@@ -87,7 +87,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
       body: querystring.stringify({
         'code': req.query.code,
         'client_id': config.CLIENT_ID,
-        'client_secret': config.PUBPALS_CLIENT_SECRET,
+        'client_secret': config.CLIENT_SECRET,
         'grant_type': 'authorization_code',
       }),
       headers: {
