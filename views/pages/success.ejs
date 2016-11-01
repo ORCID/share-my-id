@@ -1,0 +1,9 @@
+<%include ../components/header.ejs%>
+ <div class="jumbotron">
+      <h2>Thanks <%= body.name %>!</h2>
+      <p>
+      We've recorded your ORCID iD <img src="//orcid.org/sites/default/files/images/orcid_16x16.png" class="logo" width='16' height='16' alt="iD"/> http://orcid.org/<%= body.orcid %>.
+      </p>
+      <a id="close">Close</a>
+</div>   
+<%include ../components/footer.ejs%>

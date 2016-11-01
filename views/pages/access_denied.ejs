@@ -1,0 +1,14 @@
+<%include ../components/header.ejs%>
+<%include ../components/masthead-nomenu.ejs%>
+<div class="jumbotron">
+    <h2>ORCID connection to Publisher Pals not completed</h2>
+    <p>
+    We're sorry that you're not interested in adding an ORCID iD to your Publisher Pals account.
+    </p>
+    <p>
+    Keep in mind that, until you add your ORCID iD, we won't be able to include your iD in publications or update your ORCID record automatically.
+    </p>
+    <p><a class="btn btn-primary" href="<%= authorization_uri %>">Try again</a></p>
+    <a id="close">No thanks, close & return to manuscript submission</a>
+</div>   
+<%include ../components/footer.ejs%>

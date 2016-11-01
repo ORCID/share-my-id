@@ -1,0 +1,66 @@
+body {
+  background: #A6CE39;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+a {
+  cursor: pointer;
+}
+/* Custom container */
+.container-narrow {
+  margin: 6em auto;
+  padding: 2em;
+  max-width: 800px;
+  background: #fff;
+}
+.container-narrow > hr {
+  margin: .5em 2em 2em 0;
+}
+/* Main message*/
+.jumbotron {
+  text-align: center;
+  padding: 2em 2em;
+}
+.jumbotron h1 {
+  font-size: 3em;
+  font-weight: bold;
+  line-height: 2em;
+  color: #338caf;
+  text-transform: uppercase;
+}
+.jumbotron p {
+  font-size: 1.3em;
+  line-height: 1.6em;
+}
+.jumbotron .btn {
+  font-size: 1.2em;
+  padding: 1em 2em;
+  //font-weight: bold;
+  background: #338caf;
+  border-color: #338caf;
+  color: #fff;
+}
+/* ORCID iD form field */
+.form-group .col-xs-6{
+  padding-left: 0;
+}
+/*ORCID info text*/
+.alert-info-gray{
+  background-color: #eee;
+  border-color: #ccc;
+  color: #555;
+}
+
+.nav li a{
+  color: #000;
+}
+
+.nav li.active a, .nav li.active a:hover, .btn-primary, .btn-primary:hover{
+  background-color: #930f7a;
+  border-color: #930f7a;
+}
+
+ul.nav{
+  margin-top: 2em;
+}
+
