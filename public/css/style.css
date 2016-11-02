@@ -3,8 +3,19 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
+body.redirect{
+  background: #fff;
+}
+
 a {
   cursor: pointer;
+  text-decoration: none;
+  color: #338caf;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #A6CE39;
 }
 /* Custom container */
 .container-narrow {
@@ -21,6 +32,7 @@ a {
   text-align: center;
   padding: 2em 2em;
 }
+
 .jumbotron h1 {
   font-size: 3em;
   font-weight: bold;
