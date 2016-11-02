@@ -2,7 +2,6 @@ var express = require('express'),
   // load config from file
   config = require('./helpers/config'),
   httpLogging = require('./helpers/http-logging'),
-  //orcidLogging = require('./helpers/orcid-logging'),
   querystring = require("querystring"),
   fs = require('fs'),
   https = require('https'),
@@ -14,12 +13,10 @@ var ssl_options = {
   cert: fs.readFileSync('./helpers/sample_server.cert'),
 };
 
-// custom console for orcid logging
-const Console = require('console').Console;
-const orcidOutput = fs.createWriteStream('./log/orcidout.log');
-const orcidErrorOutput = fs.createWriteStream('./log/orciderr.log');
-// custom simple logger
-const orcidLogger = new Console(orcidOutput, orcidErrorOutput);
+// Custom console for orcid logging
+var orcidOutput = fs.createWriteStream('./log/orcidout.log');
+var orcidErrorOutput = fs.createWriteStream('./log/orciderr.log');
+var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
 // Init express
 var app = express();
@@ -58,36 +55,38 @@ app.get('/orcid-id.json', function(req, res) {
 
 app.get('/redirect-uri', function(req, res) { // Redeem code URL
   if (req.query.error == 'access_denied') {
+    // User denied access
     var auth_link = config.AUTHORIZE_URI + '?'
    + querystring.stringify({
-    'redirect_uri': config.REDIRECT_URI,
-    'scope': '/authenticate',
-    'response_type':'code',
-    'client_id': config.CLIENT_ID
-  });
-    // User denied access
+      'redirect_uri': config.REDIRECT_URI,
+      'scope': '/authenticate',
+      'response_type':'code',
+      'client_id': config.CLIENT_ID
+    });
+    
     res.render('pages/access_denied', {'authorization_uri': auth_link });      
   } else {
     // exchange code
-
     // function to render page after making request
     var exchangingCallback = function(error, response, body) {
-    if (error == null) { // No errors! we have a token :-)
-      var auth_link = config.AUTHORIZE_URI + '?'
-   + querystring.stringify({
-    'redirect_uri': config.REDIRECT_URI,
-    'scope': '/authenticate',
-    'response_type':'code',
-    'client_id': config.CLIENT_ID
-  });
-      var tokenJson = JSON.parse(body);
-      console.log(tokenJson);
-      var d = new Date();
-      orcidLogger.log(d, tokenJson.name, tokenJson.orcid);
-      req.session.orcid_id = tokenJson.orcid;
-      res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
-    } else // handle error
-      res.render('pages/error', { 'error': error });
+      if (error == null) { // No errors! we have a token :-)
+
+        var auth_link = config.AUTHORIZE_URI + '?'
+        + querystring.stringify({
+          'redirect_uri': config.REDIRECT_URI,
+          'scope': '/authenticate',
+          'response_type':'code',
+          'client_id': config.CLIENT_ID
+        });
+
+        var tokenJson = JSON.parse(body);
+        console.log(tokenJson);
+        var d = new Date();
+        orcidLogger.log(d, tokenJson.name, tokenJson.orcid);
+        req.session.orcid_id = tokenJson.orcid;
+        res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
+      } else // handle error
+        res.render('pages/error', { 'error': error });
     };
 
     // config for exchanging code for token 
@@ -104,7 +103,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
       }
     }
-    
+  
     //making request exchanging code for token
     request(exchangingReq, exchangingCallback);
   }
