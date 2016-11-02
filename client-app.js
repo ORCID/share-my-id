@@ -36,8 +36,6 @@ secureServer.listen(config.PORT, config.SERVER_IP, function () { // Start expres
   console.log('server started on ' + config.PORT);
 });
 
-var sess;
-
 app.get('/', function(req, res) { // Index page 
   // link we send user to authorize our requested scopes
   var auth_link = config.AUTHORIZE_URI + '?'
@@ -56,7 +54,10 @@ app.get('/', function(req, res) { // Index page
 
 app.post('/share-info', function(req, res) {
   req.session.share_info = req.body.share_info;
-  console.log("Share info checked: " + req.session.share_info)
+  console.log("Share info checked: " + req.session.share_info);
+  req.session.save(function(err) {
+  // session saved
+  });
 });
 
 app.get('/orcid-id.json', function(req, res) {
@@ -91,8 +92,8 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
 
         var tokenJson = JSON.parse(body);
         console.log(tokenJson);
-        var d = new Date();
-        orcidLogger.log(d, tokenJson.name, tokenJson.orcid, req.session.share_info);
+        var date = new Date();
+        orcidLogger.log(date, tokenJson.name, tokenJson.orcid, req.session.share_info);
         req.session.orcid_id = tokenJson.orcid;
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
       } else // handle error
