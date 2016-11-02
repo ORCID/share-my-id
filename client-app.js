@@ -1,3 +1,4 @@
+var bodyParser = require('body-parser');
 var express = require('express'), 
   // load config from file
   config = require('./helpers/config'),
@@ -22,6 +23,8 @@ var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 app.use(session({  
     secret: "notagoodsecretnoreallydontusethisone",  
     resave: false,
@@ -32,6 +35,8 @@ secureServer = https.createServer(ssl_options, app);
 secureServer.listen(config.PORT, config.SERVER_IP, function () { // Start express
   console.log('server started on ' + config.PORT);
 });
+
+var sess;
 
 app.get('/', function(req, res) { // Index page 
   // link we send user to authorize our requested scopes
@@ -47,6 +52,11 @@ app.get('/', function(req, res) { // Index page
       // nothing to do
   });
   res.render('pages/index', {'authorization_uri': auth_link});
+});
+
+app.post('/share-info', function(req, res) {
+  req.session.share_info = req.body.share_info;
+  console.log("Share info checked: " + req.session.share_info)
 });
 
 app.get('/orcid-id.json', function(req, res) {
@@ -82,7 +92,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         var tokenJson = JSON.parse(body);
         console.log(tokenJson);
         var d = new Date();
-        orcidLogger.log(d, tokenJson.name, tokenJson.orcid);
+        orcidLogger.log(d, tokenJson.name, tokenJson.orcid, req.session.share_info);
         req.session.orcid_id = tokenJson.orcid;
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
       } else // handle error

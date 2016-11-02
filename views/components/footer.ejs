@@ -1,5 +1,23 @@
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</body>
+        <script type=text/javascript>
+            $("#shareInfo").change(function() {
+                   if($(this).is(":checked")) {
+                        check_box_val = true;
+                    } else {
+                        check_box_val = false;
+                    }
+
+                    $.ajax({
+                        method: "POST",
+                        dataType: "json",
+                        url: '/share-info',
+                        data: {share_info : check_box_val}
+                    });
+
+       
+                });
+        </script>
+    </body>
 </html>
