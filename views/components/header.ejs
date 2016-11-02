@@ -34,6 +34,7 @@
     </script>
     <script type=text/javascript>
       $(document).ready(function(){
+        $(':checkbox:checked').prop('checked',false);
         //open oauth screen in popup and prefill form
         $("#oauth").click(function(){
             //add names and email to authorization url - prefills oauth signin/register form
