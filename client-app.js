@@ -2,6 +2,7 @@ var express = require('express'),
   // load config from file
   config = require('./helpers/config'),
   httpLogging = require('./helpers/http-logging'),
+  //orcidLogging = require('./helpers/orcid-logging'),
   querystring = require("querystring"),
   fs = require('fs'),
   https = require('https'),
@@ -12,6 +13,13 @@ var ssl_options = {
   key: fs.readFileSync('./helpers/sample_server.key'),
   cert: fs.readFileSync('./helpers/sample_server.cert'),
 };
+
+// custom console for orcid logging
+const Console = require('console').Console;
+const orcidOutput = fs.createWriteStream('./log/orcidout.log');
+const orcidErrorOutput = fs.createWriteStream('./log/orciderr.log');
+// custom simple logger
+const orcidLogger = new Console(orcidOutput, orcidErrorOutput);
 
 // Init express
 var app = express();
@@ -74,6 +82,8 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
   });
       var tokenJson = JSON.parse(body);
       console.log(tokenJson);
+      var d = new Date();
+      orcidLogger.log(d, tokenJson.name, tokenJson.orcid);
       req.session.orcid_id = tokenJson.orcid;
       res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
     } else // handle error
