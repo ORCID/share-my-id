@@ -20,8 +20,10 @@
                 url: '/orcid-id.json',
                 success: function(data) {
                 	if (data.orcid_id){
-                    $('input[name="orcidId"]').val("http://orcid.org/" + data.orcid_id);
-                    $( '#oauth, #orcid-info' ).hide();
+                    $.ajax({
+                        url: 'https://sandbox.orcid.org/userStatus.json?logUserOut=true',
+                        dataType: 'jsonp'
+                    });
                 	} else {
                 		setTimeout(hasOrcid, 300);
                   }
@@ -29,6 +31,7 @@
             });
         };
         hasOrcid();
+    </script>
     </script>
     <script type=text/javascript>
       $(document).ready(function(){

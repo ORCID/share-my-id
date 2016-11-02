@@ -35,7 +35,6 @@ a {
 .jumbotron .btn {
   font-size: 1.2em;
   padding: 1em 2em;
-  //font-weight: bold;
   background: #338caf;
   border-color: #338caf;
   color: #fff;
@@ -56,8 +55,8 @@ a {
 }
 
 .nav li.active a, .nav li.active a:hover, .btn-primary, .btn-primary:hover{
-  background-color: #930f7a;
-  border-color: #930f7a;
+  background-color: #A6CE39;
+  border-color: #A6CE39;
 }
 
 ul.nav{
