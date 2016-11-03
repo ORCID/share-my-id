@@ -8,6 +8,7 @@ module.exports = config = {
   // General server config
   PORT: '8443',
   SERVER_IP: '127.0.0.1',
+  GOOGLE_DOC_KEY: '1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc'
 }
 
 // Environment variables overrides
