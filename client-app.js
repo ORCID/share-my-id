@@ -95,12 +95,13 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         var tokenJson = JSON.parse(body);
         console.log(tokenJson);
         var date = new Date();
+        //Log ORCID info to file
         orcidLogger.log(date, tokenJson.name, tokenJson.orcid, req.session.share_info);
         req.session.orcid_id = tokenJson.orcid;
-        res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
+        
 
         //Google sheets
-        var doc = new GoogleSpreadsheet('1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc', 'private');
+        var doc = new GoogleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
         var sheet;
         var creds = require('./key.json');
         doc.useServiceAccountAuth(creds, callback);
@@ -111,9 +112,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
           console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
           sheet.addRow({"date" : date, "name" : tokenJson.name, "orcid" : tokenJson.orcid, "share info" : req.session.share_info}, callback);
         });
-
-        //
-
+        //node-google-spreadsheet requires a callback
         function callback(err) {
           if (err) {
             console.log(err);
@@ -122,6 +121,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
           }
         } 
 
+        res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
         
       } else // handle error
         res.render('pages/error', { 'error': error });
