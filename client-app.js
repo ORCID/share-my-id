@@ -112,7 +112,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         //Google sheets
         var doc = new googleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
         var sheet;
-        var creds = require('./key.json');
+        var creds = require(config.GOOGLE_SERVICE_ACCOUNT_KEY);
         doc.useServiceAccountAuth(creds, callback);
 
         doc.getInfo(function(err, info) {
