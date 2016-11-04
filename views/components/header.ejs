@@ -36,21 +36,10 @@
       $(document).ready(function(){
         //reset checkbox on page load
         $(':checkbox').prop('checked', true);
-        //open oauth screen in popup and prefill form
-        $("#oauth").click(function(){
-            //add names and email to authorization url - prefills oauth signin/register form
-            var url = "<%- authorization_uri %>";
-            //open oauth window in popup
-            var oauthWindow = window.location.href = url;
-            //close popup automatically after 2min
-            //setTimeout(function () { oauthWindow.close();}, 120000);
-            setTimeout(function () { window.location.href = "/";}, 40000);
-            });
-          
-          //close popup manually
-          $("#close").click(function(){
-            window.location.href = "/";
-          });
+        //redirect to index
+        if (window.location.href.indexOf('redirect-uri') >= 0){
+            setTimeout(function () { window.location.href = "/";}, 120000);
+        }
       });
     </script>
 	</head>
