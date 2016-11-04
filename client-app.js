@@ -34,7 +34,7 @@ secureServer = createServer({
   agreeTos: true, // Required for letsencrypt.
   debug: config.AUTO_SNI_DEBUG, // Add console messages and uses staging LetsEncrypt server. (Disable in production)
   domains: [["localhost","www.localhost"]], // List of accepted domain names. (You can use nested arrays to register bundles with LE).
-  forceSSL: false, // Make this false to disable auto http->https redirects (default true).
+  forceSSL: true, // Make this false to disable auto http->https redirects (default true).
   redirectCode: 301, // If forceSSL is true, decide if redirect should be 301 (permanent) or 302 (temporary). Defaults to 302
   ports: {
     http: config.PORT_HTTP, // Optionally override the default http port.
