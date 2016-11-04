@@ -83,7 +83,6 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
     // function to render page after making request
     var exchangingCallback = function(error, response, body) {
       if (error == null) { // No errors! we have a token :-)
-
         var auth_link = config.AUTHORIZE_URI + '?'
         + querystring.stringify({
           'redirect_uri': config.REDIRECT_URI,
@@ -91,15 +90,12 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
           'response_type':'code',
           'client_id': config.CLIENT_ID
         });
-
         var tokenJson = JSON.parse(body);
         console.log(tokenJson);
         var date = new Date();
         //Log ORCID info to file
         orcidLogger.log(date, tokenJson.name, tokenJson.orcid, req.session.share_info);
         req.session.orcid_id = tokenJson.orcid;
-        
-
         //Google sheets
         var doc = new GoogleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
         var sheet;
