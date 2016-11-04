@@ -27,7 +27,7 @@ app.use(session({
 secureServer = createServer({
   email: config.LETSENCRYPT_ISSUES_EMAIL, // Emailed when certificates expire.
   agreeTos: true, // Required for letsencrypt.
-  debug: (config.AUTO_SNI_DEBUG ===true), // Add console messages and uses staging LetsEncrypt server. (Disable in production)
+  debug: (config.AUTO_SNI_DEBUG === 'true'), // Add console messages and uses staging LetsEncrypt server. (Disable in production)
   domains: config.DOMAINS.split(','), // List of accepted domain names. (You can use nested arrays to register bundles with LE).
   forceSSL: true, // Make this false to disable auto http->https redirects (default true).
   redirectCode: 301, // If forceSSL is true, decide if redirect should be 301 (permanent) or 302 (temporary). Defaults to 302
