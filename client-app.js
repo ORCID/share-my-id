@@ -1,24 +1,20 @@
-var bodyParser = require('body-parser');
-var GoogleSpreadsheet = require('google-spreadsheet');
-var express = require('express'), 
+var 
   // load config from file
+  bodyParser = require('body-parser'),
+  googleSpreadsheet = require('google-spreadsheet'), 
   config = require('./helpers/config'),
+  createServer = require("auto-sni"),
+  express = require('express'),
+  fs = require('fs'),
   httpLogging = require('./helpers/http-logging'),
   querystring = require("querystring"),
-  fs = require('fs'),
-  https = require('https'),
-  session = require('express-session'),
-  request = require('request');
+  request = require('request'),
+  session = require('express-session');
 
 var ssl_options = {
   key: fs.readFileSync('./helpers/sample_server.key'),
   cert: fs.readFileSync('./helpers/sample_server.cert'),
 };
-
-// Custom console for orcid logging
-var orcidOutput = fs.createWriteStream('./log/orcidout.log');
-var orcidErrorOutput = fs.createWriteStream('./log/orciderr.log');
-var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
 // Init express
 var app = express();
@@ -32,10 +28,27 @@ app.use(session({
     saveUninitialized: true,
     cookie: {httpOnly: true, secure: true},  
 }));
-secureServer = https.createServer(ssl_options, app);
-secureServer.listen(config.PORT, config.SERVER_IP, function () { // Start express
-  console.log('server started on ' + config.PORT);
+
+secureServer = createServer({
+  email: config.LETSENCRYPT_ISSUES_EMAIL, // Emailed when certificates expire.
+  agreeTos: true, // Required for letsencrypt.
+  debug: config.AUTO_SNI_DEBUG, // Add console messages and uses staging LetsEncrypt server. (Disable in production)
+  domains: [["localhost","www.localhost"]], // List of accepted domain names. (You can use nested arrays to register bundles with LE).
+  forceSSL: true, // Make this false to disable auto http->https redirects (default true).
+  redirectCode: 301, // If forceSSL is true, decide if redirect should be 301 (permanent) or 302 (temporary). Defaults to 302
+  ports: {
+    http: config.PORT_HTTP, // Optionally override the default http port.
+    https: config.PORT_HTTPS // Optionally override the default https port.
+  }
+}, app);
+secureServer.listen(config.PORT_HTTPS, config.SERVER_IP, function () { // Start express
+  console.log('server started on ' + config.PORT_HTTPS);
 });
+
+// Custom console for orcid logging
+var orcidOutput = fs.createWriteStream('./log/orcidout.log');
+var orcidErrorOutput = fs.createWriteStream('./log/orciderr.log');
+var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
 app.get('/', function(req, res) { // Index page 
   req.session.share_info = false;
@@ -97,7 +110,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         orcidLogger.log(date, tokenJson.name, tokenJson.orcid, req.session.share_info);
         req.session.orcid_id = tokenJson.orcid;
         //Google sheets
-        var doc = new GoogleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
+        var doc = new googleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
         var sheet;
         var creds = require('./key.json');
         doc.useServiceAccountAuth(creds, callback);
