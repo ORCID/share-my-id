@@ -7,8 +7,9 @@ Simple node.js app that collects authenticated ORCID iDs and uploads them to a G
 Follow instructions at : https://www.npmjs.com/package/google-spreadsheet#service-account-recommended-method
 
 ###2. Create a new Google spreadsheet and share it with your service account
-Make note of the file 'key' - the unique string of letters and numberse included in the file URL:
-https://docs.google.com/spreadsheets/d/**1_srGiuEjCHq_kIPWAO7mJxOjCQ0UJQGjymopHJKe4Zc**/edit
+* IMPORTANT! Set row 1 column 1-4 values to 'date', 'name', 'orcid', 'share info'
+* Make note of the file 'key' - the unique string of letters and numbers included in the file URL. Ex: for URL https://docs.google.com/spreadsheets/d/1_srGiuEjCHq_kIPWAO7mJxOjCQ0UJQGjymopHJKe4Zc/edit, key is ```1_srGiuEjCHq_kIPWAO7mJxOjCQ0UJQGjymopHJKe4Zc```
+        
 
 ###3. Install NodeJS or Upgrade 
 
