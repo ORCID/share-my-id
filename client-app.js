@@ -51,7 +51,7 @@ var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
 app.get('/', function(req, res) { // Index page 
-  req.session.share_info = false;
+  req.session.share_info = true;
   // link we send user to authorize our requested scopes
   var auth_link = config.AUTHORIZE_URI + '?'
    + querystring.stringify({

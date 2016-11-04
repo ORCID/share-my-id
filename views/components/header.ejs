@@ -35,15 +35,15 @@
     <script type=text/javascript>
       $(document).ready(function(){
         //reset checkbox on page load
-        $(':checkbox:checked').prop('checked',false);
+        $(':checkbox').prop('checked'"', true);
         //open oauth screen in popup and prefill form
         $("#oauth").click(function(){
             //add names and email to authorization url - prefills oauth signin/register form
             var url = "<%- authorization_uri %>";
             //open oauth window in popup
             var oauthWindow = window.open(url, "ORCID", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
-            //close popup automatically after 90 seconds
-            setTimeout(function () { oauthWindow.close();}, 90000);
+            //close popup automatically after 2min
+            setTimeout(function () { oauthWindow.close();}, 120000);
             });
           
           //close popup manually
