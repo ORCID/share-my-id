@@ -46,8 +46,8 @@ secureServer.listen(config.PORT_HTTPS, config.SERVER_IP, function () { // Start 
 });
 
 // Custom console for orcid logging
-var orcidOutput = fs.createWriteStream('./log/orcidout.log');
-var orcidErrorOutput = fs.createWriteStream('./log/orciderr.log');
+var orcidOutput = fs.createWriteStream('./orcidout.log');
+var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
 app.get('/', function(req, res) { // Index page 
