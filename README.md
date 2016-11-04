@@ -11,7 +11,7 @@ or
 
 ###2. Download Project
 
-Download [zip file](https://github.com/ORCID/orcid-id-to-gdoc-master/archive/master.zip) and
+Download [zip file](https://github.com/ORCID/orcid-id-to-gdoc/archive/master.zip) and
  unzip.
    
 ###3. Open a command prompt
