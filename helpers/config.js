@@ -9,11 +9,12 @@ module.exports = config = {
   GOOGLE_DOC_KEY: '1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc',//Key from Google spreadsheet URL
   GOOGLE_SERVICE_ACCOUNT_KEY: './key.json',//Path to key file downloaded from Google API console https://console.developers.google.com/apis/credentials
   //Server SSL config
+  FORCE_SSL: 'true', // must be 'true' or 'false'
   LETSENCRYPT_ISSUES_EMAIL: 'orcid-id-to-gdoc@mailinator.com', // Where to email when certificates expire.
-  AUTO_SNI_DEBUG: true, // Add console messages and uses staging LetsEncrypt server. (Disable in production)
-  DOMAINS: [["localhost","www.localhost"]], // List of accepted domain names. (You can use nested arrays to register bundles with LE).
-  PORT_HTTP: 8080, // Optionally override the default http port.
-  PORT_HTTPS: 8443 // Optionally override the default https port.
+  AUTO_SNI_DEBUG: 'true', // Add console messages and uses staging LetsEncrypt server. (Disable in production)
+  DOMAINS: 'localhost,www.localhost', // List of accepted domain names. (You can use nested arrays to register bundles with LE).
+  PORT_HTTP: '8080', // Optionally override the default http port.
+  PORT_HTTPS: '8443' // Optionally override the default https port.
 }
 
 // Environment variables overrides
