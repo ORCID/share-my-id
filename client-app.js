@@ -34,7 +34,7 @@ secureServer = createServer({
   agreeTos: true, // Required for letsencrypt.
   debug: config.AUTO_SNI_DEBUG, // Add console messages and uses staging LetsEncrypt server. (Disable in production)
   domains: [["localhost","www.localhost"]], // List of accepted domain names. (You can use nested arrays to register bundles with LE).
-  forceSSL: true, // Make this false to disable auto http->https redirects (default true).
+  forceSSL: false, // Make this false to disable auto http->https redirects (default true).
   redirectCode: 301, // If forceSSL is true, decide if redirect should be 301 (permanent) or 302 (temporary). Defaults to 302
   ports: {
     http: config.PORT_HTTP, // Optionally override the default http port.
@@ -49,6 +49,10 @@ secureServer.listen(config.PORT_HTTPS, config.SERVER_IP, function () { // Start 
 var orcidOutput = fs.createWriteStream('./orcidout.log');
 var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
+
+// Google sheets
+var doc = new googleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
+var creds = require(config.GOOGLE_SERVICE_ACCOUNT_KEY);
 
 app.get('/', function(req, res) { // Index page 
   req.session.share_info = true;
@@ -96,39 +100,27 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
     // function to render page after making request
     var exchangingCallback = function(error, response, body) {
       if (error == null) { // No errors! we have a token :-)
-        var auth_link = config.AUTHORIZE_URI + '?'
-        + querystring.stringify({
-          'redirect_uri': config.REDIRECT_URI,
-          'scope': '/authenticate',
-          'response_type':'code',
-          'client_id': config.CLIENT_ID
-        });
         var tokenJson = JSON.parse(body);
         console.log(tokenJson);
         var date = new Date();
         //Log ORCID info to file
         orcidLogger.log(date, tokenJson.name, tokenJson.orcid, req.session.share_info);
+        console.log('got orcid id ' + tokenJson.orcid);
         req.session.orcid_id = tokenJson.orcid;
-        //Google sheets
-        var doc = new googleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
-        var sheet;
-        var creds = require(config.GOOGLE_SERVICE_ACCOUNT_KEY);
-        doc.useServiceAccountAuth(creds, callback);
 
-        doc.getInfo(function(err, info) {
-          console.log('Loaded doc: '+info.title+' by '+info.author.email);
-          sheet = info.worksheets[0];
-          console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
-          sheet.addRow({"date" : date, "name" : tokenJson.name, "orcid" : tokenJson.orcid, "share info" : req.session.share_info}, callback);
+        //Auth with google sheets
+        doc.useServiceAccountAuth(creds, function() {
+          doc.getInfo(function(err, info) {
+            console.log('Loaded doc: '+info.title+' by '+info.author.email);
+            var sheet = info.worksheets[0];
+            console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
+            sheet.addRow({"date" : date, "name" : tokenJson.name, "orcid" : tokenJson.orcid, "share info" : req.session.share_info}, 
+              function callback(err) {
+                if (err) console.log(err);
+                else console.log("success adding row");
+            });
+          });
         });
-        //node-google-spreadsheet requires a callback
-        function callback(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("success");
-          }
-        } 
 
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
         
