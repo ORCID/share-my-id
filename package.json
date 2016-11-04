@@ -1,18 +1,21 @@
 {
-  "name": "double-orcid-auth-node",
+  "name": "orcid-id-to-gdoc",
   "version": "0.0.1",
-  "description": "Simple node.js app that demonstrates a workflow that uses 2 oauth requests",
+  "description": "Simple node.js app that collects authenticated ORCID iDs and uploads them to a Google document",
   "main": "gulpfile.js",
   "dependencies": {
     "ejs": "^1.0.0",
     "global-request-logger": "^0.0.1",
     "express": "^4.12.4",
     "express-session": "^1.14.1",
-    "request": "^2.57.0"
+    "request": "^2.57.0",
+    "body-parser": "^1.15.2",
+    "google-spreadsheet": "^2.0.3",
+    "auto-sni": "^1.5.1"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ORCID/double-orcid-auth-node.git"
+    "url": "git@github.com:ORCID/orcid-id-to-gdoc"
   },
   "engines": {
     "node": ">= 0.10.0",
