@@ -1,22 +1,27 @@
 <%include ../components/header.ejs%>
 <body>
-    <div class="container-narrow">
+    <div class="container">
         <div class="jumbotron">
-            <h1>Please share your ORCID iD!</h1>
+            <h1>Share your ORCID iD!</h1>
             <p>
-            Click the button below to share your ORCID iD and the public name listed on your ORCID record with the conference organizers. 
-            </p>
-            <p>
-            Don't have an ORCID iD yet? Click the button to create one right now!
+            Click the button below to share your ORCID iD and the public name listed on your ORCID record with the conference organizers. Don't have an ORCID iD? Click the button to create one now!
             </p>
             <div class="checkbox">
-                <input type="checkbox" name="shareInfo" id="shareInfo" value="">
-                <label>ORCID is free to share my name and ORCID iD in association with this event.</label>
+                <p>
+                    <label>
+                        <input type="checkbox" name="shareInfo" id="shareInfo" value="">
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        ORCID is free to share my name and ORCID iD in association with this event.
+                     </label>
+                </p>
             </div>
-            <p><a class="btn btn-primary popup" href="<%- authorization_uri %>">
+            <a href="<%- authorization_uri %>" id="orcid-button"><img src="./img/orcid_scalable.svg" width="300" id="id-icon">
+            </img></a>
+            <!--<p><a class="btn btn-primary popup" href="<%- authorization_uri %>">
                     <img id="orcid-id-logo" src="//orcid.org/sites/default/files/images/orcid_24x24.png" width='24' height='24' alt="ORCID logo" /> Create or connect my ORCID iD
-            </a></p>
+            </a></p>-->
         </div>
+        <hr>
         <div class="footer">
             Get the code & learn how to deploy this example locally at: <a https://github.com/ORCID/orcid-id-to-gdoc" target="_blank">github.com/ORCID/orcid-id-to-gdoc</a>
         </div>
