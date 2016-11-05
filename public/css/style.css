@@ -50,6 +50,12 @@ a:hover, .jumbotron a:hover {
   color: #fff;
 }
 
+.jumbotron .btn:hover {
+  background: #A6CE39;
+  border-color: #A6CE39;
+  color: #fff;
+}
+
 #orcid-button{
   background: #000;
   border-radius: 50%;
