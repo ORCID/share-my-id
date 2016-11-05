@@ -1,6 +1,7 @@
 body {
-  background: #A6CE39;
-  font-family: 'Noto Sans', sans-serif;
+  //background: #A6CE39;
+  //font-family: 'Noto Sans', sans-serif;
+  background: #fff;
 }
 
 body.redirect{
@@ -24,25 +25,47 @@ a:hover {
   max-width: 800px;
   background: #fff;
 }
+
+.container {
+  margin: 4em auto;
+  //padding: 3em;
+  //max-width: 1000px;
+  background: #fff;
+} 
+
 .container-narrow > hr {
   margin: .5em 2em 2em 0;
 }
 /* Main message*/
 .jumbotron {
   text-align: center;
-  padding: 2em 2em;
+  padding: 0 2em;
+  background: #fff;
 }
 
 .jumbotron h1 {
-  font-size: 3em;
-  font-weight: bold;
-  line-height: 2em;
+  font-size: 9em;
+  //font-weight: bold;
+  //line-height: 2em;
   color: #338caf;
-  text-transform: uppercase;
+  margin: 0 0 .3em 0;
+  //text-transform: uppercase;
+  font-family: 'Covered By Your Grace', cursive;
+  //font-family: 'Roboto Slab', serif;
 }
+
 .jumbotron p {
-  font-size: 1.3em;
-  line-height: 1.6em;
+  color: #494A4C;
+  margin: 1em 3em;
+}
+
+.jumbotron label {
+  font-weight: normal;
+  font-size: 1em;
+  //color: #338caf;
+  //line-height: normal;
+  color: #494A4C;
+  //margin: 2em;
 }
 .jumbotron .btn {
   font-size: 1.2em;
@@ -75,3 +98,73 @@ ul.nav{
   margin-top: 2em;
 }
 
+.jumbotron a{
+  background: #000;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+#orcid-button:hover{
+  /* IE 8-9 */
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; 
+  /* IE 5-7 */
+  filter: alpha(opacity=80); 
+  /* Modern Browsers */
+  opacity: 0.8;
+}
+
+
+#orcid-button img:hover{
+  opacity: 0.5;
+}
+
+.footer{
+  text-align: center;
+}
+
+.checkbox label:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr{
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.checkbox .cr .cr-icon{
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"]{
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon{
+    display: none;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon{
+    display: inline;
+}
