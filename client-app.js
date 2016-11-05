@@ -82,7 +82,7 @@ app.get('/', function(req, res) { // Index page
 });
 
 app.post('/share-info', function(req, res) {
-  req.session.share_info = req.body.share_info;
+  req.session.share_info = req.body.share_info === 'true'?'TRUE':'FALSE';
   console.log("Share info checked: " + req.session.share_info);
   req.session.save(function(err) {
   // session saved - nothing else to do
