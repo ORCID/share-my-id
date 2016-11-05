@@ -66,8 +66,9 @@ function write_with_google_spreadsheet(token, share_info) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Other Google sheets...
+// Other Google sheets...
 // copied from https://developers.google.com/sheets/quickstart/nodejs
+// we'll need to refactor and clean up
 
 var fs = require('fs');
 var readline = require('readline');
@@ -188,7 +189,7 @@ function listMajors(auth) {
       for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
         // Print columns A and E, which correspond to indices 0 and 4.
-        console.log('%s, %s', row[0], row[4]);
+        console.log('%s, %s', row[0], row[3]);
       }
     }
   });
