@@ -297,7 +297,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         try {
           write_with_google_googleapis([new Date(), token.orcid, token.name, req.session.share_info])
           write_with_google_spreadsheet(token,req.session.share_info);
-        } finally {
+        } catch(e) {
           // don't die node!
         }
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
