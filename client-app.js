@@ -21,7 +21,7 @@ app.use(session({
     secret: "notagoodsecretnoreallydontusethisone",  
     resave: false,
     saveUninitialized: true,
-    cookie: {httpOnly: true, secure: true},  
+    cookie: {httpOnly: true, secure: (config.FORCE_SSL === 'true')},
 }));
 
 secureServer = createServer({
@@ -45,9 +45,24 @@ var orcidOutput = fs.createWriteStream('./orcidout.log');
 var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
-// Google sheets
+// Google sheets via google-spreadsheet
 var doc = new googleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
 var creds = require(config.GOOGLE_SERVICE_ACCOUNT_KEY);
+function write_with_google_spreadsheet(token, share_info) {
+  //Auth with google sheets
+  doc.useServiceAccountAuth(creds, function() {
+    doc.getInfo(function(err, info) {
+      console.log('Loaded doc: '+info.title+' by '+info.author.email);
+      var sheet = info.worksheets[0];
+      console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
+      sheet.addRow({"date" : new Date(), "name" : token.name, "orcid" : token.orcid, "share info" : share_info},
+        function callback(err) {
+          if (err) console.log(err);
+          else console.log("success adding row");
+      });
+    });
+  });
+};
 
 app.get('/', function(req, res) { // Index page 
   req.session.share_info = true;
@@ -95,28 +110,13 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
     // function to render page after making request
     var exchangingCallback = function(error, response, body) {
       if (error == null) { // No errors! we have a token :-)
-        var tokenJson = JSON.parse(body);
-        console.log(tokenJson);
+        var token = JSON.parse(body);
+        console.log(token);
         var date = new Date();
         //Log ORCID info to file
-        orcidLogger.log(date, tokenJson.name, tokenJson.orcid, req.session.share_info);
-        console.log('got orcid id ' + tokenJson.orcid);
-        req.session.orcid_id = tokenJson.orcid;
-
-        //Auth with google sheets
-        doc.useServiceAccountAuth(creds, function() {
-          doc.getInfo(function(err, info) {
-            console.log('Loaded doc: '+info.title+' by '+info.author.email);
-            var sheet = info.worksheets[0];
-            console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
-            sheet.addRow({"date" : date, "name" : tokenJson.name, "orcid" : tokenJson.orcid, "share info" : req.session.share_info}, 
-              function callback(err) {
-                if (err) console.log(err);
-                else console.log("success adding row");
-            });
-          });
-        });
-
+        orcidLogger.log(date, token.name, token.orcid, req.session.share_info);
+        req.session.orcid_id = token.orcid;
+        write_with_google_spreadsheet(token,req.session.share_info);
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
         
       } else // handle error
