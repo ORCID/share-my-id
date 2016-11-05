@@ -1,11 +1,11 @@
 <%include ../components/header.ejs%>
 <body class="redirect">
-    <div class="container-narrow">
+    <div class="container">
          <div class="jumbotron">
-              <h2>Thanks <%= body.name %>!</h2>
+              <h1>Thanks <br> <%= body.name %>!</h1>
               <p>
-              We've recorded your ORCID iD <br>
-              <img src="//orcid.org/sites/default/files/images/orcid_16x16.png" class="logo" width='16' height='16' alt="iD"/> <a href="http://orcid.org/<%= body.orcid %>">http://orcid.org/<%= body.orcid %></a>.
+              We've recorded your ORCID iD 
+              <img src="//orcid.org/sites/default/files/images/orcid_24x24.png" class="logo" width='24' height='24' alt="iD"/> <a href="http://orcid.org/<%= body.orcid %>">http://orcid.org/<%= body.orcid %></a>.
               </p>
               <a class="btn btn-primary" href="/">Close</a>
         </div> 
