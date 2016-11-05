@@ -3,8 +3,7 @@ module.exports = config = {
   CLIENT_ID: 'APP-B9T4095P7U7W76X5',
   CLIENT_SECRET: 'f6677b74-8f3f-4204-ad7d-55e449eac609',
   REDIRECT_URI: 'https://localhost:8080/redirect-uri',
-  AUTHORIZE_URI: 'https://sandbox.orcid.org/oauth/authorize',
-  TOKEN_EXCHANGE_URI: 'https://api.sandbox.orcid.org/oauth/token',
+  ORCID_URL: 'https://sandbox.orcid.org',
   //Google API config
   GOOGLE_DOC_KEY: '1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc',//Key from Google spreadsheet URL
   GOOGLE_SERVICE_ACCOUNT_KEY: './key.json',//Path to key file downloaded from Google API console https://console.developers.google.com/apis/credentials
