@@ -52,18 +52,22 @@ function write_with_google_spreadsheet(token, share_info) {
   //Auth with google sheets
   doc.useServiceAccountAuth(creds, function() {
     doc.getInfo(function(err, info) {
-      console.log('Loaded doc: '+info.title+' by '+info.author.email);
-      var sheet = info.worksheets[0];
-      console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
-      sheet.addRow({"date" : new Date(), "name" : token.name, "orcid" : token.orcid, "share info" : share_info},
-        function callback(err) {
-          if (err) console.log(err);
-          else console.log("success adding row");
-      });
+      if (err) {
+        console.log("ACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        console.log(err);
+      } else {
+        console.log('Loaded doc: '+info.title+' by '+info.author.email);
+        var sheet = info.worksheets[0];
+        console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
+        sheet.addRow({"date" : new Date(), "name" : token.name, "orcid" : token.orcid, "share info" : share_info},
+          function callback(err) {
+            if (err) console.log(err);
+            else console.log("success adding row");
+        });
+      }
     });
   });
 };
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Other Google sheets...
@@ -294,12 +298,8 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         //Log ORCID info to file
         orcidLogger.log(date, token.name, token.orcid, req.session.share_info);
         req.session.orcid_id = token.orcid;
-        try {
-          write_with_google_googleapis([new Date(), token.orcid, token.name, req.session.share_info])
-          write_with_google_spreadsheet(token,req.session.share_info);
-        } catch(e) {
-          // don't die node!
-        }
+        write_with_google_googleapis([new Date(), token.orcid, token.name, req.session.share_info])
+        write_with_google_spreadsheet(token,req.session.share_info);
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
         
       } else // handle error
