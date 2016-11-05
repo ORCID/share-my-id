@@ -64,6 +64,13 @@ function write_with_google_spreadsheet(token, share_info) {
   });
 };
 
+//Other Google sheets...
+var fs = require('fs');
+var readline = require('readline');
+var google = require('googleapis');
+var googleAuth = require('google-auth-library');
+
+
 app.get('/', function(req, res) { // Index page 
   req.session.share_info = true;
   // link we send user to authorize our requested scopes

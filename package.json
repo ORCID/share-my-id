@@ -2,16 +2,18 @@
   "name": "orcid-id-to-gdoc",
   "version": "0.0.1",
   "description": "Simple node.js app that collects authenticated ORCID iDs and uploads them to a Google document",
-  "main": "gulpfile.js",
+  "main": "client-app.js",
   "dependencies": {
+    "auto-sni": "^1.5.1",
+    "body-parser": "^1.15.2",
     "ejs": "^1.0.0",
-    "global-request-logger": "^0.0.1",
     "express": "^4.12.4",
     "express-session": "^1.14.1",
-    "request": "^2.57.0",
-    "body-parser": "^1.15.2",
+    "global-request-logger": "^0.0.1",
+    "google-auth-library": "^0.9.9",
     "google-spreadsheet": "^2.0.3",
-    "auto-sni": "^1.5.1"
+    "googleapis": "^14.1.0",
+    "request": "^2.57.0"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,5 @@
   "bugs": {
     "url": "https://github.com/ORCID/double-orcid-auth-node/issues"
   },
-  "homepage": "https://github.com/ORCID/double-orcid-auth-node",
-  "main": "client-app.js"
+  "homepage": "https://github.com/ORCID/double-orcid-auth-node"
 }
