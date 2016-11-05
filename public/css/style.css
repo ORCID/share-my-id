@@ -13,21 +13,10 @@ a:hover, .jumbotron a:hover {
   color: #A6CE39;
 }
 
-.container-narrow {
-  margin: 6em auto;
-  padding: 2em;
-  max-width: 800px;
-  background: #fff;
-}
-
 .container {
   margin: 3em auto;
   background: #fff;
 } 
-
-.container-narrow > hr {
-  margin: .5em 2em 2em 0;
-}
 
 .jumbotron {
   text-align: center;
@@ -37,13 +26,9 @@ a:hover, .jumbotron a:hover {
 
 .jumbotron h1 {
   font-size: 9em;
-  //font-weight: bold;
-  //line-height: 2em;
   color: #338caf;
   margin: 0 0 .3em 0;
-  //text-transform: uppercase;
   font-family: 'Covered By Your Grace', cursive;
-  //font-family: 'Roboto Slab', serif;
 }
 
 .jumbotron p {
@@ -63,29 +48,6 @@ a:hover, .jumbotron a:hover {
   background: #338caf;
   border-color: #338caf;
   color: #fff;
-}
-/* ORCID iD form field */
-.form-group .col-xs-6{
-  padding-left: 0;
-}
-/*ORCID info text*/
-.alert-info-gray{
-  background-color: #eee;
-  border-color: #ccc;
-  color: #555;
-}
-
-.nav li a{
-  color: #000;
-}
-
-.nav li.active a, .nav li.active a:hover, .btn-primary, .btn-primary:hover{
-  background-color: #A6CE39;
-  border-color: #A6CE39;
-}
-
-ul.nav{
-  margin-top: 2em;
 }
 
 #orcid-button{
@@ -109,15 +71,11 @@ ul.nav{
   opacity: 0.8;
 }
 
-
+/*ORCID iD button*/
 #id-icon img:hover{
   opacity: 0.5;
 }
-
-.footer{
-  text-align: center;
-}
-
+/*Share info checkbox*/
 .checkbox label{
   color: #338caf;
   font-size: .9em;
@@ -168,4 +126,8 @@ ul.nav{
 .redirect p{
   font-size: 1.8em;
   margin-bottom: 1em;
+}
+
+.footer{
+  text-align: center;
 }
