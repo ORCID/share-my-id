@@ -7,13 +7,15 @@
             Click the button below to share your ORCID iD and the public name listed on your ORCID record with the conference organizers. Don't have an ORCID iD? Click the button to create one now!
             </p>
             <div class="checkbox">
-            <p><label>
-                    <input type="checkbox" name="shareInfo" id="shareInfo" value="">
-                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                    ORCID is free to share my name and ORCID iD in association with this event.
-                 </label></p>
+                <p>
+                    <label>
+                        <input type="checkbox" name="shareInfo" id="shareInfo" value="">
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        ORCID is free to share my name and ORCID iD in association with this event.
+                     </label>
+                </p>
             </div>
-            <a href="<%- authorization_uri %>"><img src="./img/orcid_scalable.svg" width="300"  id="orcid-button">
+            <a href="<%- authorization_uri %>" id="orcid-button"><img src="./img/orcid_scalable.svg" width="300" id="id-icon">
             </img></a>
             <!--<p><a class="btn btn-primary popup" href="<%- authorization_uri %>">
                     <img id="orcid-id-logo" src="//orcid.org/sites/default/files/images/orcid_24x24.png" width='24' height='24' alt="ORCID logo" /> Create or connect my ORCID iD

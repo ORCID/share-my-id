@@ -1,10 +1,4 @@
 body {
-  //background: #A6CE39;
-  //font-family: 'Noto Sans', sans-serif;
-  background: #fff;
-}
-
-body.redirect{
   background: #fff;
 }
 
@@ -18,7 +12,7 @@ a:hover {
   text-decoration: none;
   color: #A6CE39;
 }
-/* Custom container */
+
 .container-narrow {
   margin: 6em auto;
   padding: 2em;
@@ -27,16 +21,14 @@ a:hover {
 }
 
 .container {
-  margin: 4em auto;
-  //padding: 3em;
-  //max-width: 1000px;
+  margin: 3em auto;
   background: #fff;
 } 
 
 .container-narrow > hr {
   margin: .5em 2em 2em 0;
 }
-/* Main message*/
+
 .jumbotron {
   text-align: center;
   padding: 0 2em;
@@ -59,14 +51,6 @@ a:hover {
   margin: 1em 3em;
 }
 
-.jumbotron label {
-  font-weight: normal;
-  font-size: 1em;
-  //color: #338caf;
-  //line-height: normal;
-  color: #494A4C;
-  //margin: 2em;
-}
 .jumbotron .btn {
   font-size: 1.2em;
   padding: 1em 2em;
@@ -98,7 +82,7 @@ ul.nav{
   margin-top: 2em;
 }
 
-.jumbotron a{
+#orcid-button{
   background: #000;
   border-radius: 50%;
   -moz-border-radius: 50%;
@@ -110,7 +94,7 @@ ul.nav{
   padding: 0;
 }
 
-#orcid-button:hover{
+#id-icon:hover{
   /* IE 8-9 */
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; 
   /* IE 5-7 */
@@ -120,12 +104,18 @@ ul.nav{
 }
 
 
-#orcid-button img:hover{
+#id-icon img:hover{
   opacity: 0.5;
 }
 
 .footer{
   text-align: center;
+}
+
+.checkbox label{
+  color: #338caf;
+  font-size: .9em;
+  margin-bottom: 1em;
 }
 
 .checkbox label:after{
@@ -153,7 +143,7 @@ ul.nav{
     left: 20%;
 }
 
-.radio .cr .cr-icon {
+.cr .cr-icon {
     margin-left: 0.04em;
 }
 
@@ -167,4 +157,9 @@ ul.nav{
 
 .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon{
     display: inline;
+}
+
+.redirect p{
+  font-size: 1.8em;
+  margin-bottom: 1em;
 }
