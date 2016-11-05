@@ -1,12 +1,13 @@
 <%include ../components/header.ejs%>
 <body class="redirect">
-    <div class="container-narrow">
+    <div class="container">
         <div class="jumbotron">
-            <h2>ORCID connection not completed</h2>
+            <h1>ORCID connection not completed</h1>
             <p>
             We're sorry that you're not interested in sharing your ORCID iD - we hope you'll reconsider!
             </p>
-            <p><a class="btn btn-primary" href="<%= authorization_uri %>">Try again</a></p>
+            <a class="btn btn-primary" href="<%= authorization_uri %>">Try again</a>
+            <br>
             <a id="close">No thanks, close this window</a>
         </div>   
     </div>  

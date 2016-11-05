@@ -8,7 +8,7 @@ a {
   color: #338caf;
 }
 
-a:hover {
+a:hover, .jumbotron a:hover {
   text-decoration: none;
   color: #A6CE39;
 }
@@ -49,6 +49,12 @@ a:hover {
 .jumbotron p {
   color: #494A4C;
   margin: 1em 3em;
+}
+
+.jumbotron a {
+  color: #338caf;
+  margin: 1.4em;
+  font-size: 1.2em;
 }
 
 .jumbotron .btn {
