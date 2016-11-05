@@ -16,23 +16,10 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous">
     </script>
     <script type="text/javascript">
-        var hasOrcid = function () {
-        	$.ajax({
-                dataType: "json",
-                url: '/orcid-id.json',
-                success: function(data) {
-                	if (data.orcid_id){
-                    $.ajax({
-                        url: 'https://sandbox.orcid.org/userStatus.json?logUserOut=true',
-                        dataType: 'jsonp'
-                    });
-                	} else {
-                		setTimeout(hasOrcid, 300);
-                  }
-                }
-            });
-        };
-        hasOrcid();
+        $.ajax({
+           url: '<%=orcid_url%>/userStatus.json?logUserOut=true',
+            dataType: 'jsonp'
+        });
     </script>
     <script type=text/javascript>
       $(document).ready(function(){

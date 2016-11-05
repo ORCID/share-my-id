@@ -249,7 +249,7 @@ function append(auth, arr) {
 app.get('/', function(req, res) { // Index page 
   req.session.share_info = true;
   // link we send user to authorize our requested scopes
-  var auth_link = config.AUTHORIZE_URI + '?'
+  var auth_link =  config.ORCID_URL + '/oauth/authorize' + '?'
    + querystring.stringify({
     'redirect_uri': config.REDIRECT_URI,
     'scope': '/authenticate /activities/update',
@@ -260,7 +260,7 @@ app.get('/', function(req, res) { // Index page
   req.session.regenerate(function(err) {
       // nothing to do
   });
-  res.render('pages/index', {'authorization_uri': auth_link});
+  res.render('pages/index', {'authorization_uri': auth_link, 'orcid_url': config.ORCID_URL});
 });
 
 app.post('/share-info', function(req, res) {
@@ -278,7 +278,7 @@ app.get('/orcid-id.json', function(req, res) {
 app.get('/redirect-uri', function(req, res) { // Redeem code URL
   if (req.query.error == 'access_denied') {
     // User denied access
-    var auth_link = config.AUTHORIZE_URI + '?'
+    var auth_link = config.ORCID_URL + '/oauth/authorize' + '?'
    + querystring.stringify({
       'redirect_uri': config.REDIRECT_URI,
       'scope': '/authenticate',
@@ -286,7 +286,7 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
       'client_id': config.CLIENT_ID
     });
     
-    res.render('pages/access_denied', {'authorization_uri': auth_link });      
+    res.render('pages/access_denied', {'authorization_uri': auth_link,'orcid_url': config.ORCID_URL });      
   } else {
     // exchange code
     // function to render page after making request
@@ -300,15 +300,15 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         req.session.orcid_id = token.orcid;
         write_with_google_googleapis([new Date(), token.orcid, token.name, req.session.share_info])
         write_with_google_spreadsheet(token,req.session.share_info);
-        res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link});
+        res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link, 'orcid_url': config.ORCID_URL});
         
       } else // handle error
-        res.render('pages/error', { 'error': error });
+        res.render('pages/error', { 'error': error, 'orcid_url': config.ORCID_URL });
     };
 
     // config for exchanging code for token 
     var exchangingReq = {
-      url: config.TOKEN_EXCHANGE_URI,
+      url: config.ORCID_URL + '/oauth/token',
       method: 'post',
       body: querystring.stringify({
         'code': req.query.code,
