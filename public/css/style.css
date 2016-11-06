@@ -62,8 +62,7 @@ a:hover, .jumbotron a:hover {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   display: block;
-  width: 300px;
-  height: 300px;
+  width: 30%;
   margin: 0 auto;
   padding: 0;
 }
@@ -136,4 +135,68 @@ a:hover, .jumbotron a:hover {
 
 .footer{
   text-align: center;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) 
+  and (max-device-width : 480px) {
+  .jumbotron h1 {
+    font-size: 4em;
+  }
+
+  .jumbotron p {
+    font-size: 1em;
+    margin: 1em;
+  }
+
+  #orcid-button{
+    width: 80%;
+  }
+}
+
+/* Tablet Portrait */
+@media only screen and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .jumbotron h1 {
+    font-size: 5em;
+    margin: .5em 0;
+  }
+
+  .jumbotron p {
+    font-size: 1.2em;
+    margin: 2em 1em;
+  }
+
+  #orcid-button{
+    width: 60%;
+    margin: 4em auto;
+  }
+}
+
+
+}
+
+/* Tablet Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .jumbotron h1 {
+    font-size: 6em;
+    margin: .3em 0;
+  }
+
+  .jumbotron p {
+    font-size: 1.3em;
+    margin: 1em;
+  }
+
+  #orcid-button{
+    width: 40%;
+  }
+}
+
 }
