@@ -38,7 +38,7 @@ a:hover, .jumbotron a:hover {
 
 .jumbotron a {
   color: #338caf;
-  margin: 1.4em;
+  margin: 1.4em 0;
   font-size: 1.2em;
 }
 
