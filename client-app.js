@@ -254,7 +254,8 @@ app.get('/', function(req, res) { // Index page
     'redirect_uri': config.REDIRECT_URI,
     'scope': '/authenticate /activities/update',
     'response_type':'code',
-    'client_id': config.CLIENT_ID
+    'client_id': config.CLIENT_ID,
+    'show_login': 'true',
   });
   // reset any session on reload of '/'
   req.session.regenerate(function(err) {
@@ -283,7 +284,8 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
       'redirect_uri': config.REDIRECT_URI,
       'scope': '/authenticate',
       'response_type':'code',
-      'client_id': config.CLIENT_ID
+      'client_id': config.CLIENT_ID,
+      'show_login': 'true',
     });
     
     res.render('pages/access_denied', {'authorization_uri': auth_link,'orcid_url': config.ORCID_URL });      
