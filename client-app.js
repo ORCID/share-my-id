@@ -1,7 +1,6 @@
 var 
   // load config from file
   bodyParser = require('body-parser'),
-  googleSpreadsheet = require('google-spreadsheet'), 
   config = require('./helpers/config'),
   createServer = require("auto-sni"),
   express = require('express'),
@@ -45,29 +44,6 @@ var orcidOutput = fs.createWriteStream('./orcidout.log');
 var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
-// Google sheets via google-spreadsheet
-var doc = new googleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
-var creds = require(config.GOOGLE_SERVICE_ACCOUNT_KEY);
-function write_with_google_spreadsheet(token, share_info) {
-  //Auth with google sheets
-  doc.useServiceAccountAuth(creds, function() {
-    doc.getInfo(function(err, info) {
-      if (err) {
-        console.log("ACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        console.log(err);
-      } else {
-        console.log('Loaded doc: '+info.title+' by '+info.author.email);
-        var sheet = info.worksheets[0];
-        console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
-        sheet.addRow({"date" : new Date(), "name" : token.name, "orcid" : token.orcid, "share info" : share_info},
-          function callback(err) {
-            if (err) console.log(err);
-            else console.log("success adding row");
-        });
-      }
-    });
-  });
-};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Other Google sheets...
@@ -178,7 +154,7 @@ function listMajors(auth) {
   var sheets = google.sheets('v4');
   sheets.spreadsheets.values.get({
     auth: auth,
-    spreadsheetId: '14ZkoBaZ2ln8LvilLCsIPVYITVFbHSYuMctArPnbS-rk',
+    spreadsheetId: '1Xm-mmMthNuE0H2hjc2x5tbfAJSDBgp7Gv0ErOeBZiYc',
     range: 'Sheet1!A1:D4',
   }, function(err, response) {
     if (err) {
@@ -186,7 +162,7 @@ function listMajors(auth) {
       return;
     }
     var rows = response.values;
-    if (rows.length == 0) {
+    if (rows == undefined || rows.length == 0) {
       console.log('No data found.');
     } else {
       console.log('rows:');
@@ -220,7 +196,7 @@ function append(auth, arr) {
   var sheets = google.sheets('v4');
   sheets.spreadsheets.values.append({
     auth: auth,
-    spreadsheetId: '14ZkoBaZ2ln8LvilLCsIPVYITVFbHSYuMctArPnbS-rk',
+    spreadsheetId: '1Xm-mmMthNuE0H2hjc2x5tbfAJSDBgp7Gv0ErOeBZiYc',
     range: 'Sheet1',
     valueInputOption: 'USER_ENTERED',
     resource: { 
@@ -301,7 +277,6 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         orcidLogger.log(date, token.name, token.orcid, req.session.share_info);
         req.session.orcid_id = token.orcid;
         write_with_google_googleapis([new Date(), token.orcid, token.name, req.session.share_info?'TRUE':'FALSE'])
-        //write_with_google_spreadsheet(token,req.session.share_info);
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link, 'orcid_url': config.ORCID_URL});
         
       } else // handle error
