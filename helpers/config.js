@@ -4,7 +4,7 @@ module.exports = config = {
   CLIENT_SECRET: 'f6677b74-8f3f-4204-ad7d-55e449eac609',
   REDIRECT_URI: 'https://localhost:8443/redirect-uri',
   ORCID_URL: 'https://sandbox.orcid.org',
-  GOOGLE_DOC_KEY: '1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc',//Key from Google spreadsheet URL
+  GOOGLE_DOC_KEY: '1Xm-mmMthNuE0H2hjc2x5tbfAJSDBgp7Gv0ErOeBZiYc',//Key from Google spreadsheet URL https://docs.google.com/a/orcid.org/spreadsheets/d/1Xm-mmMthNuE0H2hjc2x5tbfAJSDBgp7Gv0ErOeBZiYc/edit?usp=sharing
   //Server SSL config
   FORCE_SSL: 'true', // must be 'true' or 'false'
   LETSENCRYPT_ISSUES_EMAIL: 'orcid-id-to-gdoc@mailinator.com', // Where to email when certificates expire.

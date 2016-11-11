@@ -17,26 +17,39 @@ var GoogleSheet = function () {
   var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
   var TOKEN_DIR = 'credentials/';
   var TOKEN_PATH = 'credentials/sheets_token.json';
+  var credentials = null;
 
-  // Load client secrets from a local file.
-  fs.readFile('credentials/client_secret.json', function processClientSecrets(err, content) {
-    if (err) {
-      console.log('Missing credentials/client_secret.json please visit https://developers.google.com/sheets/quickstart/nodejs and read "Turn on the Google Sheets API"' + err);
+  function verify_credentails_file_exist() {
+    fs.readFile('credentials/client_secret.json', function processClientSecrets(err, content) {
+      if (err) {
+        var rl = readline.createInterface({
+          input: process.stdin,
+          output: process.stdout
+        });
+        rl.question('You are misssing ./credentials/client_secret.json please see "Turn on the Google Sheets API" at https://developers.google.com/sheets/quickstart/nodejs press enter to continue: ', function(code) {
+          rl.close();
+          verify_credentails_file_exist();
+        });
+        return;
+      }
+      credentials = JSON.parse(content);
+      // Authorize a client with the loaded credentials, then call the
+      // Google Sheets API.
+      authorize(listMajors);
       return;
-    }
-    // Authorize a client with the loaded credentials, then call the
-    // Google Sheets API.
-    authorize(JSON.parse(content), listMajors);
-  });
+    });
+  }
+  verify_credentails_file_exist();
+
+
 
   /**
    * Create an OAuth2 client with the given credentials, and then execute the
    * given callback function.
    *
-   * @param {Object} credentials The authorization client credentials.
    * @param {function} callback The callback to call with the authorized client.
    */
-  function authorize(credentials, callback) {
+  function authorize(callback) {
     var clientSecret = credentials.web.client_secret;
     var clientId = credentials.web.client_id;
     var redirectUrl = credentials.web.redirect_uris[0];
@@ -161,15 +174,7 @@ var GoogleSheet = function () {
   } 
 
   GoogleSheet.prototype.append = function append(arr) { 
-    fs.readFile('credentials/client_secret.json', function processClientSecrets(err, content) {
-      if (err) {
-        console.log('Error loading client secret file: ' + err);
-        return;
-      }
-      // Authorize a client with the loaded credentials, then call the
-      // Google Sheets API.
-      authorize(JSON.parse(content), function(auth) {auth_append(auth,arr)});
-    });
+      authorize(function(auth) {auth_append(auth,arr)});
   }
 
 };
