@@ -35,7 +35,7 @@ var GoogleSheet = function () {
       credentials = JSON.parse(content);
       // Authorize a client with the loaded credentials, then call the
       // Google Sheets API.
-      authorize(listMajors);
+      authorize(listRows);
       return;
     });
   }
@@ -120,7 +120,7 @@ var GoogleSheet = function () {
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
-  function listMajors(auth) {
+  function listRows(auth) {
     var sheets = google.sheets('v4');
     sheets.spreadsheets.values.get({
       auth: auth,
