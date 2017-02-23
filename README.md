@@ -80,3 +80,7 @@ Wait for the return prompt: "server started on 8443"
 
 ###12. Open localhost [https://localhost:8443/](https://localhost:8443/)
 Use your internert browser to navigate to [https://localhost:8443/](https://localhost:8443/). Since this is a demo app on localhost you'll get an invalid certificate message, follow the instructions to accepting the invalid certificate and proceeding to localhost. You now have a sample client application running on your local machine!
+
+###Tips:
+
+* You get a 400 error `DNS name does not have enough labels`. Means the local `~/letsencrypt/*` directory is corrupt from switching node apps. Clear the letsencrypt directory to reset `rm -rf ~/letsencrypt/*` 
