@@ -48,26 +48,6 @@ var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 // Google sheets via google-spreadsheet
 var doc = new googleSpreadsheet(config.GOOGLE_DOC_KEY, 'private');
 var creds = require(config.GOOGLE_SERVICE_ACCOUNT_KEY);
-function write_with_google_spreadsheet(token, share_info) {
-  //Auth with google sheets
-  doc.useServiceAccountAuth(creds, function() {
-    doc.getInfo(function(err, info) {
-      if (err) {
-        console.log("ACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        console.log(err);
-      } else {
-        console.log('Loaded doc: '+info.title+' by '+info.author.email);
-        var sheet = info.worksheets[0];
-        console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
-        sheet.addRow({"date" : new Date(), "name" : token.name, "orcid" : token.orcid, "share info" : share_info},
-          function callback(err) {
-            if (err) console.log(err);
-            else console.log("success adding row");
-        });
-      }
-    });
-  });
-};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Other Google sheets...
@@ -83,40 +63,39 @@ var googleAuth = require('google-auth-library');
 // at ~/.credentials/sheets.googleapis.com-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 var TOKEN_DIR = 'credentials/';
-var TOKEN_PATH = 'credentials/sheets_token.json';
 
-// Load client secrets from a local file.
-fs.readFile('credentials/client_secret.json', function processClientSecrets(err, content) {
-  if (err) {
-    console.log('Error loading client secret file: ' + err);
-    return;
-  }
-  // Authorize a client with the loaded credentials, then call the
-  // Google Sheets API.
-  authorize(JSON.parse(content), listMajors);
-});
+
+
+function getGOauth2Client() { 
+  var credentials = JSON.parse(fs.readFileSync('credentials/client_secret.json'));
+  var clientSecret = credentials.web.client_secret;
+  var clientId = credentials.web.client_id;
+  var redirectUrl = null;
+  for (var i in credentials.web.redirect_uris)  
+    if (credentials.web.redirect_uris[i].startsWith(config.HOST))
+        redirectUrl = credentials.web.redirect_uris[i];
+  var auth = new googleAuth();
+  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+  return oauth2Client;
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  *
- * @param {Object} credentials The authorization client credentials.
+ * @param {Object} spreadsheetId spreedsheet we are working with.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
-  var clientSecret = credentials.web.client_secret;
-  var clientId = credentials.web.client_id;
-  var redirectUrl = credentials.web.redirect_uris[0];
-  var auth = new googleAuth();
-  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-
+function authorize(spreadsheetId, callback) {
+  var oauth2Client = getGOauth2Client();
   // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, function(err, token) {
+  fs.readFile(tokenPath(spreadsheetId), function(err, token) {
     if (err) {
-      getNewToken(oauth2Client, callback);
+      console.log(tokenPath(spreadsheetId));
+      console.log("Default spreedsheet has no token please visit /" + spreadsheetId + '/has_token.json')
     } else {
       oauth2Client.credentials = JSON.parse(token);
-      callback(oauth2Client);
+      callback(oauth2Client, spreadsheetId);
     }
   });
 }
@@ -126,13 +105,15 @@ function authorize(credentials, callback) {
  * execute the given callback with the authorized OAuth2 client.
  *
  * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
+ * @param {spreadsheetId} 
  * @param {getEventsCallback} callback The callback to call with the authorized
  *     client.
  */
-function getNewToken(oauth2Client, callback) {
+function getNewToken(oauth2Client, spreadsheetId, callback) {
   var authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: SCOPES
+    scope: SCOPES,
+    state: spreadsheetId
   });
   console.log('Authorize this app by visiting this url: ', authUrl);
   var rl = readline.createInterface({
@@ -147,10 +128,14 @@ function getNewToken(oauth2Client, callback) {
         return;
       }
       oauth2Client.credentials = token;
-      storeToken(token);
+      storeToken(token, spreadsheetId);
       callback(oauth2Client);
     });
   });
+}
+
+function tokenPath(spreadsheetId) {
+  return TOKEN_DIR +  'sheets_token_'+spreadsheetId +'.json';
 }
 
 /**
@@ -158,7 +143,7 @@ function getNewToken(oauth2Client, callback) {
  *
  * @param {Object} token The token to store to disk.
  */
-function storeToken(token) {
+function storeToken(token, spreadsheetId) {
   try {
     fs.mkdirSync(TOKEN_DIR);
   } catch (err) {
@@ -166,19 +151,16 @@ function storeToken(token) {
       throw err;
     }
   }
-  fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-  console.log('Token stored to ' + TOKEN_PATH);
+  fs.writeFile(tokenPath(spreadsheetId), JSON.stringify(token));
+  console.log(tokenPath(spreadsheetId));
 }
 
-/**
- * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- */
-function listMajors(auth) {
+
+function listFirstRow(auth, spreadsheetId) {
   var sheets = google.sheets('v4');
   sheets.spreadsheets.values.get({
     auth: auth,
-    spreadsheetId: '14ZkoBaZ2ln8LvilLCsIPVYITVFbHSYuMctArPnbS-rk',
+    spreadsheetId: spreadsheetId,
     range: 'Sheet1!A1:D4',
   }, function(err, response) {
     if (err) {
@@ -186,41 +168,32 @@ function listMajors(auth) {
       return;
     }
     var rows = response.values;
-    if (rows.length == 0) {
+    if (rows == undefined)
+      write_with_google_googleapis(['Date', 'ORCID iD', 'Name',], spreadsheetId);
+    else if (rows.length == 0) 
       console.log('No data found.');
-    } else {
-      console.log('rows:');
-      for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        // Print columns A and E, which correspond to indices 0 and 4.
-        console.log('%s, %s', row[0], row[3]);
-      }
-    }
+    else 
+      console.log('First row %s, %s, %s, %s', rows[0][0], rows[0][1], rows[0][2], rows[0][3]);
   });
 } 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Adding to the above example with what we need 
 
-function write_with_google_googleapis(arr) { 
-  fs.readFile('credentials/client_secret.json', function processClientSecrets(err, content) {
-    if (err) {
-      console.log('Error loading client secret file: ' + err);
-      return;
-    }
-    // Authorize a client with the loaded credentials, then call the
-    // Google Sheets API.
-    authorize(JSON.parse(content), function(auth) {append(auth,arr)});
+function write_with_google_googleapis(arr, spreadsheetId) { 
+  // Authorize a client with the loaded credentials, then call the
+  // Google Sheets API.
+  authorize(spreadsheetId, function(auth) { 
+    append(auth, arr, spreadsheetId);
   });
 }
 
-
 // adding append funtion
-function append(auth, arr) {
+function append(auth, arr, spreadsheetId) {
   var sheets = google.sheets('v4');
   sheets.spreadsheets.values.append({
     auth: auth,
-    spreadsheetId: '14ZkoBaZ2ln8LvilLCsIPVYITVFbHSYuMctArPnbS-rk',
+    spreadsheetId: spreadsheetId,
     range: 'Sheet1',
     valueInputOption: 'USER_ENTERED',
     resource: { 
@@ -239,15 +212,8 @@ function append(auth, arr) {
   });
 } 
 
-
-
-
-
-
-
-
-app.get('/', function(req, res) { // Index page 
-  req.session.share_info = true;
+app.get(['/'], function(req, res) { // Index page 
+  req.session.GOOGLE_DOC_KEY = req.query.spreadsheetId ? req.query.spreadsheetId : config.GOOGLE_DOC_KEY;
   // link we send user to authorize our requested scopes
   var auth_link =  config.ORCID_URL + '/oauth/authorize' + '?'
    + querystring.stringify({
@@ -265,8 +231,6 @@ app.get('/', function(req, res) { // Index page
 });
 
 app.post('/share-info', function(req, res) {
-  req.session.share_info = req.body.share_info;
-  console.log("Share info checked: " + req.session.share_info);
   req.session.save(function(err) {
   // session saved - nothing else to do
   });
@@ -275,6 +239,40 @@ app.post('/share-info', function(req, res) {
 app.get('/orcid-id.json', function(req, res) {
   res.json({'orcid_id': req.session.orcid_id});
 });
+
+app.get('/google_oauth_redirect_uri', function(req, res) {
+  console.log("here");
+  oauth2Client = getGOauth2Client();
+  oauth2Client.getToken(req.query.code, function(err, token) {
+    if (err) {
+      console.log('Error while trying to retrieve access token', err);
+      return;
+    }
+    var spreadsheetId = req.query.state;
+    storeToken(token, spreadsheetId);
+    authorize(spreadsheetId, listFirstRow);
+    res.redirect("/token_has_been_stored");
+  });
+});
+
+app.get('/:spreadsheetId/has_token.json', function(req, res) {
+  // Load client secrets from a local file.
+  fs.readFile(tokenPath(req.param.spreadsheetId), function processClientSecrets(err, content) {
+    if (err)
+        res.json({ name: req.params.spreadsheetId, 
+          has_token : false,
+          authorization_uri: 
+            getGOauth2Client().generateAuthUrl({
+              access_type: 'offline',
+              scope: SCOPES,
+              state: req.params.spreadsheetId
+            })
+          });      
+    else
+      res.json({ name: req.params.spreadsheetId, has_token : true});
+  });
+});
+
 
 app.get('/redirect-uri', function(req, res) { // Redeem code URL
   if (req.query.error == 'access_denied') {
@@ -298,10 +296,10 @@ app.get('/redirect-uri', function(req, res) { // Redeem code URL
         console.log(token);
         var date = new Date();
         //Log ORCID info to file
-        orcidLogger.log(date, token.name, token.orcid, req.session.share_info);
+        orcidLogger.log(date, token.name, token.orcid, req.session.GOOGLE_DOC_KEY);
         req.session.orcid_id = token.orcid;
-        write_with_google_googleapis([new Date(), token.orcid, token.name, req.session.share_info?'TRUE':'FALSE'])
-        //write_with_google_spreadsheet(token,req.session.share_info);
+        // token state is mapped to spreedsheet we want to save in
+        write_with_google_googleapis([new Date(), token.orcid, token.name], req.session.GOOGLE_DOC_KEY);
         res.render('pages/success', { 'body': JSON.parse(body), 'authorization_uri': auth_link, 'orcid_url': config.ORCID_URL});
         
       } else // handle error
