@@ -5,8 +5,7 @@ module.exports = config = {
   REDIRECT_URI: 'https://localhost:8443/redirect-uri',
   ORCID_URL: 'https://sandbox.orcid.org',
   //Google API config
-  GOOGLE_DOC_KEY: '13MkfJqOOXfY3uotB0c0uagahWueT4NP5hxojbl2TxQM',//Key from Google spreadsheet URL
-  GOOGLE_SERVICE_ACCOUNT_KEY: './key.json',//Path to key file downloaded from Google API console https://console.developers.google.com/apis/credentials
+  DEFAULT_GSHEET_ID: '1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc',//Key from Google spreadsheet URL https://docs.google.com/spreadsheets/d/1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc/edit?usp=sharing
   //Server SSL config
   FORCE_SSL: 'true', // must be 'true' or 'false'
   LETSENCRYPT_ISSUES_EMAIL: 'orcid-id-to-gdoc@mailinator.com', // Where to email when certificates expire.
