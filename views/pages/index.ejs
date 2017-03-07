@@ -4,26 +4,18 @@
         <div class="jumbotron">
             <h1>Share your ORCID&nbsp;iD!</h1>
             <p>
-            Click the button below to share your ORCID iD and the public name listed on your ORCID record with the conference organizers. Don't have an ORCID iD? Click the button to create one now!
+            Click the button to share your ORCID iD and the public name listed on your ORCID record with the event organizers. Don't have an ORCID iD? Click the button to create one now!
             </p>
-            <div class="checkbox">
-                <p>
-                    <label>
-                        <input type="checkbox" name="shareInfo" id="shareInfo" value="">
-                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                        <span class="label-text">ORCID is free to share my name and ORCID iD in association with this event.</span>
-                     </label>
-                </p>
             </div>
-            <a href="<%- authorization_uri %>" id="orcid-button"><img src="./img/orcid_scalable.svg" id="id-icon">
-            </img></a>
-            <!--<p><a class="btn btn-primary popup" href="<%- authorization_uri %>">
-                    <img id="orcid-id-logo" src="//orcid.org/sites/default/files/images/orcid_24x24.png" width='24' height='24' alt="ORCID logo" /> Create or connect my ORCID iD
-            </a></p>-->
+            <!--<p><a class="btn btn-primary popup" id="orcid-button" href="<%- authorization_uri %>">Share my <img src="./img/orcid_scalable.svg" id="id-icon">
+            </img></a></p>-->
+            <p><a class="btn btn-primary popup" id="share-button"  href="<%- authorization_uri %>">
+                    <img id="orcid-id-logo" src="./img/orcid_scalable.svg" width='110' height='110' alt="ORCID logo" /> Share 
+            </a></p>
         </div>
         <hr>
         <div class="footer">
-            Get the code & learn how to deploy this example locally at: <a https://github.com/ORCID/orcid-id-to-gdoc" target="_blank">github.com/ORCID/orcid-id-to-gdoc</a>
+            Get the code & learn how to deploy this example locally at: <a https://github.com/ORCID/share-my-id" target="_blank">github.com/ORCID/share-my-id</a>
         </div>
     </div>  
 <%include ../components/footer.ejs%>

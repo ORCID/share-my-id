@@ -1,5 +1,6 @@
 body {
   background: #fff;
+  //font-family: 'Noto Sans', Helvetica, Sans-serif;
 }
 
 a {
@@ -26,9 +27,11 @@ a:hover, .jumbotron a:hover {
 
 .jumbotron h1 {
   //font-size: 9em;
-  font-size: 9vw;
+  font-size: 6vw;
+  text-transform: uppercase;
   color: #338caf;
   margin:0;
+  //font-weight: bold;
   font-family: 'Covered By Your Grace', cursive;
 }
 
@@ -57,7 +60,7 @@ a:hover, .jumbotron a:hover {
   color: #fff;
 }
 
-#orcid-button{
+/*#orcid-button{
   background: #000;
   border-radius: 50%;
   -moz-border-radius: 50%;
@@ -66,7 +69,25 @@ a:hover, .jumbotron a:hover {
   width: 30%;
   margin: 0 auto;
   padding: 0;
+}*/
+
+#share-button{
+  background: #338caf;
+  border-radius: 6em;
+  -moz-border-radius: 6em;
+  -webkit-border-radius: 6em;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  padding: .5em;
+  font-size: 6vw;
+  //font-weight: bold;
+  text-transform: uppercase;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(119,119,119,1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(119,119,119,1);
+  box-shadow: 0px 0px 10px 0px rgba(119,119,119,1);
 }
+
 
 #id-icon:hover{
   /* IE 8-9 */

@@ -23,8 +23,6 @@
     </script>
     <script type=text/javascript>
       $(document).ready(function(){
-        //reset checkbox on page load
-        $(':checkbox').prop('checked', true);
         //redirect to index
         if (window.location.href.indexOf('redirect-uri') >= 0){
             setTimeout(function () { window.location.href = "/";}, 120000);
