@@ -1,8 +1,7 @@
 module.exports = config = {
   //ORCID API config
-  CLIENT_ID: 'APP-B9T4095P7U7W76X5',
-  CLIENT_SECRET: 'f6677b74-8f3f-4204-ad7d-55e449eac609',
-  REDIRECT_URI: 'https://localhost:8443/redirect-uri',
+  CLIENT_ID: 'APP-3BI8IQ5O8DREEAVF',
+  CLIENT_SECRET: '35d8f715-9121-440c-ad34-b66cb8c4e884',
   ORCID_URL: 'https://sandbox.orcid.org',
   //Google API config
   DEFAULT_GSHEET_ID: '1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc',//Key from Google spreadsheet URL https://docs.google.com/spreadsheets/d/1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc/edit?usp=sharing
