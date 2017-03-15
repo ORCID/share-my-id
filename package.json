@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Simple node.js app that collects authenticated ORCID iDs and uploads them to a Google document",
   "main": "client-app.js",
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
     "auto-sni": "^1.5.1",
+    "ava": "^0.18.2",
     "body-parser": "^1.16.1",
     "ejs": "^2.5.6",
     "express": "^4.14.1",
@@ -16,6 +20,9 @@
     "mongojs": "^2.4.0",
     "randomstring": "^1.1.5",
     "request": "^2.79.0"
+  },
+  "scripts": {
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -31,7 +38,7 @@
   "author": "lizkrznarich",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ORCID/double-orcid-auth-node/issues"
+    "url": "https://github.com/ORCID/share-my-id"
   },
   "homepage": "https://github.com/ORCID/double-orcid-auth-node"
 }

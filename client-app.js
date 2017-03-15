@@ -6,10 +6,9 @@ var
   express = require('express'),
   fs = require('fs'),
   httpLogging = require('./helpers/http-logging'),
-  querystring = require("querystring"),
-  request = require('request'),
   session = require('express-session'),
-  SmidManger = require('./local_modules/smid-manager.js').SmidManger;
+  SmidManger = require('./local_modules/smid-manager.js').SmidManger,
+  OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
 
 /*
    for development goto mongo console
@@ -22,7 +21,13 @@ var
 */
 
 var smidManger = new SmidManger('smid_user:devpassword@127.0.0.1:27017/smid',['smids']);
+var ooau = new OcridOAuthUtil(
+  config.CLIENT_ID, 
+  config.CLIENT_SECRET, 
+  config.ORCID_URL + '/oauth/authorize',
+  config.ORCID_URL + '/oauth/token' );
 
+/*
 // quick and dirty test
 smidManger.createSmid('0000-0000-0000-0000','test name', function(err, doc) {
    console.log(doc);
@@ -39,6 +44,7 @@ smidManger.createSmid('0000-0000-0000-0000','test name', function(err, doc) {
       console.log(doc);
    });
 });
+*/
 
 // Init express
 var app = express();
@@ -78,39 +84,6 @@ var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 var CREATE_SMID_URI = '/create-smid-redirect';
 var ADD_ID_REDIRECT = '/add-id-redirect';
-
-// generates a link to orcid for authorization
-function getAuthUrl(redirect_uri, state) {
-  return config.ORCID_URL + '/oauth/authorize' + '?'
-   + querystring.stringify({
-      'redirect_uri': redirect_uri,
-      'scope': '/authenticate',
-      'response_type':'code',
-      'client_id': config.CLIENT_ID,
-      'show_login': 'true',
-      'state': state //state maps to current google sheet
-    });
-}
-
-function exchangeCode(req,callback) {
-      // config for exchanging code for token 
-    var reqConfig = {
-      url: config.ORCID_URL + '/oauth/token',
-      method: 'post',
-      body: querystring.stringify({
-        'code': req.query.code,
-        'client_id': config.CLIENT_ID,
-        'client_secret': config.CLIENT_SECRET,
-        'grant_type': 'authorization_code',
-      }),
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
-      }
-    }
-    //making request exchanging code for token
-    request(reqConfig, callback);
-}
-
 
 app.get('/:publicKey/details', function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
@@ -164,7 +137,7 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
       } else // handle error
         res.render('pages/error', { 'error': error, 'orcid_url': config.ORCID_URL });
     };
-    exchangeCode(req,exchangingCallback);
+    ooau.exchangeCode(req.query.code,exchangingCallback);
   }
 });
 
@@ -195,7 +168,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
       } else // handle error
         res.render('pages/error', { 'error': error, 'state': req.query.state, 'orcid_url': config.ORCID_URL });
     };
-    exchangeCode(req,exchangingCallback);
+    ooau.exchangeCode(req.query.code,exchangingCallback);
   }
 });
 
@@ -205,8 +178,8 @@ app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) {
       // nothing to do
   });
   res.render('pages/index', {
-    'create_smid_authorization_uri': getAuthUrl(config.HOST + CREATE_SMID_URI),
-    'add_id_authorization_uri': getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey),
+    'create_smid_authorization_uri': ooau.getAuthUrl(config.HOST + CREATE_SMID_URI),
+    'add_id_authorization_uri': ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey),
     'edit_smid_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey,
     'share_smid_link': config.HOST + '/' + req.params.publicKey,
     'put_form_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey + '/details/form',

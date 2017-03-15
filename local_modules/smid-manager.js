@@ -11,6 +11,7 @@ var SmidManger = function (connectionStr, collectionsArr) {
 //      });
 //    });
     this._smidCol.createIndex({public_key:1}, {unique: true});
+    this._smidCol.createIndex({private_key:1}, {unique: true});
 };
 
 /*
