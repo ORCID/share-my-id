@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CollectionFormComponent } from './collection-form/collection-form.component';
+import { CreateCollectionComponent } from './create-collection/create-collection.component';
+import { EditCollectionComponent } from './edit-collection/edit-collection.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,16 @@ const routes: Routes = [
     children: []
   },
   {
-    component: CollectionFormComponent,
+    component: CreateCollectionComponent,
     path: 'create-collection'
+  },
+  {
+    component: EditCollectionComponent,
+    path: ':id1/edit-collection/:id2'
+  },
+  { 
+    path: '**', 
+    redirectTo: '' 
   }
 ];
 
