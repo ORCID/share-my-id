@@ -5,27 +5,29 @@ import { CreateCollectionComponent } from './create-collection/create-collection
 import { EditCollectionComponent } from './edit-collection/edit-collection.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    children: []
-  },
-  {
-    component: CreateCollectionComponent,
-    path: 'create-collection'
-  },
-  {
-    component: EditCollectionComponent,
-    path: ':id1/edit-collection/:id2'
-  },
-  { 
-    path: '**', 
-    redirectTo: '' 
-  }
+    {
+        path: '',
+        children: []
+    },
+    {
+        component: CreateCollectionComponent,
+        path: 'create-collection'
+    },
+    {
+        component: EditCollectionComponent,
+        path: ':id1/edit-collection/:id2'
+    },
+    { 
+        path: '**', 
+        redirectTo: '' 
+    }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: []
-})
+@NgModule(
+    {
+        imports: [RouterModule.forRoot(routes)],
+        exports: [RouterModule],
+        providers: []
+    }
+)
 export class AppRoutingModule { }
