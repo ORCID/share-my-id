@@ -15,7 +15,7 @@ const routes: Routes = [
     },
     {
         component: EditCollectionComponent,
-        path: ':id1/edit-collection/:id2'
+        path: ':publicKey/edit-collection/:privateKey'
     },
     { 
         path: '**', 

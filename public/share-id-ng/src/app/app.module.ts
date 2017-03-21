@@ -5,30 +5,35 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
+
 import { CollectionFormComponent } from './collection-form/collection-form.component';
 import { CollectionLinksComponent } from './collection-links/collection-links.component';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
 import { EditCollectionComponent } from './edit-collection/edit-collection.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+
+import { CollectionService } from './collection.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    HeaderComponent,
     CollectionFormComponent,
     CollectionLinksComponent,
     CreateCollectionComponent,
-    EditCollectionComponent
+    EditCollectionComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpModule,
-    AppRoutingModule
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    CollectionService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
