@@ -14,6 +14,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 
 import { CollectionService } from './collection.service';
+import { PageConfirmCollectionComponent } from './page-confirm-collection/page-confirm-collection.component';
+import { PageHomeComponent } from './page-home/page-home.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CollectionService } from './collection.service';
     CreateCollectionComponent,
     EditCollectionComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    PageConfirmCollectionComponent,
+    PageHomeComponent
   ],
   imports: [
     AppRoutingModule,
