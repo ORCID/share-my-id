@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import 'rxjs/Rx'; //Fix for error with map, catch and other functions not being in typings for observables.
 
 import { Collection } from './collection';
 
@@ -9,7 +10,7 @@ export class CollectionService {
     
     constructor( private http: Http ) { }
     
-    private apiUrl ="";
+    private apiBaseUrl ="";
 
     private handleError (error: Response | any) {
         let errMsg: string;
@@ -25,7 +26,7 @@ export class CollectionService {
     }
 
     getCollection(): Observable<Collection[]> {
-        return this.http.get( this.Collection ).map(( res:Response ) => res.json()).catch(this.handleError);
+        return this.http.get( this.apiBaseUrl ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
 }
