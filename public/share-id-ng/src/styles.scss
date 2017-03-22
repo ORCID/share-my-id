@@ -23,7 +23,8 @@ h1 {
 
 input,
 textarea {
-    border: $input-border-width solid $input-border-color; 
+    border: $input-border-width solid $input-border-color;
+    border-radius: 5px;
 }
 
 p {
@@ -45,4 +46,11 @@ p {
         background-color: $button-bck-hover;
         color: $button-font-color-hover;
     }
+}
+
+/****************************************************
+//Helper classes
+****************************************************/
+.block {
+    display: block;
 }

@@ -1,24 +1,40 @@
-<section class="row">
+<div class="row">
+    <div class="col">
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> You successfully added a collection.
+        </div>
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col">
         <form>
-          <fieldset>
-            <legend>Id Collection Details</legend>
+            <fieldset>
+                <legend class="font-weight-bold text-center">ID Collection Details</legend>
 
-            <p>
-              <label for="input-title">Title</label>
-              <input type="text" id="input-title" placeholder="Write the collection title here...">
-            </p>
+                <div class="form-group">
+                    <label for="input-title">Title</label>
+                    <input class="form-control" id="input-title" placeholder="Write the collection title here..." type="text">
+                </div>
 
-            <p>
-              <label for="textarea-description">Description</label>
-              <textarea id="textarea-description" rows="5"></textarea>
-            </p>
+                <div class="form-group">
+                    <label for="textarea-description">Description</label>
+                    <textarea class="form-control" id="textarea-description" rows="5"></textarea>
+                </div>
 
-            <p>
-              <button class="btn btn-primary" type="submit" role="button">Save Details</button>
-            </p>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit" role="button" disabled="">Save Details</button>
+                </div>
 
-          </fieldset>
+            </fieldset>
         </form>
     </div>
-</section>
+</div>
