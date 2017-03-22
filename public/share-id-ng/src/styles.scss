@@ -21,12 +21,6 @@ h1 {
     color: $title-h1-font-color;
 }
 
-input,
-textarea {
-    border: $input-border-width solid $input-border-color;
-    border-radius: 5px;
-}
-
 p {
     color: $base-font-color;
 }
@@ -46,11 +40,4 @@ p {
         background-color: $button-bck-hover;
         color: $button-font-color-hover;
     }
-}
-
-/****************************************************
-//Helper classes
-****************************************************/
-.block {
-    display: block;
 }
