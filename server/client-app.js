@@ -48,8 +48,10 @@ smidManger.createSmid('0000-0000-0000-0000','test name', function(err, doc) {
 
 // Init express
 var app = express();
+var path = require('path');
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
+app.use('/',express.static(__dirname+'/../public/share-id-ng/dist'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({  
@@ -177,7 +179,7 @@ app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) {
   req.session.regenerate(function(err) {
       // nothing to do
   });
-  res.render('pages/indexNg', {
+  res.render(path.join(__dirname+'/../public/share-id-ng/dist','indexNg.ejs'), {
     'create_smid_authorization_uri': ooau.getAuthUrl(config.HOST + CREATE_SMID_URI),
     'add_id_authorization_uri': ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey),
     'edit_smid_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey,
@@ -187,3 +189,5 @@ app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) {
     'orcid_url': config.ORCID_URL
   });
 });
+
+//module.exports = app; 
