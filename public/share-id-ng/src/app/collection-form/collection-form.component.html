@@ -22,18 +22,18 @@
 
                 <div class="form-group has-success"><!-- has-success/has-warning/has-danger -->
                     <label class="form-control-label" for="input-title">Title</label>
-                    <input class="form-control form-control-success" id="input-title" placeholder="Write the collection title here..." type="text"><!--form-control-success/form-control-warning/form-control-danger -->
+                    <input class="form-control form-control-success" id="input-title" minlength="4" name="input-title" ngModel placeholder="Write the collection title here..." type="text" required><!--form-control-success/form-control-warning/form-control-danger -->
                     <div class="form-control-feedback">Success! You've done it.</div>
                 </div>
 
                 <div class="form-group has-danger">
                     <label class="form-control-label" for="textarea-description">Description</label>
-                    <textarea class="form-control form-control-danger" id="textarea-description" rows="5"></textarea>
+                    <textarea class="form-control form-control-danger" id="textarea-description" minlength="4" name="textarea-description" ngModel placeholder="Add a description for the collection" required="" rows="5"></textarea>
                     <div class="form-control-feedback">Error!</div>
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit" role="button" disabled="">Save Details</button>
+                    <button class="btn btn-primary" type="submit" role="button" disableda>Save Details</button>
                 </div>
 
             </fieldset>
