@@ -177,7 +177,7 @@ app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) {
   req.session.regenerate(function(err) {
       // nothing to do
   });
-  res.render('pages/index', {
+  res.render('pages/indexNg', {
     'create_smid_authorization_uri': ooau.getAuthUrl(config.HOST + CREATE_SMID_URI),
     'add_id_authorization_uri': ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey),
     'edit_smid_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey,

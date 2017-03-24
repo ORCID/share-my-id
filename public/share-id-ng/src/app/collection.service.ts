@@ -10,7 +10,7 @@ export class CollectionService {
     
     constructor( private http: Http ) { }
     
-    private apiBaseUrl ="";
+    private apiBaseUrl ="http://localhost:8080";
 
     private handleError (error: Response | any) {
         let errMsg: string;
@@ -25,8 +25,12 @@ export class CollectionService {
         return Observable.throw(errMsg);
     }
 
-    getCollection(): Observable<Collection[]> {
-        return this.http.get( this.apiBaseUrl ).map(( res:Response ) => res.json()).catch(this.handleError);
+    editCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
+        return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+    }
+
+    getCollection( publicKey: string ): Observable<Collection[]> {
+        return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
 }
