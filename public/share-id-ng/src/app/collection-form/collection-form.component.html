@@ -14,18 +14,35 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col">
-        <form #form="ngForm" (ngSubmit)="submitForm(form.value)" novalidate>
+        <form #formRef="ngForm" (ngSubmit)="submitForm(formRef.value)" >
             <fieldset>
                 <legend class="font-weight-bold text-center">ID Collection Details</legend>
 
                 <div class="form-group has-success"><!-- has-success/has-warning/has-danger -->
-                    <label class="form-control-label" for="input-title">Title</label>
-                    <input class="form-control form-control-success" id="input-title" minlength="4" name="input-title" [(ngModel)]="title" #titleRef="ngModel" placeholder="Write the collection title here..." type="text" required><!--form-control-success/form-control-warning/form-control-danger -->
-                    <div class="form-control-feedback">Success! You've done it.</div>
-                </div>
+                    <label class="form-control-label" for="title">Title</label>
+                    <input 
+                        [(ngModel)]="title" 
+                        #titleRef="ngModel" 
+                        class="form-control form-control-success" 
+                        id="title" 
+                        minlength="4" 
+                        name="title" 
+                        placeholder="Write the collection title here..." 
+                        type="text" 
+                        required
+                    ><!--form-control-success/form-control-warning/form-control-danger -->
+                    <div class="form-control-feedback" *ngIf="titleRef.errors && titleRef.dirty">
+                        <small  *ngIf="titleRef.errors?.required">This field is required</small >
+                        <small  *ngIf="titleRef.errors?.minlength">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >
+                    </div>
+                    
 
+                    {{titleRef.valid}}
+                </div>
+                <!--
                 <div class="form-group has-danger">
                     <label class="form-control-label" for="textarea-description">Description</label>
                     <textarea class="form-control form-control-danger" id="textarea-description" minlength="4" name="textarea-description" [(ngModel)]="description" placeholder="Add a description for the collection" #descriptionRef="ngModel" required="" rows="5"></textarea>
@@ -33,11 +50,13 @@
                     {{descriptionRef.valid}}
                     <div class="form-control-feedback" [hidden]="descriptionRef.valid || name.pristine" class="alert alert-danger">Error!</div>
                 </div>
-                ++{{ngForm}}--
 
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit" role="button" >Save Details</button>
                 </div>
+                -->
+                {{formRef.value | json}}   
+                {{formRef.valid | json}}  
 
             </fieldset>
         </form>

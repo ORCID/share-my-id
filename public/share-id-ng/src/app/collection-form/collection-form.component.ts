@@ -14,7 +14,7 @@ import { CollectionService } from './../collection.service';
 })
 
 export class CollectionFormComponent implements OnInit {
-    collection: Collection;
+    //collection: Collection;
     //collectionForm: FormGroup;
 
     constructor(
