@@ -23,12 +23,14 @@ export class CollectionFormComponent implements OnInit {
         private route: ActivatedRoute,
     ) 
     {
+        /*
         this.collectionForm = formBuilder.group(
             {
                 'description' : '',
                 'title' : ''
             }
         );
+        */
     }
 
     ngOnInit() {

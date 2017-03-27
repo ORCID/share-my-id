@@ -32,7 +32,8 @@ import { PageHomeComponent } from './page-home/page-home.component';
   imports: [
     AppRoutingModule,
     BrowserModule,
-    ReactiveFormsModule,
+    //ReactiveFormsModule,
+    FormsModule,
     HttpModule
   ],
   providers: [
