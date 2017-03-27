@@ -1,6 +1,6 @@
 import { Location }               from '@angular/common';
 import { Component, OnInit }      from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+//import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Collection } from './../collection';
@@ -15,10 +15,10 @@ import { CollectionService } from './../collection.service';
 
 export class CollectionFormComponent implements OnInit {
     collection: Collection;
-    collectionForm: FormGroup;
+    //collectionForm: FormGroup;
 
     constructor(
-        private formBuilder: FormBuilder,
+        //private formBuilder: FormBuilder,
         private location: Location,
         private route: ActivatedRoute,
     ) 
