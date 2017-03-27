@@ -21,7 +21,11 @@
             <fieldset>
                 <legend class="font-weight-bold text-center">ID Collection Details</legend>
 
-                <div class="form-group has-success"><!-- has-success/has-warning/has-danger -->
+                <div 
+                    class="form-group" 
+                    [class.has-success]="titleRef.valid"
+                    [class.has-danger]="titleRef.valid==false && titleRef.dirty"
+                ><!-- has-success/has-warning/has-danger -->
                     <label class="form-control-label" for="title">Title</label>
                     <input 
                         [(ngModel)]="title" 
@@ -33,14 +37,11 @@
                         placeholder="Write the collection title here..." 
                         type="text" 
                         required
-                    ><!--form-control-success/form-control-warning/form-control-danger -->
+                    >
                     <div class="form-control-feedback" *ngIf="titleRef.errors && titleRef.dirty">
                         <small  *ngIf="titleRef.errors?.required">This field is required</small >
                         <small  *ngIf="titleRef.errors?.minlength">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >
                     </div>
-                    
-
-                    {{titleRef.valid}}
                 </div>
                 <!--
                 <div class="form-group has-danger">
