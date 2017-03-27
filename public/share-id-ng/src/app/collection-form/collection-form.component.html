@@ -22,7 +22,8 @@
 
                 <div class="form-group has-success"><!-- has-success/has-warning/has-danger -->
                     <label class="form-control-label" for="input-title">Title</label>
-                    <input class="form-control form-control-success" id="input-title" minlength="4" name="input-title" ngModel placeholder="Write the collection title here..." type="text" required><!--form-control-success/form-control-warning/form-control-danger -->
+                    <input class="form-control form-control-success" id="input-title" minlength="4" name="input-title" [(ngModel)]="title" placeholder="Write the collection title here..." type="text" required><!--form-control-success/form-control-warning/form-control-danger -->
+                    --{{title}}--
                     <div class="form-control-feedback">Success! You've done it.</div>
                 </div>
 
