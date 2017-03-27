@@ -25,7 +25,7 @@
                     class="form-group" 
                     [class.has-success]="titleRef.valid"
                     [class.has-danger]="titleRef.valid==false && titleRef.dirty"
-                ><!-- has-success/has-warning/has-danger -->
+                >
                     <label class="form-control-label" for="title">Title</label>
                     <input 
                         [(ngModel)]="title" 
@@ -38,27 +38,50 @@
                         type="text" 
                         required
                     >
-                    <div class="form-control-feedback" *ngIf="titleRef.errors && titleRef.dirty">
+                    <div 
+                        *ngIf="titleRef.errors && titleRef.dirty"
+                        class="form-control-feedback" 
+                    >
                         <small  *ngIf="titleRef.errors?.required">This field is required</small >
                         <small  *ngIf="titleRef.errors?.minlength">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >
                     </div>
                 </div>
-                <!--
-                <div class="form-group has-danger">
-                    <label class="form-control-label" for="textarea-description">Description</label>
-                    <textarea class="form-control form-control-danger" id="textarea-description" minlength="4" name="textarea-description" [(ngModel)]="description" placeholder="Add a description for the collection" #descriptionRef="ngModel" required="" rows="5"></textarea>
 
-                    {{descriptionRef.valid}}
-                    <div class="form-control-feedback" [hidden]="descriptionRef.valid || name.pristine" class="alert alert-danger">Error!</div>
+                <div 
+                    class="form-group" 
+                    [class.has-success]="descriptionRef.valid"
+                    [class.has-danger]="descriptionRef.valid==false && descriptionRef.dirty"
+                >
+                    <label class="form-control-label" for="description">Title</label>
+                    <textarea
+                        [(ngModel)]="description" 
+                        #descriptionRef="ngModel" 
+                        class="form-control" 
+                        id="description" 
+                        minlength="4" 
+                        name="description" 
+                        placeholder="Write the collection description here..." 
+                        required
+                        rows="5"
+                    ></textarea> 
+                    <div 
+                        *ngIf="descriptionRef.errors && descriptionRef.dirty"
+                        class="form-control-feedback" 
+                    >
+                        <small  *ngIf="descriptionRef.errors?.required">This field is required</small >
+                        <small  *ngIf="descriptionRef.errors?.minlength">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >
+                    </div>
                 </div>
-
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit" role="button" >Save Details</button>
+                    <button 
+                        [disabled]="!formRef.valid"
+                        class="btn btn-primary" 
+                        type="submit" 
+                        role="button"
+                    >
+                        Save Details
+                    </button>
                 </div>
-                -->
-                {{formRef.value | json}}   
-                {{formRef.valid | json}}  
-
             </fieldset>
         </form>
     </div>
