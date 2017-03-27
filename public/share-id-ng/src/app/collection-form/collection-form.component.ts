@@ -14,23 +14,14 @@ import { CollectionService } from './../collection.service';
 })
 
 export class CollectionFormComponent implements OnInit {
-    //collection: Collection;
-    //collectionForm: FormGroup;
+    collection: Collection;
 
     constructor(
-        //private formBuilder: FormBuilder,
         private location: Location,
         private route: ActivatedRoute,
     ) 
     {
-        /*
-        this.collectionForm = formBuilder.group(
-            {
-                'description' : '',
-                'title' : ''
-            }
-        );
-        */
+
     }
 
     ngOnInit() {
