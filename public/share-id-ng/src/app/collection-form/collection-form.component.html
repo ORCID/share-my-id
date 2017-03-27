@@ -28,9 +28,11 @@
                 >
                     <label class="form-control-label" for="title">Title</label>
                     <input 
-                        [(ngModel)]="title" 
+                        [(ngModel)]="title"
+                        [class.form-control-success]="titleRef.valid"
+                        [class.form-control-danger]="titleRef.valid==false && titleRef.dirty"
                         #titleRef="ngModel" 
-                        class="form-control form-control-success" 
+                        class="form-control" 
                         id="title" 
                         minlength="4" 
                         name="title" 
@@ -54,7 +56,9 @@
                 >
                     <label class="form-control-label" for="description">Title</label>
                     <textarea
-                        [(ngModel)]="description" 
+                        [(ngModel)]="description"
+                        [class.form-control-success]="descriptionRef.valid"
+                        [class.form-control-danger]="descriptionRef.valid==false && descriptionRef.dirty"
                         #descriptionRef="ngModel" 
                         class="form-control" 
                         id="description" 
