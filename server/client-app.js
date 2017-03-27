@@ -50,7 +50,6 @@ smidManger.createSmid('0000-0000-0000-0000','test name', function(err, doc) {
 var app = express();
 var path = require('path');
 app.set('view engine', 'ejs');
-//app.use(express.static(__dirname + '/public'));
 app.use('/',express.static(__dirname+'/../public/share-id-ng/dist'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -115,11 +114,10 @@ app.get('/orcid-id.json', function(req, res) {
 
 app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
   var state = req.query.state; 
-  console.log("spreed sheet from /redirect-uri url " + state);
   if (req.query.error == 'access_denied') {
     // User denied access
-    //res.render('pages/access_denied', {'authorization_uri': getAuthUrl(config.HOST + CREATE_SMID_URI),'orcid_url': config.ORCID_URL });
-    res.redirect('/?error=access_denied&error_description=User%20denied%20access');      
+    console.log("error: " + req.query.error);
+    res.send(JSON.stringify(req.query, null, 2));  
   } else {
     // exchange code
     // function to render page after making request
@@ -133,23 +131,27 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         //state maps to current google sheet
         console.log("creating smid for" + token.orcid);
         smidManger.createSmid(token.orcid,token.name, function(err, doc) {
-            res.redirect("/" + doc.public_key + "/edit/"+doc.private_key);   
+          //res.redirect("/" + doc.public_key + "/edit/"+doc.private_key); 
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.stringify(doc, null, 2));  
         });
         
       } else // handle error
-        res.render('pages/error', { 'error': error, 'orcid_url': config.ORCID_URL });
+        console.log(err);
+        res.send(JSON.stringify(err, null, 2)); 
     };
     ooau.exchangeCode(req.query.code,exchangingCallback);
   }
+
 });
 
 
 app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   var state = req.query.state; 
-  console.log("spreed sheet from /redirect-uri url " + state);
   if (req.query.error == 'access_denied') {
     // User denied access
-    res.render('pages/access_denied', {'state': req.query.state, 'authorization_uri': getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.query.state),'orcid_url': config.ORCID_URL });      
+    console.log("error: " + req.query.error);
+    res.send(JSON.stringify(req.query, null, 2));       
   } else {
     // exchange code
     // function to render page after making request
@@ -165,10 +167,12 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         console.log("Got user id: " + token.orcid);
         smidManger.addOrcidName(req.query.state, {orcid: token.orcid, name: token.name}, function(err,doc) {
           console.log(doc);
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.stringify(doc, null, 2));  
         });
-        res.render('pages/success', { 'body': JSON.parse(body), 'state': req.query.state, 'orcid_url': config.ORCID_URL});
       } else // handle error
-        res.render('pages/error', { 'error': error, 'state': req.query.state, 'orcid_url': config.ORCID_URL });
+        console.log(err);
+        res.send(JSON.stringify(err, null, 2)); 
     };
     ooau.exchangeCode(req.query.code,exchangingCallback);
   }
@@ -179,7 +183,8 @@ app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) {
   req.session.regenerate(function(err) {
       // nothing to do
   });
-  res.render(path.join(__dirname+'/../public/share-id-ng/dist','indexNg.ejs'), {
+  res.send(path.join(__dirname+'/../public/share-id-ng/dist','index.html'));
+  /*res.render(path.join(__dirname+'/../public/share-id-ng/dist','indexNg.ejs'), {
     'create_smid_authorization_uri': ooau.getAuthUrl(config.HOST + CREATE_SMID_URI),
     'add_id_authorization_uri': ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey),
     'edit_smid_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey,
@@ -187,7 +192,7 @@ app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) {
     'put_form_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey + '/details/form',
     'details_json_link': config.HOST + '/' + req.params.publicKey + '/details/',
     'orcid_url': config.ORCID_URL
-  });
+  });*/
 });
 
 //module.exports = app; 
