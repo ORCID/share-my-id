@@ -4,6 +4,7 @@ import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx'; //Fix for error with map, catch and other functions not being in typings for observables.
 
 import { Collection } from './collection';
+import { Collections } from './mock-collection';
 
 @Injectable()
 export class CollectionService {
@@ -25,12 +26,21 @@ export class CollectionService {
         return Observable.throw(errMsg);
     }
 
+    addCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
+        return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+    }
+
+    deleteCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
+        return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+    }
+
     editCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
         return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
-    getCollection( publicKey: string ): Observable<Collection[]> {
-        return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
+    getCollection(): Observable<Collection[]> {
+        //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
+        //return Collections[id];
+        return Observable.of( new Collection() ).map( o => Collections );
     }
-
 }

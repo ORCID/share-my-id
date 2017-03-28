@@ -3,29 +3,26 @@ export const Collections: Collection[] = [
   {
     createdByAuthor: 'Author1', 
     createdByUrl: 'http://www.url.com/1',
+    createdDate: '10 Mar, 2017', 
     description: 'Description1',
     id: '1',
+    orcidIDs: [
+      {
+        firstName: 'first name 1',
+        lastName: 'last name 1',
+        orcidId: 'orcid id 1'
+      },
+      {
+        firstName: 'first name 2',
+        lastName: 'last name 2',
+        orcidId: 'orcid id 2'
+      },
+      {
+        firstName: 'first name 3',
+        lastName: 'last name 3',
+        orcidId: 'orcid id 3'
+      }
+    ],
     title: 'Title1'
-  },
-  {
-    createdByAuthor: 'Author2', 
-    createdByUrl: 'http://www.url.com/2',
-    description: 'Description2',
-    id: '2',
-    title: 'Title2'
-  },
-  {
-    createdByAuthor: 'Author3', 
-    createdByUrl: 'http://www.url.com/3',
-    description: 'Description3',
-    id: '3',
-    title: 'Title3'
-  },
-  {
-    createdByAuthor: 'Author4', 
-    createdByUrl: 'http://www.url.com/4',
-    description: 'Description4',
-    id: '4',
-    title: 'Title4'
-  },
+  }
 ];
