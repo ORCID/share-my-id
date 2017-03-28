@@ -16,7 +16,7 @@
                     *ngIf="collection.orcidIDs.length > 0" 
                     class="table"
                 >
-                    <thead>
+                    <thead class="thead-default">
                         <tr>
                             <th>#</th>
                             <th>First Name</th>
@@ -32,7 +32,7 @@
                             <th scope="row">{{j+1}}</th>
                             <td>{{orcidId.firstName}}</td>
                             <td>{{orcidId.lastName}}</td>
-                            <td>@{{orcidId.orcidId}}</td>
+                            <td><a href="{{orcidId.orcidId}}" target="_blank">{{orcidId.orcidId}}</a></td>
                         </tr>
                     </tbody>
                 </table>
