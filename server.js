@@ -62,6 +62,9 @@ app.use(session({
       secure: (config.FORCE_SSL === 'true')
     },
 }));
+app.set('json spaces', 2);
+app.set('json replacer', null);
+
 
 secureServer = createServer({
   email: config.LETSENCRYPT_ISSUES_EMAIL, // Emailed when certificates expire.
@@ -86,12 +89,23 @@ var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 var CREATE_SMID_URI = '/create-smid-redirect';
 var ADD_ID_REDIRECT = '/add-id-redirect';
 
+//Create smid oauth 
+app.get('/create-smid-authorize', function(req,res) {
+  create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI);
+  res.redirect(create_smid_authorization_uri);
+});
+
+//Add iD oauth
+app.get('/add-id-authorize', function(req,res) {
+  add_id_authorization_uri = ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey);
+  res.redirect(create_smid_authorization_uri);
+});
+
 app.get('/:publicKey/details', function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
     if (err) res.send(err)
     else {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(doc, null, 2));
+      res.status(200).json(doc);
     }
   });
 });
@@ -101,8 +115,7 @@ app.put('/:publicKey/details/:publicKey/edit/:privateKey/details/form', function
   smidManger.updateForm(req.params.publicKey, form, function(err, doc) {
     if (err) res.send(err)
     else {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(doc, null, 2));
+      res.status(200).json(doc);
     }
   });
 });
@@ -117,7 +130,7 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
   if (req.query.error == 'access_denied') {
     // User denied access
     console.log("error: " + req.query.error);
-    res.send(JSON.stringify(req.query, null, 2));  
+    res.json(req.query); 
   } else {
     // exchange code
     // function to render page after making request
@@ -128,30 +141,26 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         var date = new Date();
         //Log ORCID info to file
         orcidLogger.log(date, token.name, token.orcid, req.query.state);
-        //state maps to current google sheet
         console.log("creating smid for" + token.orcid);
         smidManger.createSmid(token.orcid,token.name, function(err, doc) {
-          //res.redirect("/" + doc.public_key + "/edit/"+doc.private_key); 
-          res.setHeader('Content-Type', 'application/json');
-          res.send(JSON.stringify(doc, null, 2));  
-        });
-        
-      } else // handle error
-        console.log(err);
-        res.send(JSON.stringify(err, null, 2)); 
+          if (err) res.send(err) 
+          else {
+            res.status(200).json(doc);
+          } 
+        }); 
+      }
     };
     ooau.exchangeCode(req.query.code,exchangingCallback);
   }
 
 });
 
-
 app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   var state = req.query.state; 
   if (req.query.error == 'access_denied') {
     // User denied access
     console.log("error: " + req.query.error);
-    res.send(JSON.stringify(req.query, null, 2));       
+    res.json(req.query);       
   } else {
     // exchange code
     // function to render page after making request
@@ -163,16 +172,15 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         //Log ORCID info to file
         orcidLogger.log(date, token.name, token.orcid, req.query.state);
         req.session.orcid_id = token.orcid;
-        //state maps to current google sheet
+        //state maps to smid public key
         console.log("Got user id: " + token.orcid);
         smidManger.addOrcidName(req.query.state, {orcid: token.orcid, name: token.name}, function(err,doc) {
-          console.log(doc);
-          res.setHeader('Content-Type', 'application/json');
-          res.send(JSON.stringify(doc, null, 2));  
+          if (err) res.send(err) 
+          else {
+            res.status(200).json(doc);
+          } 
         });
-      } else // handle error
-        console.log(err);
-        res.send(JSON.stringify(err, null, 2)); 
+      }
     };
     ooau.exchangeCode(req.query.code,exchangingCallback);
   }
