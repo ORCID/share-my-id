@@ -3,9 +3,9 @@ import { Component, OnInit }      from '@angular/core';
 //import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Collection } from './../collection';
+import { Collection } from './../shared/collection/collection';
 
-import { CollectionService } from './../collection.service';
+import { CollectionService } from './../shared/collection/collection.service';
 
 @Component({
     selector: 'app-collection-form',

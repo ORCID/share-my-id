@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 
@@ -13,7 +13,7 @@ import { EditCollectionComponent } from './edit-collection/edit-collection.compo
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 
-import { CollectionService } from './collection.service';
+import { CollectionService } from './shared/collection/collection.service';
 import { PageConfirmCollectionComponent } from './page-confirm-collection/page-confirm-collection.component';
 import { PageHomeComponent } from './page-home/page-home.component';
 
@@ -32,7 +32,6 @@ import { PageHomeComponent } from './page-home/page-home.component';
   imports: [
     AppRoutingModule,
     BrowserModule,
-    //ReactiveFormsModule,
     FormsModule,
     HttpModule
   ],
