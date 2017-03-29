@@ -1,86 +1,62 @@
-# orcid-id-to-gdoc
-Simple node.js app that collects authenticated ORCID iDs and uploads them to a Google document.
+# share-my-id
+MEAN app for creating collections of authenticated ORCID iDs 
 
-## Quickstart Installation
+## Developer Setup
+### Prerequsites
+- [MongoDb Community Server](https://www.mongodb.com/download-center#community)
+- [NodeJS 6.9.0 or higher](https://nodejs.org/en/)
+- [NPM 3 or higher](https://www.npmjs.com/get-npm)
+- [Angular CLI 1.0 or higher](https://github.com/angular/angular-cli)
 
-###1. Install NodeJS or Upgrade 
+###1. Clone project
+```git clone git@github.com:ORCID/share-my-id.git```
 
-[Install it!](https://nodejs.org/)
-or 
-[Upgrade it!](http://davidwalsh.name/upgrade-nodejs)
+###2. Switch to project directory
+```cd ~/git/share-my-id```
 
-###2. Download Project
+###3. Install node dependencies
+```npm install```
 
-Download [zip file](https://github.com/ORCID/orcid-id-to-gdoc/archive/master.zip) and
- unzip.
-   
-###3. Open a command prompt
+###4. Start mongodb and mongo shell
+    <path to mongo installation directory>/mongod --dbpath <path to mongo data directory>
+    <path to mongo installation directory>/mongo
 
-* **Windows**
- 
-    Select `Search programs and files` type in `node.js command prompt` and select `Node.js command prompt`.
-    
-* **OSX**
- 
-    Open terminal by clicking `Search Spotlight` typing in `Terminal` and selecting Terminal.
+Paths vary depending on your OS and installation method - see [MongoDB Manual](https://docs.mongodb.com/manual) for more info and alternate startup instructions.
 
+###5. Create database and user (first time only)
+     use smid;
+        db.createUser({
+          user: "smid_user",
+          pwd: "devpassword",
+              roles: ["readWrite"]
+        });
 
-###4. Point the command prompt to the ```orcid-id-to-gdoc-master``` directory that you just downloaded
+###4. Start app
+```npm start```
 
-        cd Downloads/orcid-id-to-gdoc-master
+###5. Open localhost [https://localhost:8443/](https://localhost:8443/)
 
+##Build/reload changes automatically
+```npm start``` builds Angular source files into the /dist directory once and starts the server; changes will not be rebuilt/reloaded. To rebuild/reload changes automatically:
 
-###5. Install client app node dependencies
-Enter the following command into the command prompt.
+1. Install [nodemon](https://github.com/remy/nodemon)
+```npm install nodemon```
 
-       npm install 
+2. Build Angular project automatically on changes to source directory (/src); start Node server and reload on changes to Angular build directory (/dist)
+```ng build -w & nodemon server.js --watch dist```
 
-###6. Configure Google API service account credentials
-Follow instructions at : https://www.npmjs.com/package/google-spreadsheet#service-account-recommended-method
+##Configure ORCID API credentials
+This example is configured with default test credentials on the ORCID Sandbox. You can optionally supply your own sandbox credentials.
 
-Once the account is configured get the email address for it by clicking on the account.
-	
-
-###7. Place the JSON key file downloaded from Google as part of step 6 inside your ```orcid-id-to-gdoc-master``` directory
-
-Change the file name to key.json if you want to use the default configuration
-
-###8. Create a new Google spreadsheet and share it with your service account
-
-* Go to [http://drive.google.com](http://drive.google.com/) then select New and Google Sheets
-* IMPORTANT! Set row 1 column 1-4 values to 'date', 'name', 'orcid', 'share info'
-* Click the share button, and the share the file with your Service Account email address from step 6
-* Make note of the file 'key' - the unique string of letters and numbers included in the file URL. Ex: for URL https://docs.google.com/spreadsheets/d/1_srGiuEjCHq_kIPWAO7mJxOjCQ0UJQGjymopHJKe4Zc/edit, key is ```1_srGiuEjCHq_kIPWAO7mJxOjCQ0UJQGjymopHJKe4Zc```
-        
-###9. Configure ORCID API credentials. 
-This example is configured with default test credentials on the ORCID Sandbox. You can optionally supply your own  
-sandbox credentials - register for sandbox credentials at:
-[http://orcid.org/content/register-client-application](http://orcid.org/content/register-client-application). 
+####1. Register for sandbox credentials at [http://orcid.org/content/register-client-application](http://orcid.org/content/register-client-application)
 When registering include the redirect_uri 'https://localhost'
 
-###10. Add API credentials to config file
-Open ```config.js``` from the helper folder in a text editor, customize the environment variables below, and save the file.
-
-The following configuration variables can be set when starting the client application:
+####2. Add API credentials to config file
+Open ```helper/config.js``` in a text, edit the environment variables below, and save the file.
 
 * CLIENT_ID - Client id issued by ORCID.
 * CLIENT_SECRET - Client secret issued by ORCID
-* REDIRECT_URI - Link user is sent back to with OAuth2 authorization code.
-* AUTHORIZE_URI - https://sandbox.orcid.org or https://orcid.org
-* TOKEN_EXCHANGE_URI - https://sandbox.orcid.org/oauth/token or https://orcid.org/oauth/token
-* GOOGLE_DOC_KEY - Key for the spreadsheet you created in step 2 (ex: 1_srGiuEjCHq_kIPWAO7mJxOjCQ0UJQGjymopHJKe4Zc)
-* GOOGLE_SERVICE_ACCOUNT_KEY - Path to the JSON key file downloaded from Google in step 1 (ex: ./key.json)
 
-###11. Start application
-Type the following command into the command prompt and hit return/enter.
-
-       node client-app.js
-
-Wait for the return prompt: "server started on 8443"
-
-###12. Open localhost [https://localhost:8443/](https://localhost:8443/)
-Use your internert browser to navigate to [https://localhost:8443/](https://localhost:8443/). Since this is a demo app on localhost you'll get an invalid certificate message, follow the instructions to accepting the invalid certificate and proceeding to localhost. You now have a sample client application running on your local machine!
-
-###Tips:
+##Troubleshooting Tips:
 
 * You get a 400 error `DNS name does not have enough labels`. Means the local `~/letsencrypt/*` directory is corrupt from switching node apps. Clear the letsencrypt directory to reset `rm -rf ~/letsencrypt/*` 
