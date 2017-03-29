@@ -11,10 +11,11 @@ import { CollectionService } from './../shared/collection/collection.service';
 
 export class CollectionFormComponent implements OnInit {
     collection: Collection;
-    description: string;
+    //description: string;
+    ngForm: any;
     showErrorMessage: boolean;
     showSuccessMessage: boolean;
-    title: string;
+    //title: string;
 
     constructor(
         private collectionService: CollectionService
@@ -28,8 +29,9 @@ export class CollectionFormComponent implements OnInit {
     }
 
     resetForm(): void {
-        this.description = "";
-        this.title = "";
+        //this.description = "";
+        //this.title = "";
+        this.ngForm.reset();
     }
 
     submitForm(form: any): void {
