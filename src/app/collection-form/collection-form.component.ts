@@ -17,6 +17,7 @@ export class CollectionFormComponent implements OnInit {
     collection: Collection;
 
     constructor(
+        private collectionService: CollectionService,
         private location: Location,
         private route: ActivatedRoute,
     ) 
@@ -31,6 +32,7 @@ export class CollectionFormComponent implements OnInit {
     submitForm(form: any): void{
         console.log('Form Data: ');
         console.log(form);
+        this.collectionService.addCollection("", "");
     }
 
 }

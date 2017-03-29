@@ -11,13 +11,9 @@ import { CollectionService } from './../shared/collection/collection.service';
 })
 export class CollectionLinksComponent implements OnInit {
     collections: Collection[];
-    collectionsTest: Collection[];
 
     constructor(private collectionService: CollectionService) { }
 
-    addCollectionTest(): void {
-        this.collectionService.addCollection("","");
-    }
 
     getCollections(): void {
         this.collectionService.getCollection().subscribe( //update param to pass an actual argument 
@@ -27,13 +23,8 @@ export class CollectionLinksComponent implements OnInit {
         );
     }
 
-    getCollectionPersistenceObj(): void {
-        this.collectionsTest = this.collectionService.getCollectionPersistentObj();
-    }
-
     ngOnInit() {
         this.getCollections();
-        this.getCollectionPersistenceObj();
     }
 
     //implement ngondestroy
