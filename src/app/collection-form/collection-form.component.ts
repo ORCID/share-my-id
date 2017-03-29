@@ -11,12 +11,15 @@ import { CollectionService } from './../shared/collection/collection.service';
 
 export class CollectionFormComponent implements OnInit {
     collection: Collection;
+    showErrorMessage: boolean;
+    showSuccessMessage: boolean;
 
     constructor(
         private collectionService: CollectionService
     ) 
     {
-
+        this.showErrorMessage = false;
+        this.showSuccessMessage = false;
     }
 
     ngOnInit() {
@@ -25,6 +28,7 @@ export class CollectionFormComponent implements OnInit {
     submitForm(form: any): void{
         console.log('Form Data: ');
         console.log(form);
+        this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
         this.collectionService.addCollection("", "");
     }
 }

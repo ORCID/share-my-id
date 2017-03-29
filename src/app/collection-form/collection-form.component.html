@@ -1,16 +1,16 @@
 <div class="row">
     <div class="col">
-        <div class="alert alert-success" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> You successfully added a collection.
-        </div>
-        <div class="alert alert-danger" role="alert">
+        <div (click)="showErrorMessage = !showErrorMessage" *ngIf="showErrorMessage" class="alert alert-danger" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div>
+        <div (click)="showSuccessMessage = !showSuccessMessage" *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> You successfully added a collection.
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
                     [class.has-success]="titleRef.valid"
                     [class.has-danger]="titleRef.valid==false && titleRef.dirty"
                 >
-                    <label class="form-control-label" for="title">Title</label>
+                    <label class="form-control-label font-weight-bold" for="title">Title</label>
                     <input 
                         [(ngModel)]="title"
                         [class.form-control-success]="titleRef.valid"
@@ -54,7 +54,7 @@
                     [class.has-success]="descriptionRef.valid"
                     [class.has-danger]="descriptionRef.valid==false && descriptionRef.dirty"
                 >
-                    <label class="form-control-label" for="description">Title</label>
+                    <label class="form-control-label font-weight-bold" for="description">Description</label>
                     <textarea
                         [(ngModel)]="description"
                         [class.form-control-success]="descriptionRef.valid"
@@ -77,6 +77,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <p class="form-control-label font-weight-bold">
+                        Created by
+                    </p>
+                    <p>Username. http://placeholder-url.com</p>
+                </div>
+                <div class="form-group">
                     <button 
                         [disabled]="!formRef.valid"
                         class="btn btn-primary" 
@@ -84,6 +90,14 @@
                         role="button"
                     >
                         Save Details
+                    </button>
+                    <button 
+                        (click)="showErrorMessage = true"
+                        class="btn btn-primary" 
+                        type="submit" 
+                        role="button"
+                    >
+                        Save Details - Error Example
                     </button>
                 </div>
             </fieldset>
