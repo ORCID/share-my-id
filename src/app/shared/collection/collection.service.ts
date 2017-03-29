@@ -11,7 +11,9 @@ export class CollectionService {
     
     constructor( private http: Http ) { }
     
-    private apiBaseUrl ="http://localhost:8080";
+    private apiBaseUrl = "http://localhost:8080";
+
+    private collectionPersistentObj = Collections;
 
     private handleError (error: Response | any) {
         let errMsg: string;
@@ -26,8 +28,10 @@ export class CollectionService {
         return Observable.throw(errMsg);
     }
 
-    addCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
-        return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+    //Frame for services. Params and uri needs to be updated
+    addCollection( publicKey: string, privateKey: string ): any {
+        //return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+        this.collectionPersistentObj.push( this.collectionPersistentObj[0] );
     }
 
     deleteCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
@@ -41,6 +45,12 @@ export class CollectionService {
     getCollection(): Observable<Collection[]> {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
         //return Collections[id];
+        this.collectionPersistentObj = Collections;
         return Observable.of( new Collection() ).map( o => Collections );
+    }
+
+    getCollectionPersistentObj(): any {
+        //console.log("this.getCollectionPersistentObj", this.collectionPersistentObj);
+        return this.collectionPersistentObj;
     }
 }
