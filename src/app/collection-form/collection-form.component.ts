@@ -1,10 +1,6 @@
-import { Location }               from '@angular/common';
 import { Component, OnInit }      from '@angular/core';
-//import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
 
 import { Collection } from './../shared/collection/collection';
-
 import { CollectionService } from './../shared/collection/collection.service';
 
 @Component({
@@ -17,16 +13,13 @@ export class CollectionFormComponent implements OnInit {
     collection: Collection;
 
     constructor(
-        private collectionService: CollectionService,
-        private location: Location,
-        private route: ActivatedRoute,
+        private collectionService: CollectionService
     ) 
     {
 
     }
 
     ngOnInit() {
-        console.log('params', this.route.params);
     }
 
     submitForm(form: any): void{
@@ -34,5 +27,4 @@ export class CollectionFormComponent implements OnInit {
         console.log(form);
         this.collectionService.addCollection("", "");
     }
-
 }

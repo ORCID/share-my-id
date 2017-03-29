@@ -26,7 +26,4 @@ export class CollectionLinksComponent implements OnInit {
     ngOnInit() {
         this.getCollections();
     }
-
-    //implement ngondestroy
-
 }

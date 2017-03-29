@@ -12,7 +12,6 @@ export class CollectionService {
     constructor( private http: Http ) { }
     
     private apiBaseUrl = "http://localhost:8080";
-
     private collectionPersistentObj = Collections;
 
     private handleError (error: Response | any) {
@@ -45,12 +44,7 @@ export class CollectionService {
     getCollection(): Observable<Collection[]> {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
         //return Collections[id];
-        this.collectionPersistentObj = Collections;
+        //this.collectionPersistentObj = Collections;
         return Observable.of( new Collection() ).map( o => Collections );
-    }
-
-    getCollectionPersistentObj(): any {
-        //console.log("this.getCollectionPersistentObj", this.collectionPersistentObj);
-        return this.collectionPersistentObj;
     }
 }
