@@ -30,6 +30,7 @@ export class PageHomeComponent implements OnInit {
 
     login(): void {
         this.loadAuthInfo();
+        this.hasParams();
         //this.authenticated = this.authInfoService.hasParamas();
         //console.log("this.authenticated ", this.authenticated );
     }
