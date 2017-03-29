@@ -13,7 +13,7 @@ const routes: Routes = [
 
     {
         component: CreateCollectionComponent,
-        path: 'create-collection'
+        path: ':publicKey/create-collection/:privateKey'
     },
     {
         component: EditCollectionComponent,

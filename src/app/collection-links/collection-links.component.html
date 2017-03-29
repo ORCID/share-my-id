@@ -1,13 +1,14 @@
 <section class="row">
     <div class="col">
         <div
-            *ngIf="collections.length > 0" 
+            *ngIf="collection!=undefined && collections.length > 0" 
             class="card"
         >
             <div 
                 *ngFor="let collection of collections"
                 class="card-block text-nowrap"
             >
+                {{collection | json}}
                 <h2>{{collection.title}}</h2>
                 <p><i>Created by {{collection.createdByAuthor}} on {{collection.createdDate}}</i></p>
                 <p>{{collection.description}}</p>
