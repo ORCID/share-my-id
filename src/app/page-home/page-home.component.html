@@ -5,12 +5,14 @@
         <p
             *ngIf="!authenticated" 
         >
-            <button (click)="window.history.pushState('Authenticate', 'Authenticate', '/create-smid-authorize');" class="btn btn-primary">Create a new iD collection</button>
+            <button (click)="loadAuthInfo()" class="btn btn-primary">Create a new iD collection</button>
         </p>
+        <!--
         <p
             *ngIf="authenticated" 
         >
             <a routerLink="/create-collection" class="btn btn-primary">Create a new iD collection</a>
         </p>
+        -->
     </div>
 </section>

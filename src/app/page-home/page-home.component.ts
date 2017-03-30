@@ -8,14 +8,15 @@ import { AuthInfoService } from './../shared/auth-info/auth-info.service';
     styleUrls: ['./page-home.component.scss']
 })
 export class PageHomeComponent implements OnInit {
-    authenticated: boolean;
+    authenticated: boolean; //Remove/refactor
 
     constructor(
         private authInfoService: AuthInfoService
     ) { 
-        this.authenticated = false;
+        this.authenticated = false; //Remove/refactor
     }
 
+    //Remove/refactor
     hasParams(): void {
         this.authInfoService.hasParams().subscribe( //update param to pass an actual argument 
             authenticated => { 
@@ -25,9 +26,11 @@ export class PageHomeComponent implements OnInit {
     }
 
     loadAuthInfo(): void {
-        this.authInfoService.loadAuthInfo();
+        //this.authInfoService.loadAuthInfo();
+        window.location.href  = '/create-smid-authorize';
     }
 
+    //Remove/refactor
     login(): void {
         this.loadAuthInfo();
         this.hasParams();

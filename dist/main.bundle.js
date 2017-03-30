@@ -132,8 +132,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PageHomeComponent = (function () {
     function PageHomeComponent(authInfoService) {
         this.authInfoService = authInfoService;
-        this.authenticated = false;
+        this.authenticated = false; //Remove/refactor
     }
+    //Remove/refactor
     PageHomeComponent.prototype.hasParams = function () {
         var _this = this;
         this.authInfoService.hasParams().subscribe(//update param to pass an actual argument 
@@ -143,8 +144,10 @@ var PageHomeComponent = (function () {
         });
     };
     PageHomeComponent.prototype.loadAuthInfo = function () {
-        this.authInfoService.loadAuthInfo();
+        //this.authInfoService.loadAuthInfo();
+        window.location.href = '/create-smid-authorize';
     };
+    //Remove/refactor
     PageHomeComponent.prototype.login = function () {
         this.loadAuthInfo();
         this.hasParams();
@@ -991,7 +994,7 @@ module.exports = "<p>\r\n  page-confirm-collection works!\r\n</p>\r\n"
 /***/ 581:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"row\">\r\n    <div class=\"col text-center\">\r\n        <h1>Share My ORCID iD</h1>\r\n        <p>A simple way to collect authenticated ORCID iDs</p>\r\n        <p\r\n            *ngIf=\"!authenticated\" \r\n        >\r\n            <a href=\"/create-smid-authorize\" target=\"_blank\" class=\"btn btn-primary\">Create a new iD collection</a>\r\n        </p>\r\n        <p\r\n            *ngIf=\"authenticated\" \r\n        >\r\n            <a routerLink=\"/create-collection\" class=\"btn btn-primary\">Create a new iD collection</a>\r\n        </p>\r\n    </div>\r\n</section>\r\n"
+module.exports = "<section class=\"row\">\r\n    <div class=\"col text-center\">\r\n        <h1>Share My ORCID iD</h1>\r\n        <p>A simple way to collect authenticated ORCID iDs</p>\r\n        <p\r\n            *ngIf=\"!authenticated\" \r\n        >\r\n            <button (click)=\"loadAuthInfo()\" class=\"btn btn-primary\">Create a new iD collection</button>\r\n        </p>\r\n        <!--\r\n        <p\r\n            *ngIf=\"authenticated\" \r\n        >\r\n            <a routerLink=\"/create-collection\" class=\"btn btn-primary\">Create a new iD collection</a>\r\n        </p>\r\n        -->\r\n    </div>\r\n</section>\r\n"
 
 /***/ }),
 
