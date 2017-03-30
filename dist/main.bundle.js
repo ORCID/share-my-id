@@ -1,6 +1,82 @@
 webpackJsonp([1,4],{
 
-/***/ 333:
+/***/ 218:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__collection__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mock_collection__ = __webpack_require__(507);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var CollectionService = (function () {
+    function CollectionService(http) {
+        this.http = http;
+        this.apiBaseUrl = "http://localhost:8080";
+        this.collectionPersistentObj = __WEBPACK_IMPORTED_MODULE_5__mock_collection__["a" /* CollectionsEmpty */];
+    }
+    CollectionService.prototype.handleError = function (error) {
+        var errMsg;
+        if (error instanceof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Response */]) {
+            var body = error.json() || '';
+            var err = body.error || JSON.stringify(body);
+            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+        }
+        else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(errMsg);
+    };
+    //Frame for services. Params and uri needs to be updated
+    CollectionService.prototype.addCollection = function (publicKey, privateKey) {
+        //return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+        this.collectionPersistentObj.push(__WEBPACK_IMPORTED_MODULE_5__mock_collection__["b" /* Collections */][0]);
+    };
+    CollectionService.prototype.deleteCollection = function (publicKey, privateKey) {
+        return this.http.get(this.apiBaseUrl + '/publicKey/edit/privateKey').map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    CollectionService.prototype.editCollection = function (publicKey, privateKey) {
+        return this.http.get(this.apiBaseUrl + '/publicKey/edit/privateKey').map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    CollectionService.prototype.getCollection = function () {
+        //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
+        //return Collections[id];
+        //this.collectionPersistentObj = Collections;
+        console.log(__WEBPACK_IMPORTED_MODULE_5__mock_collection__["b" /* Collections */], __WEBPACK_IMPORTED_MODULE_5__mock_collection__["a" /* CollectionsEmpty */]);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].of(new __WEBPACK_IMPORTED_MODULE_4__collection__["a" /* Collection */]()).map(function (o) { return __WEBPACK_IMPORTED_MODULE_5__mock_collection__["a" /* CollectionsEmpty */]; });
+    };
+    CollectionService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === 'function' && _a) || Object])
+    ], CollectionService);
+    return CollectionService;
+    var _a;
+}());
+//# sourceMappingURL=collection.service.js.map
+
+/***/ }),
+
+/***/ 334:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24,8 +100,8 @@ var CreateCollectionComponent = (function () {
     CreateCollectionComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-create-collection',
-            template: __webpack_require__(572),
-            styles: [__webpack_require__(562)]
+            template: __webpack_require__(576),
+            styles: [__webpack_require__(566)]
         }), 
         __metadata('design:paramtypes', [])
     ], CreateCollectionComponent);
@@ -35,7 +111,7 @@ var CreateCollectionComponent = (function () {
 
 /***/ }),
 
-/***/ 334:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59,8 +135,8 @@ var EditCollectionComponent = (function () {
     EditCollectionComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-edit-collection',
-            template: __webpack_require__(573),
-            styles: [__webpack_require__(563)]
+            template: __webpack_require__(577),
+            styles: [__webpack_require__(567)]
         }), 
         __metadata('design:paramtypes', [])
     ], EditCollectionComponent);
@@ -70,11 +146,12 @@ var EditCollectionComponent = (function () {
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(337);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -86,26 +163,111 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var PageHomeComponent = (function () {
-    function PageHomeComponent() {
+    function PageHomeComponent(authInfoService) {
+        this.authInfoService = authInfoService;
+        this.authenticated = false;
     }
+    PageHomeComponent.prototype.hasParams = function () {
+        var _this = this;
+        this.authInfoService.hasParams().subscribe(//update param to pass an actual argument 
+        function (//update param to pass an actual argument 
+            authenticated) {
+            _this.authenticated = authenticated;
+        });
+    };
+    PageHomeComponent.prototype.loadAuthInfo = function () {
+        this.authInfoService.loadAuthInfo();
+    };
+    PageHomeComponent.prototype.login = function () {
+        this.loadAuthInfo();
+        this.hasParams();
+        //this.authenticated = this.authInfoService.hasParamas();
+        //console.log("this.authenticated ", this.authenticated );
+    };
     PageHomeComponent.prototype.ngOnInit = function () {
+        this.hasParams();
     };
     PageHomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-page-home',
-            template: __webpack_require__(577),
-            styles: [__webpack_require__(567)]
+            template: __webpack_require__(581),
+            styles: [__webpack_require__(571)]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__["a" /* AuthInfoService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__["a" /* AuthInfoService */]) === 'function' && _a) || Object])
     ], PageHomeComponent);
     return PageHomeComponent;
+    var _a;
 }());
 //# sourceMappingURL=page-home.component.js.map
 
 /***/ }),
 
-/***/ 376:
+/***/ 337:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthInfoService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var AuthInfoService = (function () {
+    function AuthInfoService(location, route) {
+        this.location = location;
+        this.route = route;
+        this.authInfo = {
+            publicKey: null,
+            privateKey: null
+        };
+    }
+    AuthInfoService.prototype.hasParams = function () {
+        var hasParams = false;
+        if (this.authInfo.publicKey != null && this.authInfo.privateKey != null) {
+            hasParams = true;
+        }
+        else {
+            hasParams = false;
+        }
+        return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].of(hasParams);
+    };
+    AuthInfoService.prototype.loadAuthInfo = function () {
+        this.authInfo = {
+            publicKey: "publickeyval",
+            privateKey: "privateKeyval"
+        };
+    };
+    AuthInfoService = __decorate([
+        //Fix for error with map, catch and other functions not being in typings for observables.
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["c" /* Injectable */])(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object])
+    ], AuthInfoService);
+    return AuthInfoService;
+    var _a, _b;
+}());
+//# sourceMappingURL=auth-info.service.js.map
+
+/***/ }),
+
+/***/ 379:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -114,20 +276,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 376;
+webpackEmptyContext.id = 379;
 
 
 /***/ }),
 
-/***/ 377:
+/***/ 380:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(465);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(497);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(500);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(508);
 
 
 
@@ -140,15 +302,15 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 495:
+/***/ 498:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(327);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__edit_collection_edit_collection_component__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__edit_collection_edit_collection_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__ = __webpack_require__(336);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -171,7 +333,7 @@ var routes = [
     },
     {
         component: __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__["a" /* CreateCollectionComponent */],
-        path: 'create-collection'
+        path: ':publicKey/create-collection/:privateKey'
     },
     {
         component: __WEBPACK_IMPORTED_MODULE_3__edit_collection_edit_collection_component__["a" /* EditCollectionComponent */],
@@ -187,8 +349,8 @@ var AppRoutingModule = (function () {
     }
     AppRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forRoot(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
             providers: []
         }), 
         __metadata('design:paramtypes', [])
@@ -199,7 +361,7 @@ var AppRoutingModule = (function () {
 
 /***/ }),
 
-/***/ 496:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -222,8 +384,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-root',
-            template: __webpack_require__(569),
-            styles: [__webpack_require__(559)]
+            template: __webpack_require__(573),
+            styles: [__webpack_require__(563)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -233,25 +395,26 @@ var AppComponent = (function () {
 
 /***/ }),
 
-/***/ 497:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(456);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(459);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(496);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(495);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__collection_form_collection_form_component__ = __webpack_require__(498);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__collection_links_collection_links_component__ = __webpack_require__(499);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__create_collection_create_collection_component__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__edit_collection_edit_collection_component__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__footer_footer_component__ = __webpack_require__(501);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__header_header_component__ = __webpack_require__(502);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__collection_service__ = __webpack_require__(500);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_confirm_collection_page_confirm_collection_component__ = __webpack_require__(503);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__page_home_page_home_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(498);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__collection_form_collection_form_component__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__collection_links_collection_links_component__ = __webpack_require__(502);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__create_collection_create_collection_component__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__edit_collection_edit_collection_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__footer_footer_component__ = __webpack_require__(503);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__header_header_component__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__page_confirm_collection_page_confirm_collection_component__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_collection_collection_service__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_auth_info_auth_info_service__ = __webpack_require__(337);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -262,6 +425,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -290,18 +454,18 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_9__edit_collection_edit_collection_component__["a" /* EditCollectionComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__footer_footer_component__["a" /* FooterComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__header_header_component__["a" /* HeaderComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__page_confirm_collection_page_confirm_collection_component__["a" /* PageConfirmCollectionComponent */],
-                __WEBPACK_IMPORTED_MODULE_14__page_home_page_home_component__["a" /* PageHomeComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__page_confirm_collection_page_confirm_collection_component__["a" /* PageConfirmCollectionComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__["a" /* PageHomeComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_5__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                //ReactiveFormsModule,
                 __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_12__collection_service__["a" /* CollectionService */]
+                __WEBPACK_IMPORTED_MODULE_15__shared_auth_info_auth_info_service__["a" /* AuthInfoService */],
+                __WEBPACK_IMPORTED_MODULE_14__shared_collection_collection_service__["a" /* CollectionService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         }), 
@@ -313,13 +477,12 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 498:
+/***/ 501:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(327);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(218);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -332,50 +495,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var CollectionFormComponent = (function () {
-    //collectionForm: FormGroup;
-    function CollectionFormComponent(
-        //private formBuilder: FormBuilder,
-        location, route) {
-        this.location = location;
-        this.route = route;
-        /*
-        this.collectionForm = formBuilder.group(
-            {
-                'description' : '',
-                'title' : ''
-            }
-        );
-        */
+    function CollectionFormComponent(collectionService) {
+        this.collectionService = collectionService;
+        this.showErrorMessage = false;
+        this.showSuccessMessage = false;
     }
     CollectionFormComponent.prototype.ngOnInit = function () {
-        console.log('params', this.route.params);
+    };
+    CollectionFormComponent.prototype.resetForm = function () {
+        this.description = "";
+        this.title = "";
+        //this.ngForm.reset(); <- This is reloading the whole app, needs a fix
     };
     CollectionFormComponent.prototype.submitForm = function (form) {
-        console.log('Form Data: ');
-        console.log(form);
+        this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
+        this.collectionService.addCollection("", "");
+        this.resetForm(); // <- Update to change the status on the ajax call result 
     };
     CollectionFormComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_6" /* Component */])({
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-collection-form',
-            template: __webpack_require__(570),
-            styles: [__webpack_require__(560)]
+            template: __webpack_require__(574),
+            styles: [__webpack_require__(564)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object])
     ], CollectionFormComponent);
     return CollectionFormComponent;
-    var _a, _b;
+    var _a;
 }());
 //# sourceMappingURL=collection-form.component.js.map
 
 /***/ }),
 
-/***/ 499:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(218);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionLinksComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -387,85 +545,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var CollectionLinksComponent = (function () {
-    function CollectionLinksComponent() {
+    function CollectionLinksComponent(collectionService) {
+        this.collectionService = collectionService;
     }
+    CollectionLinksComponent.prototype.getCollections = function () {
+        var _this = this;
+        this.collectionService.getCollection().subscribe(//update param to pass an actual argument 
+        function (//update param to pass an actual argument 
+            collections) {
+            _this.collections = collections;
+        });
+    };
     CollectionLinksComponent.prototype.ngOnInit = function () {
+        this.getCollections();
     };
     CollectionLinksComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-collection-links',
-            template: __webpack_require__(571),
-            styles: [__webpack_require__(561)]
+            template: __webpack_require__(575),
+            styles: [__webpack_require__(565)]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object])
     ], CollectionLinksComponent);
     return CollectionLinksComponent;
+    var _a;
 }());
 //# sourceMappingURL=collection-links.component.js.map
 
 /***/ }),
 
-/***/ 500:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(579);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var CollectionService = (function () {
-    function CollectionService(http) {
-        this.http = http;
-        this.apiBaseUrl = "http://localhost:8080";
-    }
-    CollectionService.prototype.handleError = function (error) {
-        var errMsg;
-        if (error instanceof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Response */]) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
-        }
-        else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(errMsg);
-    };
-    CollectionService.prototype.editCollection = function (publicKey, privateKey) {
-        return this.http.get(this.apiBaseUrl + '/publicKey/edit/privateKey').map(function (res) { return res.json(); }).catch(this.handleError);
-    };
-    CollectionService.prototype.getCollection = function (publicKey) {
-        return this.http.get(this.apiBaseUrl + '/publicKey/details').map(function (res) { return res.json(); }).catch(this.handleError);
-    };
-    CollectionService = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === 'function' && _a) || Object])
-    ], CollectionService);
-    return CollectionService;
-    var _a;
-}());
-//# sourceMappingURL=collection.service.js.map
-
-/***/ }),
-
-/***/ 501:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -489,8 +600,8 @@ var FooterComponent = (function () {
     FooterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-footer',
-            template: __webpack_require__(574),
-            styles: [__webpack_require__(564)]
+            template: __webpack_require__(578),
+            styles: [__webpack_require__(568)]
         }), 
         __metadata('design:paramtypes', [])
     ], FooterComponent);
@@ -500,7 +611,7 @@ var FooterComponent = (function () {
 
 /***/ }),
 
-/***/ 502:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -524,8 +635,8 @@ var HeaderComponent = (function () {
     HeaderComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-header',
-            template: __webpack_require__(575),
-            styles: [__webpack_require__(565)]
+            template: __webpack_require__(579),
+            styles: [__webpack_require__(569)]
         }), 
         __metadata('design:paramtypes', [])
     ], HeaderComponent);
@@ -535,7 +646,7 @@ var HeaderComponent = (function () {
 
 /***/ }),
 
-/***/ 503:
+/***/ 505:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -559,8 +670,8 @@ var PageConfirmCollectionComponent = (function () {
     PageConfirmCollectionComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-page-confirm-collection',
-            template: __webpack_require__(576),
-            styles: [__webpack_require__(566)]
+            template: __webpack_require__(580),
+            styles: [__webpack_require__(570)]
         }), 
         __metadata('design:paramtypes', [])
     ], PageConfirmCollectionComponent);
@@ -570,7 +681,59 @@ var PageConfirmCollectionComponent = (function () {
 
 /***/ }),
 
-/***/ 504:
+/***/ 506:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Collection; });
+var Collection = (function () {
+    function Collection() {
+    }
+    return Collection;
+}());
+//# sourceMappingURL=collection.js.map
+
+/***/ }),
+
+/***/ 507:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Collections; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionsEmpty; });
+var Collections = [
+    {
+        createdByAuthor: 'Author1',
+        createdByUrl: 'http://www.url.com/1',
+        createdDate: '10 Mar, 2017',
+        description: 'Description1',
+        id: '1',
+        orcidIDs: [
+            {
+                firstName: 'first name 1',
+                lastName: 'last name 1',
+                orcidId: 'orcid id 1'
+            },
+            {
+                firstName: 'first name 2',
+                lastName: 'last name 2',
+                orcidId: 'orcid id 2'
+            },
+            {
+                firstName: 'first name 3',
+                lastName: 'last name 3',
+                orcidId: 'orcid id 3'
+            }
+        ],
+        title: 'Title1'
+    }
+];
+var CollectionsEmpty = [];
+//# sourceMappingURL=mock-collection.js.map
+
+/***/ }),
+
+/***/ 508:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -586,7 +749,7 @@ var environment = {
 
 /***/ }),
 
-/***/ 559:
+/***/ 563:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(23)();
@@ -604,78 +767,6 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 560:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(23)();
-// imports
-
-
-// module
-exports.push([module.i, "/****************************************************\n//Base colors\n****************************************************/\n/****************************************************\n//Font sizes\n****************************************************/\n/****************************************************\n//Themes colors\n****************************************************/\nlegend {\n  color: #31789B;\n  font-size: 24px; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 561:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(23)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 562:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(23)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 563:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(23)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 564:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -684,7 +775,7 @@ exports = module.exports = __webpack_require__(23)();
 
 
 // module
-exports.push([module.i, "/****************************************************\n//Base colors\n****************************************************/\n/****************************************************\n//Font sizes\n****************************************************/\n/****************************************************\n//Themes colors\n****************************************************/\nfooter {\n  background-color: #939598; }\n", ""]);
+exports.push([module.i, "/****************************************************\r\n//Base colors\r\n****************************************************/\n/****************************************************\r\n//Font sizes\r\n****************************************************/\n/****************************************************\r\n//Themes colors\r\n****************************************************/\nlegend {\n  color: #31789B;\n  font-size: 24px; }\n", ""]);
 
 // exports
 
@@ -702,7 +793,7 @@ exports = module.exports = __webpack_require__(23)();
 
 
 // module
-exports.push([module.i, "/****************************************************\n//Base colors\n****************************************************/\n/****************************************************\n//Font sizes\n****************************************************/\n/****************************************************\n//Themes colors\n****************************************************/\nheader {\n  background-color: #939598; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -748,76 +839,148 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 569:
-/***/ (function(module, exports) {
+/***/ 568:
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "\n<!-- Header here -->\n<app-header></app-header>\n\n<main class=\"container\" id=\"content\" tabindex=\"-1\">\n    <!-- Content here -->\n    <router-outlet></router-outlet>\n</main>\n\n<!-- Footer here -->\n<app-footer></app-footer>"
+exports = module.exports = __webpack_require__(23)();
+// imports
+
+
+// module
+exports.push([module.i, "/****************************************************\r\n//Base colors\r\n****************************************************/\n/****************************************************\r\n//Font sizes\r\n****************************************************/\n/****************************************************\r\n//Themes colors\r\n****************************************************/\nfooter {\n  background-color: #939598; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 569:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(23)();
+// imports
+
+
+// module
+exports.push([module.i, "/****************************************************\r\n//Base colors\r\n****************************************************/\n/****************************************************\r\n//Font sizes\r\n****************************************************/\n/****************************************************\r\n//Themes colors\r\n****************************************************/\nheader {\n  background-color: #FFF;\n  border-bottom: 1px solid #939598; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
 /***/ 570:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<div class=\"row\">\n    <div class=\"col\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <strong>Well done!</strong> You successfully added a collection.\n        </div>\n        <div class=\"alert alert-danger\" role=\"alert\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <strong>Oh snap!</strong> Change a few things up and try submitting again.\n        </div>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"col\">\n        <form #form=\"ngForm\" (ngSubmit)=\"submitForm(form.value)\" novalidate>\n            <fieldset>\n                <legend class=\"font-weight-bold text-center\">ID Collection Details</legend>\n\n                <div class=\"form-group has-success\"><!-- has-success/has-warning/has-danger -->\n                    <label class=\"form-control-label\" for=\"input-title\">Title</label>\n                    <input class=\"form-control form-control-success\" id=\"input-title\" minlength=\"4\" name=\"input-title\" [(ngModel)]=\"title\" #titleRef=\"ngModel\" placeholder=\"Write the collection title here...\" type=\"text\" required><!--form-control-success/form-control-warning/form-control-danger -->\n                    <div class=\"form-control-feedback\">Success! You've done it.</div>\n                </div>\n\n                <div class=\"form-group has-danger\">\n                    <label class=\"form-control-label\" for=\"textarea-description\">Description</label>\n                    <textarea class=\"form-control form-control-danger\" id=\"textarea-description\" minlength=\"4\" name=\"textarea-description\" [(ngModel)]=\"description\" placeholder=\"Add a description for the collection\" #descriptionRef=\"ngModel\" required=\"\" rows=\"5\"></textarea>\n\n                    {{descriptionRef.valid}}\n                    <div class=\"form-control-feedback\" [hidden]=\"descriptionRef.valid || name.pristine\" class=\"alert alert-danger\">Error!</div>\n                </div>\n                ++{{ngForm}}--\n\n                <div class=\"form-group\">\n                    <button class=\"btn btn-primary\" type=\"submit\" role=\"button\" >Save Details</button>\n                </div>\n\n            </fieldset>\n        </form>\n    </div>\n</div>"
+exports = module.exports = __webpack_require__(23)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
 /***/ 571:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<section class=\"row\">\n    <div class=\"col\">\n        <div class=\"card\">\n            <div class=\"card-block text-nowrap\">\n                <h2>Collection Links</h2>\n                <p>Hold onto these!</p>\n                <ul class=\"list-unstyled\">\n                    <li>\n                        <p class=\"bold\">Administration Link</p>\n                        <p>Use this link to edit collection details</p>\n                        <p><a href=\"http://www.google.com\">http://www.google.com</a></p>\n                    </li>\n                    <li>\n                        <p class=\"bold\">Administration Link</p>\n                        <p>Use this link to edit collection details</p>\n                        <p><a href=\"http://www.google.com\">http://www.google.com</a></p>\n                    </li>\n                    <li>\n                        <p class=\"bold\">Administration Link</p>\n                        <p>Use this link to edit collection details</p>\n                        <p><a href=\"http://www.google.com\">http://www.google.com</a></p>\n                    </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n</section>"
+exports = module.exports = __webpack_require__(23)();
+// imports
 
-/***/ }),
 
-/***/ 572:
-/***/ (function(module, exports) {
+// module
+exports.push([module.i, "", ""]);
 
-module.exports = "<app-collection-form></app-collection-form>\n<app-collection-links></app-collection-links>"
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
 /***/ 573:
 /***/ (function(module, exports) {
 
-module.exports = "<app-collection-form></app-collection-form>\n"
+module.exports = "\r\n<!-- Header here -->\r\n<app-header></app-header>\r\n\r\n<main class=\"container\" id=\"content\" tabindex=\"-1\">\r\n    <!-- Content here -->\r\n    <router-outlet></router-outlet>\r\n</main>\r\n\r\n<!-- Footer here -->\r\n<app-footer></app-footer>"
 
 /***/ }),
 
 /***/ 574:
 /***/ (function(module, exports) {
 
-module.exports = "<footer class=\"fixed-bottom\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <p>\n                    footer works!\n                </p>\n            </div>\n        </div>\n    </div>\n</footer>\n\n"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col\">\r\n        <div (click)=\"showErrorMessage = !showErrorMessage\" *ngIf=\"showErrorMessage\" class=\"alert alert-danger\" role=\"alert\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n                <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n            <strong>Oh snap!</strong> Change a few things up and try submitting again.\r\n        </div>\r\n        <div (click)=\"showSuccessMessage = !showSuccessMessage\" *ngIf=\"showSuccessMessage\" class=\"alert alert-success\" role=\"alert\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n                <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n            <strong>Well done!</strong> You successfully added a collection.\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col\">\r\n        <form #formRef=\"ngForm\" (ngSubmit)=\"submitForm(formRef.value)\" novalidate>\r\n            <fieldset>\r\n                <legend class=\"font-weight-bold text-center\">ID Collection Details</legend>\r\n\r\n                <div \r\n                    class=\"form-group\" \r\n                    [class.has-success]=\"titleRef.valid\"\r\n                    [class.has-danger]=\"titleRef.valid==false && titleRef.dirty\"\r\n                >\r\n                    <label class=\"form-control-label font-weight-bold\" for=\"title\">Title</label>\r\n                    <input \r\n                        [(ngModel)]=\"title\"\r\n                        [class.form-control-success]=\"titleRef.valid\"\r\n                        [class.form-control-danger]=\"titleRef.valid==false && titleRef.dirty\"\r\n                        #titleRef=\"ngModel\" \r\n                        class=\"form-control\" \r\n                        id=\"title\" \r\n                        minlength=\"4\" \r\n                        name=\"title\" \r\n                        placeholder=\"Write the collection title here...\" \r\n                        type=\"text\" \r\n                        required\r\n                    >\r\n                    <div \r\n                        *ngIf=\"titleRef.errors && titleRef.dirty\"\r\n                        class=\"form-control-feedback\" \r\n                    >\r\n                        <small  *ngIf=\"titleRef.errors?.required\">This field is required</small >\r\n                        <small  *ngIf=\"titleRef.errors?.minlength\">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >\r\n                    </div>\r\n                </div>\r\n\r\n                <div \r\n                    class=\"form-group\" \r\n                    [class.has-success]=\"descriptionRef.valid\"\r\n                    [class.has-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\r\n                >\r\n                    <label class=\"form-control-label font-weight-bold\" for=\"description\">Description</label>\r\n                    <textarea\r\n                        [(ngModel)]=\"description\"\r\n                        [class.form-control-success]=\"descriptionRef.valid\"\r\n                        [class.form-control-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\r\n                        #descriptionRef=\"ngModel\" \r\n                        class=\"form-control\" \r\n                        id=\"description\" \r\n                        minlength=\"4\" \r\n                        name=\"description\" \r\n                        placeholder=\"Write the collection description here...\" \r\n                        required\r\n                        rows=\"5\"\r\n                    ></textarea> \r\n                    <div \r\n                        *ngIf=\"descriptionRef.errors && descriptionRef.dirty\"\r\n                        class=\"form-control-feedback\" \r\n                    >\r\n                        <small  *ngIf=\"descriptionRef.errors?.required\">This field is required</small >\r\n                        <small  *ngIf=\"descriptionRef.errors?.minlength\">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <p class=\"form-control-label font-weight-bold\">\r\n                        Created by\r\n                    </p>\r\n                    <p>Username. http://placeholder-url.com</p>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <button \r\n                        [disabled]=\"!formRef.valid\"\r\n                        class=\"btn btn-primary\" \r\n                        type=\"submit\" \r\n                        role=\"button\"\r\n                    >\r\n                        Save Details\r\n                    </button>\r\n                    <button \r\n                        (click)=\"showErrorMessage = true\"\r\n                        class=\"btn btn-primary\" \r\n                        type=\"submit\" \r\n                        role=\"button\"\r\n                    >\r\n                        Save Details - Error Example\r\n                    </button>\r\n                </div>\r\n            </fieldset>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 575:
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"sticky-top\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <nav class=\"col\">\n                <p>\n                    <a routerLink=\"/\" routerLinkActive=\"active\">Home</a>\n                </p>\n                <p>\n                    <a routerLink=\"/create-collection\" routerLinkActive=\"active\">create-collection</a>\n                </p>\n                <p>\n                    <a routerLink=\"/asfg/edit-collection/1234\" routerLinkActive=\"active\">edit-collection</a>\n                </p>\n            </nav>\n        </div>\n    </div>\n</header>\n\n"
+module.exports = "<section class=\"row\">\r\n    <div class=\"col\">\r\n        <div\r\n            *ngIf=\"collections!=undefined && collections.length > 0\" \r\n            class=\"card\"\r\n        >\r\n            <div \r\n                *ngFor=\"let collection of collections\"\r\n                class=\"card-block text-nowrap\"\r\n            >\r\n                <h2>{{collection.title}}</h2>\r\n                <p><i>Created by {{collection.createdByAuthor}} on {{collection.createdDate}}</i></p>\r\n                <p>{{collection.description}}</p>\r\n\r\n                <table \r\n                    *ngIf=\"collection.orcidIDs.length > 0\" \r\n                    class=\"table\"\r\n                >\r\n                    <thead class=\"thead-default\">\r\n                        <tr>\r\n                            <th>#</th>\r\n                            <th>First Name</th>\r\n                            <th>Last Name</th>\r\n                            <th>ORCID iD</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr\r\n                            *ngFor=\"let orcidId of collection.orcidIDs; let j = index\"\r\n                            [attr.data-index]=\"j\"\r\n                        >\r\n                            <th scope=\"row\">{{j+1}}</th>\r\n                            <td>{{orcidId.firstName}}</td>\r\n                            <td>{{orcidId.lastName}}</td>\r\n                            <td><a href=\"{{orcidId.orcidId}}\" target=\"_blank\">{{orcidId.orcidId}}</a></td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>"
 
 /***/ }),
 
 /***/ 576:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-confirm-collection works!\n</p>\n"
+module.exports = "<app-collection-form></app-collection-form>\r\n<app-collection-links></app-collection-links>"
 
 /***/ }),
 
 /***/ 577:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-home works!\n</p>\n"
+module.exports = "<app-collection-form></app-collection-form>\r\n"
 
 /***/ }),
 
-/***/ 845:
+/***/ 578:
+/***/ (function(module, exports) {
+
+module.exports = "<footer class=\"fixed-bottom\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col\">\r\n                <p>\r\n                    footer works!\r\n                </p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</footer>\r\n\r\n"
+
+/***/ }),
+
+/***/ 579:
+/***/ (function(module, exports) {
+
+module.exports = "<header class=\"sticky-top\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <nav class=\"col\">\r\n                <p>\r\n                    <a routerLink=\"/\" routerLinkActive=\"active\">Home</a>\r\n                </p>\r\n            </nav>\r\n        </div>\r\n    </div>\r\n</header>\r\n\r\n"
+
+/***/ }),
+
+/***/ 580:
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  page-confirm-collection works!\r\n</p>\r\n"
+
+/***/ }),
+
+/***/ 581:
+/***/ (function(module, exports) {
+
+module.exports = "<section class=\"row\">\r\n    <div class=\"col text-center\">\r\n        <h1>Share My ORCID iD</h1>\r\n        <p>A simple way to collect authenticated ORCID iDs</p>\r\n        <p\r\n            *ngIf=\"!authenticated\" \r\n        >\r\n            <a (click)=\"login()\" class=\"btn btn-primary\">Login</a>\r\n        </p>\r\n        <p\r\n            *ngIf=\"authenticated\" \r\n        >\r\n            <a routerLink=\"/asfg/create-collection/1234\" class=\"btn btn-primary\">Create a new iD collection</a>\r\n        </p>\r\n    </div>\r\n</section>\r\n<app-collection-links *ngIf=\"authenticated\"></app-collection-links>\r\n"
+
+/***/ }),
+
+/***/ 848:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(377);
+module.exports = __webpack_require__(380);
 
 
 /***/ })
 
-},[845]);
+},[848]);
 //# sourceMappingURL=main.bundle.js.map
