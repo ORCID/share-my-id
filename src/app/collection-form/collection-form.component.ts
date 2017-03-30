@@ -31,12 +31,10 @@ export class CollectionFormComponent implements OnInit {
     resetForm(): void {
         //this.description = "";
         //this.title = "";
-        this.ngForm.reset();
+        //this.ngForm.reset();
     }
 
     submitForm(form: any): void {
-        console.log('Form Data: ');
-        console.log(form);
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
         this.collectionService.addCollection("", "");
         this.resetForm(); // <- Update to change the status on the ajax call result 

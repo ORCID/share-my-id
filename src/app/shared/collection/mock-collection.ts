@@ -1,5 +1,5 @@
 import { Collection } from './collection';
-/*
+
 export const Collections: Collection[] = [
   {
     createdByAuthor: 'Author1', 
@@ -27,7 +27,7 @@ export const Collections: Collection[] = [
     title: 'Title1'
   }
 ];
-*/
-export const Collections: Collection[] = [
+
+export const CollectionsEmpty: Collection[] = [
 
 ];

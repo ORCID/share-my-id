@@ -4,7 +4,7 @@ import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx'; //Fix for error with map, catch and other functions not being in typings for observables.
 
 import { Collection } from './collection';
-import { Collections } from './mock-collection';
+import { Collections, CollectionsEmpty } from './mock-collection';
 
 @Injectable()
 export class CollectionService {
@@ -30,7 +30,7 @@ export class CollectionService {
     //Frame for services. Params and uri needs to be updated
     addCollection( publicKey: string, privateKey: string ): any {
         //return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
-        this.collectionPersistentObj.push( this.collectionPersistentObj[0] );
+        this.collectionPersistentObj.push( Collections[0] );
     }
 
     deleteCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
@@ -45,6 +45,7 @@ export class CollectionService {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
         //return Collections[id];
         //this.collectionPersistentObj = Collections;
+        console.log(Collections, CollectionsEmpty);
         return Observable.of( new Collection() ).map( o => Collections );
     }
 }
