@@ -12,7 +12,7 @@ export class CollectionService {
     constructor( private http: Http ) { }
     
     private apiBaseUrl = "http://localhost:8080";
-    private collectionPersistentObj = Collections;
+    private collectionPersistentObj = CollectionsEmpty;
 
     private handleError (error: Response | any) {
         let errMsg: string;
@@ -46,6 +46,6 @@ export class CollectionService {
         //return Collections[id];
         //this.collectionPersistentObj = Collections;
         console.log(Collections, CollectionsEmpty);
-        return Observable.of( new Collection() ).map( o => Collections );
+        return Observable.of( new Collection() ).map( o => CollectionsEmpty );
     }
 }
