@@ -36,6 +36,10 @@ p {
         color: $button-font-color-active;
     }
 
+    &:focus {
+        color: $button-font-color-focus;
+    }
+
     &:hover {
         background-color: $button-bck-hover;
         color: $button-font-color-hover;

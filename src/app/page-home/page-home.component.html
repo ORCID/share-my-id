@@ -5,7 +5,7 @@
         <p
             *ngIf="!authenticated" 
         >
-            <a href="/create-smid-authorize" target="_blank" class="btn btn-primary">Create a new iD collection</a>
+            <button (click)="window.history.pushState('Authenticate', 'Authenticate', '/create-smid-authorize');" class="btn btn-primary">Create a new iD collection</button>
         </p>
         <p
             *ngIf="authenticated" 
