@@ -6,14 +6,16 @@ module.exports = config = {
   //Google API config
   DEFAULT_GSHEET_ID: '1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc',//Key from Google spreadsheet URL https://docs.google.com/spreadsheets/d/1_srGxfEjCHq_kUDTAO3mJxOjCQ0UJQGjymlvBMNe4Zc/edit?usp=sharing
   //Server SSL config
-  FORCE_SSL: 'true', // must be 'true' or 'false'
+  FORCE_SSL: 'false', // must be 'true' or 'false'
   LETSENCRYPT_ISSUES_EMAIL: 'orcid-id-to-gdoc@mailinator.com', // Where to email when certificates expire.
   AUTO_SNI_DEBUG: 'true', // Add console messages and uses staging LetsEncrypt server. (Disable in production)
   DOMAINS: 'localhost,www.localhost', // List of accepted domain names. (You can use nested arrays to register bundles with LE).
   PORT_HTTP: '8080', // Optionally override the default http port.
   PORT_HTTPS: '8443', // Optionally override the default https port.
-  HOST: 'https://localhost:8443'
+  HOST: 'http://localhost:8080'
 }
+
+console.log("config", config);
 
 // Environment variables overrides
 for (key in config)
