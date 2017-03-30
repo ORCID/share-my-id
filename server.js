@@ -89,42 +89,13 @@ var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 var CREATE_SMID_URI = '/create-smid-redirect';
 var ADD_ID_REDIRECT = '/add-id-redirect';
 
-//Create smid oauth 
+//Create smid oauth sign into ORCID (redirects to CREATE_SMID_URI after signin)
 app.get('/create-smid-authorize', function(req,res) {
   create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI);
   res.redirect(create_smid_authorization_uri);
 });
 
-//Add iD oauth
-app.get('/add-id-authorize', function(req,res) {
-  add_id_authorization_uri = ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey);
-  res.redirect(create_smid_authorization_uri);
-});
-
-app.get('/:publicKey/details', function(req,res) {
-  smidManger.getDetails(req.params.publicKey, function(err, doc) {
-    if (err) res.send(err)
-    else {
-      res.status(200).json(doc);
-    }
-  });
-});
-
-app.put('/:publicKey/details/:publicKey/edit/:privateKey/details/form', function(req,res) {
-  var form = req.body;
-  smidManger.updateForm(req.params.publicKey, form, function(err, doc) {
-    if (err) res.send(err)
-    else {
-      res.status(200).json(doc);
-    }
-  });
-});
-
-
-app.get('/orcid-id.json', function(req, res) {
-  res.json({'orcid_id': req.session.orcid_id});
-});
-
+//Create new id collection
 app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
   var state = req.query.state; 
   if (req.query.error == 'access_denied') {
@@ -155,6 +126,34 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
 
 });
 
+//Get collection details
+app.get('/:publicKey/details', function(req,res) {
+  smidManger.getDetails(req.params.publicKey, function(err, doc) {
+    if (err) res.send(err)
+    else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+//Update collection details form fields
+app.put('/:publicKey/details/:publicKey/edit/:privateKey/details/form', function(req,res) {
+  var form = req.body;
+  smidManger.updateForm(req.params.publicKey, form, function(err, doc) {
+    if (err) res.send(err)
+    else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+//Add iD oauth sign into ORCID (redirects to ADD_ID_REDIRECT after signin)
+app.get('/add-id-authorize/:publicKey', function(req,res) {
+  add_id_authorization_uri = ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey);
+  res.redirect(add_id_authorization_uri);
+});
+
+//Add id to collection
 app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   var state = req.query.state; 
   if (req.query.error == 'access_denied') {
@@ -185,6 +184,11 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
     ooau.exchangeCode(req.query.code,exchangingCallback);
   }
 });
+
+app.get('/orcid-id.json', function(req, res) {
+  res.json({'orcid_id': req.session.orcid_id});
+});
+
 
 app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) { // Index page 
   // reset any session on reload of '/'
