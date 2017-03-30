@@ -32,6 +32,7 @@
                         [class.form-control-success]="titleRef.valid"
                         [class.form-control-danger]="titleRef.valid==false && titleRef.dirty"
                         #titleRef="ngModel" 
+                        autocomplete="off"
                         class="form-control" 
                         id="title" 
                         minlength="4" 

@@ -9,10 +9,13 @@ import { Collections, CollectionsEmpty } from './mock-collection';
 @Injectable()
 export class CollectionService {
     
-    constructor( private http: Http ) { }
+    constructor( private http: Http ) {
+        this.apiBaseUrl = "http://localhost:8080";
+        this.collectionPersistentObj = CollectionsEmpty;
+    }
     
-    private apiBaseUrl = "http://localhost:8080";
-    private collectionPersistentObj = CollectionsEmpty;
+    private apiBaseUrl:string;
+    private collectionPersistentObj: Collection[];
 
     private handleError (error: Response | any) {
         let errMsg: string;
