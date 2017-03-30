@@ -1,14 +1,14 @@
 webpackJsonp([1,4],{
 
-/***/ 218:
+/***/ 219:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(349);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__collection__ = __webpack_require__(506);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mock_collection__ = __webpack_require__(507);
@@ -116,42 +116,7 @@ var CreateCollectionComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditCollectionComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var EditCollectionComponent = (function () {
-    function EditCollectionComponent() {
-    }
-    EditCollectionComponent.prototype.ngOnInit = function () {
-    };
-    EditCollectionComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-            selector: 'app-edit-collection',
-            template: __webpack_require__(577),
-            styles: [__webpack_require__(567)]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], EditCollectionComponent);
-    return EditCollectionComponent;
-}());
-//# sourceMappingURL=edit-collection.component.js.map
-
-/***/ }),
-
-/***/ 336:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(336);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -204,17 +169,18 @@ var PageHomeComponent = (function () {
 
 /***/ }),
 
-/***/ 337:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthInfoService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -230,6 +196,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AuthInfoService = (function () {
     function AuthInfoService(location, route) {
         this.location = location;
@@ -238,7 +205,26 @@ var AuthInfoService = (function () {
             publicKey: null,
             privateKey: null
         };
+        this.apiBaseUrl = "http://localhost:8080";
+        this.CLIENT_ID = "APP-3BI8IQ5O8DREEAVF";
+        this.CLIENT_SECRET = "35d8f715-9121-440c-ad34-b66cb8c4e884";
+        this.ORCID_URL = 'https://sandbox.orcid.org';
     }
+    AuthInfoService.prototype.handleError = function (error) {
+        var errMsg;
+        if (error instanceof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Response */]) {
+            var body = error.json() || '';
+            var err = body.error || JSON.stringify(body);
+            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+        }
+        else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].throw(errMsg);
+    };
+    AuthInfoService.prototype.authenticate = function () {
+    };
     AuthInfoService.prototype.hasParams = function () {
         var hasParams = false;
         if (this.authInfo.publicKey != null && this.authInfo.privateKey != null) {
@@ -247,7 +233,7 @@ var AuthInfoService = (function () {
         else {
             hasParams = false;
         }
-        return __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__["Observable"].of(hasParams);
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(hasParams);
     };
     AuthInfoService.prototype.loadAuthInfo = function () {
         this.authInfo = {
@@ -258,7 +244,7 @@ var AuthInfoService = (function () {
     AuthInfoService = __decorate([
         //Fix for error with map, catch and other functions not being in typings for observables.
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["c" /* Injectable */])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object])
     ], AuthInfoService);
     return AuthInfoService;
     var _a, _b;
@@ -267,7 +253,7 @@ var AuthInfoService = (function () {
 
 /***/ }),
 
-/***/ 379:
+/***/ 378:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -276,19 +262,19 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 379;
+webpackEmptyContext.id = 378;
 
 
 /***/ }),
 
-/***/ 380:
+/***/ 379:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(468);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(500);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(499);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(508);
 
 
@@ -302,15 +288,15 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 498:
+/***/ 497:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__edit_collection_edit_collection_component__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_home_page_home_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_add_my_id_page_add_my_id_component__ = __webpack_require__(504);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -328,16 +314,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var routes = [
     {
-        component: __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__["a" /* PageHomeComponent */],
-        path: ''
+        component: __WEBPACK_IMPORTED_MODULE_3__page_home_page_home_component__["a" /* PageHomeComponent */],
+        path: '' // update to 'create-smid-authorize'
+    },
+    {
+        component: __WEBPACK_IMPORTED_MODULE_4__page_add_my_id_page_add_my_id_component__["a" /* PageAddMyIdComponent */],
+        path: ':publicKey'
     },
     {
         component: __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__["a" /* CreateCollectionComponent */],
-        path: ':publicKey/create-collection/:privateKey'
-    },
-    {
-        component: __WEBPACK_IMPORTED_MODULE_3__edit_collection_edit_collection_component__["a" /* EditCollectionComponent */],
-        path: ':publicKey/edit-collection/:privateKey'
+        path: ':publicKey/edit/:privateKey'
     },
     {
         path: '**',
@@ -361,7 +347,7 @@ var AppRoutingModule = (function () {
 
 /***/ }),
 
-/***/ 499:
+/***/ 498:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -395,26 +381,26 @@ var AppComponent = (function () {
 
 /***/ }),
 
-/***/ 500:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(459);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(499);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(498);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__collection_form_collection_form_component__ = __webpack_require__(501);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__collection_links_collection_links_component__ = __webpack_require__(502);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__create_collection_create_collection_component__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__edit_collection_edit_collection_component__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__footer_footer_component__ = __webpack_require__(503);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__header_header_component__ = __webpack_require__(504);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__page_confirm_collection_page_confirm_collection_component__ = __webpack_require__(505);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_collection_collection_service__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_auth_info_auth_info_service__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(498);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_collection_collection_service__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collection_form_collection_form_component__ = __webpack_require__(500);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__collection_links_collection_links_component__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__create_collection_create_collection_component__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__footer_footer_component__ = __webpack_require__(502);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__header_header_component__ = __webpack_require__(503);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_add_my_id_page_add_my_id_component__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__page_confirm_collection_page_confirm_collection_component__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_home_page_home_component__ = __webpack_require__(335);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -448,14 +434,14 @@ var AppModule = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__angular_core__["b" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__collection_form_collection_form_component__["a" /* CollectionFormComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__collection_links_collection_links_component__["a" /* CollectionLinksComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__create_collection_create_collection_component__["a" /* CreateCollectionComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__edit_collection_edit_collection_component__["a" /* EditCollectionComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__footer_footer_component__["a" /* FooterComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__header_header_component__["a" /* HeaderComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__page_confirm_collection_page_confirm_collection_component__["a" /* PageConfirmCollectionComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__page_home_page_home_component__["a" /* PageHomeComponent */]
+                __WEBPACK_IMPORTED_MODULE_8__collection_form_collection_form_component__["a" /* CollectionFormComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__collection_links_collection_links_component__["a" /* CollectionLinksComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__create_collection_create_collection_component__["a" /* CreateCollectionComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__footer_footer_component__["a" /* FooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__header_header_component__["a" /* HeaderComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__page_confirm_collection_page_confirm_collection_component__["a" /* PageConfirmCollectionComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__page_home_page_home_component__["a" /* PageHomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__page_add_my_id_page_add_my_id_component__["a" /* PageAddMyIdComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_5__app_routing_module__["a" /* AppRoutingModule */],
@@ -464,8 +450,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_15__shared_auth_info_auth_info_service__["a" /* AuthInfoService */],
-                __WEBPACK_IMPORTED_MODULE_14__shared_collection_collection_service__["a" /* CollectionService */]
+                __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__["a" /* AuthInfoService */],
+                __WEBPACK_IMPORTED_MODULE_6__shared_collection_collection_service__["a" /* CollectionService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         }), 
@@ -477,12 +463,12 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 501:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(219);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -528,12 +514,12 @@ var CollectionFormComponent = (function () {
 
 /***/ }),
 
-/***/ 502:
+/***/ 501:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(219);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionLinksComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -576,7 +562,7 @@ var CollectionLinksComponent = (function () {
 
 /***/ }),
 
-/***/ 503:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -600,8 +586,8 @@ var FooterComponent = (function () {
     FooterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-footer',
-            template: __webpack_require__(578),
-            styles: [__webpack_require__(568)]
+            template: __webpack_require__(577),
+            styles: [__webpack_require__(567)]
         }), 
         __metadata('design:paramtypes', [])
     ], FooterComponent);
@@ -611,7 +597,7 @@ var FooterComponent = (function () {
 
 /***/ }),
 
-/***/ 504:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -635,14 +621,49 @@ var HeaderComponent = (function () {
     HeaderComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-header',
-            template: __webpack_require__(579),
-            styles: [__webpack_require__(569)]
+            template: __webpack_require__(578),
+            styles: [__webpack_require__(568)]
         }), 
         __metadata('design:paramtypes', [])
     ], HeaderComponent);
     return HeaderComponent;
 }());
 //# sourceMappingURL=header.component.js.map
+
+/***/ }),
+
+/***/ 504:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAddMyIdComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PageAddMyIdComponent = (function () {
+    function PageAddMyIdComponent() {
+    }
+    PageAddMyIdComponent.prototype.ngOnInit = function () {
+    };
+    PageAddMyIdComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-page-add-my-id',
+            template: __webpack_require__(579),
+            styles: [__webpack_require__(569)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], PageAddMyIdComponent);
+    return PageAddMyIdComponent;
+}());
+//# sourceMappingURL=page-add-my-id.component.js.map
 
 /***/ }),
 
@@ -829,7 +850,7 @@ exports = module.exports = __webpack_require__(23)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "/****************************************************\r\n//Base colors\r\n****************************************************/\n/****************************************************\r\n//Font sizes\r\n****************************************************/\n/****************************************************\r\n//Themes colors\r\n****************************************************/\nfooter {\n  background-color: #939598; }\n", ""]);
 
 // exports
 
@@ -847,7 +868,7 @@ exports = module.exports = __webpack_require__(23)();
 
 
 // module
-exports.push([module.i, "/****************************************************\r\n//Base colors\r\n****************************************************/\n/****************************************************\r\n//Font sizes\r\n****************************************************/\n/****************************************************\r\n//Themes colors\r\n****************************************************/\nfooter {\n  background-color: #939598; }\n", ""]);
+exports.push([module.i, "/****************************************************\r\n//Base colors\r\n****************************************************/\n/****************************************************\r\n//Font sizes\r\n****************************************************/\n/****************************************************\r\n//Themes colors\r\n****************************************************/\nheader {\n  background-color: #FFF;\n  border-bottom: 1px solid #939598; }\n", ""]);
 
 // exports
 
@@ -865,7 +886,7 @@ exports = module.exports = __webpack_require__(23)();
 
 
 // module
-exports.push([module.i, "/****************************************************\r\n//Base colors\r\n****************************************************/\n/****************************************************\r\n//Font sizes\r\n****************************************************/\n/****************************************************\r\n//Themes colors\r\n****************************************************/\nheader {\n  background-color: #FFF;\n  border-bottom: 1px solid #939598; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -921,7 +942,7 @@ module.exports = "\r\n<!-- Header here -->\r\n<app-header></app-header>\r\n\r\n<
 /***/ 574:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col\">\r\n        <div (click)=\"showErrorMessage = !showErrorMessage\" *ngIf=\"showErrorMessage\" class=\"alert alert-danger\" role=\"alert\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n                <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n            <strong>Oh snap!</strong> Change a few things up and try submitting again.\r\n        </div>\r\n        <div (click)=\"showSuccessMessage = !showSuccessMessage\" *ngIf=\"showSuccessMessage\" class=\"alert alert-success\" role=\"alert\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n                <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n            <strong>Well done!</strong> You successfully added a collection.\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col\">\r\n        <form #formRef=\"ngForm\" (ngSubmit)=\"submitForm(formRef.value)\" novalidate>\r\n            <fieldset>\r\n                <legend class=\"font-weight-bold text-center\">ID Collection Details</legend>\r\n\r\n                <div \r\n                    class=\"form-group\" \r\n                    [class.has-success]=\"titleRef.valid\"\r\n                    [class.has-danger]=\"titleRef.valid==false && titleRef.dirty\"\r\n                >\r\n                    <label class=\"form-control-label font-weight-bold\" for=\"title\">Title</label>\r\n                    <input \r\n                        [(ngModel)]=\"title\"\r\n                        [class.form-control-success]=\"titleRef.valid\"\r\n                        [class.form-control-danger]=\"titleRef.valid==false && titleRef.dirty\"\r\n                        #titleRef=\"ngModel\" \r\n                        class=\"form-control\" \r\n                        id=\"title\" \r\n                        minlength=\"4\" \r\n                        name=\"title\" \r\n                        placeholder=\"Write the collection title here...\" \r\n                        type=\"text\" \r\n                        required\r\n                    >\r\n                    <div \r\n                        *ngIf=\"titleRef.errors && titleRef.dirty\"\r\n                        class=\"form-control-feedback\" \r\n                    >\r\n                        <small  *ngIf=\"titleRef.errors?.required\">This field is required</small >\r\n                        <small  *ngIf=\"titleRef.errors?.minlength\">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >\r\n                    </div>\r\n                </div>\r\n\r\n                <div \r\n                    class=\"form-group\" \r\n                    [class.has-success]=\"descriptionRef.valid\"\r\n                    [class.has-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\r\n                >\r\n                    <label class=\"form-control-label font-weight-bold\" for=\"description\">Description</label>\r\n                    <textarea\r\n                        [(ngModel)]=\"description\"\r\n                        [class.form-control-success]=\"descriptionRef.valid\"\r\n                        [class.form-control-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\r\n                        #descriptionRef=\"ngModel\" \r\n                        class=\"form-control\" \r\n                        id=\"description\" \r\n                        minlength=\"4\" \r\n                        name=\"description\" \r\n                        placeholder=\"Write the collection description here...\" \r\n                        required\r\n                        rows=\"5\"\r\n                    ></textarea> \r\n                    <div \r\n                        *ngIf=\"descriptionRef.errors && descriptionRef.dirty\"\r\n                        class=\"form-control-feedback\" \r\n                    >\r\n                        <small  *ngIf=\"descriptionRef.errors?.required\">This field is required</small >\r\n                        <small  *ngIf=\"descriptionRef.errors?.minlength\">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <p class=\"form-control-label font-weight-bold\">\r\n                        Created by\r\n                    </p>\r\n                    <p>Username. http://placeholder-url.com</p>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <button \r\n                        [disabled]=\"!formRef.valid\"\r\n                        class=\"btn btn-primary\" \r\n                        type=\"submit\" \r\n                        role=\"button\"\r\n                    >\r\n                        Save Details\r\n                    </button>\r\n                    <button \r\n                        (click)=\"showErrorMessage = true\"\r\n                        class=\"btn btn-primary\" \r\n                        type=\"submit\" \r\n                        role=\"button\"\r\n                    >\r\n                        Save Details - Error Example\r\n                    </button>\r\n                </div>\r\n            </fieldset>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col\">\r\n        <div (click)=\"showErrorMessage = !showErrorMessage\" *ngIf=\"showErrorMessage\" class=\"alert alert-danger\" role=\"alert\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n                <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n            <strong>Oh snap!</strong> Change a few things up and try submitting again.\r\n        </div>\r\n        <div (click)=\"showSuccessMessage = !showSuccessMessage\" *ngIf=\"showSuccessMessage\" class=\"alert alert-success\" role=\"alert\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n                <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n            <strong>Well done!</strong> You successfully added a collection.\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col\">\r\n        <form #formRef=\"ngForm\" (ngSubmit)=\"submitForm(formRef.value)\" novalidate>\r\n            <fieldset>\r\n                <legend class=\"font-weight-bold text-center\">ID Collection Details</legend>\r\n\r\n                <div \r\n                    class=\"form-group\" \r\n                    [class.has-success]=\"titleRef.valid\"\r\n                    [class.has-danger]=\"titleRef.valid==false && titleRef.dirty\"\r\n                >\r\n                    <label class=\"form-control-label font-weight-bold\" for=\"title\">Title</label>\r\n                    <input \r\n                        [(ngModel)]=\"title\"\r\n                        [class.form-control-success]=\"titleRef.valid\"\r\n                        [class.form-control-danger]=\"titleRef.valid==false && titleRef.dirty\"\r\n                        #titleRef=\"ngModel\" \r\n                        autocomplete=\"off\"\r\n                        class=\"form-control\" \r\n                        id=\"title\" \r\n                        minlength=\"4\" \r\n                        name=\"title\" \r\n                        placeholder=\"Write the collection title here...\" \r\n                        type=\"text\" \r\n                        required\r\n                    >\r\n                    <div \r\n                        *ngIf=\"titleRef.errors && titleRef.dirty\"\r\n                        class=\"form-control-feedback\" \r\n                    >\r\n                        <small  *ngIf=\"titleRef.errors?.required\">This field is required</small >\r\n                        <small  *ngIf=\"titleRef.errors?.minlength\">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >\r\n                    </div>\r\n                </div>\r\n\r\n                <div \r\n                    class=\"form-group\" \r\n                    [class.has-success]=\"descriptionRef.valid\"\r\n                    [class.has-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\r\n                >\r\n                    <label class=\"form-control-label font-weight-bold\" for=\"description\">Description</label>\r\n                    <textarea\r\n                        [(ngModel)]=\"description\"\r\n                        [class.form-control-success]=\"descriptionRef.valid\"\r\n                        [class.form-control-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\r\n                        #descriptionRef=\"ngModel\" \r\n                        class=\"form-control\" \r\n                        id=\"description\" \r\n                        minlength=\"4\" \r\n                        name=\"description\" \r\n                        placeholder=\"Write the collection description here...\" \r\n                        required\r\n                        rows=\"5\"\r\n                    ></textarea> \r\n                    <div \r\n                        *ngIf=\"descriptionRef.errors && descriptionRef.dirty\"\r\n                        class=\"form-control-feedback\" \r\n                    >\r\n                        <small  *ngIf=\"descriptionRef.errors?.required\">This field is required</small >\r\n                        <small  *ngIf=\"descriptionRef.errors?.minlength\">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <p class=\"form-control-label font-weight-bold\">\r\n                        Created by\r\n                    </p>\r\n                    <p>Username. http://placeholder-url.com</p>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <button \r\n                        [disabled]=\"!formRef.valid\"\r\n                        class=\"btn btn-primary\" \r\n                        type=\"submit\" \r\n                        role=\"button\"\r\n                    >\r\n                        Save Details\r\n                    </button>\r\n                    <button \r\n                        (click)=\"showErrorMessage = true\"\r\n                        class=\"btn btn-primary\" \r\n                        type=\"submit\" \r\n                        role=\"button\"\r\n                    >\r\n                        Save Details - Error Example\r\n                    </button>\r\n                </div>\r\n            </fieldset>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -942,21 +963,21 @@ module.exports = "<app-collection-form></app-collection-form>\r\n<app-collection
 /***/ 577:
 /***/ (function(module, exports) {
 
-module.exports = "<app-collection-form></app-collection-form>\r\n"
+module.exports = "<footer class=\"fixed-bottom\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col\">\r\n                <p>\r\n                    footer works!\r\n                </p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</footer>\r\n\r\n"
 
 /***/ }),
 
 /***/ 578:
 /***/ (function(module, exports) {
 
-module.exports = "<footer class=\"fixed-bottom\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col\">\r\n                <p>\r\n                    footer works!\r\n                </p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</footer>\r\n\r\n"
+module.exports = "<header class=\"sticky-top\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <nav class=\"col\">\r\n                <p>\r\n                    <a routerLink=\"/\" routerLinkActive=\"active\">Home</a>\r\n                </p>\r\n            </nav>\r\n        </div>\r\n    </div>\r\n</header>\r\n\r\n"
 
 /***/ }),
 
 /***/ 579:
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"sticky-top\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <nav class=\"col\">\r\n                <p>\r\n                    <a routerLink=\"/\" routerLinkActive=\"active\">Home</a>\r\n                </p>\r\n            </nav>\r\n        </div>\r\n    </div>\r\n</header>\r\n\r\n"
+module.exports = "<section class=\"row\">\n    <div class=\"col text-center\">\n        <h1>Share My ORCID iD</h1>\n        <p>A simple way to collect authenticated ORCID iDs</p>\n        <p\n            *ngIf=\"!authenticated\" \n        >\n            <a href=\"/create-smid-authorize\" target=\"_blank\" class=\"btn btn-primary\">Create a new iD collection</a>\n        </p>\n        <p\n            *ngIf=\"authenticated\" \n        >\n            <a routerLink=\"/create-collection\" class=\"btn btn-primary\">Create a new iD collection</a>\n        </p>\n    </div>\n</section>\n<app-collection-links *ngIf=\"authenticated\"></app-collection-links>\n"
 
 /***/ }),
 
@@ -970,14 +991,14 @@ module.exports = "<p>\r\n  page-confirm-collection works!\r\n</p>\r\n"
 /***/ 581:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"row\">\r\n    <div class=\"col text-center\">\r\n        <h1>Share My ORCID iD</h1>\r\n        <p>A simple way to collect authenticated ORCID iDs</p>\r\n        <p\r\n            *ngIf=\"!authenticated\" \r\n        >\r\n            <a (click)=\"login()\" class=\"btn btn-primary\">Login</a>\r\n        </p>\r\n        <p\r\n            *ngIf=\"authenticated\" \r\n        >\r\n            <a routerLink=\"/asfg/create-collection/1234\" class=\"btn btn-primary\">Create a new iD collection</a>\r\n        </p>\r\n    </div>\r\n</section>\r\n<app-collection-links *ngIf=\"authenticated\"></app-collection-links>\r\n"
+module.exports = "<section class=\"row\">\r\n    <div class=\"col text-center\">\r\n        <h1>Share My ORCID iD</h1>\r\n        <p>A simple way to collect authenticated ORCID iDs</p>\r\n        <p\r\n            *ngIf=\"!authenticated\" \r\n        >\r\n            <a href=\"/create-smid-authorize\" target=\"_blank\" class=\"btn btn-primary\">Create a new iD collection</a>\r\n        </p>\r\n        <p\r\n            *ngIf=\"authenticated\" \r\n        >\r\n            <a routerLink=\"/create-collection\" class=\"btn btn-primary\">Create a new iD collection</a>\r\n        </p>\r\n    </div>\r\n</section>\r\n"
 
 /***/ }),
 
 /***/ 848:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(380);
+module.exports = __webpack_require__(379);
 
 
 /***/ })

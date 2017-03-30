@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditCollectionComponent } from './edit-collection.component';
+import { PageAddMyIdComponent } from './page-add-my-id.component';
 
-describe('EditCollectionComponent', () => {
-  let component: EditCollectionComponent;
-  let fixture: ComponentFixture<EditCollectionComponent>;
+describe('PageAddMyIdComponent', () => {
+  let component: PageAddMyIdComponent;
+  let fixture: ComponentFixture<PageAddMyIdComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCollectionComponent ]
+      declarations: [ PageAddMyIdComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditCollectionComponent);
+    fixture = TestBed.createComponent(PageAddMyIdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
