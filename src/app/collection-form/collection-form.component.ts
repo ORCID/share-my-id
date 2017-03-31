@@ -34,9 +34,9 @@ export class CollectionFormComponent implements OnInit {
         //this.ngForm.reset(); <- This is reloading the whole app, needs a fix
     }
 
-    submitForm(form: any): void {
+    submitForm( form: any ): void {
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
-        this.collectionService.editCollection("", "");
+        this.collectionService.editCollection();
         this.resetForm(); // <- Update to change the status on the ajax call result 
     }
 }

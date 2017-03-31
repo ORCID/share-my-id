@@ -12,6 +12,7 @@ webpackJsonp([1,4],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__collection__ = __webpack_require__(506);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mock_collection__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_info_auth_info_service__ = __webpack_require__(337);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -28,10 +29,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CollectionService = (function () {
-    function CollectionService(http) {
+    function CollectionService(http, authInfoService) {
         this.http = http;
+        this.authInfoService = authInfoService;
         this.apiBaseUrl = "http://localhost:8080";
+        this.authInfo = authInfoService.getAuthInfo();
         this.collectionPersistentObj = __WEBPACK_IMPORTED_MODULE_5__mock_collection__["a" /* CollectionsEmpty */];
     }
     CollectionService.prototype.handleError = function (error) {
@@ -60,8 +64,9 @@ var CollectionService = (function () {
     }
     */
     //Currently add and edit
-    CollectionService.prototype.editCollection = function (publicKey, privateKey) {
-        return this.http.get(this.apiBaseUrl + '/' + publicKey + '/details/' + publicKey + '/edit/' + privateKey + '/details/form').map(function (res) { return res.json(); }).catch(this.handleError);
+    CollectionService.prototype.editCollection = function () {
+        console.log("editcol called", this.authInfo);
+        return this.http.get(this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form').map(function (res) { return res.json(); }).catch(this.handleError);
     };
     CollectionService.prototype.getCollection = function () {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
@@ -72,10 +77,10 @@ var CollectionService = (function () {
     };
     CollectionService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__auth_info_auth_info_service__["a" /* AuthInfoService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_6__auth_info_auth_info_service__["a" /* AuthInfoService */]) === 'function' && _b) || Object])
     ], CollectionService);
     return CollectionService;
-    var _a;
+    var _a, _b;
 }());
 //# sourceMappingURL=collection.service.js.map
 
@@ -293,6 +298,9 @@ var AuthInfoService = (function () {
     };
     AuthInfoService.prototype.authenticate = function () {
     };
+    AuthInfoService.prototype.getAuthInfo = function () {
+        return this.authInfo;
+    };
     AuthInfoService.prototype.hasParams = function () {
         var hasParams = false;
         if (this.authInfo.publicKey != null && this.authInfo.privateKey != null) {
@@ -308,7 +316,6 @@ var AuthInfoService = (function () {
             publicKey: publickeyval,
             privateKey: privateKeyval
         };
-        console.log("loadAuthInfo", this.authInfo);
     };
     AuthInfoService = __decorate([
         //Fix for error with map, catch and other functions not being in typings for observables.
@@ -569,7 +576,7 @@ var CollectionFormComponent = (function () {
     };
     CollectionFormComponent.prototype.submitForm = function (form) {
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
-        this.collectionService.editCollection("", "");
+        this.collectionService.editCollection();
         this.resetForm(); // <- Update to change the status on the ajax call result 
     };
     CollectionFormComponent = __decorate([
