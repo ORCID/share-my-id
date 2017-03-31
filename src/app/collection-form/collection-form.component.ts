@@ -36,7 +36,7 @@ export class CollectionFormComponent implements OnInit {
 
     submitForm(form: any): void {
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
-        this.collectionService.addCollection("", "");
+        this.collectionService.editCollection("", "");
         this.resetForm(); // <- Update to change the status on the ajax call result 
     }
 }

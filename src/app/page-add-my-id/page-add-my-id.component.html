@@ -1,17 +1,11 @@
-<section class="row">
-    <div class="col text-center">
-        <h1>Share My ORCID iD</h1>
-        <p>A simple way to collect authenticated ORCID iDs</p>
-        <p
-            *ngIf="!authenticated" 
-        >
-            <a href="/create-smid-authorize" target="_blank" class="btn btn-primary">Create a new iD collection</a>
-        </p>
-        <p
-            *ngIf="authenticated" 
-        >
-            <a routerLink="/create-collection" class="btn btn-primary">Create a new iD collection</a>
-        </p>
+<section>
+    <div class="row">
+        <div class="col text-center">
+            <h1>Share My ORCID iD</h1>
+            <p>A simple way to collect authenticated ORCID iDs</p>
+            <p><i>Pretty cool, right? <a routerLink="/">Create your own iD collection now</a></i></p>
+        </div>
     </div>
+    <app-collection-links *ngIf="authenticated"></app-collection-links>
+    
 </section>
-<app-collection-links *ngIf="authenticated"></app-collection-links>

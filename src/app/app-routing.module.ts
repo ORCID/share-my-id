@@ -8,7 +8,7 @@ import { PageHomeComponent } from './page-home/page-home.component';
 const routes: Routes = [
     {
         component: PageHomeComponent, //Authenticate -> Redirects to editCollection
-        path: 'test' // update to 'create-smid-authorize'
+        path: '' // update to 'create-smid-authorize'
     },
     {
         component: PageAddMyIdComponent,

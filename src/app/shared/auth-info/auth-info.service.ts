@@ -12,20 +12,24 @@ export class AuthInfoService {
         private location: Location,
         private route: ActivatedRoute,
     ) { 
+        /*
         this.apiBaseUrl = "http://localhost:8080";
         this.CLIENT_ID = "APP-3BI8IQ5O8DREEAVF";
         this.CLIENT_SECRET = "35d8f715-9121-440c-ad34-b66cb8c4e884";
         this.ORCID_URL = 'https://sandbox.orcid.org';
+        */
     }
     
     private authInfo = { //Will store the values of the generated collection. Update names for something clearer
         publicKey: null,
         privateKey: null
     };
+    /*
     private apiBaseUrl:string;
     private CLIENT_ID: string;
     private CLIENT_SECRET: string;
     private ORCID_URL: string;
+    */
 
     private handleError (error: Response | any) {
         let errMsg: string;
@@ -54,10 +58,10 @@ export class AuthInfoService {
         return Observable.of(hasParams);
     }
 
-    loadAuthInfo(): void {
+    loadAuthInfo( publickeyval: string, privateKeyval: string ): void {
         this.authInfo = {
-            publicKey: "publickeyval",
-            privateKey: "privateKeyval"
+            publicKey: publickeyval,
+            privateKey: privateKeyval
         }
     }
 

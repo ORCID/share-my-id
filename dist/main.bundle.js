@@ -8,7 +8,7 @@ webpackJsonp([1,4],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(350);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__collection__ = __webpack_require__(506);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mock_collection__ = __webpack_require__(507);
@@ -48,21 +48,26 @@ var CollectionService = (function () {
         return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(errMsg);
     };
     //Frame for services. Params and uri needs to be updated
-    CollectionService.prototype.addCollection = function (publicKey, privateKey) {
+    /*
+
+    addCollection( publicKey: string, privateKey: string ): any {
         //return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
-        this.collectionPersistentObj.push(__WEBPACK_IMPORTED_MODULE_5__mock_collection__["b" /* Collections */][0]);
-    };
-    CollectionService.prototype.deleteCollection = function (publicKey, privateKey) {
-        return this.http.get(this.apiBaseUrl + '/publicKey/edit/privateKey').map(function (res) { return res.json(); }).catch(this.handleError);
-    };
+        this.collectionPersistentObj.push( Collections[0] );
+    }
+
+    deleteCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
+        return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+    }
+    */
+    //Currently add and edit
     CollectionService.prototype.editCollection = function (publicKey, privateKey) {
-        return this.http.get(this.apiBaseUrl + '/publicKey/edit/privateKey').map(function (res) { return res.json(); }).catch(this.handleError);
+        return this.http.get(this.apiBaseUrl + '/' + publicKey + '/details/' + publicKey + '/edit/' + privateKey + '/details/form').map(function (res) { return res.json(); }).catch(this.handleError);
     };
     CollectionService.prototype.getCollection = function () {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
         //return Collections[id];
         //this.collectionPersistentObj = Collections;
-        console.log(__WEBPACK_IMPORTED_MODULE_5__mock_collection__["b" /* Collections */], __WEBPACK_IMPORTED_MODULE_5__mock_collection__["a" /* CollectionsEmpty */]);
+        //console.log(Collections, CollectionsEmpty);
         return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].of(new __WEBPACK_IMPORTED_MODULE_4__collection__["a" /* Collection */]()).map(function (o) { return __WEBPACK_IMPORTED_MODULE_5__mock_collection__["a" /* CollectionsEmpty */]; });
     };
     CollectionService = __decorate([
@@ -81,6 +86,9 @@ var CollectionService = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(689);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateCollectionComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -92,8 +100,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var CreateCollectionComponent = (function () {
-    function CreateCollectionComponent() {
+    function CreateCollectionComponent(route, router) {
+        this.route = route;
+        this.router = router;
+        this.publicKey = route.url['_value'][0]['path'];
+        this.privateKey = route.url['_value'][2]['path'];
+        console.log(this.publicKey, this.privateKey);
     }
     CreateCollectionComponent.prototype.ngOnInit = function () {
     };
@@ -103,9 +118,10 @@ var CreateCollectionComponent = (function () {
             template: __webpack_require__(576),
             styles: [__webpack_require__(566)]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === 'function' && _b) || Object])
     ], CreateCollectionComponent);
     return CreateCollectionComponent;
+    var _a, _b;
 }());
 //# sourceMappingURL=create-collection.component.js.map
 
@@ -116,7 +132,42 @@ var CreateCollectionComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(336);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAddMyIdComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PageAddMyIdComponent = (function () {
+    function PageAddMyIdComponent() {
+    }
+    PageAddMyIdComponent.prototype.ngOnInit = function () {
+    };
+    PageAddMyIdComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-page-add-my-id',
+            template: __webpack_require__(579),
+            styles: [__webpack_require__(569)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], PageAddMyIdComponent);
+    return PageAddMyIdComponent;
+}());
+//# sourceMappingURL=page-add-my-id.component.js.map
+
+/***/ }),
+
+/***/ 336:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(337);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -172,7 +223,7 @@ var PageHomeComponent = (function () {
 
 /***/ }),
 
-/***/ 336:
+/***/ 337:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -182,7 +233,7 @@ var PageHomeComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(350);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthInfoService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -208,11 +259,19 @@ var AuthInfoService = (function () {
             publicKey: null,
             privateKey: null
         };
+        /*
         this.apiBaseUrl = "http://localhost:8080";
         this.CLIENT_ID = "APP-3BI8IQ5O8DREEAVF";
         this.CLIENT_SECRET = "35d8f715-9121-440c-ad34-b66cb8c4e884";
         this.ORCID_URL = 'https://sandbox.orcid.org';
+        */
     }
+    /*
+    private apiBaseUrl:string;
+    private CLIENT_ID: string;
+    private CLIENT_SECRET: string;
+    private ORCID_URL: string;
+    */
     AuthInfoService.prototype.handleError = function (error) {
         var errMsg;
         if (error instanceof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Response */]) {
@@ -238,10 +297,10 @@ var AuthInfoService = (function () {
         }
         return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(hasParams);
     };
-    AuthInfoService.prototype.loadAuthInfo = function () {
+    AuthInfoService.prototype.loadAuthInfo = function (publickeyval, privateKeyval) {
         this.authInfo = {
-            publicKey: "publickeyval",
-            privateKey: "privateKeyval"
+            publicKey: publickeyval,
+            privateKey: privateKeyval
         };
     };
     AuthInfoService = __decorate([
@@ -256,7 +315,7 @@ var AuthInfoService = (function () {
 
 /***/ }),
 
-/***/ 378:
+/***/ 379:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -265,19 +324,19 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 378;
+webpackEmptyContext.id = 379;
 
 
 /***/ }),
 
-/***/ 379:
+/***/ 380:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(500);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(508);
 
 
@@ -291,15 +350,15 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 497:
+/***/ 498:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_home_page_home_component__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_add_my_id_page_add_my_id_component__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_add_my_id_page_add_my_id_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__ = __webpack_require__(336);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -317,11 +376,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var routes = [
     {
-        component: __WEBPACK_IMPORTED_MODULE_3__page_home_page_home_component__["a" /* PageHomeComponent */],
+        component: __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__["a" /* PageHomeComponent */],
         path: '' // update to 'create-smid-authorize'
     },
     {
-        component: __WEBPACK_IMPORTED_MODULE_4__page_add_my_id_page_add_my_id_component__["a" /* PageAddMyIdComponent */],
+        component: __WEBPACK_IMPORTED_MODULE_3__page_add_my_id_page_add_my_id_component__["a" /* PageAddMyIdComponent */],
         path: ':publicKey'
     },
     {
@@ -338,8 +397,12 @@ var AppRoutingModule = (function () {
     }
     AppRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: true }) //http://stackoverflow.com/questions/31415052/angular-2-0-router-not-working-on-reloading-the-browser posible fix to remove the hash #
+            ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]
+            ],
             providers: []
         }), 
         __metadata('design:paramtypes', [])
@@ -350,7 +413,7 @@ var AppRoutingModule = (function () {
 
 /***/ }),
 
-/***/ 498:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -384,26 +447,26 @@ var AppComponent = (function () {
 
 /***/ }),
 
-/***/ 499:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(459);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(498);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_collection_collection_service__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collection_form_collection_form_component__ = __webpack_require__(500);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__collection_links_collection_links_component__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collection_form_collection_form_component__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__collection_links_collection_links_component__ = __webpack_require__(502);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__create_collection_create_collection_component__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__footer_footer_component__ = __webpack_require__(502);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__header_header_component__ = __webpack_require__(503);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_add_my_id_page_add_my_id_component__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__footer_footer_component__ = __webpack_require__(503);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__header_header_component__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_add_my_id_page_add_my_id_component__ = __webpack_require__(335);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__page_confirm_collection_page_confirm_collection_component__ = __webpack_require__(505);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_home_page_home_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_home_page_home_component__ = __webpack_require__(336);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -466,7 +529,7 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 500:
+/***/ 501:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -499,7 +562,7 @@ var CollectionFormComponent = (function () {
     };
     CollectionFormComponent.prototype.submitForm = function (form) {
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
-        this.collectionService.addCollection("", "");
+        this.collectionService.editCollection("", "");
         this.resetForm(); // <- Update to change the status on the ajax call result 
     };
     CollectionFormComponent = __decorate([
@@ -517,7 +580,7 @@ var CollectionFormComponent = (function () {
 
 /***/ }),
 
-/***/ 501:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -565,7 +628,7 @@ var CollectionLinksComponent = (function () {
 
 /***/ }),
 
-/***/ 502:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -600,7 +663,7 @@ var FooterComponent = (function () {
 
 /***/ }),
 
-/***/ 503:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -632,41 +695,6 @@ var HeaderComponent = (function () {
     return HeaderComponent;
 }());
 //# sourceMappingURL=header.component.js.map
-
-/***/ }),
-
-/***/ 504:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageAddMyIdComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var PageAddMyIdComponent = (function () {
-    function PageAddMyIdComponent() {
-    }
-    PageAddMyIdComponent.prototype.ngOnInit = function () {
-    };
-    PageAddMyIdComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-            selector: 'app-page-add-my-id',
-            template: __webpack_require__(579),
-            styles: [__webpack_require__(569)]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], PageAddMyIdComponent);
-    return PageAddMyIdComponent;
-}());
-//# sourceMappingURL=page-add-my-id.component.js.map
 
 /***/ }),
 
@@ -723,7 +751,7 @@ var Collection = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Collections; });
+/* unused harmony export Collections */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionsEmpty; });
 var Collections = [
     {
@@ -952,7 +980,7 @@ module.exports = "<div class=\"row\">\r\n    <div class=\"col\">\r\n        <div
 /***/ 575:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"row\">\r\n    <div class=\"col\">\r\n        <div\r\n            *ngIf=\"collections!=undefined && collections.length > 0\" \r\n            class=\"card\"\r\n        >\r\n            <div \r\n                *ngFor=\"let collection of collections\"\r\n                class=\"card-block text-nowrap\"\r\n            >\r\n                <h2>{{collection.title}}</h2>\r\n                <p><i>Created by {{collection.createdByAuthor}} on {{collection.createdDate}}</i></p>\r\n                <p>{{collection.description}}</p>\r\n\r\n                <table \r\n                    *ngIf=\"collection.orcidIDs.length > 0\" \r\n                    class=\"table\"\r\n                >\r\n                    <thead class=\"thead-default\">\r\n                        <tr>\r\n                            <th>#</th>\r\n                            <th>First Name</th>\r\n                            <th>Last Name</th>\r\n                            <th>ORCID iD</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr\r\n                            *ngFor=\"let orcidId of collection.orcidIDs; let j = index\"\r\n                            [attr.data-index]=\"j\"\r\n                        >\r\n                            <th scope=\"row\">{{j+1}}</th>\r\n                            <td>{{orcidId.firstName}}</td>\r\n                            <td>{{orcidId.lastName}}</td>\r\n                            <td><a href=\"{{orcidId.orcidId}}\" target=\"_blank\">{{orcidId.orcidId}}</a></td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>"
+module.exports = "<div *ngIf=\"collections!=undefined && collections.length > 0\" class=\"row\">\r\n    <div class=\"col\">\r\n        <p>\r\n            <button (click)=\"console.log('works')\" class=\"btn btn-primary\">Add my iD</button>\r\n        </p>\r\n    </div>\r\n</div>\r\n<section class=\"row\">\r\n    <div class=\"col\">\r\n        <div\r\n            *ngIf=\"collections!=undefined && collections.length > 0\" \r\n            class=\"card\"\r\n        >\r\n            <div \r\n                *ngFor=\"let collection of collections\"\r\n                class=\"card-block text-nowrap\"\r\n            >\r\n                <h2>{{collection.title}}</h2>\r\n                <p><i>Created by {{collection.createdByAuthor}} on {{collection.createdDate}}</i></p>\r\n                <p>{{collection.description}}</p>\r\n\r\n                <table \r\n                    *ngIf=\"collection.orcidIDs.length > 0\" \r\n                    class=\"table\"\r\n                >\r\n                    <thead class=\"thead-default\">\r\n                        <tr>\r\n                            <th>#</th>\r\n                            <th>First Name</th>\r\n                            <th>Last Name</th>\r\n                            <th>ORCID iD</th>\r\n                        </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                        <tr\r\n                            *ngFor=\"let orcidId of collection.orcidIDs; let j = index\"\r\n                            [attr.data-index]=\"j\"\r\n                        >\r\n                            <th scope=\"row\">{{j+1}}</th>\r\n                            <td>{{orcidId.firstName}}</td>\r\n                            <td>{{orcidId.lastName}}</td>\r\n                            <td><a href=\"{{orcidId.orcidId}}\" target=\"_blank\">{{orcidId.orcidId}}</a></td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n<div *ngIf=\"collections!=undefined && collections.length > 0\" class=\"row\">\r\n    <div class=\"col\">\r\n        <p>\r\n            <button (click)=\"console.log('works')\" class=\"btn btn-primary\">Add my iD</button>\r\n        </p>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -980,7 +1008,7 @@ module.exports = "<header class=\"sticky-top\">\r\n    <div class=\"container\">
 /***/ 579:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"row\">\n    <div class=\"col text-center\">\n        <h1>Share My ORCID iD</h1>\n        <p>A simple way to collect authenticated ORCID iDs</p>\n        <p\n            *ngIf=\"!authenticated\" \n        >\n            <a href=\"/create-smid-authorize\" target=\"_blank\" class=\"btn btn-primary\">Create a new iD collection</a>\n        </p>\n        <p\n            *ngIf=\"authenticated\" \n        >\n            <a routerLink=\"/create-collection\" class=\"btn btn-primary\">Create a new iD collection</a>\n        </p>\n    </div>\n</section>\n<app-collection-links *ngIf=\"authenticated\"></app-collection-links>\n"
+module.exports = "<section>\n    <div class=\"row\">\n        <div class=\"col text-center\">\n            <h1>Share My ORCID iD</h1>\n            <p>A simple way to collect authenticated ORCID iDs</p>\n            <p><i>Pretty cool, right? <a routerLink=\"/\">Create your own iD collection now</a></i></p>\n        </div>\n    </div>\n    <app-collection-links *ngIf=\"authenticated\"></app-collection-links>\n    \n</section>\n"
 
 /***/ }),
 
@@ -1001,7 +1029,7 @@ module.exports = "<section class=\"row\">\r\n    <div class=\"col text-center\">
 /***/ 848:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(379);
+module.exports = __webpack_require__(380);
 
 
 /***/ })

@@ -31,6 +31,9 @@ export class CollectionService {
     }
 
     //Frame for services. Params and uri needs to be updated
+
+    /*
+
     addCollection( publicKey: string, privateKey: string ): any {
         //return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
         this.collectionPersistentObj.push( Collections[0] );
@@ -39,16 +42,18 @@ export class CollectionService {
     deleteCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
         return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
+    */
 
+    //Currently add and edit
     editCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
-        return this.http.get( this.apiBaseUrl + '/publicKey/edit/privateKey' ).map(( res:Response ) => res.json()).catch(this.handleError);
+        return this.http.get( this.apiBaseUrl + '/' + publicKey + '/details/' + publicKey + '/edit/' + privateKey + '/details/form' ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
     getCollection(): Observable<Collection[]> {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
         //return Collections[id];
         //this.collectionPersistentObj = Collections;
-        console.log(Collections, CollectionsEmpty);
+        //console.log(Collections, CollectionsEmpty);
         return Observable.of( new Collection() ).map( o => CollectionsEmpty );
     }
 }
