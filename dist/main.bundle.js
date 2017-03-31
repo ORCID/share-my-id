@@ -89,6 +89,7 @@ var CollectionService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(328);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(689);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(337);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateCollectionComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -102,15 +103,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CreateCollectionComponent = (function () {
-    function CreateCollectionComponent(route, router) {
+    function CreateCollectionComponent(authInfoService, route, router) {
+        this.authInfoService = authInfoService;
         this.route = route;
         this.router = router;
         this.publicKey = route.url['_value'][0]['path'];
         this.privateKey = route.url['_value'][2]['path'];
-        console.log(this.publicKey, this.privateKey);
     }
+    CreateCollectionComponent.prototype.loadAuthInfo = function () {
+        this.authInfoService.loadAuthInfo(this.publicKey, this.privateKey);
+    };
     CreateCollectionComponent.prototype.ngOnInit = function () {
+        this.loadAuthInfo();
     };
     CreateCollectionComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
@@ -118,10 +124,10 @@ var CreateCollectionComponent = (function () {
             template: __webpack_require__(576),
             styles: [__webpack_require__(566)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__["a" /* AuthInfoService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__["a" /* AuthInfoService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === 'function' && _c) || Object])
     ], CreateCollectionComponent);
     return CreateCollectionComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 //# sourceMappingURL=create-collection.component.js.map
 
@@ -302,6 +308,7 @@ var AuthInfoService = (function () {
             publicKey: publickeyval,
             privateKey: privateKeyval
         };
+        console.log("loadAuthInfo", this.authInfo);
     };
     AuthInfoService = __decorate([
         //Fix for error with map, catch and other functions not being in typings for observables.
