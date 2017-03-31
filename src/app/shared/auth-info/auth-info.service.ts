@@ -48,6 +48,10 @@ export class AuthInfoService {
         
     }
 
+    getAuthInfo(): any {
+        return this.authInfo;
+    }
+
     hasParams(): Observable<boolean> {
         var hasParams = false;
         if( this.authInfo.publicKey != null && this.authInfo.privateKey != null ){

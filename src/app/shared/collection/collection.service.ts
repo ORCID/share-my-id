@@ -6,15 +6,22 @@ import 'rxjs/Rx'; //Fix for error with map, catch and other functions not being 
 import { Collection } from './collection';
 import { Collections, CollectionsEmpty } from './mock-collection';
 
+import { AuthInfoService } from './../auth-info/auth-info.service';
+
 @Injectable()
 export class CollectionService {
     
-    constructor( private http: Http ) {
+    constructor( 
+        private http: Http, 
+        private authInfoService: AuthInfoService
+    ) {
         this.apiBaseUrl = "http://localhost:8080";
+        this.authInfo = authInfoService.getAuthInfo();
         this.collectionPersistentObj = CollectionsEmpty;
     }
     
     private apiBaseUrl:string;
+    private authInfo: any;
     private collectionPersistentObj: Collection[];
 
     private handleError (error: Response | any) {
@@ -45,8 +52,8 @@ export class CollectionService {
     */
 
     //Currently add and edit
-    editCollection( publicKey: string, privateKey: string ): Observable<Collection[]> {
-        return this.http.get( this.apiBaseUrl + '/' + publicKey + '/details/' + publicKey + '/edit/' + privateKey + '/details/form' ).map(( res:Response ) => res.json()).catch(this.handleError);
+    editCollection(): Observable<Collection[]> {
+        return this.http.get( this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form' ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
     getCollection(): Observable<Collection[]> {
