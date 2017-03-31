@@ -16,12 +16,12 @@ export class CollectionService {
         private authInfoService: AuthInfoService
     ) {
         this.apiBaseUrl = "http://localhost:8080";
-        this.authInfo = authInfoService.getAuthInfo();
+        //this.authInfo = authInfoService.getAuthInfo();
         this.collectionPersistentObj = CollectionsEmpty;
     }
     
     private apiBaseUrl:string;
-    private authInfo: any;
+    authInfo: any; //json object
     private collectionPersistentObj: Collection[];
 
     private handleError (error: Response | any) {
@@ -53,6 +53,12 @@ export class CollectionService {
 
     //Currently add and edit
     editCollection(): Observable<Collection[]> {
+        this.authInfoService.getAuthInfo().subscribe( //update param to pass an actual argument 
+            authInfo => { 
+                this.authInfo = authInfo;
+            }
+        );
+
         return this.http.get( this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form' ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 

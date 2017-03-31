@@ -48,8 +48,8 @@ export class AuthInfoService {
         
     }
 
-    getAuthInfo(): any {
-        return this.authInfo;
+    getAuthInfo(): Observable<any> {
+        return Observable.of(this.authInfo);
     }
 
     hasParams(): Observable<boolean> {
