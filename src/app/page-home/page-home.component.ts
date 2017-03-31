@@ -25,7 +25,7 @@ export class PageHomeComponent implements OnInit {
         );
     }
 
-    loadAuthInfo(): void {
+    authenticate(): void {
         //this.authInfoService.loadAuthInfo();
         window.location.href  = '/create-smid-authorize';
     }

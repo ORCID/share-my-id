@@ -14,6 +14,10 @@ export class CollectionLinksComponent implements OnInit {
 
     constructor(private collectionService: CollectionService) { }
 
+    authenticate(): void {
+        //this.authInfoService.loadAuthInfo();
+        window.location.href  = '/add-id-authorize/:publicKey';
+    }
 
     getCollections(): void {
         this.collectionService.getCollection().subscribe( //update param to pass an actual argument 

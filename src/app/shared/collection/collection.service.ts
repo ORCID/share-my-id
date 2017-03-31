@@ -15,7 +15,7 @@ export class CollectionService {
         private http: Http, 
         private authInfoService: AuthInfoService
     ) {
-        this.apiBaseUrl = "http://localhost:8080";
+        this.apiBaseUrl = "https://localhost:8080";
         //this.authInfo = authInfoService.getAuthInfo();
         this.collectionPersistentObj = CollectionsEmpty;
     }
@@ -67,6 +67,7 @@ export class CollectionService {
         //return Collections[id];
         //this.collectionPersistentObj = Collections;
         //console.log(Collections, CollectionsEmpty);
-        return Observable.of( new Collection() ).map( o => CollectionsEmpty );
+        //return Observable.of( new Collection() ).map( o => CollectionsEmpty );
+        return this.http.get( this.apiBaseUrl + '/' + this.authInfo.publicKey ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 }
