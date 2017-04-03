@@ -42,8 +42,11 @@ Paths vary depending on your OS and installation method - see [MongoDB Manual](h
 1. Install [nodemon](https://github.com/remy/nodemon)
 ```npm install nodemon```
 
-2. Build Angular project automatically on changes to source directory (/src); start Node server and reload on changes to Angular build directory (/dist)
-```ng build -w & nodemon server.js --watch dist```
+2. Start node server with nodemon
+```nodemon server.js```
+
+3. In separate tab/window, build the Angular project and watch for changes
+```ng build -w```
 
 ##Configure ORCID API credentials
 This example is configured with default test credentials on the ORCID Sandbox. You can optionally supply your own sandbox credentials.
