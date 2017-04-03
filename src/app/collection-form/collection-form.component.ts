@@ -1,11 +1,9 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, Inject}      from '@angular/core';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-
-import { AuthInfoService } from './../shared/auth-info/auth-info.service';
 
 
 import { Collection } from './../shared/collection/collection';
@@ -27,10 +25,11 @@ export class CollectionFormComponent implements OnInit {
     private publicKey: string;
     private privateKey: string;
     private response: any;
+    private _windowLocationOrigin
 
     constructor(
+        @Inject(Window) private _window: Window,
         private collectionService: CollectionService,
-        private authInfoService: AuthInfoService,
         private route: ActivatedRoute,
         private router: Router
     ) 
@@ -39,6 +38,7 @@ export class CollectionFormComponent implements OnInit {
         this.showSuccessMessage = false;
         this.publicKey = route.url['_value'][0]['path'];
         this.privateKey = route.url['_value'][2]['path'];
+        this._windowLocationOrigin = `${_window.location.protocol+'//'+ _window.location.hostname + (_window.location.port ? ':'+location.port: '') }`;
     }
 
     ngOnInit() {

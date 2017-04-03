@@ -40,7 +40,8 @@ import { PageHomeComponent } from './page-home/page-home.component';
   ],
   providers: [
     AuthInfoService,
-    CollectionService
+    CollectionService,
+    {provide: Window, useValue: window} // get's the browsers window info
   ],
   bootstrap: [AppComponent]
 })
