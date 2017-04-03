@@ -27,7 +27,7 @@ const routes: Routes = [
 @NgModule(
     {
         imports: [
-            RouterModule.forRoot(routes, { useHash: true }) //http://stackoverflow.com/questions/31415052/angular-2-0-router-not-working-on-reloading-the-browser posible fix to remove the hash #
+            RouterModule.forRoot(routes, { useHash: false }) //http://stackoverflow.com/questions/31415052/angular-2-0-router-not-working-on-reloading-the-browser posible fix to remove the hash #
         ],
         exports: [
             RouterModule

@@ -50,6 +50,7 @@ smidManger.createSmid('0000-0000-0000-0000','test name', function(err, doc) {
 var app = express();
 var path = require('path');
 var distDir = __dirname + "/dist/";
+var index_file =  distDir + "index.html"
 app.use(express.static(distDir));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -107,7 +108,6 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
     // function to render page after making request
     var exchangingCallback = function(error, response, body) {
       if (error == null) { // No errors! we have a token :-)
-
         var token = JSON.parse(body);
         console.log(token);
         var date = new Date();
@@ -117,14 +117,7 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         smidManger.createSmid(token.orcid,token.name, function(err, doc) {
           if (err) res.send(err) 
           else {
-            var response = JSON.stringify(doc, null, 2);
-            var collection = JSON.parse(JSON.stringify(doc, null, 2));
-            var private_key = collection.private_key;
-            var public_key = collection.public_key;
-            //res.redirect('/' + public_key + '/edit/' + private_key);
-            //using hash for now to verify that it works. need to make it work w out hash.
-            res.redirect('/#/' + public_key + '/edit/' + private_key);
-
+            res.status(200).json(doc);
           } 
         }); 
       }
@@ -184,12 +177,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         smidManger.addOrcidName(req.query.state, {orcid: token.orcid, name: token.name}, function(err,doc) {
           if (err) res.send(err) 
           else {
-            var response = JSON.stringify(doc, null, 2);
-            var collection = JSON.parse(JSON.stringify(doc, null, 2));
-            var public_key = collection.public_key;
-            //res.redirect('/' + public_key);
-            //using hash for now to verify that it works. need to make it work w out hash.
-            res.redirect('/#/' + public_key);
+            res.status(200).json(doc);
           } 
         });
       }
@@ -208,14 +196,5 @@ app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) {
   req.session.regenerate(function(err) {
       // nothing to do
   });
-  res.send(distDir);
-  /*res.render(path.join(__dirname+'/../public/share-id-ng/dist','indexNg.ejs'), {
-    'create_smid_authorization_uri': ooau.getAuthUrl(config.HOST + CREATE_SMID_URI),
-    'add_id_authorization_uri': ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey),
-    'edit_smid_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey,
-    'share_smid_link': config.HOST + '/' + req.params.publicKey,
-    'put_form_link': config.HOST + '/' + req.params.publicKey + '/edit/' + req.params.privateKey + '/details/form',
-    'details_json_link': config.HOST + '/' + req.params.publicKey + '/details/',
-    'orcid_url': config.ORCID_URL
-  });*/
+  res.status(200).sendFile(index_file);
 });
