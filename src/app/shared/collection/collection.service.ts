@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/Rx'; //Fix for error with map, catch and other functions not being in typings for observables.
 
@@ -62,7 +62,9 @@ export class CollectionService {
             }
         );
 
-        return this.http.post( 
+        console.log("data", data);
+
+        return this.http.put( 
             this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form',
             data,
             options
