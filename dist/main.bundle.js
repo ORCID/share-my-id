@@ -1,5 +1,100 @@
 webpackJsonp([1,4],{
 
+/***/ 100:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthInfoService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var AuthInfoService = (function () {
+    function AuthInfoService(location, route) {
+        this.location = location;
+        this.route = route;
+        this.authInfo = {
+            publicKey: null,
+            privateKey: null
+        };
+        /*
+        this.apiBaseUrl = "http://localhost:8080";
+        this.CLIENT_ID = "APP-3BI8IQ5O8DREEAVF";
+        this.CLIENT_SECRET = "35d8f715-9121-440c-ad34-b66cb8c4e884";
+        this.ORCID_URL = 'https://sandbox.orcid.org';
+        */
+    }
+    /*
+    private apiBaseUrl:string;
+    private CLIENT_ID: string;
+    private CLIENT_SECRET: string;
+    private ORCID_URL: string;
+    */
+    AuthInfoService.prototype.handleError = function (error) {
+        var errMsg;
+        if (error instanceof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Response */]) {
+            var body = error.json() || '';
+            var err = body.error || JSON.stringify(body);
+            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+        }
+        else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].throw(errMsg);
+    };
+    AuthInfoService.prototype.authenticate = function () {
+    };
+    AuthInfoService.prototype.getAuthInfo = function () {
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(this.authInfo);
+    };
+    AuthInfoService.prototype.hasParams = function () {
+        var hasParams = false;
+        if (this.authInfo.publicKey != null && this.authInfo.privateKey != null) {
+            hasParams = true;
+        }
+        else {
+            hasParams = false;
+        }
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(hasParams);
+    };
+    AuthInfoService.prototype.loadAuthInfo = function (publickeyval, privateKeyval) {
+        this.authInfo = {
+            publicKey: publickeyval,
+            privateKey: privateKeyval
+        };
+    };
+    AuthInfoService = __decorate([
+        //Fix for error with map, catch and other functions not being in typings for observables.
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["c" /* Injectable */])(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object])
+    ], AuthInfoService);
+    return AuthInfoService;
+    var _a, _b;
+}());
+//# sourceMappingURL=auth-info.service.js.map
+
+/***/ }),
+
 /***/ 221:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11,7 +106,7 @@ webpackJsonp([1,4],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(351);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mock_collection__ = __webpack_require__(507);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__ = __webpack_require__(100);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -98,10 +193,10 @@ var CollectionService = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(239);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(100);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateCollectionComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -185,7 +280,7 @@ var PageAddMyIdComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(100);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -281,7 +376,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__ = __webpack_require__(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_add_my_id_page_add_my_id_component__ = __webpack_require__(337);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__ = __webpack_require__(338);
@@ -324,7 +419,7 @@ var AppRoutingModule = (function () {
     AppRoutingModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* NgModule */])({
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: true }) //http://stackoverflow.com/questions/31415052/angular-2-0-router-not-working-on-reloading-the-browser posible fix to remove the hash #
+                __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: false }) //http://stackoverflow.com/questions/31415052/angular-2-0-router-not-working-on-reloading-the-browser posible fix to remove the hash #
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]
@@ -377,14 +472,14 @@ var AppComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(148);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(460);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(500);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(499);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_collection_collection_service__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collection_form_collection_form_component__ = __webpack_require__(502);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__collection_links_collection_links_component__ = __webpack_require__(503);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__create_collection_create_collection_component__ = __webpack_require__(336);
@@ -461,10 +556,10 @@ var AppModule = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(239);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_collection_collection_service__ = __webpack_require__(221);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -530,6 +625,7 @@ var CollectionFormComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(97);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionLinksComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -542,13 +638,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var CollectionLinksComponent = (function () {
-    function CollectionLinksComponent(collectionService) {
+    //private privateKey: string;
+    function CollectionLinksComponent(collectionService, route, router) {
         this.collectionService = collectionService;
+        this.route = route;
+        this.router = router;
+        this.publicKey = route.url['_value'][0]['path'];
+        //this.privateKey = route.url['_value'][2]['path'];
     }
     CollectionLinksComponent.prototype.authenticate = function () {
         //this.authInfoService.loadAuthInfo();
-        window.location.href = '/add-id-authorize/:publicKey';
+        window.location.href = '/add-id-authorize/' + this.publicKey;
     };
     CollectionLinksComponent.prototype.getCollections = function () {
         var _this = this;
@@ -567,10 +669,10 @@ var CollectionLinksComponent = (function () {
             template: __webpack_require__(575),
             styles: [__webpack_require__(565)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === 'function' && _c) || Object])
     ], CollectionLinksComponent);
     return CollectionLinksComponent;
-    var _a;
+    var _a, _b, _c;
 }());
 //# sourceMappingURL=collection-links.component.js.map
 
@@ -942,7 +1044,7 @@ module.exports = "<header class=\"sticky-top\">\n    <div class=\"container\">\n
 /***/ 579:
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n    <div class=\"row\">\n        <div class=\"col text-center\">\n            <h1>Share My ORCID iD</h1>\n            <p>A simple way to collect authenticated ORCID iDs</p>\n            <p><i>Pretty cool, right? <a routerLink=\"/\">Create your own iD collection now</a></i></p>\n        </div>\n    </div>\n    <app-collection-links *ngIf=\"authenticated\"></app-collection-links>\n    \n</section>\n"
+module.exports = "<section>\n    <div class=\"row\">\n        <div class=\"col text-center\">\n            <h1>Share My ORCID iD</h1>\n            <p>A simple way to collect authenticated ORCID iDs</p>\n            <p><i>Pretty cool, right? <a routerLink=\"/\">Create your own iD collection now</a></i></p>\n        </div>\n    </div>\n    <app-collection-links></app-collection-links>\n    \n</section>\n"
 
 /***/ }),
 
@@ -965,101 +1067,6 @@ module.exports = "<section class=\"row\">\n    <div class=\"col text-center\">\n
 
 module.exports = __webpack_require__(381);
 
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthInfoService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var AuthInfoService = (function () {
-    function AuthInfoService(location, route) {
-        this.location = location;
-        this.route = route;
-        this.authInfo = {
-            publicKey: null,
-            privateKey: null
-        };
-        /*
-        this.apiBaseUrl = "http://localhost:8080";
-        this.CLIENT_ID = "APP-3BI8IQ5O8DREEAVF";
-        this.CLIENT_SECRET = "35d8f715-9121-440c-ad34-b66cb8c4e884";
-        this.ORCID_URL = 'https://sandbox.orcid.org';
-        */
-    }
-    /*
-    private apiBaseUrl:string;
-    private CLIENT_ID: string;
-    private CLIENT_SECRET: string;
-    private ORCID_URL: string;
-    */
-    AuthInfoService.prototype.handleError = function (error) {
-        var errMsg;
-        if (error instanceof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Response */]) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
-        }
-        else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].throw(errMsg);
-    };
-    AuthInfoService.prototype.authenticate = function () {
-    };
-    AuthInfoService.prototype.getAuthInfo = function () {
-        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(this.authInfo);
-    };
-    AuthInfoService.prototype.hasParams = function () {
-        var hasParams = false;
-        if (this.authInfo.publicKey != null && this.authInfo.privateKey != null) {
-            hasParams = true;
-        }
-        else {
-            hasParams = false;
-        }
-        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(hasParams);
-    };
-    AuthInfoService.prototype.loadAuthInfo = function (publickeyval, privateKeyval) {
-        this.authInfo = {
-            publicKey: publickeyval,
-            privateKey: privateKeyval
-        };
-    };
-    AuthInfoService = __decorate([
-        //Fix for error with map, catch and other functions not being in typings for observables.
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["c" /* Injectable */])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object])
-    ], AuthInfoService);
-    return AuthInfoService;
-    var _a, _b;
-}());
-//# sourceMappingURL=auth-info.service.js.map
 
 /***/ })
 

@@ -4,6 +4,8 @@ import { Collection } from './../shared/collection/collection';
 
 import { CollectionService } from './../shared/collection/collection.service';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 @Component({
     selector: 'app-collection-links',
     templateUrl: './collection-links.component.html',
@@ -12,11 +14,21 @@ import { CollectionService } from './../shared/collection/collection.service';
 export class CollectionLinksComponent implements OnInit {
     collections: Collection[];
 
-    constructor(private collectionService: CollectionService) { }
+    private publicKey: string;
+    //private privateKey: string;
+
+    constructor(
+        private collectionService: CollectionService,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {
+        this.publicKey = route.url['_value'][0]['path'];
+        //this.privateKey = route.url['_value'][2]['path'];
+    }
 
     authenticate(): void {
         //this.authInfoService.loadAuthInfo();
-        window.location.href  = '/add-id-authorize/:publicKey';
+        window.location.href  = '/add-id-authorize/' + this.publicKey;
     }
 
     getCollections(): void {
