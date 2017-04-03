@@ -180,7 +180,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         smidManger.addOrcidName(req.query.state, {orcid: token.orcid, name: token.name}, function(err,doc) {
           if (err) res.send(err) 
           else {
-            res.redirect('/#/' + req.query.state);
+            res.redirect('/' + req.query.state);
           } 
         });
       }
