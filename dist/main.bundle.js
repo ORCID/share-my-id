@@ -1,112 +1,17 @@
 webpackJsonp([1,4],{
 
-/***/ 149:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthInfoService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var AuthInfoService = (function () {
-    function AuthInfoService(location, route) {
-        this.location = location;
-        this.route = route;
-        this.authInfo = {
-            publicKey: null,
-            privateKey: null
-        };
-        /*
-        this.apiBaseUrl = "http://localhost:8080";
-        this.CLIENT_ID = "APP-3BI8IQ5O8DREEAVF";
-        this.CLIENT_SECRET = "35d8f715-9121-440c-ad34-b66cb8c4e884";
-        this.ORCID_URL = 'https://sandbox.orcid.org';
-        */
-    }
-    /*
-    private apiBaseUrl:string;
-    private CLIENT_ID: string;
-    private CLIENT_SECRET: string;
-    private ORCID_URL: string;
-    */
-    AuthInfoService.prototype.handleError = function (error) {
-        var errMsg;
-        if (error instanceof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Response */]) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
-        }
-        else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].throw(errMsg);
-    };
-    AuthInfoService.prototype.authenticate = function () {
-    };
-    AuthInfoService.prototype.getAuthInfo = function () {
-        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(this.authInfo);
-    };
-    AuthInfoService.prototype.hasParams = function () {
-        var hasParams = false;
-        if (this.authInfo.publicKey != null && this.authInfo.privateKey != null) {
-            hasParams = true;
-        }
-        else {
-            hasParams = false;
-        }
-        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(hasParams);
-    };
-    AuthInfoService.prototype.loadAuthInfo = function (publickeyval, privateKeyval) {
-        this.authInfo = {
-            publicKey: publickeyval,
-            privateKey: privateKeyval
-        };
-    };
-    AuthInfoService = __decorate([
-        //Fix for error with map, catch and other functions not being in typings for observables.
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["c" /* Injectable */])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object])
-    ], AuthInfoService);
-    return AuthInfoService;
-    var _a, _b;
-}());
-//# sourceMappingURL=auth-info.service.js.map
-
-/***/ }),
-
 /***/ 221:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(351);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mock_collection__ = __webpack_require__(507);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__ = __webpack_require__(99);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -133,7 +38,7 @@ var CollectionService = (function () {
     }
     CollectionService.prototype.handleError = function (error) {
         var errMsg;
-        if (error instanceof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Response */]) {
+        if (error instanceof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Response */]) {
             var body = error.json() || '';
             var err = body.error || JSON.stringify(body);
             errMsg = error.status + " - " + (error.statusText || '') + " " + err;
@@ -159,12 +64,14 @@ var CollectionService = (function () {
     //Currently add and edit
     CollectionService.prototype.editCollection = function (data) {
         var _this = this;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestOptions */]({ headers: headers });
         this.authInfoService.getAuthInfo().subscribe(//update param to pass an actual argument 
         function (//update param to pass an actual argument 
             authInfo) {
             _this.authInfo = authInfo;
         });
-        return this.http.get(this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form').map(function (res) { return res.json(); }).catch(this.handleError);
+        return this.http.post(this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form', data, options).map(function (res) { return res.json(); }).catch(this.handleError);
     };
     CollectionService.prototype.getCollection = function () {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
@@ -176,7 +83,7 @@ var CollectionService = (function () {
     };
     CollectionService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__["a" /* AuthInfoService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__["a" /* AuthInfoService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* Http */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__["a" /* AuthInfoService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_5__auth_info_auth_info_service__["a" /* AuthInfoService */]) === 'function' && _b) || Object])
     ], CollectionService);
     return CollectionService;
     var _a, _b;
@@ -185,15 +92,15 @@ var CollectionService = (function () {
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(352);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(239);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(99);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateCollectionComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -237,7 +144,7 @@ var CreateCollectionComponent = (function () {
 
 /***/ }),
 
-/***/ 336:
+/***/ 337:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -272,12 +179,12 @@ var PageAddMyIdComponent = (function () {
 
 /***/ }),
 
-/***/ 337:
+/***/ 338:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_auth_info_auth_info_service__ = __webpack_require__(99);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageHomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -373,10 +280,10 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_add_my_id_page_add_my_id_component__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_collection_create_collection_component__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__page_add_my_id_page_add_my_id_component__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__page_home_page_home_component__ = __webpack_require__(338);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -469,22 +376,22 @@ var AppComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(460);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(500);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__(499);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_collection_collection_service__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__collection_form_collection_form_component__ = __webpack_require__(502);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__collection_links_collection_links_component__ = __webpack_require__(503);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__create_collection_create_collection_component__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__create_collection_create_collection_component__ = __webpack_require__(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__footer_footer_component__ = __webpack_require__(504);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__header_header_component__ = __webpack_require__(505);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_add_my_id_page_add_my_id_component__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__page_add_my_id_page_add_my_id_component__ = __webpack_require__(337);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__page_confirm_collection_page_confirm_collection_component__ = __webpack_require__(506);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_home_page_home_component__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_home_page_home_component__ = __webpack_require__(338);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -531,7 +438,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_5__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */]
+                __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* JsonpModule */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_7__shared_auth_info_auth_info_service__["a" /* AuthInfoService */],
@@ -552,7 +460,11 @@ var AppModule = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_collection_collection_service__ = __webpack_require__(221);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionFormComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -565,11 +477,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
 var CollectionFormComponent = (function () {
-    function CollectionFormComponent(collectionService) {
+    function CollectionFormComponent(collectionService, authInfoService, route, router) {
         this.collectionService = collectionService;
+        this.authInfoService = authInfoService;
+        this.route = route;
+        this.router = router;
         this.showErrorMessage = false;
         this.showSuccessMessage = false;
+        this.publicKey = route.url['_value'][0]['path'];
+        this.privateKey = route.url['_value'][2]['path'];
     }
     CollectionFormComponent.prototype.ngOnInit = function () {
     };
@@ -589,10 +509,10 @@ var CollectionFormComponent = (function () {
             template: __webpack_require__(574),
             styles: [__webpack_require__(564)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__["a" /* AuthInfoService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__shared_auth_info_auth_info_service__["a" /* AuthInfoService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === 'function' && _d) || Object])
     ], CollectionFormComponent);
     return CollectionFormComponent;
-    var _a;
+    var _a, _b, _c, _d;
 }());
 //# sourceMappingURL=collection-form.component.js.map
 
@@ -981,7 +901,7 @@ module.exports = "\n<!-- Header here -->\n<app-header></app-header>\n\n<main cla
 /***/ 574:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <div class=\"col\">\n        <div (click)=\"showErrorMessage = !showErrorMessage\" *ngIf=\"showErrorMessage\" class=\"alert alert-danger\" role=\"alert\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <strong>Oh snap!</strong> Change a few things up and try submitting again.\n        </div>\n        <div (click)=\"showSuccessMessage = !showSuccessMessage\" *ngIf=\"showSuccessMessage\" class=\"alert alert-success\" role=\"alert\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <strong>Well done!</strong> You successfully added a collection.\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col\">\n        <form #formRef=\"ngForm\" (ngSubmit)=\"submitForm(formRef.value)\" novalidate>\n            <fieldset>\n                <legend class=\"font-weight-bold text-center\">ID Collection Details</legend>\n\n                <div \n                    class=\"form-group\" \n                    [class.has-success]=\"titleRef.valid\"\n                    [class.has-danger]=\"titleRef.valid==false && titleRef.dirty\"\n                >\n                    <label class=\"form-control-label font-weight-bold\" for=\"title\">Title</label>\n                    <input \n                        [(ngModel)]=\"title\"\n                        [class.form-control-success]=\"titleRef.valid\"\n                        [class.form-control-danger]=\"titleRef.valid==false && titleRef.dirty\"\n                        #titleRef=\"ngModel\" \n                        autocomplete=\"off\"\n                        class=\"form-control\" \n                        id=\"title\" \n                        minlength=\"4\" \n                        name=\"title\" \n                        placeholder=\"Write the collection title here...\" \n                        type=\"text\" \n                        required\n                    >\n                    <div \n                        *ngIf=\"titleRef.errors && titleRef.dirty\"\n                        class=\"form-control-feedback\" \n                    >\n                        <small  *ngIf=\"titleRef.errors?.required\">This field is required</small >\n                        <small  *ngIf=\"titleRef.errors?.minlength\">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >\n                    </div>\n                </div>\n\n                <div \n                    class=\"form-group\" \n                    [class.has-success]=\"descriptionRef.valid\"\n                    [class.has-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\n                >\n                    <label class=\"form-control-label font-weight-bold\" for=\"description\">Description</label>\n                    <textarea\n                        [(ngModel)]=\"description\"\n                        [class.form-control-success]=\"descriptionRef.valid\"\n                        [class.form-control-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\n                        #descriptionRef=\"ngModel\" \n                        class=\"form-control\" \n                        id=\"description\" \n                        minlength=\"4\" \n                        name=\"description\" \n                        placeholder=\"Write the collection description here...\" \n                        required\n                        rows=\"5\"\n                    ></textarea> \n                    <div \n                        *ngIf=\"descriptionRef.errors && descriptionRef.dirty\"\n                        class=\"form-control-feedback\" \n                    >\n                        <small  *ngIf=\"descriptionRef.errors?.required\">This field is required</small >\n                        <small  *ngIf=\"descriptionRef.errors?.minlength\">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <p class=\"form-control-label font-weight-bold\">\n                        Created by\n                    </p>\n                    <p>Username. http://placeholder-url.com</p>\n                </div>\n                <div class=\"form-group\">\n                    <button \n                        [disabled]=\"!formRef.valid\"\n                        class=\"btn btn-primary\" \n                        type=\"submit\" \n                        role=\"button\"\n                    >\n                        Save Details\n                    </button>\n                    <button \n                        (click)=\"showErrorMessage = true\"\n                        class=\"btn btn-primary\" \n                        type=\"submit\" \n                        role=\"button\"\n                    >\n                        Save Details - Error Example\n                    </button>\n                </div>\n            </fieldset>\n        </form>\n    </div>\n</div>"
+module.exports = "<div class=\"row\">\n    <div class=\"col\">\n        <div (click)=\"showErrorMessage = !showErrorMessage\" *ngIf=\"showErrorMessage\" class=\"alert alert-danger\" role=\"alert\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <strong>Oh snap!</strong> Change a few things up and try submitting again.\n        </div>\n        <div (click)=\"showSuccessMessage = !showSuccessMessage\" *ngIf=\"showSuccessMessage\" class=\"alert alert-success\" role=\"alert\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n            <strong>Well done!</strong> You successfully added a collection.\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col\">\n        <form #formRef=\"ngForm\" (ngSubmit)=\"submitForm(formRef.value)\" novalidate>\n            <fieldset>\n                <legend class=\"font-weight-bold text-center\">ID Collection Details</legend>\n\n                <div \n                    class=\"form-group\" \n                    [class.has-success]=\"titleRef.valid\"\n                    [class.has-danger]=\"titleRef.valid==false && titleRef.dirty\"\n                >\n                    <label class=\"form-control-label font-weight-bold\" for=\"title\">Title</label>\n                    <input \n                        [(ngModel)]=\"title\"\n                        [class.form-control-success]=\"titleRef.valid\"\n                        [class.form-control-danger]=\"titleRef.valid==false && titleRef.dirty\"\n                        #titleRef=\"ngModel\" \n                        autocomplete=\"off\"\n                        class=\"form-control\" \n                        id=\"title\" \n                        minlength=\"4\" \n                        name=\"title\" \n                        placeholder=\"Write the collection title here...\" \n                        type=\"text\" \n                        required\n                    >\n                    <div \n                        *ngIf=\"titleRef.errors && titleRef.dirty\"\n                        class=\"form-control-feedback\" \n                    >\n                        <small  *ngIf=\"titleRef.errors?.required\">This field is required</small >\n                        <small  *ngIf=\"titleRef.errors?.minlength\">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >\n                    </div>\n                </div>\n\n                <div \n                    class=\"form-group\" \n                    [class.has-success]=\"descriptionRef.valid\"\n                    [class.has-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\n                >\n                    <label class=\"form-control-label font-weight-bold\" for=\"description\">Description</label>\n                    <textarea\n                        [(ngModel)]=\"description\"\n                        [class.form-control-success]=\"descriptionRef.valid\"\n                        [class.form-control-danger]=\"descriptionRef.valid==false && descriptionRef.dirty\"\n                        #descriptionRef=\"ngModel\" \n                        class=\"form-control\" \n                        id=\"description\" \n                        minlength=\"4\" \n                        name=\"description\" \n                        placeholder=\"Write the collection description here...\" \n                        required\n                        rows=\"5\"\n                    ></textarea> \n                    <div \n                        *ngIf=\"descriptionRef.errors && descriptionRef.dirty\"\n                        class=\"form-control-feedback\" \n                    >\n                        <small  *ngIf=\"descriptionRef.errors?.required\">This field is required</small >\n                        <small  *ngIf=\"descriptionRef.errors?.minlength\">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <p class=\"form-control-label font-weight-bold\">\n                        Created by\n                    </p>\n                    <p>Username. http://placeholder-url.com</p>\n                </div>\n                <div class=\"form-group\">\n                    <button \n                        [disabled]=\"!formRef.valid\"\n                        class=\"btn btn-primary\" \n                        type=\"submit\" \n                        role=\"button\"\n                    >\n                        Save Details\n                    </button>\n                    <button \n                        (click)=\"showErrorMessage = true\"\n                        class=\"btn btn-primary\" \n                        type=\"submit\" \n                        role=\"button\"\n                    >\n                        Save Details - Error Example\n                    </button>\n                </div>\n            </fieldset>\n        </form>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col\">\n        <h2>Collection Links <span class=\"small\">Hold onto these!</span></h2>\n        <p class=\"bold\">Administration Link</p>\n        <p>Use this link to edit collection details:</p>\n        <p><a href=\"\">https://share-my-id.orcid.org/{{publicKey}}/edit/{{privatekey}}</a></p>\n        <p class=\"bold\">Share Link</p>\n        <p>Share this link with anyone whose iD you want to collect, or display this page on a laptop/tablet at your event:</p>\n        <p><a href=\"\">https://share-my-id.orcid.org/{{publicKey}}</a></p>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -995,7 +915,7 @@ module.exports = "<div class=\"row\">\n    <div class=\"col\">\n        <p>\n   
 /***/ 576:
 /***/ (function(module, exports) {
 
-module.exports = "<app-collection-form></app-collection-form>\n<app-collection-links></app-collection-links>"
+module.exports = "<app-collection-form></app-collection-form>"
 
 /***/ }),
 
@@ -1039,6 +959,101 @@ module.exports = "<section class=\"row\">\n    <div class=\"col text-center\">\n
 
 module.exports = __webpack_require__(381);
 
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthInfoService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var AuthInfoService = (function () {
+    function AuthInfoService(location, route) {
+        this.location = location;
+        this.route = route;
+        this.authInfo = {
+            publicKey: null,
+            privateKey: null
+        };
+        /*
+        this.apiBaseUrl = "http://localhost:8080";
+        this.CLIENT_ID = "APP-3BI8IQ5O8DREEAVF";
+        this.CLIENT_SECRET = "35d8f715-9121-440c-ad34-b66cb8c4e884";
+        this.ORCID_URL = 'https://sandbox.orcid.org';
+        */
+    }
+    /*
+    private apiBaseUrl:string;
+    private CLIENT_ID: string;
+    private CLIENT_SECRET: string;
+    private ORCID_URL: string;
+    */
+    AuthInfoService.prototype.handleError = function (error) {
+        var errMsg;
+        if (error instanceof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Response */]) {
+            var body = error.json() || '';
+            var err = body.error || JSON.stringify(body);
+            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+        }
+        else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].throw(errMsg);
+    };
+    AuthInfoService.prototype.authenticate = function () {
+    };
+    AuthInfoService.prototype.getAuthInfo = function () {
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(this.authInfo);
+    };
+    AuthInfoService.prototype.hasParams = function () {
+        var hasParams = false;
+        if (this.authInfo.publicKey != null && this.authInfo.privateKey != null) {
+            hasParams = true;
+        }
+        else {
+            hasParams = false;
+        }
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__["Observable"].of(hasParams);
+    };
+    AuthInfoService.prototype.loadAuthInfo = function (publickeyval, privateKeyval) {
+        this.authInfo = {
+            publicKey: publickeyval,
+            privateKey: privateKeyval
+        };
+    };
+    AuthInfoService = __decorate([
+        //Fix for error with map, catch and other functions not being in typings for observables.
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["c" /* Injectable */])(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_common__["c" /* Location */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object])
+    ], AuthInfoService);
+    return AuthInfoService;
+    var _a, _b;
+}());
+//# sourceMappingURL=auth-info.service.js.map
 
 /***/ })
 
