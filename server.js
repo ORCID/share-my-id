@@ -107,6 +107,7 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
     // function to render page after making request
     var exchangingCallback = function(error, response, body) {
       if (error == null) { // No errors! we have a token :-)
+
         var token = JSON.parse(body);
         console.log(token);
         var date = new Date();
@@ -116,7 +117,14 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         smidManger.createSmid(token.orcid,token.name, function(err, doc) {
           if (err) res.send(err) 
           else {
-            res.status(200).json(doc);
+            var response = JSON.stringify(doc, null, 2);
+            var collection = JSON.parse(JSON.stringify(doc, null, 2));
+            var private_key = collection.private_key;
+            var public_key = collection.public_key;
+            //res.redirect('/' + public_key + '/edit/' + private_key);
+            //using hash for now to verify that it works. need to make it work w out hash.
+            res.redirect('/#/' + public_key + '/edit/' + private_key);
+
           } 
         }); 
       }
@@ -176,7 +184,12 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         smidManger.addOrcidName(req.query.state, {orcid: token.orcid, name: token.name}, function(err,doc) {
           if (err) res.send(err) 
           else {
-            res.status(200).json(doc);
+            var response = JSON.stringify(doc, null, 2);
+            var collection = JSON.parse(JSON.stringify(doc, null, 2));
+            var public_key = collection.public_key;
+            //res.redirect('/' + public_key);
+            //using hash for now to verify that it works. need to make it work w out hash.
+            res.redirect('/#/' + public_key);
           } 
         });
       }
