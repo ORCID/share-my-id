@@ -71,7 +71,8 @@ var CollectionService = (function () {
             authInfo) {
             _this.authInfo = authInfo;
         });
-        return this.http.post(this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form', data, options).map(function (res) { return res.json(); }).catch(this.handleError);
+        console.log("data", data);
+        return this.http.put(this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form', data, options).map(function (res) { return res.json(); }).catch(this.handleError);
     };
     CollectionService.prototype.getCollection = function () {
         //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
@@ -499,8 +500,13 @@ var CollectionFormComponent = (function () {
         //this.ngForm.reset(); <- This is reloading the whole app, needs a fix
     };
     CollectionFormComponent.prototype.submitForm = function (form) {
+        var _this = this;
+        console.log("form", form);
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
-        this.collectionService.editCollection(form);
+        this.collectionService.editCollection(form).subscribe(function (response) {
+            _this.response = response;
+            console.log(_this.response, response);
+        }, function (err) { return console.log(err); }, function () { return console.log("Done"); });
         this.resetForm(); // <- Update to change the status on the ajax call result 
     };
     CollectionFormComponent = __decorate([

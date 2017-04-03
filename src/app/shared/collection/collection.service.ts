@@ -62,7 +62,9 @@ export class CollectionService {
             }
         );
 
-        return this.http.post( 
+        console.log("data", data);
+
+        return this.http.put( 
             this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form',
             data,
             options

@@ -26,6 +26,7 @@ export class CollectionFormComponent implements OnInit {
     title: string;
     private publicKey: string;
     private privateKey: string;
+    private response: any;
 
     constructor(
         private collectionService: CollectionService,
@@ -50,8 +51,17 @@ export class CollectionFormComponent implements OnInit {
     }
 
     submitForm( form: any ): void {
+        console.log("form", form);
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
-        this.collectionService.editCollection( form );
+
+        this.collectionService.editCollection( form ).subscribe(
+            (response) => { 
+                this.response = response;
+                console.log(this.response, response);
+            },
+            (err)=>console.log(err),
+            ()=>console.log("Done")
+        );
         this.resetForm(); // <- Update to change the status on the ajax call result 
     }
 }
