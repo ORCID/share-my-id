@@ -32,7 +32,7 @@ export class PageHomeComponent implements OnInit {
 
     //Remove/refactor
     login(): void {
-        this.loadAuthInfo();
+        this.authenticate();
         this.hasParams();
         //this.authenticated = this.authInfoService.hasParamas();
         //console.log("this.authenticated ", this.authenticated );

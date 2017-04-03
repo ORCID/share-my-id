@@ -1,5 +1,13 @@
 import { Component, OnInit }      from '@angular/core';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+
+import { AuthInfoService } from './../shared/auth-info/auth-info.service';
+
+
 import { Collection } from './../shared/collection/collection';
 import { CollectionService } from './../shared/collection/collection.service';
 
@@ -16,13 +24,20 @@ export class CollectionFormComponent implements OnInit {
     showErrorMessage: boolean;
     showSuccessMessage: boolean;
     title: string;
+    private publicKey: string;
+    private privateKey: string;
 
     constructor(
-        private collectionService: CollectionService
+        private collectionService: CollectionService,
+        private authInfoService: AuthInfoService,
+        private route: ActivatedRoute,
+        private router: Router
     ) 
     {
         this.showErrorMessage = false;
         this.showSuccessMessage = false;
+        this.publicKey = route.url['_value'][0]['path'];
+        this.privateKey = route.url['_value'][2]['path'];
     }
 
     ngOnInit() {
@@ -36,7 +51,7 @@ export class CollectionFormComponent implements OnInit {
 
     submitForm( form: any ): void {
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
-        this.collectionService.editCollection();
+        this.collectionService.editCollection( form );
         this.resetForm(); // <- Update to change the status on the ajax call result 
     }
 }

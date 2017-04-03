@@ -52,14 +52,21 @@ export class CollectionService {
     */
 
     //Currently add and edit
-    editCollection(): Observable<Collection[]> {
+    editCollection( data: any ): Observable<Collection[]> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
         this.authInfoService.getAuthInfo().subscribe( //update param to pass an actual argument 
             authInfo => { 
                 this.authInfo = authInfo;
             }
         );
 
-        return this.http.get( this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form' ).map(( res:Response ) => res.json()).catch(this.handleError);
+        return this.http.post( 
+            this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form',
+            data,
+            options
+        ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
     getCollection(): Observable<Collection[]> {
