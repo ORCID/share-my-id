@@ -117,7 +117,10 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         smidManger.createSmid(token.orcid,token.name, function(err, doc) {
           if (err) res.send(err) 
           else {
-            res.status(200).json(doc);
+            var collection = JSON.parse(JSON.stringify(doc, null, 2));
+            var private_key = collection.private_key;
+            var public_key = collection.public_key;
+            res.redirect('/' + public_key + '/edit/' + private_key);
           } 
         }); 
       }
@@ -177,7 +180,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         smidManger.addOrcidName(req.query.state, {orcid: token.orcid, name: token.name}, function(err,doc) {
           if (err) res.send(err) 
           else {
-            res.status(200).json(doc);
+            res.redirect('/#/' + req.query.state);
           } 
         });
       }
