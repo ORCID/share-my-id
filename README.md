@@ -34,7 +34,7 @@ Paths vary depending on your OS and installation method - see [MongoDB Manual](h
 ###4. Start app
 ```npm start```
 
-###5. Open localhost [https://localhost:8443/](https://localhost:8443/)
+###5. Open localhost [http://localhost:8080/](http://localhost:8080/)
 
 ##Build/reload changes automatically
 ```npm start``` builds Angular source files into the /dist directory once and starts the server; changes will not be rebuilt/reloaded. To rebuild/reload changes automatically:
@@ -54,12 +54,14 @@ This example is configured with default test credentials on the ORCID Sandbox. Y
 ####1. Register for sandbox credentials at [http://orcid.org/content/register-client-application](http://orcid.org/content/register-client-application)
 When registering include the redirect_uri 'https://localhost'
 
-####2. Add API credentials to config file
-Open ```helper/config.js``` in a text, edit the environment variables below, and save the file.
+####2. Override default config by exporting environment variables
 
-* CLIENT_ID - Client id issued by ORCID.
-* CLIENT_SECRET - Client secret issued by ORCID
+Example in linux bash:
 
-##Troubleshooting Tips:
+        export CLIENT_ID='APP-3BI8IQ5O8DREEAVF'
+        export CLIENT_SECRET='35d8f715-9121-440c-ad34-b66cb8c4e884'
+        export ORCID_URL='https://sandbox.orcid.org'
+        export PORT_HTTP='8080'
+        export HOST='http://localhost:8080'
 
-* You get a 400 error `DNS name does not have enough labels`. Means the local `~/letsencrypt/*` directory is corrupt from switching node apps. Clear the letsencrypt directory to reset `rm -rf ~/letsencrypt/*` 
+[other systems](https://www.schrodinger.com/kb/1842)
