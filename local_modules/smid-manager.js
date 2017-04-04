@@ -1,5 +1,62 @@
 var mongojs = require('mongojs'),
+Ajv = require('ajv'),
 randomstring = require("randomstring");
+
+var ajv = new Ajv();
+
+var OrcidRecordSchema = {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Orcid Record",
+    "description": "Records Name and ORCID iD",
+    "type": "object",
+    "properties": {
+        "orcid": {
+            "description": "ORCID iD",
+            "type": "string"
+        },
+        "fullOrcidId": {
+            "description": "Full url ORCID iD",
+            "type": "string"
+        },
+        "name": {
+            "description": "ORCID users pulbic name",
+            "type": "string"
+        },
+        "dateRecorded": {
+            "description": "ORCID iD",
+            "type": "object",
+            "format": "date-time"
+        },
+        "version": {
+            "description": "version of type of this record, useful for later migrations",
+            "type": "number"
+        }
+
+    },
+    "required": ["orcid", "fullOrcidId", "name", "dateRecorded", "version"],
+    "additionalProperties": false
+};
+
+var FormSchema = {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "SMID Form",
+    "description": "SMID Form",
+    "type": "object",
+    "properties": {
+        "description": {
+            "description": "description",
+            "type": "string"
+        },
+        "title": {
+            "description": "title",
+            "type": "string"
+        }
+    },
+    "required": ["title"],
+    "additionalProperties": false
+};
+
+
 
 var SmidManger = function (connectionStr) {
     this._db = mongojs(connectionStr);
@@ -19,7 +76,7 @@ var SmidManger = function (connectionStr) {
  */
 
 SmidManger.prototype.createSmid = function(orcidRecord, callback) {
-  if (orcidRecord == null) throw new Error("createSmid: orcidRecord is null");
+  this.validateOrcidRecord(orcidRecord);
   var smidManger = this;
   var pubKey = randomstring.generate(8);
   var privKey = randomstring.generate()
@@ -61,6 +118,7 @@ SmidManger.prototype.getDetails = function(pubKey, callback) {
 };
 
 SmidManger.prototype.updateForm = function(privateKey, form, callback) {
+  this.validateForm(form);
   this._smidCol.findAndModify({
       query: {private_key: privateKey}, 
       update: {$set: {'details.form': form}},
@@ -75,7 +133,24 @@ SmidManger.prototype.updateForm = function(privateKey, form, callback) {
   });
 }
 
+SmidManger.prototype.validateOrcidRecord = function(orcidRecord) {
+  if (!ajv.validate(OrcidRecordSchema, orcidRecord)) {
+    console.log(JSON.stringify(orcidRecord));
+    console.log(ajv.errors);
+    throw new Error("Invalid orcidRecord");
+  }
+};
+
+SmidManger.prototype.validateForm = function(form) {
+  if (!ajv.validate(FormSchema, form)) {
+    console.log(JSON.stringify(form));
+    console.log(ajv.errors);
+    throw new Error("Invalid form");
+  }
+};
+
 SmidManger.prototype.addOrcidRecord = function(orcidRecord, publicKey, callback) {
+  this.validateOrcidRecord(orcidRecord);
   this._smidCol.findAndModify({
       query: {public_key: publicKey}, 
       update: {$push: {'details.authenticated_orcids': orcidRecord}},
@@ -83,10 +158,7 @@ SmidManger.prototype.addOrcidRecord = function(orcidRecord, publicKey, callback)
     },
     function(err, doc, lastErrorObject) {
       if (err) callback(err, null);
-      else {
-        console.log("returned doc " + JSON.stringify(doc));
-        callback(null, doc.details.authenticated_orcids);
-      }
+      else callback(null, doc.details.authenticated_orcids); 
   });
 }
 
