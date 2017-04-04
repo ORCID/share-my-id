@@ -41,7 +41,8 @@ SmidManger.prototype.createSmid = function(orcidRecord, callback) {
           owner: orcidRecord
         },
         private_key: privKey, // used for allowing edits
-        public_key: pubKey // used for shareing
+        public_key: pubKey, // used for shareing
+        'version': 1
       }
       smidManger._smidCol.save(newSmid, callback);      
     }
@@ -49,7 +50,7 @@ SmidManger.prototype.createSmid = function(orcidRecord, callback) {
 };
 
 SmidManger.prototype.createOrcidRecord = function(orcidId, fullOrcidId, name) {
-  return { 'orcid': orcidId, 'fullOrcidId': fullOrcidId, 'name': name, 'dateRecorded': new Date()};
+  return { 'orcid': orcidId, 'fullOrcidId': fullOrcidId, 'name': name, 'dateRecorded': new Date(), 'version': 1};
 };
 
 SmidManger.prototype.getDetails = function(pubKey, callback) {
