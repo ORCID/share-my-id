@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
-import { CollectionLinksComponent } from './collection-links/collection-links.component';
+import { CollectionShareComponent } from './collection-share/collection-share.component';
 import { PageHomeComponent } from './page-home/page-home.component';
 
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
         path: '' // update to 'create-smid-authorize'
     },
     {
-        component: CollectionLinksComponent,
+        component: CollectionShareComponent,
         path: ':publicKey'
     },
     {

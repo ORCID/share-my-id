@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CollectionService } from './shared/collection/collection.service';
 
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
-import { CollectionLinksComponent } from './collection-links/collection-links.component';
+import { CollectionShareComponent } from './collection-share/collection-share.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { PageHomeComponent } from './page-home/page-home.component';
@@ -19,7 +19,7 @@ import { PageHomeComponent } from './page-home/page-home.component';
   declarations: [
     AppComponent,
     CollectionEditComponent,
-    CollectionLinksComponent,
+    CollectionShareComponent,
     FooterComponent,
     HeaderComponent,
     PageHomeComponent
