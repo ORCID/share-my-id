@@ -1,0 +1,43 @@
+
+/****************************************************
+//Base colors
+****************************************************/
+$abbey: #494A4C;
+$atlantis1: #A6CE39;
+$atlantis2:#9FC836;
+$astral: #31789B;
+$bostonblue: #338CAF;
+$oslogray: #939598;
+$white: #FFF;
+
+/****************************************************
+//Font sizes
+****************************************************/
+$font-size-small: 10px;
+$font-size-extra-small: 8px;
+$font-size-normal: 12px;
+$font-size-big: 16px;
+$font-size-huge: 24px;
+
+/****************************************************
+//Themes colors
+****************************************************/
+$bck-default: $oslogray;
+
+$base-font-color: $abbey;
+$title-h1-font-color: $astral;
+
+$input-border-color: $oslogray;
+$input-border-width: 1px;
+
+$button-bck-active: $atlantis1;
+$button-bck-default: $astral;
+$button-bck-hover: $atlantis1;
+$button-font-color-active: $white;
+$button-font-color-default: $white;
+$button-font-color-focus: $white;
+$button-font-color-hover: $white;
+
+$link-font-color-active: $atlantis2;
+$link-font-color-default: $bostonblue;
+$link-font-color-hover: $atlantis2;

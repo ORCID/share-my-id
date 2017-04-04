@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+/****************************************************
+//Global Styles
+****************************************************/
+a {
+    color: $link-font-color-default;
+
+    &:active,
+    .active {
+        color: $link-font-color-active;
+    }
+
+    &:hover {
+        color: $link-font-color-hover;
+    }
+}
+
+h1 {
+    color: $title-h1-font-color;
+}
+
+p {
+    color: $base-font-color;
+}
+
+.btn-primary {
+    background-color: $button-bck-default;
+    border: none;
+    color: $button-font-color-default;
+
+    &:active,
+    .active {
+        background-color: $button-bck-active;
+        color: $button-font-color-active;
+    }
+
+    &:focus {
+        color: $button-font-color-focus;
+    }
+
+    &:hover {
+        background-color: $button-bck-hover;
+        color: $button-font-color-hover;
+    }
+}

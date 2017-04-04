@@ -1,0 +1,18 @@
+<section class="row">
+    <div class="col text-center">
+        <h1>Share My ORCID iD</h1>
+        <p>A simple way to collect authenticated ORCID iDs</p>
+        <p
+            *ngIf="!authenticated" 
+        >
+            <button (click)="authenticate()" class="btn btn-primary">Create a new iD collection</button>
+        </p>
+        <!--
+        <p
+            *ngIf="authenticated" 
+        >
+            <a routerLink="/create-collection" class="btn btn-primary">Create a new iD collection</a>
+        </p>
+        -->
+    </div>
+</section>
