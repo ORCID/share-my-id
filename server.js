@@ -129,7 +129,7 @@ app.get('/:publicKey/details', function(req,res) {
 //Update collection details form fields
 app.put('/:publicKey/details/:publicKey/edit/:privateKey/details/form', function(req,res) {
   var form = req.body;
-  smidManger.updateForm(req.params.publicKey, form, function(err, doc) {
+  smidManger.updateForm(req.params.privateKey, form, function(err, doc) {
     if (err) res.send(err)
     else {
       res.status(200).json(doc);
