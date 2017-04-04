@@ -1,9 +1,11 @@
-import { Component, OnInit, Inject}      from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+
+import { AuthInfoService } from './../shared/auth-info/auth-info.service';
 
 
 import { Collection } from './../shared/collection/collection';
@@ -22,23 +24,23 @@ export class CollectionFormComponent implements OnInit {
     showErrorMessage: boolean;
     showSuccessMessage: boolean;
     title: string;
+    private path: string[];
     private publicKey: string;
     private privateKey: string;
     private response: any;
-    private _windowLocationOrigin
+    private _windowLocationOrigin: string;
 
     constructor(
-        @Inject(Window) private _window: Window,
         private collectionService: CollectionService,
-        private route: ActivatedRoute,
-        private router: Router
+        private authInfoService: AuthInfoService,
     ) 
     {
         this.showErrorMessage = false;
         this.showSuccessMessage = false;
-        this.publicKey = route.url['_value'][0]['path'];
-        this.privateKey = route.url['_value'][2]['path'];
-        this._windowLocationOrigin = `${_window.location.protocol+'//'+ _window.location.hostname + (_window.location.port ? ':'+location.port: '') }`;
+        this.path = window.location.pathname.split("/");
+        this.publicKey = this.path[1];
+        this.privateKey = this.path[3];
+        this._windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
     }
 
     ngOnInit() {
@@ -51,10 +53,9 @@ export class CollectionFormComponent implements OnInit {
     }
 
     submitForm( form: any ): void {
-        console.log("form", form);
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
 
-        this.collectionService.editCollection( form ).subscribe(
+        this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
             (response) => { 
                 this.response = response;
                 console.log(this.response, response);
