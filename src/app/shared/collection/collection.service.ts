@@ -71,12 +71,8 @@ export class CollectionService {
         ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
-    getCollection(): Observable<Collection[]> {
-        //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
-        //return Collections[id];
-        //this.collectionPersistentObj = Collections;
-        //console.log(Collections, CollectionsEmpty);
-        //return Observable.of( new Collection() ).map( o => CollectionsEmpty );
-        return this.http.get( this.apiBaseUrl + '/' + this.authInfo.publicKey ).map(( res:Response ) => res.json()).catch(this.handleError);
+    getCollection(publicKey): Observable<Collection[]> {
+        return this.http.get( publicKey + '/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
+
     }
 }
