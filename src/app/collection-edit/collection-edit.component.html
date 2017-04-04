@@ -97,8 +97,10 @@
         </form>
     </div>
 </div>
-
-<div class="row">
+<div 
+    *ngIf="title!=null && description!=null > 0"
+    class="row"
+>
     <div class="col">
         <div class="card">
             <div class="card-block">

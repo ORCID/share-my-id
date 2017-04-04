@@ -33,11 +33,13 @@ export class CollectionEditComponent implements OnInit {
         private collectionService: CollectionService,
     ) 
     {
-        this.showErrorMessage = false;
-        this.showSuccessMessage = false;
+        this.description = "";
         this.path = window.location.pathname.split("/");
         this.publicKey = this.path[1];
         this.privateKey = this.path[3];
+        this.showErrorMessage = false;
+        this.showSuccessMessage = false;
+        this.title = "";
         this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
     }
 
@@ -47,7 +49,6 @@ export class CollectionEditComponent implements OnInit {
                 var collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
-                console.log(this.collections, collection_parsed);
 
                 this.description = collection_parsed.form.description;
                 this.title = collection_parsed.form.title;
