@@ -30,7 +30,6 @@ export class CollectionLinksComponent implements OnInit {
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
                 this.collections = collections;
-                console.log(this.collections);
             }
         );
     }

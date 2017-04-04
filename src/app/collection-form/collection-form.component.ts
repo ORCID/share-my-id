@@ -40,7 +40,6 @@ export class CollectionFormComponent implements OnInit {
     }
 
     getCollections(): void {
-        console.log("get collections", this.publicKey);
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
                 var collection_parsed = null;
@@ -54,7 +53,6 @@ export class CollectionFormComponent implements OnInit {
     }    
 
     ngOnInit() {
-        console.log("init");
         this.getCollections();
     }
 
@@ -66,7 +64,7 @@ export class CollectionFormComponent implements OnInit {
                 this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
             },
             (err)=>console.log(err),
-            ()=>console.log("Done")
+            ()=>console.log("Submitted")
         );
     }
 }
