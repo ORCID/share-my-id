@@ -16,24 +16,24 @@ import { PageHomeComponent } from './page-home/page-home.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CollectionEditComponent,
-    CollectionShareComponent,
-    FooterComponent,
-    HeaderComponent,
-    PageHomeComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    JsonpModule
-  ],
-  providers: [
-    CollectionService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        CollectionEditComponent,
+        CollectionShareComponent,
+        FooterComponent,
+        HeaderComponent,
+        PageHomeComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        JsonpModule
+    ],
+    providers: [
+        CollectionService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
