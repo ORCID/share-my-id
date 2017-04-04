@@ -2,9 +2,10 @@ export class Collection {
     
     details: {
         authenticated_orcids: [
-            {
-                name: string;
+            {  
                 orcid: string;
+                fullOrcidId: string;
+                name: string;
             }
         ];
         created: string;
@@ -14,6 +15,7 @@ export class Collection {
             };
         owner: {
                 orcid: string;
+                fullOrcidId: string;
                 name: string;
             };
     };

@@ -53,7 +53,7 @@ export class CollectionEditComponent implements OnInit {
                 this.description = collection_parsed.form.description;
                 this.title = collection_parsed.form.title;
                 this.username = collection_parsed.owner.name;
-                this.uri = collection_parsed.owner.orcid;
+                this.uri = collection_parsed.owner.fullOrcidId;
             }
         );
     }    
