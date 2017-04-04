@@ -26,7 +26,7 @@ export class CollectionFormComponent implements OnInit {
     private publicKey: string;
     private privateKey: string;
     private response: any;
-    private _windowLocationOrigin: string;
+    private windowLocationOrigin: string;
 
     constructor(
         private collectionService: CollectionService,
@@ -37,7 +37,7 @@ export class CollectionFormComponent implements OnInit {
         this.path = window.location.pathname.split("/");
         this.publicKey = this.path[1];
         this.privateKey = this.path[3];
-        this._windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
+        this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
     }
 
     getCollections(): void {
