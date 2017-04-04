@@ -23,7 +23,7 @@
                     class="card-block text-nowrap"
                 >
                     <h2>{{collections.form.title}}</h2>
-                    <p><i>Created by <a href="{{collections.owner.orcid}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created}}</i></p>
+                    <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created}}</i></p>
                     <p>{{collections.form.description}}</p>
 
                     <table 
@@ -44,7 +44,7 @@
                             >
                                 <th scope="row">{{j+1}}</th>
                                 <td>{{authenticated_orcid.name}}</td>
-                                <td><a href="{{authenticated_orcid.orcid}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
+                                <td><a href="{{authenticated_orcid.fullOrcidId}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
                             </tr>
                         </tbody>
                     </table>

@@ -5,8 +5,9 @@ export const Collections: Collection[] = [
   details: {
         authenticated_orcids: [
             {
+                orcid: "0000-0000-0000-0000",
+                fullOrcidId: "http://sandbox.orcid.org0000-0000-0000-0000",
                 name: "Test name",
-                orcid: "0000-0000-0000-0000"
             }
         ],
         created: "Test date",
@@ -16,6 +17,7 @@ export const Collections: Collection[] = [
             },
         owner: {
                 orcid: "0000-0000-0000-0000",
+                fullOrcidId: "http://sandbox.orcid.org0000-0000-0000-0000",
                 name: "Test owner"
             },
     },
