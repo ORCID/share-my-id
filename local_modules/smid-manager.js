@@ -18,10 +18,8 @@ var SmidManger = function (connectionStr, collectionsArr) {
  *  callback(err, [new smid object])
  */
 
-SmidManger.prototype.createSmid = function(orcidId, orcidName, callback) {
-  if (orcidId == null) throw new Error("createSmid: orcidId is null");
-  if (orcidName == null) throw new Error("createSmid: orcidName is null");
-  if (orcidId == null) throw new Error("createSmid: orcidCallback is null");
+SmidManger.prototype.createSmid = function(orcidRecord, callback) {
+  if (orcidRecord == null) throw new Error("createSmid: orcidRecord is null");
   var smidManger = this;
   var pubKey = randomstring.generate(8);
   var privKey = randomstring.generate()
@@ -30,7 +28,7 @@ SmidManger.prototype.createSmid = function(orcidId, orcidName, callback) {
   this._smidCol.findOne({public_key: pubKey}, function(err, doc) {
     if (doc !== null) {
       console.log("public_key collision " + pubKey + "! tying agian.");
-      smidManger.createSmid(orcidId, callback);
+      smidManger.createSmid(orcidRecord, callback);
     } else {
       var newSmid = {
         details : {
@@ -40,10 +38,7 @@ SmidManger.prototype.createSmid = function(orcidId, orcidName, callback) {
             description: undefined,
             title: undefined,
           },
-          owner: {
-            orcid: orcidId, 
-            name: orcidName
-          }
+          owner: orcidRecord
         },
         private_key: privKey, // used for allowing edits
         public_key: pubKey // used for shareing
@@ -51,6 +46,10 @@ SmidManger.prototype.createSmid = function(orcidId, orcidName, callback) {
       smidManger._smidCol.save(newSmid, callback);      
     }
   });
+};
+
+SmidManger.prototype.createOrcidRecord = function(orcidId, fullOrcidId, name) {
+  return { 'orcid': orcidId, 'fullOrcidId': fullOrcidId, 'name': name, 'dateRecorded': new Date()};
 };
 
 SmidManger.prototype.getDetails = function(pubKey, callback) {
@@ -75,10 +74,10 @@ SmidManger.prototype.updateForm = function(privateKey, form, callback) {
   });
 }
 
-SmidManger.prototype.addOrcidName = function(publicKey, orcidName, callback) {
+SmidManger.prototype.addOrcidRecord = function(orcidRecord, publicKey, callback) {
   this._smidCol.findAndModify({
       query: {public_key: publicKey}, 
-      update: {$addToSet: {'details.authenticated_orcids': orcidName}},
+      update: {$push: {'details.authenticated_orcids': orcidRecord}},
       new: true // this means return the updated object
     },
     function(err, doc, lastErrorObject) {
