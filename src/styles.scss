@@ -45,3 +45,8 @@ p {
         color: $button-font-color-hover;
     }
 }
+
+.link-style {
+    @extend a;
+    cursor: pointer;
+}
