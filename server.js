@@ -73,11 +73,19 @@ app.listen(config.PORT_HTTP, function () {
 var orcidOutput = fs.createWriteStream('./orcidout.log');
 var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
-var CREATE_SMID_URI = '/create-smid-redirect';
-var ADD_ID_REDIRECT = '/add-id-redirect';
 
-//Create smid oauth sign into ORCID (redirects to CREATE_SMID_URI after signin)
-app.get('/create-smid-authorize', function(req,res) {
+//Endpoints
+var CREATE_SMID_AUTHORIZE = '/create-smid-authorize';
+var CREATE_SMID_URI = '/create-smid-redirect';
+var COLLECTION_DETAILS = '/:publicKey/details';
+var COLLECTION_DETAILS_FORM = '/:publicKey/details/:publicKey/edit/:privateKey/details/form';
+var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
+var ADD_ID_REDIRECT = '/add-id-redirect';
+var COLLECTION_EDIT = '/:publicKey/edit/:privateKey';
+var COLLECTION_SHARE = '/:publicKey';
+
+//Create smid oauth sign into ORCID
+app.get(CREATE_SMID_AUTHORIZE, function(req,res) {
   create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI);
   res.redirect(create_smid_authorization_uri);
 });
@@ -117,7 +125,7 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
 });
 
 //Get collection details
-app.get('/:publicKey/details', function(req,res) {
+app.get(COLLECTION_DETAILS, function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
     if (err) res.send(err)
     else {
@@ -127,7 +135,7 @@ app.get('/:publicKey/details', function(req,res) {
 });
 
 //Update collection details form fields
-app.put('/:publicKey/details/:publicKey/edit/:privateKey/details/form', function(req,res) {
+app.put(COLLECTION_DETAILS_FORM, function(req,res) {
   var form = req.body;
   smidManger.updateForm(req.params.privateKey, form, function(err, doc) {
     if (err) res.send(err)
@@ -137,8 +145,8 @@ app.put('/:publicKey/details/:publicKey/edit/:privateKey/details/form', function
   });
 });
 
-//Add iD oauth sign into ORCID (redirects to ADD_ID_REDIRECT after signin)
-app.get('/add-id-authorize/:publicKey', function(req,res) {
+//Add iD oauth sign into ORCID
+app.get(ADD_ID_AUTHORIZE, function(req,res) {
   add_id_authorization_uri = ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey);
   res.redirect(add_id_authorization_uri);
 });
@@ -175,12 +183,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   }
 });
 
-app.get('/orcid-id.json', function(req, res) {
-  res.json({'orcid_id': req.session.orcid_id});
-});
-
-
-app.get(['/:publicKey/edit/:privateKey','/:publicKey','/'], function(req, res) { // Index page 
+app.get([COLLECTION_EDIT, COLLECTION_SHARE,'/'], function(req, res) { // Index page 
   // reset any session on reload of '/'
   req.session.regenerate(function(err) {
       // nothing to do
