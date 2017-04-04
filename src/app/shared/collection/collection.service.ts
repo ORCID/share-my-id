@@ -12,11 +12,9 @@ export class CollectionService {
     constructor( 
         private http: Http, 
     ) {
-        this.apiBaseUrl = "https://localhost:8080";
         this.collectionPersistentObj = CollectionsEmpty;
     }
     
-    private apiBaseUrl:string;
     private collectionPersistentObj: Collection[];
 
     private handleError (error: Response | any) {

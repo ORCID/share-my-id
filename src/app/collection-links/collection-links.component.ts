@@ -23,15 +23,16 @@ export class CollectionLinksComponent implements OnInit {
     }
 
     authenticate(): void {
-            window.location.href  = '/add-id-authorize' + this.publicKey;
-      }
+        window.location.href  = '/add-id-authorize' + this.publicKey;
+    }
 
     getCollections(): void {
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
-            this.collections = collections;
-            console.log(this.collections);
-        });
+                this.collections = collections;
+                console.log(this.collections);
+            }
+        );
     }
 
     ngOnInit() {

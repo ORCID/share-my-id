@@ -1,10 +1,8 @@
 import { Component, OnInit }      from '@angular/core';
-
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-
 
 import { Collection } from './../shared/collection/collection';
 import { CollectionService } from './../shared/collection/collection.service';
@@ -61,12 +59,13 @@ export class CollectionFormComponent implements OnInit {
     }
 
     submitForm( form: any ): void {
-        this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
+        
 
         this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
             (response) => { 
                 this.response = response;
                 console.log(this.response, response);
+                this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
             },
             (err)=>console.log(err),
             ()=>console.log("Done")
