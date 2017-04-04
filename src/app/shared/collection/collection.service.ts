@@ -41,7 +41,6 @@ export class CollectionService {
     }
 
     getCollection(publicKey): Observable<Collection[]> {
-        console.log("get collections service");
         return this.http.get( publicKey + '/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
 
     }

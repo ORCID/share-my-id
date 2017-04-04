@@ -8,27 +8,21 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CollectionService } from './shared/collection/collection.service';
 
-import { CollectionFormComponent } from './collection-form/collection-form.component';
-import { CollectionLinksComponent } from './collection-links/collection-links.component';
-import { CreateCollectionComponent } from './create-collection/create-collection.component';
+import { CollectionEditComponent } from './collection-edit/collection-edit.component';
+import { CollectionShareComponent } from './collection-share/collection-share.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { PageAddMyIdComponent } from './page-add-my-id/page-add-my-id.component';
-import { PageConfirmCollectionComponent } from './page-confirm-collection/page-confirm-collection.component';
 import { PageHomeComponent } from './page-home/page-home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CollectionFormComponent,
-    CollectionLinksComponent,
-    CreateCollectionComponent,
+    CollectionEditComponent,
+    CollectionShareComponent,
     FooterComponent,
     HeaderComponent,
-    PageConfirmCollectionComponent,
-    PageHomeComponent,
-    PageAddMyIdComponent
+    PageHomeComponent
   ],
   imports: [
     AppRoutingModule,
