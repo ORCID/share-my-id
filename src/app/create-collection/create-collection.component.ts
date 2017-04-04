@@ -4,8 +4,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
-import { AuthInfoService } from './../shared/auth-info/auth-info.service';
-
 @Component({
     selector: 'app-create-collection',
     templateUrl: './create-collection.component.html',
@@ -17,7 +15,6 @@ export class CreateCollectionComponent implements OnInit {
     private privateKey: string;
 
     constructor(
-        private authInfoService: AuthInfoService,
         private route: ActivatedRoute,
         private router: Router
     ) {
@@ -25,12 +22,7 @@ export class CreateCollectionComponent implements OnInit {
         this.privateKey = route.url['_value'][2]['path'];
     }
 
-    private loadAuthInfo(): void{
-        this.authInfoService.loadAuthInfo( this.publicKey, this.privateKey);
-    }
-
     ngOnInit() {
-        this.loadAuthInfo();
     }
 
 }

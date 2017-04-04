@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthInfoService } from './../shared/auth-info/auth-info.service';
 
 @Component({
     selector: 'app-page-home',
@@ -10,7 +9,6 @@ import { AuthInfoService } from './../shared/auth-info/auth-info.service';
 export class PageHomeComponent implements OnInit {
 
     constructor(
-        private authInfoService: AuthInfoService
     ) { 
     }
 

@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CollectionService } from './shared/collection/collection.service';
-import { AuthInfoService } from './shared/auth-info/auth-info.service';
 
 import { CollectionFormComponent } from './collection-form/collection-form.component';
 import { CollectionLinksComponent } from './collection-links/collection-links.component';
@@ -39,7 +38,6 @@ import { PageHomeComponent } from './page-home/page-home.component';
     JsonpModule
   ],
   providers: [
-    AuthInfoService,
     CollectionService
   ],
   bootstrap: [AppComponent]
