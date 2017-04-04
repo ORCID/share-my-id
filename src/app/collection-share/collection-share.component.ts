@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+
 import { Collection } from './../shared/collection/collection';
 
 import { Http } from '@angular/http';
@@ -19,6 +21,7 @@ export class CollectionShareComponent implements OnInit {
     collections: Collection[];
 
     private publicKey: string;
+    private logUserOut: string[];
 
     constructor(
         private collectionService: CollectionService,
@@ -29,6 +32,12 @@ export class CollectionShareComponent implements OnInit {
     }
 
     authenticate(): void {
+        this.collectionService.logUserOut().subscribe(
+            response => {
+                this.logUserOut = response;
+            }
+        );
+        
         window.location.href  = '/add-id-authorize' + this.publicKey;
     }
 
@@ -44,9 +53,5 @@ export class CollectionShareComponent implements OnInit {
         this.configService.getConfiguration().subscribe(data => {
            alert(data['ORCID_URL']);
         });
-        this.configService.getConfiguration().subscribe(data => {
-           alert(data['ORCID_URL']);
-        });
-
     }
 }

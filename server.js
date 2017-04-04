@@ -54,6 +54,7 @@ var orcidErrorOutput = fs.createWriteStream('./orciderr.log');
 var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
 //Endpoints
+var CONFIG = '/config';
 var CREATE_SMID_AUTHORIZE = '/create-smid-authorize';
 var CONFIG = '/config';
 var CREATE_SMID_URI = '/create-smid-redirect';
@@ -63,6 +64,10 @@ var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
 var ADD_ID_REDIRECT = '/add-id-redirect';
 var COLLECTION_EDIT = '/:publicKey/edit/:privateKey';
 var COLLECTION_SHARE = '/:publicKey';
+
+app.get(CONFIG, function(req, res) { 
+   return res.status(200).json({'ORCID_URL': config.ORCID_URL});
+});
 
 //Create smid oauth sign into ORCID
 app.get(CREATE_SMID_AUTHORIZE, function(req,res) {
