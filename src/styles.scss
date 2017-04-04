@@ -10,6 +10,7 @@ body {
 
 a {
     color: $link-font-color-default;
+    word-break: break-all;
 
     &:active,
     .active {
