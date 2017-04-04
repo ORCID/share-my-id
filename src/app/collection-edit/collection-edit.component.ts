@@ -49,11 +49,12 @@ export class CollectionEditComponent implements OnInit {
                 var collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
+                //console.log("collection_parsed", collection_parsed);
 
                 this.description = collection_parsed.form.description;
                 this.title = collection_parsed.form.title;
                 this.username = collection_parsed.owner.name;
-                this.uri = collection_parsed.owner.fullOrcidId;
+                this.uri = collection_parsed.owner.orcid;
             }
         );
     }    
@@ -66,10 +67,15 @@ export class CollectionEditComponent implements OnInit {
         this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
             (response) => { 
                 this.response = response;
-                this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
+                this.showErrorMessage = false;
+                this.showSuccessMessage = true; // <- Update to change the status on the ajax call result
             },
-            (err)=>console.log(err),
-            ()=>console.log("Submitted")
+            (err)=> {
+                console.log(err);
+                this.showErrorMessage = true;
+                this.showSuccessMessage = false;
+            },
+            ()=>{}
         );
     }
 }

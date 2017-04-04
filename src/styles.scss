@@ -10,6 +10,7 @@ body {
 
 a {
     color: $link-font-color-default;
+    word-break: break-all;
 
     &:active,
     .active {
@@ -29,6 +30,7 @@ p {
     color: $base-font-color;
 }
 
+//Overwrite for bootstrap4 styles
 .btn-primary {
     background-color: $button-bck-default;
     border: none;
@@ -48,4 +50,9 @@ p {
         background-color: $button-bck-hover;
         color: $button-font-color-hover;
     }
+}
+
+.link-style {
+    @extend a;
+    cursor: pointer;
 }

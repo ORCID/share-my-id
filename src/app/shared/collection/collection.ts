@@ -1,5 +1,6 @@
 export class Collection {
     
+    _id: string;
     details: {
         authenticated_orcids: [
             {  
@@ -10,18 +11,16 @@ export class Collection {
         ];
         created: string;
         form: {
-                title: string;
-                description: string;
-            };
+            title: string;
+            description: string;
+        };
         owner: {
-                orcid: string;
-                fullOrcidId: string;
-                name: string;
-            };
+            orcid: string;
+            fullOrcidId: string;
+            name: string;
+        };
     };
-    private_key: string;
     public_key: string;
-    _id: string;
-    
+    private_key: string;
 }
 

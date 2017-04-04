@@ -1,30 +1,30 @@
 import { Collection } from './collection';
 
 export const Collections: Collection[] = [
-  {
-  details: {
-        authenticated_orcids: [
-            {
-                orcid: "0000-0000-0000-0000",
-                fullOrcidId: "http://sandbox.orcid.org0000-0000-0000-0000",
-                name: "Test name",
-            }
-        ],
-        created: "Test date",
-        form: {
-                title: "Test title",
-                description: "Test description"
+    {
+        _id: "testCollectionId",
+        details: {
+            authenticated_orcids: [
+                {
+                    fullOrcidId: "http://sandbox.orcid.org0000-0000-0000-0000",
+                    name: "Test name",
+                    orcid: "0000-0000-0000-0000"
+                }
+            ],
+            created: "Test date",
+            form: {
+                description: "Test description",
+                title: "Test title"
             },
-        owner: {
-                orcid: "0000-0000-0000-0000",
+            owner: {
                 fullOrcidId: "http://sandbox.orcid.org0000-0000-0000-0000",
-                name: "Test owner"
+                name: "Test owner",
+                orcid: "0000-0000-0000-0000"
             },
-    },
-    private_key: "testPrivateKey",
-    public_key: "testPublicKey",
-    _id: "testCollectionId",
-  }
+        },
+        private_key: "testPrivateKey",
+        public_key: "testPublicKey",
+    }
 ];
 
 export const CollectionsEmpty: Collection[] = [

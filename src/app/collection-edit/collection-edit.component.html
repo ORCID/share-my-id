@@ -45,8 +45,8 @@
                         *ngIf="titleRef.errors && titleRef.dirty"
                         class="form-control-feedback" 
                     >
-                        <small  *ngIf="titleRef.errors?.required">This field is required</small >
-                        <small  *ngIf="titleRef.errors?.minlength">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >
+                        <small *ngIf="titleRef.errors?.required">This field is required</small >
+                        <small *ngIf="titleRef.errors?.minlength">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >
                     </div>
                 </div>
 
@@ -73,8 +73,8 @@
                         *ngIf="descriptionRef.errors && descriptionRef.dirty"
                         class="form-control-feedback" 
                     >
-                        <small  *ngIf="descriptionRef.errors?.required">This field is required</small >
-                        <small  *ngIf="descriptionRef.errors?.minlength">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >
+                        <small *ngIf="descriptionRef.errors?.required">This field is required</small >
+                        <small *ngIf="descriptionRef.errors?.minlength">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >
                     </div>
                 </div>
                 <div class="form-group">
