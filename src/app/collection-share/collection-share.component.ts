@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { Collection } from './../shared/collection/collection';
 
+import { Http } from '@angular/http';
+
+import { ConfigService } from './../shared/config/config.service';
+
 import { CollectionService } from './../shared/collection/collection.service';
 
 @Component({
@@ -18,6 +22,8 @@ export class CollectionShareComponent implements OnInit {
 
     constructor(
         private collectionService: CollectionService,
+        private http: Http,
+        private configService: ConfigService
     ) {
         this.publicKey = window.location.pathname;
     }
@@ -35,6 +41,12 @@ export class CollectionShareComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getCollections();
+        this.configService.getConfiguration().subscribe(data => {
+           alert(data['ORCID_URL']);
+        });
+        this.configService.getConfiguration().subscribe(data => {
+           alert(data['ORCID_URL']);
+        });
+
     }
 }

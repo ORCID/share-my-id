@@ -55,6 +55,7 @@ var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 
 //Endpoints
 var CREATE_SMID_AUTHORIZE = '/create-smid-authorize';
+var CONFIG = '/config';
 var CREATE_SMID_URI = '/create-smid-redirect';
 var COLLECTION_DETAILS = '/:publicKey/details';
 var COLLECTION_DETAILS_FORM = '/:publicKey/details/:publicKey/edit/:privateKey/details/form';
@@ -67,6 +68,10 @@ var COLLECTION_SHARE = '/:publicKey';
 app.get(CREATE_SMID_AUTHORIZE, function(req,res) {
   create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI);
   res.redirect(create_smid_authorization_uri);
+});
+
+app.get(CONFIG, function(req, res) { 
+   return res.status(200).json({'ORCID_URL': config.ORCID_URL});
 });
 
 //Create new id collection

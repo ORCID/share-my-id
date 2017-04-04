@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CollectionService } from './shared/collection/collection.service';
+import { ConfigService } from './shared/config/config.service';
 
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
 import { CollectionShareComponent } from './collection-share/collection-share.component';
@@ -32,7 +33,8 @@ import { PageHomeComponent } from './page-home/page-home.component';
         JsonpModule
     ],
     providers: [
-        CollectionService
+        CollectionService,
+        ConfigService
     ],
     bootstrap: [AppComponent]
 })
