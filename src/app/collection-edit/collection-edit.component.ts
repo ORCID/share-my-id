@@ -67,10 +67,15 @@ export class CollectionEditComponent implements OnInit {
         this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
             (response) => { 
                 this.response = response;
-                this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
+                this.showErrorMessage = false;
+                this.showSuccessMessage = true; // <- Update to change the status on the ajax call result
             },
-            (err)=>console.log(err),
-            ()=>console.log("Submitted")
+            (err)=> {
+                console.log(err);
+                this.showErrorMessage = true;
+                this.showSuccessMessage = false;
+            },
+            ()=>{}
         );
     }
 }
