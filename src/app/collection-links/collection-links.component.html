@@ -8,38 +8,35 @@
 <section class="row">
     <div class="col">
         <div
-            *ngIf="collections!=undefined && collections.length > 0" 
+            *ngIf="collections" 
             class="card"
         >
             <div 
-                *ngFor="let collection of collections"
                 class="card-block text-nowrap"
             >
-                <h2>{{collection.title}}</h2>
-                <p><i>Created by {{collection.createdByAuthor}} on {{collection.createdDate}}</i></p>
-                <p>{{collection.description}}</p>
+                <h2>{{collections.form.title}}</h2>
+                <p><i>Created by <a href="{{collections.owner.orcid}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created}}</i></p>
+                <p>{{collections.form.description}}</p>
 
                 <table 
-                    *ngIf="collection.orcidIDs.length > 0" 
+                    *ngIf="collections.authenticated_orcids.length > 0" 
                     class="table"
                 >
                     <thead class="thead-default">
                         <tr>
                             <th>#</th>
                             <th>First Name</th>
-                            <th>Last Name</th>
                             <th>ORCID iD</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let orcidId of collection.orcidIDs; let j = index"
+                            *ngFor="let authenticated_orcid of collections.authenticated_orcids; let j = index"
                             [attr.data-index]="j"
                         >
                             <th scope="row">{{j+1}}</th>
-                            <td>{{orcidId.firstName}}</td>
-                            <td>{{orcidId.lastName}}</td>
-                            <td><a href="{{orcidId.orcidId}}" target="_blank">{{orcidId.orcidId}}</a></td>
+                            <td>{{authenticated_orcid.name}}</td>
+                            <td><a href="{{authenticated_orcid.orcid}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -47,7 +44,7 @@
         </div>
     </div>
 </section>
-<div *ngIf="collections!=undefined && collections.length > 0" class="row">
+<div *ngIf="collections" class="row">
     <div class="col">
         <p>
             <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>

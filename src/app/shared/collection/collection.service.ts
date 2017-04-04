@@ -52,31 +52,18 @@ export class CollectionService {
     */
 
     //Currently add and edit
-    editCollection( data: any ): Observable<Collection[]> {
+    editCollection( data: any, publicKey, privateKey ): Observable<Collection[]> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-
-        this.authInfoService.getAuthInfo().subscribe( //update param to pass an actual argument 
-            authInfo => { 
-                this.authInfo = authInfo;
-            }
-        );
-
-        console.log("data", data);
-
         return this.http.put( 
-            this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form',
+            '/' + publicKey + '/details/' + publicKey + '/edit/' + privateKey + '/details/form',
             data,
             options
         ).map(( res:Response ) => res.json()).catch(this.handleError);
     }
 
-    getCollection(): Observable<Collection[]> {
-        //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
-        //return Collections[id];
-        //this.collectionPersistentObj = Collections;
-        //console.log(Collections, CollectionsEmpty);
-        //return Observable.of( new Collection() ).map( o => CollectionsEmpty );
-        return this.http.get( this.apiBaseUrl + '/' + this.authInfo.publicKey ).map(( res:Response ) => res.json()).catch(this.handleError);
+    getCollection(publicKey): Observable<Collection[]> {
+        return this.http.get( publicKey + '/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
+
     }
 }

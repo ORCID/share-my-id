@@ -9,22 +9,29 @@ import { CollectionService } from './../shared/collection/collection.service';
     templateUrl: './collection-links.component.html',
     styleUrls: ['./collection-links.component.scss']
 })
+
 export class CollectionLinksComponent implements OnInit {
+
     collections: Collection[];
 
-    constructor(private collectionService: CollectionService) { }
+    private publicKey: string;
 
-    authenticate(): void {
-        //this.authInfoService.loadAuthInfo();
-        window.location.href  = '/add-id-authorize/:publicKey';
+    constructor(
+        private collectionService: CollectionService,
+    ) {
+        this.publicKey = window.location.pathname;
     }
 
+    authenticate(): void {
+            window.location.href  = '/add-id-authorize' + this.publicKey;
+      }
+
     getCollections(): void {
-        this.collectionService.getCollection().subscribe( //update param to pass an actual argument 
-            collections => { 
-                this.collections = collections;
-            }
-        );
+        this.collectionService.getCollection(this.publicKey).subscribe( 
+            collections => {
+            this.collections = collections;
+            console.log(this.collections);
+        });
     }
 
     ngOnInit() {

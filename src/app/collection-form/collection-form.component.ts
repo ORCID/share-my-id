@@ -24,6 +24,7 @@ export class CollectionFormComponent implements OnInit {
     showErrorMessage: boolean;
     showSuccessMessage: boolean;
     title: string;
+    private path: string[];
     private publicKey: string;
     private privateKey: string;
     private response: any;
@@ -31,14 +32,13 @@ export class CollectionFormComponent implements OnInit {
     constructor(
         private collectionService: CollectionService,
         private authInfoService: AuthInfoService,
-        private route: ActivatedRoute,
-        private router: Router
     ) 
     {
         this.showErrorMessage = false;
         this.showSuccessMessage = false;
-        this.publicKey = route.url['_value'][0]['path'];
-        this.privateKey = route.url['_value'][2]['path'];
+        this.path = window.location.pathname.split("/");
+        this.publicKey = this.path[1];
+        this.privateKey = this.path[3];
     }
 
     ngOnInit() {
@@ -51,10 +51,9 @@ export class CollectionFormComponent implements OnInit {
     }
 
     submitForm( form: any ): void {
-        console.log("form", form);
         this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
 
-        this.collectionService.editCollection( form ).subscribe(
+        this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
             (response) => { 
                 this.response = response;
                 console.log(this.response, response);
