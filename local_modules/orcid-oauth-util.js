@@ -23,7 +23,7 @@ OcridOAuthUtil.prototype.getAuthUrl = function(redirect_uri, state) {
 }
 
 OcridOAuthUtil.prototype.fullOrcid = function(orcidId) {
-  return this.ORCID_URL.replace('https://','http://') + orcidId;
+  return this.ORCID_URL.replace('https://','http://') + '/' + orcidId;
 }
 
 
