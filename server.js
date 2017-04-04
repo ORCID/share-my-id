@@ -22,8 +22,7 @@ var smidManger = new SmidManger('smid_user:devpassword@127.0.0.1:27017/smid',['s
 var ooau = new OcridOAuthUtil(
   config.CLIENT_ID, 
   config.CLIENT_SECRET, 
-  config.ORCID_URL + '/oauth/authorize',
-  config.ORCID_URL + '/oauth/token' );
+  config.ORCID_URL);
 
 /*
 // quick and dirty test
@@ -107,8 +106,9 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         var date = new Date();
         //Log ORCID info to file
         orcidLogger.log(date, token.name, token.orcid, req.query.state);
-        console.log("creating smid for" + token.orcid);
-        smidManger.createSmid(token.orcid,token.name, function(err, doc) {
+        console.log("creating smid for " + token.orcid);
+        var orcidRecord = smidManger.createOrcidRecord(token.orcid,ooau.fullOrcid(token.orcid),token.name);
+        smidManger.createSmid(orcidRecord, function(err, doc) {
           if (err) res.send(err) 
           else {
             var collection = JSON.parse(JSON.stringify(doc, null, 2));
@@ -119,7 +119,7 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         }); 
       }
     };
-    ooau.exchangeCode(req.query.code,exchangingCallback);
+    ooau.exchangeCode(req.query.code, exchangingCallback);
   }
 
 });
@@ -171,7 +171,8 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         req.session.orcid_id = token.orcid;
         //state maps to smid public key
         console.log("Got user id: " + token.orcid);
-        smidManger.addOrcidName(req.query.state, {orcid: token.orcid, name: token.name}, function(err,doc) {
+        var orcidRecord = smidManger.createOrcidRecord(token.orcid,ooau.fullOrcid(token.orcid),token.name);
+        smidManger.addOrcidRecord(orcidRecord, req.query.state, function(err,doc) {
           if (err) res.send(err) 
           else {
             res.redirect('/' + req.query.state);

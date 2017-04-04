@@ -1,11 +1,12 @@
 var querystring = require("querystring"),
 request = require('request');
 
-var OcridOAuthUtil = function (CLIENT_ID, CLIENT_SECRET, AUTHORIZATION_ENDPOINT_URL, TOKEN_ENDPOINT_URL) {
+var OcridOAuthUtil = function (CLIENT_ID, CLIENT_SECRET, ORCID_URL) {
   this.CLIENT_SECRET = CLIENT_SECRET;
   this.CLIENT_ID = CLIENT_ID;
-  this.TOKEN_ENDPOINT_URL = TOKEN_ENDPOINT_URL;
-  this.AUTHORIZATION_ENDPOINT_URL = AUTHORIZATION_ENDPOINT_URL;
+  this.ORCID_URL = ORCID_URL;
+  this.TOKEN_ENDPOINT_URL = ORCID_URL + '/oauth/token';
+  this.AUTHORIZATION_ENDPOINT_URL = ORCID_URL + '/oauth/authorize';
 };
 
 // generates a link to orcid for authorization
@@ -21,7 +22,12 @@ OcridOAuthUtil.prototype.getAuthUrl = function(redirect_uri, state) {
     });
 }
 
-OcridOAuthUtil.prototype.exchangeCode = function(code,callback) {
+OcridOAuthUtil.prototype.fullOrcid = function(orcidId) {
+  return this.ORCID_URL.replace('https://','http://') + orcidId;
+}
+
+
+OcridOAuthUtil.prototype.exchangeCode = function(code, callback) {
       // config for exchanging code for token 
     var reqConfig = {
       url: this.TOKEN_ENDPOINT_URL,
