@@ -1,8 +1,8 @@
 var mongojs = require('mongojs'),
 randomstring = require("randomstring");
 
-var SmidManger = function (connectionStr, collectionsArr) {
-    this._db = mongojs(connectionStr, collectionsArr);
+var SmidManger = function (connectionStr) {
+    this._db = mongojs(connectionStr);
     this._smidCol = this._db.collection('smids');
     console.log("listing all docs")
 //    this._smidCol.find(function (err, docs) {

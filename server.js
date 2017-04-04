@@ -8,17 +8,7 @@ var
   SmidManger = require('./local_modules/smid-manager.js').SmidManger,
   OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
 
-/*
-   for development goto mongo console
-    use smid;
-    db.createUser({
-      user: "smid_user",
-      pwd: "devpassword",
-          roles: ["readWrite"]
-    });
-*/
-
-var smidManger = new SmidManger('smid_user:devpassword@127.0.0.1:27017/smid',['smids']);
+var smidManger = new SmidManger(config.MONGO_CONNECTION_STRING);
 var ooau = new OcridOAuthUtil(
   config.CLIENT_ID, 
   config.CLIENT_SECRET, 
