@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CreateCollectionComponent } from './create-collection/create-collection.component';
+import { CollectionFormComponent } from './collection-form/collection-form.component';
 import { PageAddMyIdComponent } from './page-add-my-id/page-add-my-id.component';
 import { PageHomeComponent } from './page-home/page-home.component';
 
@@ -15,7 +15,7 @@ const routes: Routes = [
         path: ':publicKey'
     },
     {
-        component: CreateCollectionComponent,
+        component: CollectionFormComponent,
         path: ':publicKey/edit/:privateKey'
     },
     {

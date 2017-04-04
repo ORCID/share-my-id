@@ -45,7 +45,6 @@ export class CollectionFormComponent implements OnInit {
                 var collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
-                console.log("collection_parsed", collection_parsed);
                 this.title = collection_parsed.form.title;
                 this.description = collection_parsed.form.description;
             }
@@ -60,7 +59,6 @@ export class CollectionFormComponent implements OnInit {
         this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
             (response) => { 
                 this.response = response;
-                console.log(this.response, response);
                 this.showSuccessMessage = true; // <- Update to change the status on the ajax call result 
             },
             (err)=>console.log(err),
