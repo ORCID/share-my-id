@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CollectionService } from './shared/collection/collection.service';
 
-import { CollectionFormComponent } from './collection-form/collection-form.component';
+import { CollectionEditComponent } from './collection-edit/collection-edit.component';
 import { CollectionLinksComponent } from './collection-links/collection-links.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -18,7 +18,7 @@ import { PageHomeComponent } from './page-home/page-home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CollectionFormComponent,
+    CollectionEditComponent,
     CollectionLinksComponent,
     FooterComponent,
     HeaderComponent,
