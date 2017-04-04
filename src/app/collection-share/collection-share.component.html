@@ -26,28 +26,30 @@
                     <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
                     <p>{{collections.form.description}}</p>
 
-                    <table 
-                        *ngIf="collections.authenticated_orcids.length > 0" 
-                        class="table"
-                    >
-                        <thead class="thead-default">
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>ORCID iD</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="let authenticated_orcid of collections.authenticated_orcids; let j = index"
-                                [attr.data-index]="j"
-                            >
-                                <th scope="row">{{j+1}}</th>
-                                <td>{{authenticated_orcid.name}}</td>
-                                <td><a href="{{authenticated_orcid.fullOrcidId}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table 
+                            *ngIf="collections.authenticated_orcids.length > 0" 
+                            class="table"
+                        >
+                            <thead class="thead-default">
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>ORCID iD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let authenticated_orcid of collections.authenticated_orcids; let j = index"
+                                    [attr.data-index]="j"
+                                >
+                                    <th scope="row">{{j+1}}</th>
+                                    <td>{{authenticated_orcid.name}}</td>
+                                    <td><a href="{{authenticated_orcid.fullOrcidId}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
