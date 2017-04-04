@@ -4,21 +4,10 @@ var
   config = require('./local_modules/config'),
   express = require('express'),
   fs = require('fs'),
-  session = require('express-session'),
   SmidManger = require('./local_modules/smid-manager.js').SmidManger,
   OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
 
-/*
-   for development goto mongo console
-    use smid;
-    db.createUser({
-      user: "smid_user",
-      pwd: "devpassword",
-          roles: ["readWrite"]
-    });
-*/
-
-var smidManger = new SmidManger('smid_user:devpassword@127.0.0.1:27017/smid',['smids']);
+var smidManger = new SmidManger(config.MONGO_CONNECTION_STRING);
 var ooau = new OcridOAuthUtil(
   config.CLIENT_ID, 
   config.CLIENT_SECRET, 
@@ -51,15 +40,6 @@ var index_file =  distDir + "index.html"
 app.use(express.static(distDir));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(session({  
-    secret: "notagoodsecretnoreallydontusethisone",  
-    resave: false,
-    saveUninitialized: true,
-    cookie: { 
-      httpOnly: true, 
-      secure: (config.FORCE_SSL === 'true')
-    },
-}));
 app.set('json spaces', 2);
 app.set('json replacer', null);
 
@@ -168,7 +148,6 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         var date = new Date();
         //Log ORCID info to file
         orcidLogger.log(date, token.name, token.orcid, req.query.state);
-        req.session.orcid_id = token.orcid;
         //state maps to smid public key
         console.log("Got user id: " + token.orcid);
         var orcidRecord = smidManger.createOrcidRecord(token.orcid,ooau.fullOrcid(token.orcid),token.name);
@@ -185,9 +164,5 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
 });
 
 app.get([COLLECTION_EDIT, COLLECTION_SHARE,'/'], function(req, res) { // Index page 
-  // reset any session on reload of '/'
-  req.session.regenerate(function(err) {
-      // nothing to do
-  });
   res.status(200).sendFile(index_file);
 });

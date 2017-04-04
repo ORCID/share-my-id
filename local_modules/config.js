@@ -4,7 +4,17 @@ module.exports = config = {
   CLIENT_SECRET: '35d8f715-9121-440c-ad34-b66cb8c4e884',
   ORCID_URL: 'https://sandbox.orcid.org',
   PORT_HTTP: '8080', // Optionally override the default http port.
-  HOST: 'http://localhost:8080'
+  HOST: 'http://localhost:8080',
+  /*
+	for development setup goto mongo console
+	  use smid;
+	  db.createUser({
+	    user: "smid_user",
+	    pwd: "devpassword",
+	    roles: ["readWrite"]
+	});
+  */
+  MONGO_CONNECTION_STRING: 'smid_user:devpassword@127.0.0.1:27017/smid'
 }
 
 // Environment variables overrides
