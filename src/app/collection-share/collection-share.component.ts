@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+
 import { Collection } from './../shared/collection/collection';
 
 import { CollectionService } from './../shared/collection/collection.service';
@@ -15,14 +17,22 @@ export class CollectionShareComponent implements OnInit {
     collections: Collection[];
 
     private publicKey: string;
+    private logUserOut: string[];
 
     constructor(
         private collectionService: CollectionService,
+        private http: Http,
     ) {
         this.publicKey = window.location.pathname;
     }
 
     authenticate(): void {
+        this.collectionService.logUserOut().subscribe(
+            response => {
+                this.logUserOut = response;
+            }
+        );
+        
         window.location.href  = '/add-id-authorize' + this.publicKey;
     }
 
