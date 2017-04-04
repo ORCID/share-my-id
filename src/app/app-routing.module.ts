@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CollectionFormComponent } from './collection-form/collection-form.component';
-import { PageAddMyIdComponent } from './page-add-my-id/page-add-my-id.component';
+import { CollectionLinksComponent } from './collection-links/collection-links.component';
 import { PageHomeComponent } from './page-home/page-home.component';
 
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
         path: '' // update to 'create-smid-authorize'
     },
     {
-        component: PageAddMyIdComponent,
+        component: CollectionLinksComponent,
         path: ':publicKey'
     },
     {
@@ -27,7 +27,7 @@ const routes: Routes = [
 @NgModule(
     {
         imports: [
-            RouterModule.forRoot(routes, { useHash: false }) //http://stackoverflow.com/questions/31415052/angular-2-0-router-not-working-on-reloading-the-browser posible fix to remove the hash #
+            RouterModule.forRoot(routes, { useHash: false })
         ],
         exports: [
             RouterModule

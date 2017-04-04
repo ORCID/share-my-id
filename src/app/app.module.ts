@@ -12,7 +12,6 @@ import { CollectionFormComponent } from './collection-form/collection-form.compo
 import { CollectionLinksComponent } from './collection-links/collection-links.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { PageAddMyIdComponent } from './page-add-my-id/page-add-my-id.component';
 import { PageHomeComponent } from './page-home/page-home.component';
 
 
@@ -23,8 +22,7 @@ import { PageHomeComponent } from './page-home/page-home.component';
     CollectionLinksComponent,
     FooterComponent,
     HeaderComponent,
-    PageHomeComponent,
-    PageAddMyIdComponent
+    PageHomeComponent
   ],
   imports: [
     AppRoutingModule,
