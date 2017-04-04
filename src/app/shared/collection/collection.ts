@@ -1,5 +1,5 @@
 export class Collection {
-    {
+    
     details: {
         authenticated_orcids: [
             {
@@ -20,6 +20,6 @@ export class Collection {
     private_key: string;
     public_key: string;
     _id: string;
-    }
+    
 }
 
