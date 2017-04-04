@@ -5,8 +5,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
-import { AuthInfoService } from './../shared/auth-info/auth-info.service';
-
 
 import { Collection } from './../shared/collection/collection';
 import { CollectionService } from './../shared/collection/collection.service';
@@ -18,7 +16,7 @@ import { CollectionService } from './../shared/collection/collection.service';
 })
 
 export class CollectionFormComponent implements OnInit {
-    collection: Collection;
+    collections: Collection[];
     description: string;
     ngForm: any;
     showErrorMessage: boolean;
@@ -32,7 +30,6 @@ export class CollectionFormComponent implements OnInit {
 
     constructor(
         private collectionService: CollectionService,
-        private authInfoService: AuthInfoService,
     ) 
     {
         this.showErrorMessage = false;
@@ -43,7 +40,18 @@ export class CollectionFormComponent implements OnInit {
         this._windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
     }
 
+    getCollections(): void {
+        this.collectionService.getCollection(this.publicKey).subscribe( 
+            collections => {
+            this.collections = collections;
+            var collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
+            this.title = collection_parsed.form.title;
+            this.description = collection_parsed.form.description;
+        });
+    }    
+
     ngOnInit() {
+        this.getCollections();
     }
 
     resetForm(): void {

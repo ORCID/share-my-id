@@ -1,15 +1,25 @@
 export class Collection {
-    createdByAuthor: string;
-    createdByUrl: string;
-    createdDate: string;
-    description: string;
-    id: string;
-    orcidIDs: [
-        {
-            firstName: string;
-            lastName: string;
-            orcidId: string;
-        }
-    ];
-    title: string;
+    {
+    details: {
+        authenticated_orcids: [
+            {
+                name: string;
+                orcid: string;
+            }
+        ];
+        created: string;
+        form: {
+                title: string;
+                description: string;
+            };
+        owner: {
+                orcid: string;
+                name: string;
+            };
+    };
+    private_key: string;
+    public_key: string;
+    _id: string;
+    }
 }
+
