@@ -169,13 +169,8 @@ var CollectionService = (function () {
         console.log("data", data);
         return this.http.put(this.apiBaseUrl + '/' + this.authInfo.publicKey + '/details/' + this.authInfo.publicKey + '/edit/' + this.authInfo.privateKey + '/details/form', data, options).map(function (res) { return res.json(); }).catch(this.handleError);
     };
-    CollectionService.prototype.getCollection = function () {
-        //return this.http.get( this.apiBaseUrl + '/publicKey/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
-        //return Collections[id];
-        //this.collectionPersistentObj = Collections;
-        //console.log(Collections, CollectionsEmpty);
-        //return Observable.of( new Collection() ).map( o => CollectionsEmpty );
-        return this.http.get(this.apiBaseUrl + '/' + this.authInfo.publicKey).map(function (res) { return res.json(); }).catch(this.handleError);
+    CollectionService.prototype.getCollection = function (publicKey) {
+        return this.http.get(publicKey + '/details').map(function (res) { return res.json(); }).catch(this.handleError);
     };
     CollectionService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
@@ -625,7 +620,6 @@ var CollectionFormComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(97);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CollectionLinksComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -638,26 +632,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var CollectionLinksComponent = (function () {
-    //private privateKey: string;
-    function CollectionLinksComponent(collectionService, route, router) {
+    function CollectionLinksComponent(collectionService) {
         this.collectionService = collectionService;
-        this.route = route;
-        this.router = router;
-        this.publicKey = route.url['_value'][0]['path'];
-        //this.privateKey = route.url['_value'][2]['path'];
+        this.publicKey = window.location.pathname;
     }
     CollectionLinksComponent.prototype.authenticate = function () {
-        //this.authInfoService.loadAuthInfo();
-        window.location.href = '/add-id-authorize/' + this.publicKey;
+        window.location.href = '/add-id-authorize' + this.publicKey;
     };
     CollectionLinksComponent.prototype.getCollections = function () {
         var _this = this;
-        this.collectionService.getCollection().subscribe(//update param to pass an actual argument 
-        function (//update param to pass an actual argument 
-            collections) {
+        this.collectionService.getCollection(this.publicKey).subscribe(function (collections) {
             _this.collections = collections;
+            console.log(_this.collections);
         });
     };
     CollectionLinksComponent.prototype.ngOnInit = function () {
@@ -669,10 +656,10 @@ var CollectionLinksComponent = (function () {
             template: __webpack_require__(575),
             styles: [__webpack_require__(565)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__shared_collection_collection_service__["a" /* CollectionService */]) === 'function' && _a) || Object])
     ], CollectionLinksComponent);
     return CollectionLinksComponent;
-    var _a, _b, _c;
+    var _a;
 }());
 //# sourceMappingURL=collection-links.component.js.map
 
