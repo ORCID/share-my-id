@@ -18,20 +18,24 @@
 
     <div class="row">
         <div class="col">
-            <form #formRef="ngForm" (ngSubmit)="submitForm(formRef.value)" novalidate>
+            <form 
+                #formRef="ngForm" 
+                (ngSubmit)="submitForm(formRef.value)" 
+                novalidate
+            >
                 <fieldset>
                     <legend class="font-weight-bold text-center">ID Collection Details</legend>
 
                     <div 
                         class="form-group" 
-                        [class.has-success]="titleRef.valid"
-                        [class.has-danger]="titleRef.valid==false && titleRef.dirty"
+                        [class.has-success]="titleRef.valid && formSubmitted"
+                        [class.has-danger]="titleRef.valid==false && titleRef.dirty && formSubmitted"
                     >
                         <label class="form-control-label font-weight-bold" for="title">Title</label>
                         <input 
                             [(ngModel)]="title"
-                            [class.form-control-success]="titleRef.valid"
-                            [class.form-control-danger]="titleRef.valid==false && titleRef.dirty"
+                            [class.form-control-success]="titleRef.valid && formSubmitted"
+                            [class.form-control-danger]="titleRef.valid==false && titleRef.dirty && formSubmitted"
                             #titleRef="ngModel" 
                             autocomplete="off"
                             class="form-control" 
@@ -43,7 +47,7 @@
                             required
                         >
                         <div 
-                            *ngIf="titleRef.errors && titleRef.dirty"
+                            *ngIf="titleRef.errors && titleRef.dirty && formSubmitted"
                             class="form-control-feedback" 
                         >
                             <small *ngIf="titleRef.errors?.required">This field is required</small >
@@ -53,14 +57,14 @@
 
                     <div 
                         class="form-group" 
-                        [class.has-success]="descriptionRef.valid"
-                        [class.has-danger]="descriptionRef.valid==false && descriptionRef.dirty"
+                        [class.has-success]="descriptionRef.valid && formSubmitted"
+                        [class.has-danger]="descriptionRef.valid==false && descriptionRef.dirty && formSubmitted"
                     >
                         <label class="form-control-label font-weight-bold" for="description">Description</label>
                         <textarea
                             [(ngModel)]="description"
-                            [class.form-control-success]="descriptionRef.valid"
-                            [class.form-control-danger]="descriptionRef.valid==false && descriptionRef.dirty"
+                            [class.form-control-success]="descriptionRef.valid && formSubmitted"
+                            [class.form-control-danger]="descriptionRef.valid==false && descriptionRef.dirty && formSubmitted"
                             #descriptionRef="ngModel" 
                             class="form-control" 
                             id="description" 
@@ -71,7 +75,7 @@
                             rows="5"
                         ></textarea> 
                         <div 
-                            *ngIf="descriptionRef.errors && descriptionRef.dirty"
+                            *ngIf="descriptionRef.errors && descriptionRef.dirty && formSubmitted"
                             class="form-control-feedback" 
                         >
                             <small *ngIf="descriptionRef.errors?.required">This field is required</small >

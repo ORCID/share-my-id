@@ -22,6 +22,7 @@ export class CollectionEditComponent implements OnInit {
 
     collections: Collection[];
     description: string;
+    formSubmitted: boolean;
     ngForm: any;
     showErrorMessage: boolean;
     showSuccessMessage: boolean;
@@ -34,6 +35,7 @@ export class CollectionEditComponent implements OnInit {
     ) 
     {
         this.description = "";
+        this.formSubmitted = false;
         this.path = window.location.pathname.split("/");
         this.publicKey = this.path[1];
         this.privateKey = this.path[3];
@@ -64,8 +66,9 @@ export class CollectionEditComponent implements OnInit {
     }
 
     submitForm( form: any ): void {
+        this.formSubmitted = true; 
         this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
-            (response) => { 
+            (response) => {
                 this.response = response;
                 this.showErrorMessage = false;
                 this.showSuccessMessage = true; // <- Update to change the status on the ajax call result
