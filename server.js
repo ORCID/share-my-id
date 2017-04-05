@@ -166,8 +166,8 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
         smidManger.addOrcidRecord(orcidRecord, req.query.state, function(err,doc) {
           if (err) res.send(err) 
           else {
-            res.redirect('/' + req.query.state);
-            res.redirect(ADD_ID_SUCCESS + '?state=' + state); 
+            //res.redirect('/' + req.query.state);
+            res.redirect(ADD_ID_SUCCESS + '?state=' + state + '&name=' + token.name + '&orcid=' + token.orcid); 
           } 
         });
       }
