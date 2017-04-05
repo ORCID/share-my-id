@@ -37,6 +37,7 @@ var app = express();
 var path = require('path');
 var distDir = __dirname + "/dist/";
 var index_file =  distDir + "index.html"
+var PAGE_404 =  distDir + "assets/404.html"
 app.use(express.static(distDir));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -63,7 +64,7 @@ var COLLECTION_DETAILS_DOWNLOAD = '/:publicKey/details/download';
 var COLLECTION_DETAILS_FORM = '/:publicKey/details/:publicKey/edit/:privateKey/details/form';
 var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
 var ADD_ID_REDIRECT = '/add-id-redirect';
-var ADD_ID_SUCCESS = '/add-id-success';
+var ADD_ID_SUCCESS = '/:publicKey/orcid/:orcid';
 var ADD_ID_ERROR = '/add-id-error';
 var COLLECTION_EDIT = '/:publicKey/edit/:privateKey';
 var COLLECTION_SHARE = '/:publicKey';
@@ -195,7 +196,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
           if (err) res.send(err) 
           else {
             //res.redirect('/' + req.query.state);
-            res.redirect(ADD_ID_SUCCESS + '?state=' + state + '&name=' + token.name + '&orcid=' + token.orcid); 
+            res.redirect( /* make ADD_ID_SUCCESS url */'/' + state + '/orcid/' + token.orcid); 
           } 
         });
       }
@@ -209,7 +210,7 @@ app.get([COLLECTION_EDIT], function(req, res) { // Index page
     if (bool == true)
       res.status(200).sendFile(index_file);
     else
-      res.sendFile("/404.html");
+      res.sendFile(PAGE_404);
   });
 });
 
@@ -218,7 +219,7 @@ app.get([COLLECTION_SHARE, ADD_ID_SUCCESS], function(req, res) { // Index page
     if (bool == true)
       res.status(200).sendFile(index_file);
     else
-      res.sendFile("/404.html");
+      res.sendFile(PAGE_404);
   });
 });
 

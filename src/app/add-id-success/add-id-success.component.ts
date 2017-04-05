@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -13,32 +15,17 @@ import { CollectionService } from './../shared/collection/collection.service';
 })
 export class AddIdSuccessComponent implements OnInit {
     
-    userOrcidId: string;
-    publicKey: string;
-    userName: string;
+    private publicKey: string;
+    private response: any;
+    private sub: any;
+    private userOrcidId: string;
 
     collections: Collection[];
 
     constructor(
+        private route: ActivatedRoute,
         private collectionService: CollectionService
     ) {
-        this.userOrcidId = this.getParameterByName('orcid'); 
-        this.publicKey = this.getParameterByName('state'); //name orcid
-        this.userName = this.getParameterByName('name');
-    }
-
-    private getParameterByName(name:string): string {
-        var url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) {
-            return null;
-        }
-        if (!results[2]) {
-            return '';
-        } 
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
     getCollections(): void {
@@ -50,7 +37,15 @@ export class AddIdSuccessComponent implements OnInit {
     }    
 
     ngOnInit() {
-        this.getCollections();
+        this.sub = this.route.params.subscribe(params => {
+            this.publicKey = params['publicKey'];
+            this.userOrcidId = params['orcid'];
+            this.getCollections();
+        });
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
 }
