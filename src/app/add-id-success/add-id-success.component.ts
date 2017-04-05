@@ -43,13 +43,10 @@ export class AddIdSuccessComponent implements OnInit {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.publicKey = params['publicKey']; 
-            this.orcid = params['orcid']; 
+            this.publicKey = params['publicKey'];
+            this.orcid = params['orcid'];
             this.getCollections();
-    
         });
-
-    
     }
 
     ngOnDestroy() {
