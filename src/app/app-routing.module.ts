@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AddIdErrorComponent } from './add-id-error/add-id-error.component';
+import { AddIdSuccessComponent } from './add-id-success/add-id-success.component';
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
 import { CollectionShareComponent } from './collection-share/collection-share.component';
 import { PageHomeComponent } from './page-home/page-home.component';
@@ -11,8 +13,17 @@ const routes: Routes = [
         path: ''
     },
     {
+        component: AddIdErrorComponent,
+        path: 'add-id-error'
+    },
+    {
+        component: AddIdSuccessComponent,
+        path: 'add-id-success'
+    },
+    //Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will redirect to them instead of the expected url.
+    {
         component: CollectionShareComponent,
-        path: ':publicKey'
+        path: ':publicKey' 
     },
     {
         component: CollectionEditComponent,

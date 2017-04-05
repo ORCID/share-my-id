@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CollectionService } from './shared/collection/collection.service';
 import { ConfigService } from './shared/config/config.service';
 
+import { AddIdErrorComponent } from './add-id-error/add-id-error.component';
+import { AddIdSuccessComponent } from './add-id-success/add-id-success.component';
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
 import { CollectionShareComponent } from './collection-share/collection-share.component';
 import { FooterComponent } from './footer/footer.component';
@@ -18,6 +20,8 @@ import { PageHomeComponent } from './page-home/page-home.component';
 
 @NgModule({
     declarations: [
+        AddIdSuccessComponent,
+        AddIdErrorComponent,
         AppComponent,
         CollectionEditComponent,
         CollectionShareComponent,
