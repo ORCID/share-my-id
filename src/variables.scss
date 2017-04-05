@@ -2,12 +2,11 @@
 /****************************************************
 //Base colors
 ****************************************************/
-$abbey: #494A4C;
-$atlantis1: #A6CE39;
-$atlantis2:#9FC836;
-$astral: #31789B;
-$bostonblue: #338CAF;
-$oslogray: #939598;
+$orcidblue: #338CAF;
+$orcidgraydk: #494A4C;
+$orcidgraymd: #939598;
+$orcidgraylt: #C9CACB;
+$orcidgreen: #A6CE39;
 $white: #FFF;
 
 
@@ -28,22 +27,22 @@ $font-size-huge: 24px;
 /****************************************************
 //Themes colors
 ****************************************************/
-$bck-default: $oslogray;
+$bck-default: $orcidgraymd;
 
-$base-font-color: $abbey;
-$title-h1-font-color: $astral;
+$base-font-color: $orcidgraydk;
+$title-h1-font-color: $orcidblue;
 
-$input-border-color: $oslogray;
+$input-border-color: $orcidgraymd;
 $input-border-width: 1px;
 
-$button-bck-active: $atlantis1;
-$button-bck-default: $astral;
-$button-bck-hover: $atlantis1;
+$button-bck-active: $orcidgreen;
+$button-bck-default: $orcidblue;
+$button-bck-hover: $orcidgreen;
 $button-font-color-active: $white;
 $button-font-color-default: $white;
 $button-font-color-focus: $white;
 $button-font-color-hover: $white;
 
-$link-font-color-active: $atlantis2;
-$link-font-color-default: $bostonblue;
-$link-font-color-hover: $atlantis2;
+$link-font-color-active: $orcidgreen;
+$link-font-color-default: $orcidblue;
+$link-font-color-hover: $orcidgreen;
