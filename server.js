@@ -38,6 +38,7 @@ var path = require('path');
 var distDir = __dirname + "/dist/";
 var index_file =  distDir + "index.html"
 var PAGE_404 =  distDir + "assets/404.html"
+var PAGE_500 =  distDir + "assets/500.html"
 app.use(express.static(distDir));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -108,13 +109,15 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
     // User denied access
     console.log("error: " + req.query.error);
     res.json(req.query); 
+  } else if (req.query.code === undefined) { 
+    res.json(req.query);
   } else {
     // exchange code
     // function to render page after making request
-    var exchangingCallback = function(error, response, body) {
-      if (error == null) { // No errors! we have a token :-)
-        var token = JSON.parse(body);
-        console.log(token);
+    var exchangingCallback = function(err, token) {
+      if (err != null)
+        res.sendFile(PAGE_500); 
+      else { // No errors! we have a token :-)
         var date = new Date();
         //Log ORCID info to file
         orcidLogger.log(date, token.name, token.orcid, req.query.state);
@@ -190,10 +193,10 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   } else {
     // exchange code
     // function to render page after making request
-    var exchangingCallback = function(error, response, body) {
-      if (error == null) { // No errors! we have a token :-)
-        var token = JSON.parse(body);
-        console.log(token);
+    var exchangingCallback = function(error, token) {
+      if (error != null)
+        res.sendFile(PAGE_500);
+      else { // No errors! we have a token :-)
         var date = new Date();
         //Log ORCID info to file
         orcidLogger.log(date, token.name, token.orcid, req.query.state);
