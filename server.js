@@ -204,6 +204,24 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   }
 });
 
-app.get([COLLECTION_EDIT, COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR,'/'], function(req, res) { // Index page 
+app.get([COLLECTION_EDIT], function(req, res) { // Index page
+  smidManger.smidExist(req.params.publicKey, req.params.privateKey, function(err, bool) {
+    if (bool == true)
+      res.status(200).sendFile(index_file);
+    else
+      res.sendFile("/404.html");
+  });
+});
+
+app.get([COLLECTION_SHARE, ADD_ID_SUCCESS], function(req, res) { // Index page
+  smidManger.detailsExist(req.params.publicKey, function(err, bool) {
+    if (bool == true)
+      res.status(200).sendFile(index_file);
+    else
+      res.sendFile("/404.html");
+  });
+});
+
+app.get('/', function(req, res) { // Index page
   res.status(200).sendFile(index_file);
 });
