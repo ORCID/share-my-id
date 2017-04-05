@@ -1,4 +1,9 @@
+import { ActivatedRoute } from '@angular/router';
+
 import { Component, OnInit } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-add-id-error',
@@ -8,11 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class AddIdErrorComponent implements OnInit {
     publicKey: string;
 
-    collections: Collection[];
-
-    constructor(
-        private collectionService: CollectionService
-    ) {
+    constructor() {
         this.publicKey = this.getParameterByName('state'); //name orcid
     }
 
@@ -30,16 +31,7 @@ export class AddIdErrorComponent implements OnInit {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    getCollections(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe( 
-            collections => {
-                this.collections = collections;
-            }
-        );
-    }    
-
     ngOnInit() {
-        this.getCollections();
     }
 
 }
