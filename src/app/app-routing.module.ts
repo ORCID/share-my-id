@@ -16,11 +16,11 @@ const routes: Routes = [
         component: AddIdErrorComponent,
         path: ':publicKey/add-id-error'
     },
+    //Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will redirect to them instead of the expected url.
     {
         component: AddIdSuccessComponent,
         path: ':publicKey/orcid/:orcid'
     },
-    //Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will redirect to them instead of the expected url.
     {
         component: CollectionShareComponent,
         path: ':publicKey' 

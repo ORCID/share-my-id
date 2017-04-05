@@ -3,11 +3,9 @@
     class="row"
 >
     <div class="col text-center">
-        <h1 class="mb-5">Thanks, 
-        <br />
-        {{collections.owner.name}}</h1>
+        <h1 class="mb-5">Thanks!</h1>
         <p class="mb-5">We've added your ORCID iD
-        <br /><a class="font-weight-bold" href="{{collections.owner.fullOrcidId}}" target="{{publicKey}}">{{collections.owner.orcid}}</a>
+        <br /><span class="font-weight-bold">{{userOrcidId}}</span>
         <br />to {{collections.form.title}}</p>
         <p>
             <a routerLink="/{{publicKey}}" class="btn btn-primary">Close</a>
