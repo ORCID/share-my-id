@@ -14,7 +14,7 @@ const routes: Routes = [
     },
     {
         component: AddIdErrorComponent,
-        path: 'add-id-error'
+        path: ':publicKey/add-id-error'
     },
     {
         component: AddIdSuccessComponent,

@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-id-error.component.scss']
 })
 export class AddIdErrorComponent implements OnInit {
+  private sub: any;
+  private publicKey: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    	this.sub = this.route.params.subscribe(params => {
+            this.publicKey = params['publicKey'];
+        });  	
   }
 
 }
