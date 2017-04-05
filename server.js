@@ -59,6 +59,7 @@ var CREATE_SMID_AUTHORIZE = '/create-smid-authorize';
 var CONFIG = '/config';
 var CREATE_SMID_URI = '/create-smid-redirect';
 var COLLECTION_DETAILS = '/:publicKey/details';
+var COLLECTION_DETAILS_DOWNLOAD = '/:publicKey/details/download';
 var COLLECTION_DETAILS_FORM = '/:publicKey/details/:publicKey/edit/:privateKey/details/form';
 var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
 var ADD_ID_REDIRECT = '/add-id-redirect';
@@ -66,6 +67,23 @@ var ADD_ID_SUCCESS = '/add-id-success';
 var ADD_ID_ERROR = '/add-id-error';
 var COLLECTION_EDIT = '/:publicKey/edit/:privateKey';
 var COLLECTION_SHARE = '/:publicKey';
+
+function rmTab(str) {
+  if (str !== undefined && str != null)
+    return  str.replace(/\t/g, '');
+  return str;
+}
+
+function smidToTxt(doc) {
+  var csv = 'created\ttitle\tdescription\towner orcid\towner fullOrcidId\towner name\towner dateRecorded\t\n';
+  csv += `${doc.created.toString()}\t${rmTab(doc.form.title)}\t${rmTab(doc.form.description)}\t${doc.owner.orcid}\t${doc.owner.fullOrcidId}\t${rmTab(doc.owner.name)}\t${doc.owner.dateRecorded.toString()}\n`;
+  csv += "\n";
+  csv += 'orcid\tfullOrcidId\tname\tdateRecorded\t\n';
+  doc.authenticated_orcids.forEach(function(row) { 
+    csv += `${row.orcid}\t${row.fullOrcidId}\t${rmTab(row.name)}\t${row.dateRecorded.toString()}\n`;
+    })
+  return csv;
+}
 
 app.get(CONFIG, function(req, res) { 
    return res.status(200).json({'ORCID_URL': config.ORCID_URL});
@@ -120,8 +138,18 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
 app.get(COLLECTION_DETAILS, function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
     if (err) res.send(err)
+    else res.status(200).json(doc);
+  });
+});
+
+
+//Get collection details
+app.get(COLLECTION_DETAILS_DOWNLOAD, function(req,res) {
+  smidManger.getDetails(req.params.publicKey, function(err, doc) {
+    if (err) res.send(err)
     else {
-      res.status(200).json(doc);
+      res.set({"Content-Disposition": `attachment; filename="${doc.form.title}_tab_separated.txt"`});
+      res.status(200).send(smidToTxt(doc));
     }
   });
 });
@@ -176,6 +204,24 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   }
 });
 
-app.get([COLLECTION_EDIT, COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR,'/'], function(req, res) { // Index page 
+app.get([COLLECTION_EDIT], function(req, res) { // Index page
+  smidManger.smidExist(req.params.publicKey, req.params.privateKey, function(err, bool) {
+    if (bool == true)
+      res.status(200).sendFile(index_file);
+    else
+      res.sendFile("/404.html");
+  });
+});
+
+app.get([COLLECTION_SHARE, ADD_ID_SUCCESS], function(req, res) { // Index page
+  smidManger.detailsExist(req.params.publicKey, function(err, bool) {
+    if (bool == true)
+      res.status(200).sendFile(index_file);
+    else
+      res.sendFile("/404.html");
+  });
+});
+
+app.get('/', function(req, res) { // Index page
   res.status(200).sendFile(index_file);
 });

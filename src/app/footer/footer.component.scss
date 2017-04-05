@@ -1,5 +1,23 @@
 @import '../../variables';
 
 footer {
-    background-color: $bck-default;
+    background-color: $orcidgraydk;
+    padding: 1rem 0;
+    color: $white;
+
+    img {
+        float: left;
+        margin-right: 1rem;
+    }
+
+    p {
+        font: .8rem $font-stack;
+        color: $white;
+        float: left;
+        padding: 0;
+        margin: 0;
+        vartical-align: bottom;
+        line-height: 2.2rem;
+    }
 }
+

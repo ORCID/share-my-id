@@ -6,6 +6,7 @@
 ****************************************************/
 body {
     font: normal 100% $font-stack;
+    color: $orcidgraydk;
 }
 
 a {
@@ -15,19 +16,26 @@ a {
     &:active,
     .active {
         color: $link-font-color-active;
+        cursor: pointer;
     }
 
     &:hover {
         color: $link-font-color-hover;
+        cursor: pointer;
+        text-decoration: none;
     }
 }
 
-h1 {
+h1, h2 {
     color: $title-h1-font-color;
 }
 
 p {
     color: $base-font-color;
+}
+
+button, .btn, .btn-primary {
+    cursor: pointer;
 }
 
 //Overwrite for bootstrap4 styles
@@ -55,4 +63,8 @@ p {
 .link-style {
     @extend a;
     cursor: pointer;
+}
+
+main#content{
+    padding-top: 0;
 }

@@ -117,6 +117,20 @@ SmidManger.prototype.getDetails = function(pubKey, callback) {
   })
 };
 
+SmidManger.prototype.detailsExist = function(pubKey, callback) {
+  this._smidCol.count({public_key: pubKey}, function(err, count) {
+    if (err) callback(err,null);
+    else callback(null, count == 0 ? false : true);
+  })
+};
+
+SmidManger.prototype.smidExist = function(pubKey, privKey, callback) {
+  this._smidCol.count({public_key: pubKey, private_key: privKey}, function(err, count) {
+    if (err) callback(err,null);
+    else callback(null, count == 0 ? false : true);
+  })
+};
+
 SmidManger.prototype.updateForm = function(privateKey, form, callback) {
   this.validateForm(form);
   this._smidCol.findAndModify({

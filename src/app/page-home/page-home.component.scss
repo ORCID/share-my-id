@@ -1,0 +1,32 @@
+@import '../../variables';
+
+.jumbotron{
+    background-color: $orcidgraydk;
+}
+
+.jumbotron{
+    .share-id-icon{
+        width: 4rem;
+        margin-bottom: .2rem;
+        margin-left: -4rem;
+        //float: left;
+    }
+    h1 {
+        font: bold 3.6rem $font-stack;
+        color: $white;
+        margin: 0;
+    }
+
+    .lead {
+        font:  1.2rem $font-stack;
+        color: $orcidgraylt;
+    }
+
+    .btn-primary {
+        margin-top: 2rem;
+        font: normal 1.4rem $font-stack;
+        padding: .8em 2rem;
+    }
+
+
+}
