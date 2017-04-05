@@ -6,6 +6,7 @@
 ****************************************************/
 body {
     font: normal 100% $font-stack;
+    color: $orcidgraydk;
 }
 
 a {
@@ -15,10 +16,12 @@ a {
     &:active,
     .active {
         color: $link-font-color-active;
+        cursor: pointer;
     }
 
     &:hover {
         color: $link-font-color-hover;
+        cursor: pointer;
     }
 }
 
@@ -28,6 +31,10 @@ h1 {
 
 p {
     color: $base-font-color;
+}
+
+button, .btn, .btn-primary {
+    cursor: pointer;
 }
 
 //Overwrite for bootstrap4 styles
