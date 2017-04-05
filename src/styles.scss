@@ -22,10 +22,11 @@ a {
     &:hover {
         color: $link-font-color-hover;
         cursor: pointer;
+        text-decoration: none;
     }
 }
 
-h1 {
+h1, h2 {
     color: $title-h1-font-color;
 }
 
@@ -62,4 +63,8 @@ button, .btn, .btn-primary {
 .link-style {
     @extend a;
     cursor: pointer;
+}
+
+main#content{
+    padding-top: 0;
 }
