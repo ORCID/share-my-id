@@ -4,8 +4,6 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Collection } from './../shared/collection/collection';
 
-import { Http } from '@angular/http';
-
 import { ConfigService } from './../shared/config/config.service';
 
 import { CollectionService } from './../shared/collection/collection.service';
@@ -21,7 +19,6 @@ export class CollectionShareComponent implements OnInit {
     collections: Collection[];
 
     private publicKey: string;
-    private logUserOut: string[];
 
     constructor(
         private collectionService: CollectionService,
@@ -32,13 +29,18 @@ export class CollectionShareComponent implements OnInit {
     }
 
     authenticate(): void {
+        // make sure the user is logged out before sending them over
+        
         this.collectionService.logUserOut().subscribe(
-            response => {
-                this.logUserOut = response;
+            response => { 
+                window.location.href  = '/add-id-authorize' + this.publicKey;
+            }, 
+            err => { 
+                // ignore error
+                window.location.href  = '/add-id-authorize' + this.publicKey;      
             }
         );
         
-        window.location.href  = '/add-id-authorize' + this.publicKey;
     }
 
     getCollections(): void {
@@ -50,8 +52,15 @@ export class CollectionShareComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.configService.getConfiguration().subscribe(data => {
-           alert(data['ORCID_URL']);
-        });
+        // make sure the user is logged out as soon as they are sent to this page
+        this.collectionService.logUserOut().subscribe(
+            response => {
+               // do nothing
+            },
+            err => { 
+                // ignore error  
+            }  
+        );
+        this.getCollections();
     }
 }
