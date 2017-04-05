@@ -18,7 +18,7 @@ const routes: Routes = [
     },
     {
         component: AddIdSuccessComponent,
-        path: 'add-id-success'
+        path: ':publicKey/orcid/:orcid'
     },
     //Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will redirect to them instead of the expected url.
     {
