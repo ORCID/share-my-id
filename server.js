@@ -62,6 +62,8 @@ var COLLECTION_DETAILS = '/:publicKey/details';
 var COLLECTION_DETAILS_FORM = '/:publicKey/details/:publicKey/edit/:privateKey/details/form';
 var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
 var ADD_ID_REDIRECT = '/add-id-redirect';
+var ADD_ID_SUCCESS = '/add-id-success';
+var ADD_ID_ERROR = '/add-id-error';
 var COLLECTION_EDIT = '/:publicKey/edit/:privateKey';
 var COLLECTION_SHARE = '/:publicKey';
 
@@ -147,7 +149,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   if (req.query.error == 'access_denied') {
     // User denied access
     console.log("error: " + req.query.error);
-    res.json(req.query);       
+    res.redirect(ADD_ID_ERROR + '?state=' + state);       
   } else {
     // exchange code
     // function to render page after making request
@@ -165,6 +167,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
           if (err) res.send(err) 
           else {
             res.redirect('/' + req.query.state);
+            res.redirect(ADD_ID_SUCCESS + '?state=' + state); 
           } 
         });
       }
@@ -173,6 +176,6 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   }
 });
 
-app.get([COLLECTION_EDIT, COLLECTION_SHARE,'/'], function(req, res) { // Index page 
+app.get([COLLECTION_EDIT, COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR,'/'], function(req, res) { // Index page 
   res.status(200).sendFile(index_file);
 });
