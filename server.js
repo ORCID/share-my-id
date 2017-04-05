@@ -65,7 +65,7 @@ var COLLECTION_DETAILS_FORM = '/:publicKey/details/:publicKey/edit/:privateKey/d
 var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
 var ADD_ID_REDIRECT = '/add-id-redirect';
 var ADD_ID_SUCCESS = '/:publicKey/orcid/:orcid';
-var ADD_ID_ERROR = '/add-id-error';
+var ADD_ID_ERROR = '/:publicKey/add-id-error';
 var COLLECTION_EDIT = '/:publicKey/edit/:privateKey';
 var COLLECTION_SHARE = '/:publicKey';
 
@@ -76,6 +76,7 @@ function rmTab(str) {
 }
 
 function smidToTxt(doc) {
+  if (doc === undefined || doc == null) return null;
   var csv = 'created\ttitle\tdescription\towner orcid\towner fullOrcidId\towner name\towner dateRecorded\t\n';
   csv += `${doc.created.toString()}\t${rmTab(doc.form.title)}\t${rmTab(doc.form.description)}\t${doc.owner.orcid}\t${doc.owner.fullOrcidId}\t${rmTab(doc.owner.name)}\t${doc.owner.dateRecorded.toString()}\n`;
   csv += "\n";
@@ -138,8 +139,12 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
 //Get collection details
 app.get(COLLECTION_DETAILS, function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
-    if (err) res.send(err)
-    else res.status(200).json(doc);
+    if (err) 
+      res.send(err)
+    else if (doc === undefined || doc == null)
+      res.sendFile(PAGE_404);
+    else 
+      res.status(200).json(doc);
   });
 });
 
@@ -147,7 +152,10 @@ app.get(COLLECTION_DETAILS, function(req,res) {
 //Get collection details
 app.get(COLLECTION_DETAILS_DOWNLOAD, function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
-    if (err) res.send(err)
+    if (err) 
+      res.send(err)
+    else if (doc === undefined || doc == null)
+      res.sendFile(PAGE_404);
     else {
       res.set({"Content-Disposition": `attachment; filename="${doc.form.title}_tab_separated.txt"`});
       res.status(200).send(smidToTxt(doc));
@@ -178,7 +186,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
   if (req.query.error == 'access_denied') {
     // User denied access
     console.log("error: " + req.query.error);
-    res.redirect(ADD_ID_ERROR + '?state=' + state);       
+    res.redirect(/* make ADD_ID_ERROR url */ '/' + state + "/add-id-error");       
   } else {
     // exchange code
     // function to render page after making request
@@ -214,7 +222,7 @@ app.get([COLLECTION_EDIT], function(req, res) { // Index page
   });
 });
 
-app.get([COLLECTION_SHARE, ADD_ID_SUCCESS], function(req, res) { // Index page
+app.get([COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR], function(req, res) { // Index page
   smidManger.detailsExist(req.params.publicKey, function(err, bool) {
     if (bool == true)
       res.status(200).sendFile(index_file);

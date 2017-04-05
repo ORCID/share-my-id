@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -12,33 +14,38 @@ import { CollectionService } from './../shared/collection/collection.service';
     styleUrls: ['./add-id-success.component.scss']
 })
 export class AddIdSuccessComponent implements OnInit {
-    private path: string[];
+    
     private publicKey: string;
     private response: any;
-    private windowLocationOrigin: string;
+    private sub: any;
+    private userOrcidId: string;
 
     collections: Collection[];
 
     constructor(
+        private route: ActivatedRoute,
         private collectionService: CollectionService
     ) {
-        this.path = window.location.search.split("?");
-        this.publicKey = this.path[1].split("=")[1]; //Make this prettier
-        this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
     }
 
     getCollections(): void {
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
-                var collection_parsed = null;
                 this.collections = collections;
-                collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
             }
         );
     }    
 
     ngOnInit() {
-        this.getCollections();
+        this.sub = this.route.params.subscribe(params => {
+            this.publicKey = params['publicKey'];
+            this.userOrcidId = params['orcid'];
+            this.getCollections();
+        });
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
 }

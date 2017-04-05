@@ -12,22 +12,22 @@ const routes: Routes = [
         component: PageHomeComponent, //Authenticate -> Redirects to editCollection
         path: ''
     },
+    //Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will redirect to them instead of the expected url.
     {
         component: AddIdErrorComponent,
-        path: 'add-id-error'
+        path: ':publicKey/add-id-error'
     },
     {
         component: AddIdSuccessComponent,
-        path: 'add-id-success'
-    },
-    //Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will redirect to them instead of the expected url.
-    {
-        component: CollectionShareComponent,
-        path: ':publicKey' 
+        path: ':publicKey/orcid/:orcid'
     },
     {
         component: CollectionEditComponent,
         path: ':publicKey/edit/:privateKey'
+    },
+    {
+        component: CollectionShareComponent,
+        path: ':publicKey' 
     },
     {
         path: '**', 
