@@ -1,13 +1,16 @@
-<div class="row">
+<div 
+    *ngIf="collections"
+    class="row"
+>
     <div class="col text-center">
         <h1 class="mb-5">Thanks, 
         <br />
-        Yeddie Bird</h1>
+        {{collections.owner.name}}</h1>
         <p class="mb-5">We've added your ORCID iD
-        <br /><a class="font-weight-bold" href="">a;sjkfalksjfasf</a>
-        <br />to COLLECTIONNAME</p>
+        <br /><a class="font-weight-bold" href="{{collections.owner.fullOrcidId}}" target="{{publicKey}}">{{collections.owner.orcid}}</a>
+        <br />to {{collections.form.title}}</p>
         <p>
-            <a routerLink="/publicKey" class="btn btn-primary">Close</a>
+            <a routerLink="/{{publicKey}}" class="btn btn-primary">Close</a>
         </p>
     </div>
 </div>

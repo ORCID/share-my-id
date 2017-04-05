@@ -14,6 +14,12 @@ import { CollectionService } from './../shared/collection/collection.service';
 })
 
 export class CollectionEditComponent implements OnInit {
+    private path: string[];
+    private publicKey: string;
+    private privateKey: string;
+    private response: any;
+    private windowLocationOrigin: string;
+
     collections: Collection[];
     description: string;
     ngForm: any;
@@ -23,14 +29,8 @@ export class CollectionEditComponent implements OnInit {
     username: string;
     uri: string;
 
-    private path: string[];
-    private publicKey: string;
-    private privateKey: string;
-    private response: any;
-    private windowLocationOrigin: string;
-
     constructor(
-        private collectionService: CollectionService,
+        private collectionService: CollectionService
     ) 
     {
         this.description = "";
