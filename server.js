@@ -76,6 +76,7 @@ function rmTab(str) {
 }
 
 function smidToTxt(doc) {
+  if (doc === undefined || doc == null) return null;
   var csv = 'created\ttitle\tdescription\towner orcid\towner fullOrcidId\towner name\towner dateRecorded\t\n';
   csv += `${doc.created.toString()}\t${rmTab(doc.form.title)}\t${rmTab(doc.form.description)}\t${doc.owner.orcid}\t${doc.owner.fullOrcidId}\t${rmTab(doc.owner.name)}\t${doc.owner.dateRecorded.toString()}\n`;
   csv += "\n";
@@ -138,8 +139,12 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
 //Get collection details
 app.get(COLLECTION_DETAILS, function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
-    if (err) res.send(err)
-    else res.status(200).json(doc);
+    if (err) 
+      res.send(err)
+    else if (doc === undefined || doc == null)
+      res.sendFile(PAGE_404);
+    else 
+      res.status(200).json(doc);
   });
 });
 
@@ -147,7 +152,10 @@ app.get(COLLECTION_DETAILS, function(req,res) {
 //Get collection details
 app.get(COLLECTION_DETAILS_DOWNLOAD, function(req,res) {
   smidManger.getDetails(req.params.publicKey, function(err, doc) {
-    if (err) res.send(err)
+    if (err) 
+      res.send(err)
+    else if (doc === undefined || doc == null)
+      res.sendFile(PAGE_404);
     else {
       res.set({"Content-Disposition": `attachment; filename="${doc.form.title}_tab_separated.txt"`});
       res.status(200).send(smidToTxt(doc));
