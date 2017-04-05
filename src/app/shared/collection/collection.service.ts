@@ -63,8 +63,5 @@ export class CollectionService {
         return this.configService.getConfiguration().flatMap(
               config => 
                 this.jsonp.get(config['ORCID_URL'] + '/userStatus.json?logUserOut=true&callback=BROKEN_CALLBACK_IS_FINE_SEE_CODE'))
-                    .catch( function (error: any) {
-                      return Observable.throw(error);
-                    });
     }
 }
