@@ -12,27 +12,39 @@ import { CollectionService } from './../shared/collection/collection.service';
     styleUrls: ['./add-id-success.component.scss']
 })
 export class AddIdSuccessComponent implements OnInit {
-    private path: string[];
-    private publicKey: string;
-    private response: any;
-    private windowLocationOrigin: string;
+    
+    userOrcidId: string;
+    publicKey: string;
+    userName: string;
 
     collections: Collection[];
 
     constructor(
         private collectionService: CollectionService
     ) {
-        this.path = window.location.search.split("?");
-        this.publicKey = this.path[1].split("=")[1]; //Make this prettier
-        this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
+        this.userOrcidId = this.getParameterByName('orcid'); 
+        this.publicKey = this.getParameterByName('state'); //name orcid
+        this.userName = this.getParameterByName('name');
+    }
+
+    private getParameterByName(name:string): string {
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) {
+            return null;
+        }
+        if (!results[2]) {
+            return '';
+        } 
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
     getCollections(): void {
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
-                var collection_parsed = null;
                 this.collections = collections;
-                collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
             }
         );
     }    
