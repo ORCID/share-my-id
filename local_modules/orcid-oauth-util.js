@@ -43,7 +43,12 @@ OcridOAuthUtil.prototype.exchangeCode = function(code, callback) {
       }
     }
     //making request exchanging code for token
-    request(reqConfig, callback);
+    request(reqConfig, function(error, response, body) {
+        if (response.statusCode!=200)
+          callback(new Error('Non 200 error code' + response.statusCode), null);
+        else
+          callback(null, JSON.parse(body));
+    });
 }
 
 exports.OcridOAuthUtil = OcridOAuthUtil;
