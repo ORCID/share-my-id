@@ -37,7 +37,7 @@ var app = express();
 var path = require('path');
 var distDir = __dirname + "/dist/";
 var index_file =  distDir + "index.html"
-var page404 =  distDir + "404.html"
+var PAGE_404 =  distDir + "assets/404.html"
 app.use(express.static(distDir));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -210,7 +210,7 @@ app.get([COLLECTION_EDIT], function(req, res) { // Index page
     if (bool == true)
       res.status(200).sendFile(index_file);
     else
-      res.sendFile("/404.html");
+      res.sendFile(PAGE_404);
   });
 });
 
@@ -219,7 +219,7 @@ app.get([COLLECTION_SHARE, ADD_ID_SUCCESS], function(req, res) { // Index page
     if (bool == true)
       res.status(200).sendFile(index_file);
     else
-      res.sendFile("/404.html");
+      res.sendFile(PAGE_404);
   });
 });
 
