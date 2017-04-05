@@ -22,6 +22,7 @@ export class CollectionEditComponent implements OnInit {
 
     collections: Collection[];
     description: string;
+    formEmptyOnLoad: boolean;
     formSubmitted: boolean;
     ngForm: any;
     showErrorMessage: boolean;
@@ -35,6 +36,7 @@ export class CollectionEditComponent implements OnInit {
     ) 
     {
         this.description = "";
+        this.formEmptyOnLoad = true;
         this.formSubmitted = false;
         this.path = window.location.pathname.split("/");
         this.publicKey = this.path[1];
@@ -48,6 +50,7 @@ export class CollectionEditComponent implements OnInit {
     getCollections(): void {
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
+                console.log("collections",collections);
                 var collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
@@ -57,6 +60,10 @@ export class CollectionEditComponent implements OnInit {
                 this.title = collection_parsed.form.title;
                 this.username = collection_parsed.owner.name;
                 this.uri = collection_parsed.owner.orcid;
+
+                if( this.description.length > 0 && this.title.length > 0 ) {
+                    this.formEmptyOnLoad = false;
+                }
             }
         );
     }    

@@ -103,7 +103,7 @@
         </div>
     </div>
     <div 
-        *ngIf="title!=null && description!=null > 0"
+        *ngIf="formSubmitted || !formEmptyOnLoad"
         class="row"
     >
         <div class="col">
