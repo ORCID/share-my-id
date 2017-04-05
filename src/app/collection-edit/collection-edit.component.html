@@ -1,23 +1,6 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div (click)="showErrorMessage = !showErrorMessage" *ngIf="showErrorMessage" class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Oh snap!</strong> Change a few things up and try submitting again.
-            </div>
-            <div (click)="showSuccessMessage = !showSuccessMessage" *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Well done!</strong> You successfully added a collection.
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
             <form 
                 #formRef="ngForm" 
                 (ngSubmit)="submitForm(formRef.value)" 
@@ -92,15 +75,36 @@
                         <p><span *ngIf="username">{{username}}, </span><a href="{{uri}}" target="_blank">{{uri}}</a></p>
                     </div>
                     <div class="form-group">
-                        <button 
-                            [disabled]="!formRef.valid"
-                            class="btn btn-primary" 
-                            type="submit" 
-                            role="button"
-                        >
-                            Save Details
-                        </button>
+                        <p>
+                            <button 
+                                [disabled]="!formRef.valid"
+                                class="btn btn-primary" 
+                                type="submit" 
+                                role="button"
+                            >
+                                Save Details
+                            </button>
+                            
+                        </p>
                     </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div (click)="showErrorMessage = !showErrorMessage" *ngIf="showErrorMessage" class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                            </div>
+                            <div (click)="showSuccessMessage = !showSuccessMessage" *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Well done!</strong> You successfully added a collection.
+                            </div>
+                        </div>
+                    </div>
+                
                 </fieldset>
             </form>
         </div>
