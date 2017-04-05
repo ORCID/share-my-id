@@ -28,13 +28,11 @@ export class AddIdSuccessComponent implements OnInit {
     }
 
     getCollections(): void {
-        console.log(this.path, this.publicKey );
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
                 var collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
-                console.log("collection_parsed", collection_parsed);
             }
         );
     }    
