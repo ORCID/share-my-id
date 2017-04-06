@@ -15,7 +15,7 @@ import { CollectionService } from './../shared/collection/collection.service';
 export class AddIdErrorComponent implements OnInit {
 
     private sub: any;
-    private publicKey: string;
+    public publicKey: string;
 
     constructor(
         private collectionService: CollectionService,
