@@ -19,7 +19,7 @@ module.exports = config = {
 
 // Environment variables overrides
 for (key in config)
-	if (process.env[key] != undefined)
-		config[key] = process.env[key];
+  if (process.env[key] != undefined)
+    config[key] = process.env[key];
 
 console.log("config: ", config);
