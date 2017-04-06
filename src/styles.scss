@@ -4,14 +4,14 @@
 /****************************************************
 //Global Styles
 ****************************************************/
-body {
-    font: normal 100% $font-stack;
-    color: $orcidgraydk;
+* {
+    white-space: normal;
+    word-break: break-all;
 }
 
 a {
     color: $link-font-color-default;
-    word-break: break-all;
+    cursor: pointer;
 
     &:active,
     .active {
@@ -26,7 +26,19 @@ a {
     }
 }
 
-h1, h2 {
+body {
+    font: normal 100% $font-stack;
+    color: $orcidgraydk;
+}
+
+button, 
+.btn, 
+.btn-primary {
+    cursor: pointer;
+}
+
+h1, 
+h2 {
     color: $title-h1-font-color;
     margin-bottom: .8rem;
 }
@@ -35,9 +47,6 @@ p {
     color: $base-font-color;
 }
 
-button, .btn, .btn-primary {
-    cursor: pointer;
-}
 
 //Overwrite for bootstrap4 styles
 .btn-primary {
@@ -63,7 +72,6 @@ button, .btn, .btn-primary {
 
 .link-style {
     @extend a;
-    cursor: pointer;
 }
 
 main#content{
