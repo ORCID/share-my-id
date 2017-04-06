@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+/****************************************************
+//Global Styles
+****************************************************/
+body {
+    font: normal 100% $font-stack;
+    color: $orcidgraydk;
+}
+
+a {
+    color: $link-font-color-default;
+    word-break: break-all;
+
+    &:active,
+    .active {
+        color: $link-font-color-active;
+        cursor: pointer;
+    }
+
+    &:hover {
+        color: $link-font-color-hover;
+        cursor: pointer;
+        text-decoration: none;
+    }
+}
+
+h1, h2 {
+    color: $title-h1-font-color;
+    margin-bottom: .8rem;
+}
+
+p {
+    color: $base-font-color;
+}
+
+button, .btn, .btn-primary {
+    cursor: pointer;
+}
+
+//Overwrite for bootstrap4 styles
+.btn-primary {
+    background-color: $button-bck-default;
+    border: none;
+    color: $button-font-color-default;
+
+    &:active,
+    .active {
+        background-color: $button-bck-active;
+        color: $button-font-color-active;
+    }
+
+    &:focus {
+        color: $button-font-color-focus;
+    }
+
+    &:hover {
+        background-color: $button-bck-hover;
+        color: $button-font-color-hover;
+    }
+}
+
+.link-style {
+    @extend a;
+    cursor: pointer;
+}
+
+main#content{
+    padding-top: 0;
+}
+
+.container{
+    padding: 0 3rem;
+    min-height: 100%;
+    height: 100%;
+    padding-bottom: 1rem;
+}

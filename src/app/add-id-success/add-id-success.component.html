@@ -1,0 +1,16 @@
+<div 
+    *ngIf="collections"
+    class="container"
+>
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="mb-5">Thanks!</h1>
+            <p class="mb-5">We've added your ORCID iD
+            <br /><span class="font-weight-bold">{{userOrcidId}}</span>
+            <br />to {{collections.form.title}}</p>
+            <p>
+                <a routerLink="/{{publicKey}}" class="btn btn-primary">Close</a>
+            </p>
+        </div>
+    </div>
+</div>

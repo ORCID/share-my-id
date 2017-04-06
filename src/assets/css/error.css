@@ -1,0 +1,45 @@
+/*
+$orcidblue: #338CAF;
+$orcidgraydk: #494A4C;
+$orcidgraymd: #939598;
+$orcidgraylt: #C9CACB;
+$orcidgreen: #A6CE39;
+$white: #FFF;
+*/
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+    font-style: normal;
+    background-color: #A6CE39;
+}
+
+#main.container{
+    background-color: #A6CE39;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    //color: #779625;
+    color: #fff;
+}
+
+h1{
+    font-size: 10rem;
+    color: #98be2f;
+    margin: 0;
+    padding: 0;
+    line-height: 10rem;
+}
+
+button {
+    font: 1rem 'Noto Sans', sans-serif;
+    background-color: #338CAF;
+    border: none;
+    border-radius: .3em;
+    color: #fff;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #494A4C;
+}
