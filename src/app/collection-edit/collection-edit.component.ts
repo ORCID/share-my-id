@@ -22,14 +22,15 @@ export class CollectionEditComponent implements OnInit {
 
     collections: Collection[];
     description: string;
+    fullOrcidId: string;
     formEmptyOnLoad: boolean;
     formSubmitted: boolean;
     ngForm: any;
+    orcid: string;
     showErrorMessage: boolean;
     showSuccessMessage: boolean;
     title: string;
     username: string;
-    uri: string;
 
     constructor(
         private collectionService: CollectionService,
@@ -54,9 +55,10 @@ export class CollectionEditComponent implements OnInit {
                 //console.log("collection_parsed", collection_parsed);
 
                 this.description = collection_parsed.form.description;
+                this.fullOrcidId = collection_parsed.owner.fullOrcidId;
+                this.orcid = collection_parsed.owner.orcid;
                 this.title = collection_parsed.form.title;
                 this.username = collection_parsed.owner.name;
-                this.uri = collection_parsed.owner.orcid;
 
                 if( this.description.length > 0 && this.title.length > 0 ) {
                     this.formEmptyOnLoad = false;
