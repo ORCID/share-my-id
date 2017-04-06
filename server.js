@@ -13,25 +13,6 @@ var ooau = new OcridOAuthUtil(
   config.CLIENT_SECRET,
   config.ORCID_URL);
 
-/*
-// quick and dirty test
-smidManger.createSmid('0000-0000-0000-0000','test name', function(err, doc) {
-   console.log(doc);
-   smidManger.updateForm(doc.private_key, {title: 'test update title', description: 'test update description'}, function(err,doc) {
-      console.log(doc);
-   });
-   smidManger.addOrcidName(doc.public_key, {orcid: '0000-0000-0000-0001', name: 'test1'}, function(err,doc) {
-      console.log(doc);
-   });
-   smidManger.addOrcidName(doc.public_key, {orcid: '0000-0000-0000-0002', name: 'test2'}, function(err,doc) {
-      console.log(doc);
-   });
-   smidManger.addOrcidName(doc.public_key, {orcid: '0000-0000-0000-0001', name: 'test1'}, function(err,doc) {
-      console.log(doc);
-   });
-});
-*/
-
 // Init express
 var app = express();
 var path = require('path');
@@ -50,7 +31,6 @@ app.set('json replacer', null);
 app.listen(config.PORT_HTTP, function() {
   console.log('listening on port: ' + config.PORT_HTTP)
 })
-
 
 // Custom console for orcid logging
 var orcidOutput = fs.createWriteStream('./orcidout.log');
