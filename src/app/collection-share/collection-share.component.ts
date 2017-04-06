@@ -18,14 +18,18 @@ export class CollectionShareComponent implements OnInit {
 
     collections: Collection[];
 
+    private path: string[];
     private publicKey: string;
+    private windowLocationOrigin: string;
 
     constructor(
         private collectionService: CollectionService,
         private http: Http,
         private configService: ConfigService
     ) {
-        this.publicKey = window.location.pathname;
+        this.path = window.location.pathname.split("/");
+        this.publicKey = this.path[1];
+        this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
     }
 
     authenticate(): void {
@@ -33,11 +37,11 @@ export class CollectionShareComponent implements OnInit {
         
         this.collectionService.logUserOut().subscribe(
             response => { 
-                window.location.href  = '/add-id-authorize' + this.publicKey;
+                window.location.href  = '/add-id-authorize/' + this.publicKey;
             }, 
             err => { 
                 // ignore error
-                window.location.href  = '/add-id-authorize' + this.publicKey;      
+                window.location.href  = '/add-id-authorize/' + this.publicKey;      
             }
         );
         
