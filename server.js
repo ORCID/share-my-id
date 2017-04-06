@@ -166,10 +166,15 @@ app.get(COLLECTION_DETAILS_DOWNLOAD, function(req, res) {
     else if (doc === undefined || doc == null)
       res.sendFile(PAGE_404);
     else {
-      res.set({
-        "Content-Disposition": `attachment; filename="${doc.form.title}_tab_separated.txt"`
-      });
-      res.status(200).send(smidToTxt(doc));
+      try {
+        var txt = smidToTxt(doc);
+        res.set({
+          "Content-Disposition": `attachment; filename="${doc.form.title}_tab_separated.txt"`
+        });
+        res.status(200).send(txt);
+      } catch (e) {
+        res.sendFile(PAGE_500);
+      }
     }
   });
 });
