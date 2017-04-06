@@ -45,4 +45,8 @@ export class AddIdErrorComponent implements OnInit {
         );     
     }
 
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
 }
