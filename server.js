@@ -4,6 +4,7 @@ var
   config = require('./local_modules/config'),
   express = require('express'),
   fs = require('fs'),
+  helmet = require('helmet'),
   SmidManger = require('./local_modules/smid-manager.js').SmidManger,
   OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
 
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+app.use(helmet());
 app.set('json spaces', 2);
 app.set('json replacer', null);
 

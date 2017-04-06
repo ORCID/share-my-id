@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "description": "MEAN app for creating collections of authenticated ORCID iDs",
-   "repository": {
+  "repository": {
     "type": "git",
     "url": "git@github.com:ORCID/share-my-id"
   },
@@ -27,19 +27,20 @@
     "@angular/platform-browser": "^2.4.0",
     "@angular/platform-browser-dynamic": "^2.4.0",
     "@angular/router": "^3.4.0",
-    "bootstrap": "^4.0.0-alpha.6",
-    "core-js": "^2.4.1",
-    "font-awesome": "^4.7.0",
-    "rxjs": "^5.1.0",
-    "zone.js": "^0.7.6",
     "ava": "^0.18.2",
     "body-parser": "^1.16.1",
+    "bootstrap": "^4.0.0-alpha.6",
+    "core-js": "^2.4.1",
     "ejs": "^2.5.6",
     "express": "^4.14.1",
+    "font-awesome": "^4.7.0",
     "global-request-logger": "^0.1.1",
+    "helmet": "^3.5.0",
     "mongojs": "^2.4.0",
     "randomstring": "^1.1.5",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.7.6"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",
