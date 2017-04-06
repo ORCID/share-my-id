@@ -28,6 +28,7 @@ a {
 
 h1, h2 {
     color: $title-h1-font-color;
+    margin-bottom: .8rem;
 }
 
 p {
@@ -67,4 +68,8 @@ button, .btn, .btn-primary {
 
 main#content{
     padding-top: 0;
+}
+
+.container{
+    padding: 0 3rem;
 }
