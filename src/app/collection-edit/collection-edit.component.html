@@ -9,16 +9,10 @@
                 <fieldset>
                     <legend class="font-weight-bold text-center">ID Collection Details</legend>
 
-                    <div 
-                        class="form-group" 
-                        [class.has-success]="titleRef.valid && formSubmitted"
-                        [class.has-danger]="titleRef.valid==false && titleRef.dirty && formSubmitted"
-                    >
+                    <div class="form-group" >
                         <label class="form-control-label font-weight-bold" for="title">Title</label>
                         <input 
                             [(ngModel)]="title"
-                            [class.form-control-success]="titleRef.valid && formSubmitted"
-                            [class.form-control-danger]="titleRef.valid==false && titleRef.dirty && formSubmitted"
                             #titleRef="ngModel" 
                             autocomplete="off"
                             class="form-control" 
@@ -29,25 +23,12 @@
                             type="text" 
                             required
                         >
-                        <div 
-                            *ngIf="titleRef.errors && titleRef.dirty && formSubmitted"
-                            class="form-control-feedback" 
-                        >
-                            <small *ngIf="titleRef.errors?.required">This field is required</small >
-                            <small *ngIf="titleRef.errors?.minlength">This field must be longer than {{titleRef.errors?.minlength.requiredLength}} characters. You only typed {{titleRef.errors?.minlength.actualLength}}</small >
-                        </div>
                     </div>
 
-                    <div 
-                        class="form-group" 
-                        [class.has-success]="descriptionRef.valid && formSubmitted"
-                        [class.has-danger]="descriptionRef.valid==false && descriptionRef.dirty && formSubmitted"
-                    >
+                    <div class="form-group">
                         <label class="form-control-label font-weight-bold" for="description">Description</label>
                         <textarea
                             [(ngModel)]="description"
-                            [class.form-control-success]="descriptionRef.valid && formSubmitted"
-                            [class.form-control-danger]="descriptionRef.valid==false && descriptionRef.dirty && formSubmitted"
                             #descriptionRef="ngModel" 
                             class="form-control" 
                             id="description" 
@@ -57,16 +38,9 @@
                             required
                             rows="5"
                         ></textarea> 
-                        <div 
-                            *ngIf="descriptionRef.errors && descriptionRef.dirty && formSubmitted"
-                            class="form-control-feedback" 
-                        >
-                            <small *ngIf="descriptionRef.errors?.required">This field is required</small >
-                            <small *ngIf="descriptionRef.errors?.minlength">This field must be longer than {{descriptionRef.errors?.minlength.requiredLength}} characters. You only typed {{descriptionRef.errors?.minlength.actualLength}}</small >
-                        </div>
                     </div>
                     <div
-                        *ngIf="username || uri" 
+                        *ngIf="username || orcid" 
                         class="form-group"
                     >
                         <p class="form-control-label font-weight-bold">
@@ -84,10 +58,11 @@
                                 role="button"
                             >
                                 Save Details
-                            </button>    
-                            <span (click)="showErrorMessage = !showErrorMessage" *ngIf="showErrorMessage" class="text-danger ml-3"><strong>Oh snap!</strong> Change a few things up and try submitting again.</span>
-                            <span (click)="showSuccessMessage = !showSuccessMessage" *ngIf="showSuccessMessage" class="text-success ml-3"><strong>Well done!</strong> You successfully added a collection.</span>
-                        </p>                            
+                            </button>
+                        </p>
+                        <p (click)="showErrorMessage = !showErrorMessage" *ngIf="showErrorMessage && formRef.valid" class="text-danger"><strong>Oh snap!</strong> Try submitting again.</p>
+                        <p (click)="showSuccessMessage = !showSuccessMessage" *ngIf="showSuccessMessage && formRef.valid" class="text-success"><strong>Well done!</strong> You successfully saved the collection.</p>
+                        <p (click)="showWarningMessage = !showWarningMessage" *ngIf="!formRef.valid && (formSubmitted || !formEmptyOnLoad)" class="text-warning"><strong>Please fill out the title and description.</strong></p>                           
                     </div>
                 </fieldset>
             </form>
