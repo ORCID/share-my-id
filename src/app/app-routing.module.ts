@@ -18,12 +18,12 @@ const routes: Routes = [
         path: ':publicKey/add-id-error'
     },
     {
-        component: AddIdSuccessComponent,
-        path: ':publicKey/orcid/:orcid'
-    },
-    {
         component: CollectionEditComponent,
         path: ':publicKey/edit/:privateKey'
+    },
+    {
+        component: AddIdSuccessComponent,
+        path: ':publicKey/orcid/:orcid'
     },
     {
         component: CollectionShareComponent,

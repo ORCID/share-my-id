@@ -19,6 +19,7 @@ a {
         cursor: pointer;
     }
 
+    &:focus,
     &:hover {
         color: $link-font-color-hover;
         cursor: pointer;
@@ -43,11 +44,13 @@ legend {
     color: $title-h1-font-color;
     margin-bottom: .8rem;
 }
+main#content{
+    padding-top: 0;
+}
 
 p {
     color: $base-font-color;
 }
-
 
 //Overwrite for bootstrap4 styles
 .btn-primary {
@@ -71,14 +74,10 @@ p {
     }
 }
 
-.link-style {
-    @extend a;
-}
-
-main#content{
-    padding-top: 0;
-}
-
 .container{
     padding: 0 3rem;
+}
+
+.link-style {
+    @extend a;
 }
