@@ -25,4 +25,13 @@ legend {
     small{
         font: italic 1rem $font-stack;
     }
+
+    button {
+        margin: 1rem 0 0 0;
+        
+        fa {
+            color: $white;
+        }
+    }
+
 }
