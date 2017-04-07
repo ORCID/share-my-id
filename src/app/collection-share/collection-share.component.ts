@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
+import { Observable } from 'rxjs/Rx';
+
 import { Collection } from './../shared/collection/collection';
 
 import { ConfigService } from './../shared/config/config.service';
@@ -18,8 +20,10 @@ export class CollectionShareComponent implements OnInit {
 
     collections: Collection[];
 
+    private collectionSubscription: any;
     private path: string[];
     private publicKey: string;
+    private timerSubscription: any;
     private windowLocationOrigin: string;
 
     constructor(
@@ -30,6 +34,20 @@ export class CollectionShareComponent implements OnInit {
         this.path = window.location.pathname.split("/");
         this.publicKey = this.path[1];
         this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
+    }
+
+    private refreshData(): void {
+        this.collectionService.getCollection(this.publicKey).subscribe( 
+            collections => {
+                console.log("called");
+                this.collections = collections;
+                this.subscribeToData();
+            }
+        );
+    }
+
+    private subscribeToData(): void {
+        this.timerSubscription = Observable.timer(0, 30000).first().subscribe(() => this.refreshData());
     }
 
     authenticate(): void {
@@ -47,14 +65,6 @@ export class CollectionShareComponent implements OnInit {
         
     }
 
-    getCollections(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe( 
-            collections => {
-                this.collections = collections;
-            }
-        );
-    }
-
     ngOnInit() {
         // make sure the user is logged out as soon as they are sent to this page
         this.collectionService.logUserOut().subscribe(
@@ -65,6 +75,12 @@ export class CollectionShareComponent implements OnInit {
                 // ignore error  
             }  
         );
-        this.getCollections();
+        this.subscribeToData();
+    }
+
+    public ngOnDestroy(): void {
+        if (this.timerSubscription) {
+            this.timerSubscription.unsubscribe();
+        }
     }
 }
