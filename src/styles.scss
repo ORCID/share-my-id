@@ -12,18 +12,28 @@
 a {
     color: $link-font-color-default;
     cursor: pointer;
+    text-decoration: none;
 
     &:active,
     .active {
         color: $link-font-color-active;
         cursor: pointer;
+        text-decoration: none;
+    }
+
+    &:focus{
+        text-decoration: none;
     }
 
     &:hover {
         color: $link-font-color-hover;
-        cursor: pointer;
         text-decoration: none;
     }
+
+    &:visited{
+        text-decoration: none;
+    }
+
 }
 
 body {
