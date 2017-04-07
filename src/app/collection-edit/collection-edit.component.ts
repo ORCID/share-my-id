@@ -46,10 +46,10 @@ export class CollectionEditComponent implements OnInit {
         this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
     }
 
-    copyLink(): void {
-        var adminLink = document.querySelector('#copy-admin-link');  
+    copyLinks(): void {
+        var collectionLinks = document.querySelector('#collection-links');  
         var range = document.createRange();  
-        range.selectNode(adminLink);  
+        range.selectNode(collectionLinks);  
         window.getSelection().addRange(range);
         document.execCommand('copy');
         window.getSelection().removeAllRanges(); 
