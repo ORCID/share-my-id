@@ -47,7 +47,7 @@ export class CollectionShareComponent implements OnInit {
     }
 
     private subscribeToData(): void {
-        this.timerSubscription = Observable.timer(0, 30000).first().subscribe(() => this.refreshData());
+        this.timerSubscription = Observable.timer( 0, 30000 ).subscribe(() => this.refreshData());
     }
 
     authenticate(): void {
