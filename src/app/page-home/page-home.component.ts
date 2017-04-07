@@ -32,7 +32,7 @@ export class PageHomeComponent implements OnInit {
         // make sure the user is logged out as soon as they are sent to this page
         this.collectionService.logUserOut().subscribe(
             response => { /* do nothing */},
-            err => { /* ignore error /*}
+            err => { /* ignore error */}
         );
     }
 
