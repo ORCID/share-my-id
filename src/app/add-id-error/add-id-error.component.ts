@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
-import { CollectionService } from './../shared/collection/collection.service';
+import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
 
 @Component({
   selector: 'app-add-id-error',
@@ -18,14 +18,14 @@ export class AddIdErrorComponent implements OnInit {
     public publicKey: string;
 
     constructor(
-        private collectionService: CollectionService,
+        private orcidUtilService: OrcidUtilService,
         private route: ActivatedRoute
     ) { }
 
     authenticate(): void {
         // make sure the user is logged out before sending them over
         
-        this.collectionService.logUserOut().subscribe(
+        this.orcidUtilService.logUserOut().subscribe(
             response => { 
                 window.location.href  = '/add-id-authorize/' + this.publicKey;
             }, 
