@@ -14,33 +14,32 @@ import { CollectionService } from './../shared/collection/collection.service';
 })
 
 export class CollectionEditComponent implements OnInit {
-    private path: string[];
     private publicKey: string;
     private privateKey: string;
     private response: any;
+    private sub: any;
     private windowLocationOrigin: string;
 
     collections: Collection[];
     description: string;
+    fullOrcidId: string;
     formEmptyOnLoad: boolean;
     formSubmitted: boolean;
     ngForm: any;
+    orcid: string;
     showErrorMessage: boolean;
     showSuccessMessage: boolean;
     title: string;
     username: string;
-    uri: string;
 
     constructor(
-        private collectionService: CollectionService
+        private collectionService: CollectionService,
+        private route: ActivatedRoute
     ) 
     {
         this.description = "";
         this.formEmptyOnLoad = true;
         this.formSubmitted = false;
-        this.path = window.location.pathname.split("/");
-        this.publicKey = this.path[1];
-        this.privateKey = this.path[3];
         this.showErrorMessage = false;
         this.showSuccessMessage = false;
         this.title = "";
@@ -50,16 +49,16 @@ export class CollectionEditComponent implements OnInit {
     getCollections(): void {
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
-                console.log("collections",collections);
                 var collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
                 //console.log("collection_parsed", collection_parsed);
 
                 this.description = collection_parsed.form.description;
+                this.fullOrcidId = collection_parsed.owner.fullOrcidId;
+                this.orcid = collection_parsed.owner.orcid;
                 this.title = collection_parsed.form.title;
                 this.username = collection_parsed.owner.name;
-                this.uri = collection_parsed.owner.orcid;
 
                 if( this.description.length > 0 && this.title.length > 0 ) {
                     this.formEmptyOnLoad = false;
@@ -69,7 +68,17 @@ export class CollectionEditComponent implements OnInit {
     }    
 
     ngOnInit() {
-        this.getCollections();
+        this.sub = this.route.params.subscribe(
+            params => {
+                this.publicKey = params['publicKey'];
+                this.privateKey = params['privateKey'];
+                this.getCollections();
+            }
+        );
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
     submitForm( form: any ): void {

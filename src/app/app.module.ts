@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 
+import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -30,6 +32,7 @@ import { PageHomeComponent } from './page-home/page-home.component';
         PageHomeComponent
     ],
     imports: [
+        Angular2FontAwesomeModule,
         AppRoutingModule,
         BrowserModule,
         FormsModule,

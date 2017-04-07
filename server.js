@@ -60,14 +60,20 @@ function rmTab(str) {
   return str;
 }
 
+function dateToStr(date) {
+  return date.toISOString();
+}
+
 function smidToTxt(doc) {
   if (doc === undefined || doc == null) return null;
-  var csv = 'created\ttitle\tdescription\towner orcid\towner fullOrcidId\towner name\towner dateRecorded\t\n';
-  csv += `${doc.created.toString()}\t${rmTab(doc.form.title)}\t${rmTab(doc.form.description)}\t${doc.owner.orcid}\t${doc.owner.fullOrcidId}\t${rmTab(doc.owner.name)}\t${doc.owner.dateRecorded.toString()}\n`;
+  var csv = `${rmTab(doc.form.title)}\n`;
+  csv += 'dateRecorded             \towner orcid        \towner fullOrcidId                            \towner name\n';
+  csv += `${dateToStr(doc.owner.dateRecorded)}\t${doc.owner.orcid}\t${doc.owner.fullOrcidId}\t${rmTab(doc.owner.name)}\n`;
   csv += "\n";
-  csv += 'orcid\tfullOrcidId\tname\tdateRecorded\t\n';
+  csv += "Share my iD results\n";
+  csv += 'dateRecorded             \torcid              \tfullOrcidId                                   \tname\n';
   doc.authenticated_orcids.forEach(function(row) {
-    csv += `${row.orcid}\t${row.fullOrcidId}\t${rmTab(row.name)}\t${row.dateRecorded.toString()}\n`;
+    csv += `${dateToStr(row.dateRecorded)}\t${row.orcid}\t${row.fullOrcidId}\t${rmTab(row.name)}\n`;
   })
   return csv;
 }

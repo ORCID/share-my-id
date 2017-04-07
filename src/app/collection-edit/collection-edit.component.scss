@@ -2,5 +2,27 @@
 
 legend {
     color: $title-h1-font-color;
-    font-size: $font-size-huge;
+    font: normal 2.5rem $font-stack;
+}
+
+.card {
+    background-color: $gray97;
+
+    h2 {
+        font: bold 1.5rem $font-stack;
+        color: $orcidgraydk;
+    }
+
+    h3 {
+        font: bold 1rem $font-stack;
+        margin: 1rem 0 0 0;
+    }
+
+    p {
+        margin: .1rem 0;
+    }
+
+    small{
+        font: italic 1rem $font-stack;
+    }
 }
