@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ConfigService } from './../shared/config/config.service';
+
+import { CollectionService } from './../shared/collection/collection.service';
 
 @Component({
     selector: 'app-page-home',
@@ -9,16 +12,28 @@ import { Component, OnInit } from '@angular/core';
 export class PageHomeComponent implements OnInit {
 
     constructor(
-    ) { 
-    }
-
-    //Remove/refactor
+       private collectionService: CollectionService,
+       private configService: ConfigService
+    ) {}
 
     authenticate(): void {
-        window.location.href  = '/create-smid-authorize';
+        this.collectionService.logUserOut().subscribe(
+            response => { 
+                window.location.href  = '/create-smid-authorize';
+            },
+            err => {
+                // ignore error
+                window.location.href  = '/create-smid-authorize';
+            }
+        );
     }
 
     ngOnInit() {
+        // make sure the user is logged out as soon as they are sent to this page
+        this.collectionService.logUserOut().subscribe(
+            response => { /* do nothing */},
+            err => { /* ignore error */}
+        );
     }
 
 }
