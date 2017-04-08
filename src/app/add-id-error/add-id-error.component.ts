@@ -23,18 +23,7 @@ export class AddIdErrorComponent implements OnInit {
     ) { }
 
     authenticate(): void {
-        // make sure the user is logged out before sending them over
-        
-        this.orcidUtilService.logUserOut().subscribe(
-            response => { 
-                window.location.href  = '/add-id-authorize/' + this.publicKey;
-            }, 
-            err => { 
-                // ignore error
-                window.location.href  = '/add-id-authorize/' + this.publicKey;      
-            }
-        );
-        
+        this.orcidUtilService.addIdAuth(this.publicKey);
     }
 
     ngOnInit() {

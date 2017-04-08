@@ -86,7 +86,7 @@ app.get(CONFIG, function(req, res) {
 
 //Create smid oauth sign into ORCID
 app.get(CREATE_SMID_AUTHORIZE, function(req, res) {
-  create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI);
+  var create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI);
   res.redirect(create_smid_authorization_uri);
 });
 
@@ -180,7 +180,7 @@ app.put(COLLECTION_DETAILS_FORM, function(req, res) {
 
 //Add iD oauth sign into ORCID
 app.get(ADD_ID_AUTHORIZE, function(req, res) {
-  add_id_authorization_uri = ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey);
+  var add_id_authorization_uri = ooau.getAuthUrl(config.HOST + ADD_ID_REDIRECT, req.params.publicKey);
   res.redirect(add_id_authorization_uri);
 });
 

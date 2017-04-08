@@ -34,16 +34,7 @@ export class CollectionShareComponent implements OnInit {
     }
 
     authenticate(): void {
-        // make sure the user is logged out before sending them over
-        this.orcidUtilService.logUserOut().subscribe(
-            response => { 
-                window.location.href  = '/add-id-authorize/' + this.publicKey;
-            }, 
-            err => { 
-                // ignore error
-                window.location.href  = '/add-id-authorize/' + this.publicKey;      
-            }
-        );   
+        this.orcidUtilService.addIdAuth(this.publicKey);
     }
 
     getCollections(): void {
@@ -56,14 +47,7 @@ export class CollectionShareComponent implements OnInit {
 
     ngOnInit() {
         // make sure the user is logged out as soon as they are sent to this page
-        this.orcidUtilService.logUserOut().subscribe(
-            response => {
-                // do nothing
-            },
-            err => { 
-                // ignore error  
-            }  
-        );
+        this.orcidUtilService.logUserOut()
         this.getCollections();
     }
 }

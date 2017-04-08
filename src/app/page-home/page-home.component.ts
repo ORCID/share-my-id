@@ -17,23 +17,12 @@ export class PageHomeComponent implements OnInit {
     ) {}
 
     authenticate(): void {
-        this.orcidUtilService.logUserOut().subscribe(
-            response => { 
-                window.location.href  = '/create-smid-authorize';
-            },
-            err => {
-                // ignore error
-                window.location.href  = '/create-smid-authorize';
-            }
-        );
+        this.orcidUtilService.createAuth();
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         // make sure the user is logged out as soon as they are sent to this page
-        this.orcidUtilService.logUserOut().subscribe(
-            response => { /* do nothing */ },
-            err => { /* ignore error */ }
-        );
+        this.orcidUtilService.logUserOut();
     }
 
 }
