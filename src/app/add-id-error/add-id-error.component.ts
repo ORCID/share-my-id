@@ -31,7 +31,7 @@ export class AddIdErrorComponent implements OnInit {
             params => {
                 this.publicKey = params['publicKey'];
             }
-        );     
+        );
     }
 
     ngOnDestroy() {

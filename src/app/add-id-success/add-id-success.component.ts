@@ -14,7 +14,7 @@ import { CollectionService } from './../shared/collection/collection.service';
     styleUrls: ['./add-id-success.component.scss']
 })
 export class AddIdSuccessComponent implements OnInit {
-    
+
     private publicKey: string;
     private response: any;
     private sub: any;
@@ -29,12 +29,12 @@ export class AddIdSuccessComponent implements OnInit {
     }
 
     getCollections(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe( 
+        this.collectionService.getCollection(this.publicKey).subscribe(
             collections => {
                 this.collections = collections;
             }
         );
-    }    
+    }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {

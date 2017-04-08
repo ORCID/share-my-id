@@ -9,15 +9,15 @@ import { Collections, CollectionsEmpty } from './mock-collection';
 
 @Injectable()
 export class CollectionService {
-    
-    constructor( 
-        private http: Http, 
+
+    constructor(
+        private http: Http,
         private jsonp: Jsonp,
         private configService: ConfigService
     ) {
         this.collectionPersistentObj = CollectionsEmpty;
     }
-    
+
     private collectionPersistentObj: Collection[];
 
     private handleError (error: Response | any) {
@@ -34,22 +34,22 @@ export class CollectionService {
     }
 
     private extractData(res: Response) {
-      let body = res.json();
+      const body = res.json();
       return body.data || { };
     }
 
     editCollection( data: any, publicKey, privateKey ): Observable<Collection[]> {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.put( 
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers });
+        return this.http.put(
             '/' + publicKey + '/details/' + publicKey + '/edit/' + privateKey + '/details/form',
             data,
             options
-        ).map(( res:Response ) => res.json()).catch(this.handleError);
+        ).map(( res: Response ) => res.json()).catch(this.handleError);
     }
 
     getCollection(publicKey): Observable<Collection[]> {
-        return this.http.get( publicKey + '/details' ).map(( res:Response ) => res.json()).catch(this.handleError);
+        return this.http.get( publicKey + '/details' ).map(( res: Response ) => res.json()).catch(this.handleError);
 
     }
 

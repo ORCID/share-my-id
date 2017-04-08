@@ -27,11 +27,11 @@ const routes: Routes = [
     },
     {
         component: CollectionShareComponent,
-        path: ':publicKey' 
+        path: ':publicKey'
     },
     {
-        path: '**', 
-        redirectTo: '' 
+        path: '**',
+        redirectTo: ''
     }
 ];
 

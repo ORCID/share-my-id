@@ -35,30 +35,30 @@ export class CollectionEditComponent implements OnInit {
     constructor(
         private collectionService: CollectionService,
         private route: ActivatedRoute
-    ) 
+    )
     {
-        this.description = "";
+        this.description = '';
         this.formEmptyOnLoad = true;
         this.formSubmitted = false;
         this.showErrorMessage = false;
         this.showSuccessMessage = false;
-        this.title = "";
-        this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
+        this.title = '';
+        this.windowLocationOrigin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + location.port : '');
     }
 
     copyLinks(): void {
-        var collectionLinks = document.querySelector('#collection-links');  
-        var range = document.createRange();  
-        range.selectNode(collectionLinks);  
+        const collectionLinks = document.querySelector('#collection-links');
+        const range = document.createRange();
+        range.selectNode(collectionLinks);
         window.getSelection().addRange(range);
         document.execCommand('copy');
-        window.getSelection().removeAllRanges(); 
+        window.getSelection().removeAllRanges();
     }
 
     getCollections(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe( 
+        this.collectionService.getCollection(this.publicKey).subscribe(
             collections => {
-                var collection_parsed = null;
+                let collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
                 //console.log("collection_parsed", collection_parsed);
@@ -69,12 +69,12 @@ export class CollectionEditComponent implements OnInit {
                 this.title = collection_parsed.form.title;
                 this.username = collection_parsed.owner.name;
 
-                if( this.description.length > 0 && this.title.length > 0 ) {
+                if ( this.description.length > 0 && this.title.length > 0 ) {
                     this.formEmptyOnLoad = false;
                 }
             }
         );
-    }    
+    }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(
@@ -91,19 +91,19 @@ export class CollectionEditComponent implements OnInit {
     }
 
     submitForm( form: any ): void {
-        this.formSubmitted = true; 
+        this.formSubmitted = true;
         this.collectionService.editCollection( form, this.publicKey, this.privateKey ).subscribe(
             (response) => {
                 this.response = response;
                 this.showErrorMessage = false;
                 this.showSuccessMessage = true; // <- Update to change the status on the ajax call result
             },
-            (err)=> {
+            (err) => {
                 console.log(err);
                 this.showErrorMessage = true;
                 this.showSuccessMessage = false;
             },
-            ()=>{}
+            () => {}
         );
     }
 }
