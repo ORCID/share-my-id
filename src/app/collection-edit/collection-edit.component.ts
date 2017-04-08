@@ -1,4 +1,4 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -13,12 +13,12 @@ import { CollectionService } from './../shared/collection/collection.service';
     styleUrls: ['./collection-edit.component.scss']
 })
 
-export class CollectionEditComponent implements OnInit {
-    private publicKey: string;
-    private privateKey: string;
+export class CollectionEditComponent implements OnInit, OnDestroy {
+    public publicKey: string;
+    public privateKey: string;
     private response: any;
     private sub: any;
-    private windowLocationOrigin: string;
+    public windowLocationOrigin: string;
 
     collections: Collection[];
     description: string;
@@ -35,15 +35,15 @@ export class CollectionEditComponent implements OnInit {
     constructor(
         private collectionService: CollectionService,
         private route: ActivatedRoute
-    )
-    {
+    ) {
         this.description = '';
         this.formEmptyOnLoad = true;
         this.formSubmitted = false;
         this.showErrorMessage = false;
         this.showSuccessMessage = false;
         this.title = '';
-        this.windowLocationOrigin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + location.port : '');
+        this.windowLocationOrigin = window.location.protocol + '//'
+            + window.location.hostname + (window.location.port ? ':' + location.port : '');
     }
 
     copyLinks(): void {
@@ -61,7 +61,7 @@ export class CollectionEditComponent implements OnInit {
                 let collection_parsed = null;
                 this.collections = collections;
                 collection_parsed = JSON.parse(JSON.stringify(this.collections, null, 2));
-                //console.log("collection_parsed", collection_parsed);
+                // console.log("collection_parsed", collection_parsed);
 
                 this.description = collection_parsed.form.description;
                 this.fullOrcidId = collection_parsed.owner.fullOrcidId;

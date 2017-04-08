@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, Jsonp, URLSearchParams } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
-import 'rxjs/Rx'; //Fix for error with map, catch and other functions not being in typings for observables.
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx'; // Fix for error with map, catch and other functions not being in typings for observables.
 
 import { Collection } from './collection';
 import { ConfigService } from './../../shared/config/config.service';
@@ -10,6 +10,8 @@ import { Collections, CollectionsEmpty } from './mock-collection';
 @Injectable()
 export class CollectionService {
 
+    private collectionPersistentObj: Collection[];
+
     constructor(
         private http: Http,
         private jsonp: Jsonp,
@@ -17,8 +19,6 @@ export class CollectionService {
     ) {
         this.collectionPersistentObj = CollectionsEmpty;
     }
-
-    private collectionPersistentObj: Collection[];
 
     private handleError (error: Response | any) {
         let errMsg: string;

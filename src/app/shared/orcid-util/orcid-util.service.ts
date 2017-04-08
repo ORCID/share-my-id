@@ -39,13 +39,13 @@ export class OrcidUtilService {
             response => { window.location.href  = '/create-smid-authorize'; },
             err => { window.location.href  = '/create-smid-authorize'; }
         );
-	}
+    }
 
     addIdAuth(pubKey: string): void {
-	        this.logUserOutObserable().subscribe(
+        this.logUserOutObserable().subscribe(
             response => { window.location.href  = '/add-id-authorize/' + pubKey; },
             err => { window.location.href  = '/add-id-authorize/' + pubKey; }
         );
-	}
+    }
 
 }

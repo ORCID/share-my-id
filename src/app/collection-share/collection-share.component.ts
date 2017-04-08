@@ -20,8 +20,8 @@ export class CollectionShareComponent implements OnInit {
     collections: Collection[];
 
     private path: string[];
-    private publicKey: string;
-    private windowLocationOrigin: string;
+    public publicKey: string;
+    public windowLocationOrigin: string;
 
     constructor(
         private collectionService: CollectionService,
@@ -30,7 +30,8 @@ export class CollectionShareComponent implements OnInit {
     ) {
         this.path = window.location.pathname.split('/');
         this.publicKey = this.path[1];
-        this.windowLocationOrigin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + location.port : '');
+        this.windowLocationOrigin = window.location.protocol + '//'
+            + window.location.hostname + (window.location.port ? ':' + location.port : '');
     }
 
     authenticate(): void {

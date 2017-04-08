@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -12,7 +12,7 @@ import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
   templateUrl: './add-id-error.component.html',
   styleUrls: ['./add-id-error.component.scss']
 })
-export class AddIdErrorComponent implements OnInit {
+export class AddIdErrorComponent implements OnInit, OnDestroy {
 
     private sub: any;
     public publicKey: string;
