@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -13,12 +13,12 @@ import { CollectionService } from './../shared/collection/collection.service';
     templateUrl: './add-id-success.component.html',
     styleUrls: ['./add-id-success.component.scss']
 })
-export class AddIdSuccessComponent implements OnInit {
-    
-    private publicKey: string;
+export class AddIdSuccessComponent implements OnInit, OnDestroy {
+
+    public publicKey: string;
     private response: any;
     private sub: any;
-    private userOrcidId: string;
+    public userOrcidId: string;
 
     collections: Collection[];
 
@@ -29,12 +29,12 @@ export class AddIdSuccessComponent implements OnInit {
     }
 
     getCollections(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe( 
+        this.collectionService.getCollection(this.publicKey).subscribe(
             collections => {
                 this.collections = collections;
             }
         );
-    }    
+    }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {

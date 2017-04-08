@@ -20,17 +20,18 @@ export class CollectionShareComponent implements OnInit {
     collections: Collection[];
 
     private path: string[];
-    private publicKey: string;
-    private windowLocationOrigin: string;
+    public publicKey: string;
+    public windowLocationOrigin: string;
 
     constructor(
         private collectionService: CollectionService,
         private configService: ConfigService,
         private orcidUtilService: OrcidUtilService,
     ) {
-        this.path = window.location.pathname.split("/");
+        this.path = window.location.pathname.split('/');
         this.publicKey = this.path[1];
-        this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
+        this.windowLocationOrigin = window.location.protocol + '//'
+            + window.location.hostname + (window.location.port ? ':' + location.port : '');
     }
 
     authenticate(): void {
@@ -38,7 +39,7 @@ export class CollectionShareComponent implements OnInit {
     }
 
     getCollections(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe( 
+        this.collectionService.getCollection(this.publicKey).subscribe(
             collections => {
                 this.collections = collections;
             }
@@ -47,7 +48,7 @@ export class CollectionShareComponent implements OnInit {
 
     ngOnInit() {
         // make sure the user is logged out as soon as they are sent to this page
-        this.orcidUtilService.logUserOut()
+        this.orcidUtilService.logUserOut();
         this.getCollections();
     }
 }

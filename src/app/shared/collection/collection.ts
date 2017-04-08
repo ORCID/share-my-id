@@ -1,9 +1,9 @@
 export class Collection {
-    
+
     _id: string;
     details: {
         authenticated_orcids: [
-            {  
+            {
                 orcid: string;
                 fullOrcidId: string;
                 name: string;
