@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-
 import { Collection } from './../shared/collection/collection';
 
 import { ConfigService } from './../shared/config/config.service';
 
 import { CollectionService } from './../shared/collection/collection.service';
+
+import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
+
 
 @Component({
     selector: 'app-collection-share',
@@ -24,8 +25,8 @@ export class CollectionShareComponent implements OnInit {
 
     constructor(
         private collectionService: CollectionService,
-        private http: Http,
-        private configService: ConfigService
+        private configService: ConfigService,
+        private orcidUtilService: OrcidUtilService,
     ) {
         this.path = window.location.pathname.split("/");
         this.publicKey = this.path[1];
@@ -34,8 +35,7 @@ export class CollectionShareComponent implements OnInit {
 
     authenticate(): void {
         // make sure the user is logged out before sending them over
-        
-        this.collectionService.logUserOut().subscribe(
+        this.orcidUtilService.logUserOut().subscribe(
             response => { 
                 window.location.href  = '/add-id-authorize/' + this.publicKey;
             }, 
@@ -43,8 +43,7 @@ export class CollectionShareComponent implements OnInit {
                 // ignore error
                 window.location.href  = '/add-id-authorize/' + this.publicKey;      
             }
-        );
-        
+        );   
     }
 
     getCollections(): void {
@@ -57,7 +56,7 @@ export class CollectionShareComponent implements OnInit {
 
     ngOnInit() {
         // make sure the user is logged out as soon as they are sent to this page
-        this.collectionService.logUserOut().subscribe(
+        this.orcidUtilService.logUserOut().subscribe(
             response => {
                 // do nothing
             },
