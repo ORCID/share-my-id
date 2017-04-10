@@ -1,32 +1,24 @@
-<section class="text-center jumbotron jumbotron-fluid">
-    <div class="container">
+<div class="container">
+    <div class="row">
+        <div class="col">
         <h1><img class="share-id-icon" src="../assets/img/share-id-icon.svg" alt="Share iD icon"> Share your ORCID iD</h1>
         <!--<p class="lead">A simple way to collect authenticated ORCID iDs</p>-->
         <p class="lead">You've been invited to add your ORCID iD to the collection:</p>
-        <div class="collection-info">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">    
+        <div class="card">
+            <div class="card-block">
             <div *ngIf="collections">
                 <h2>{{collections.form.title}}</h2>
                 <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
                 <p>{{collections.form.description}}</p>
-                <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
-                <p><i><small>After adding your iD, the public name and iD on your ORCID record will be displayed in the list below.</small></i></p>         
-            </div>
-        </div>
-        <p class="lead"><i><small>Pretty cool, right? <a routerLink="/">Create your own iD collection now</a></small></i></p>
-    </div>
-</section>
-<div class="container">
-        <section 
-            class="row" 
-            *ngIf="collections" 
-        >
-            <div class="col">
-                <div class="card">
-                    <div class="card-block text-nowrap">
-                        <div class="table-responsive">
+                <button (click)="authenticate()" class="btn btn-primary">Add my iD</button> 
+                <div class="table-responsive">
                             <table 
                                 *ngIf="collections.authenticated_orcids.length > 0" 
-                                class="table"
+                                class="table text-left"
                             >
                                 <thead class="thead-default">
                                     <tr>
@@ -46,40 +38,24 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-</section>
-    <div 
-            *ngIf="collections" 
-            class="row"
-        >
-            <div class="col">
-                <p class="text-right link-style"><small><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>Download plain text</a></small></p>
-                <!--<p 
-                    (click)="showJsonObject = !showJsonObject"
-                    class="text-right link-style" 
-                ><small>View/Download as plain text.</small></p>
-                <div 
-                    *ngIf="showJsonObject"
-                    class="card"
-                >
-                    <div class="card-block">
-                        <pre ><code>{{collections | json}}</code></pre>
-                    </div>
-                </div>-->
-            </div>
-        </div>
+                        </div> 
         <div 
             *ngIf="collections" 
             class="row"
         >
             <div class="col">
-                <p class="mt-3">
-                    <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
-                </p>
+                <button (click)="authenticate()" class="btn float-left">Add my iD</button>
+                <p class="float-right text-right link-style"><small><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><fa  name="download"></fa> Download plain text</a></small></p>
             </div>
+
+        </div>
+                    </div>      
+            </div>
+
+
+        </div>
     </div>
 </div>
+</div>
+
+    

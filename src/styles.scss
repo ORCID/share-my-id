@@ -55,8 +55,10 @@ legend {
     margin-bottom: .8rem;
     word-break: normal;
 }
+
 main#content{
     padding-top: 0;
+    background-color: $orcidgraydk;
 }
 
 p {
@@ -65,7 +67,7 @@ p {
 }
 
 //Overwrite for bootstrap4 styles
-.btn-primary {
+.btn-primary, .btn {
     background-color: $button-bck-default;
     border: none;
     color: $button-font-color-default;
