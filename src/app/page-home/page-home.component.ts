@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ConfigService } from './../shared/config/config.service';
+
+import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
 
 @Component({
     selector: 'app-page-home',
@@ -9,16 +12,17 @@ import { Component, OnInit } from '@angular/core';
 export class PageHomeComponent implements OnInit {
 
     constructor(
-    ) { 
-    }
-
-    //Remove/refactor
+       private orcidUtilService: OrcidUtilService,
+       private configService: ConfigService
+    ) {}
 
     authenticate(): void {
-        window.location.href  = '/create-smid-authorize';
+        this.orcidUtilService.createAuth();
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
+        // make sure the user is logged out as soon as they are sent to this page
+        this.orcidUtilService.logUserOut();
     }
 
 }

@@ -9,29 +9,30 @@ import { PageHomeComponent } from './page-home/page-home.component';
 
 const routes: Routes = [
     {
-        component: PageHomeComponent, //Authenticate -> Redirects to editCollection
+        component: PageHomeComponent, // Authenticate -> Redirects to editCollection
         path: ''
     },
-    //Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will redirect to them instead of the expected url.
+    /* Be sure to put urls with :dinamicParam after the ones that are static. Other way the evaluation will
+       redirect to them instead of the expected url. */
     {
         component: AddIdErrorComponent,
         path: ':publicKey/add-id-error'
-    },
-    {
-        component: AddIdSuccessComponent,
-        path: ':publicKey/orcid/:orcid'
     },
     {
         component: CollectionEditComponent,
         path: ':publicKey/edit/:privateKey'
     },
     {
-        component: CollectionShareComponent,
-        path: ':publicKey' 
+        component: AddIdSuccessComponent,
+        path: ':publicKey/orcid/:orcid'
     },
     {
-        path: '**', 
-        redirectTo: '' 
+        component: CollectionShareComponent,
+        path: ':publicKey'
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
 

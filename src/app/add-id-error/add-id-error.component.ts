@@ -1,40 +1,29 @@
 import { ActivatedRoute } from '@angular/router';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
-import { CollectionService } from './../shared/collection/collection.service';
+import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
 
 @Component({
   selector: 'app-add-id-error',
   templateUrl: './add-id-error.component.html',
   styleUrls: ['./add-id-error.component.scss']
 })
-export class AddIdErrorComponent implements OnInit {
+export class AddIdErrorComponent implements OnInit, OnDestroy {
 
     private sub: any;
     public publicKey: string;
 
     constructor(
-        private collectionService: CollectionService,
+        private orcidUtilService: OrcidUtilService,
         private route: ActivatedRoute
     ) { }
 
     authenticate(): void {
-        // make sure the user is logged out before sending them over
-        
-        this.collectionService.logUserOut().subscribe(
-            response => { 
-                window.location.href  = '/add-id-authorize/' + this.publicKey;
-            }, 
-            err => { 
-                // ignore error
-                window.location.href  = '/add-id-authorize/' + this.publicKey;      
-            }
-        );
-        
+        this.orcidUtilService.addIdAuth(this.publicKey);
     }
 
     ngOnInit() {
@@ -42,7 +31,7 @@ export class AddIdErrorComponent implements OnInit {
             params => {
                 this.publicKey = params['publicKey'];
             }
-        );     
+        );
     }
 
     ngOnDestroy() {

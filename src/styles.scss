@@ -25,6 +25,7 @@ a {
         text-decoration: none;
     }
 
+    &:focus,
     &:hover {
         color: $link-font-color-hover;
         text-decoration: none;
@@ -54,12 +55,14 @@ legend {
     margin-bottom: .8rem;
     word-break: normal;
 }
+main#content{
+    padding-top: 0;
+}
 
 p {
     color: $base-font-color;
     word-break: normal;
 }
-
 
 //Overwrite for bootstrap4 styles
 .btn-primary {
@@ -83,14 +86,14 @@ p {
     }
 }
 
+.container{
+    height: 100%;
+    min-height: 100%;
+    padding: 0 3rem;
+    padding-bottom: 1rem;
+}
+
 .link-style {
     @extend a;
-}
 
-main#content{
-    padding-top: 0;
-}
-
-.container{
-    padding: 0 3rem;
 }

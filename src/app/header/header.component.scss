@@ -2,7 +2,6 @@
 
 header {
     background-color: $white;
-    color: $orcidgraymd;
     border-bottom: 1px solid #eceeef;
 }
 
@@ -13,9 +12,9 @@ nav {
 
 nav {
     a {
+        color: $orcidgraymd;
         font: normal 1rem $font-stack;
         text-transform: uppercase;
-        color: $orcidgraymd;
 
         &:hover {
             color: $orcidblue;
