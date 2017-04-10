@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Rx';
+
 import { Collection } from './../shared/collection/collection';
 
 import { ConfigService } from './../shared/config/config.service';
@@ -19,7 +21,10 @@ export class CollectionShareComponent implements OnInit {
 
     collections: Collection[];
 
+    private collectionSubscription: any;
     private path: string[];
+    private timerSubscription: any;
+
     public publicKey: string;
     public windowLocationOrigin: string;
 
@@ -34,21 +39,33 @@ export class CollectionShareComponent implements OnInit {
             + window.location.hostname + (window.location.port ? ':' + location.port : '');
     }
 
+    private refreshData(): void {
+        this.collectionService.getCollection(this.publicKey).subscribe( 
+            collections => {
+                this.collections = collections;
+                this.subscribeToData();
+            }
+        );
+    }
+
+    private subscribeToData(): void {
+        this.timerSubscription = Observable.timer( 30000 ).subscribe(() => this.refreshData());
+    }
+
     authenticate(): void {
         this.orcidUtilService.addIdAuth(this.publicKey);
     }
 
-    getCollections(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe(
-            collections => {
-                this.collections = collections;
-            }
-        );
+    public ngOnDestroy(): void {
+        if (this.timerSubscription) {
+            this.timerSubscription.unsubscribe();
+        }
     }
 
     ngOnInit() {
         // make sure the user is logged out as soon as they are sent to this page
         this.orcidUtilService.logUserOut();
-        this.getCollections();
+        this.refreshData();
+
     }
 }
