@@ -15,6 +15,7 @@ import { AddIdErrorComponent } from './add-id-error/add-id-error.component';
 import { AddIdSuccessComponent } from './add-id-success/add-id-success.component';
 import { CollectionEditComponent } from './collection-edit/collection-edit.component';
 import { CollectionShareComponent } from './collection-share/collection-share.component';
+import { OrcidUtilService } from './shared/orcid-util/orcid-util.service';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { PageHomeComponent } from './page-home/page-home.component';
@@ -41,7 +42,8 @@ import { PageHomeComponent } from './page-home/page-home.component';
     ],
     providers: [
         CollectionService,
-        ConfigService
+        ConfigService,
+        OrcidUtilService
     ],
     bootstrap: [AppComponent]
 })

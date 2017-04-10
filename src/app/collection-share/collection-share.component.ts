@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
+<<<<<<< HEAD
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 
+=======
+>>>>>>> 300d9a58b8ca90ef9ea021ec461eb1a12749455e
 import { Collection } from './../shared/collection/collection';
 
 import { ConfigService } from './../shared/config/config.service';
 
 import { CollectionService } from './../shared/collection/collection.service';
+
+import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
+
 
 @Component({
     selector: 'app-collection-share',
@@ -22,18 +28,20 @@ export class CollectionShareComponent implements OnInit {
 
     private collectionSubscription: any;
     private path: string[];
-    private publicKey: string;
     private timerSubscription: any;
-    private windowLocationOrigin: string;
+
+    public publicKey: string;
+    public windowLocationOrigin: string;
 
     constructor(
         private collectionService: CollectionService,
-        private http: Http,
-        private configService: ConfigService
+        private configService: ConfigService,
+        private orcidUtilService: OrcidUtilService,
     ) {
-        this.path = window.location.pathname.split("/");
+        this.path = window.location.pathname.split('/');
         this.publicKey = this.path[1];
-        this.windowLocationOrigin = window.location.protocol+'//'+ window.location.hostname + (window.location.port ? ':'+location.port: ''); 
+        this.windowLocationOrigin = window.location.protocol + '//'
+            + window.location.hostname + (window.location.port ? ':' + location.port : '');
     }
 
     private refreshData(): void {
@@ -51,36 +59,19 @@ export class CollectionShareComponent implements OnInit {
     }
 
     authenticate(): void {
-        // make sure the user is logged out before sending them over
-        
-        this.collectionService.logUserOut().subscribe(
-            response => { 
-                window.location.href  = '/add-id-authorize/' + this.publicKey;
-            }, 
-            err => { 
-                // ignore error
-                window.location.href  = '/add-id-authorize/' + this.publicKey;      
-            }
-        );
-        
-    }
-
-    ngOnInit() {
-        // make sure the user is logged out as soon as they are sent to this page
-        this.collectionService.logUserOut().subscribe(
-            response => {
-                // do nothing
-            },
-            err => { 
-                // ignore error  
-            }  
-        );
-        this.subscribeToData();
+        this.orcidUtilService.addIdAuth(this.publicKey);
     }
 
     public ngOnDestroy(): void {
         if (this.timerSubscription) {
             this.timerSubscription.unsubscribe();
         }
+    }
+
+    ngOnInit() {
+        // make sure the user is logged out as soon as they are sent to this page
+        this.orcidUtilService.logUserOut();
+        this.refreshData()();
+
     }
 }

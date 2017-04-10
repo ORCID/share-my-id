@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ConfigService } from './../shared/config/config.service';
 
-import { CollectionService } from './../shared/collection/collection.service';
+import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
 
 @Component({
     selector: 'app-page-home',
@@ -12,28 +12,17 @@ import { CollectionService } from './../shared/collection/collection.service';
 export class PageHomeComponent implements OnInit {
 
     constructor(
-       private collectionService: CollectionService,
+       private orcidUtilService: OrcidUtilService,
        private configService: ConfigService
     ) {}
 
     authenticate(): void {
-        this.collectionService.logUserOut().subscribe(
-            response => { 
-                window.location.href  = '/create-smid-authorize';
-            },
-            err => {
-                // ignore error
-                window.location.href  = '/create-smid-authorize';
-            }
-        );
+        this.orcidUtilService.createAuth();
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         // make sure the user is logged out as soon as they are sent to this page
-        this.collectionService.logUserOut().subscribe(
-            response => { /* do nothing */},
-            err => { /* ignore error */}
-        );
+        this.orcidUtilService.logUserOut();
     }
 
 }
