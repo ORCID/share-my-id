@@ -1,85 +1,85 @@
-<section class="container">
-    <div class="row">
-        <div class="col text-center">
-            <h1>Share My ORCID iD</h1>
-            <p>A simple way to collect authenticated ORCID iDs</p>
-            <p><i>Pretty cool, right? <a routerLink="/">Create your own iD collection now</a></i></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p>
+<section class="text-center jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1><img class="share-id-icon" src="../assets/img/share-id-icon.svg" alt="Share iD icon"> Share your ORCID iD</h1>
+        <!--<p class="lead">A simple way to collect authenticated ORCID iDs</p>-->
+        <p class="lead">You've been invited to add your ORCID iD to the collection:</p>
+        <div class="collection-info">
+            <div *ngIf="collections">
+                <h2>{{collections.form.title}}</h2>
+                <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
+                <p>{{collections.form.description}}</p>
                 <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
-            </p>
+                <p><i><small>After adding your iD, the public name and iD on your ORCID record will be displayed in the list below.</small></i></p>         
+            </div>
         </div>
+        <p class="lead"><i><small>Pretty cool, right? <a routerLink="/">Create your own iD collection now</a></small></i></p>
     </div>
-    <div 
-        class="row" 
-        *ngIf="collections" 
-    >
-        <div class="col">
-            <div class="card">
-                <div class="card-block text-nowrap">
-                    <h2>{{collections.form.title}}</h2>
-                    <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
-                    <p>{{collections.form.description}}</p>
-
-                    <div class="table-responsive">
-                        <table 
-                            *ngIf="collections.authenticated_orcids.length > 0" 
-                            class="table"
-                        >
-                            <thead class="thead-default">
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>ORCID iD</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    *ngFor="let authenticated_orcid of collections.authenticated_orcids; let j = index"
-                                    [attr.data-index]="j"
-                                >
-                                    <th scope="row">{{j+1}}</th>
-                                    <td>{{authenticated_orcid.name}}</td>
-                                    <td><a href="{{authenticated_orcid.fullOrcidId}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+</section>
+<div class="container">
+        <section 
+            class="row" 
+            *ngIf="collections" 
+        >
+            <div class="col">
+                <div class="card">
+                    <div class="card-block text-nowrap">
+                        <div class="table-responsive">
+                            <table 
+                                *ngIf="collections.authenticated_orcids.length > 0" 
+                                class="table"
+                            >
+                                <thead class="thead-default">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>ORCID iD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let authenticated_orcid of collections.authenticated_orcids; let j = index"
+                                        [attr.data-index]="j"
+                                    >
+                                        <th scope="row">{{j+1}}</th>
+                                        <td>{{authenticated_orcid.name}}</td>
+                                        <td><a href="{{authenticated_orcid.fullOrcidId}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div 
-        *ngIf="collections" 
-        class="row"
-    >
-        <div class="col">
-            <p class="text-right link-style"><small><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>Download plain text</a></small></p>
-            <!--<p 
-                (click)="showJsonObject = !showJsonObject"
-                class="text-right link-style" 
-            ><small>View/Download as plain text.</small></p>
-            <div 
-                *ngIf="showJsonObject"
-                class="card"
-            >
-                <div class="card-block">
-                    <pre ><code>{{collections | json}}</code></pre>
-                </div>
-            </div>-->
-        </div>
-    </div>
-    <div 
-        *ngIf="collections" 
-        class="row"
-    >
-        <div class="col">
-            <p class="mt-3">
-                <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
-            </p>
-        </div>
-    </div>
+    
 </section>
+    <div 
+            *ngIf="collections" 
+            class="row"
+        >
+            <div class="col">
+                <p class="text-right link-style"><small><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>Download plain text</a></small></p>
+                <!--<p 
+                    (click)="showJsonObject = !showJsonObject"
+                    class="text-right link-style" 
+                ><small>View/Download as plain text.</small></p>
+                <div 
+                    *ngIf="showJsonObject"
+                    class="card"
+                >
+                    <div class="card-block">
+                        <pre ><code>{{collections | json}}</code></pre>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div 
+            *ngIf="collections" 
+            class="row"
+        >
+            <div class="col">
+                <p class="mt-3">
+                    <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
+                </p>
+            </div>
+    </div>
+</div>

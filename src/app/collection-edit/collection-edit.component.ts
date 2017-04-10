@@ -28,6 +28,7 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
     ngForm: any;
     orcid: string;
     showErrorMessage: boolean;
+    showLinksCopied: boolean;
     showSuccessMessage: boolean;
     title: string;
     username: string;
@@ -40,6 +41,7 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
         this.formEmptyOnLoad = true;
         this.formSubmitted = false;
         this.showErrorMessage = false;
+        this.showLinksCopied = false;
         this.showSuccessMessage = false;
         this.title = '';
         this.windowLocationOrigin = window.location.protocol + '//'
@@ -52,7 +54,8 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
         range.selectNode(collectionLinks);
         window.getSelection().addRange(range);
         document.execCommand('copy');
-        window.getSelection().removeAllRanges();
+        window.getSelection().removeAllRanges(); 
+        this.showLinksCopied = true;
     }
 
     getCollections(): void {
