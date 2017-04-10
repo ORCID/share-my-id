@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-<<<<<<< HEAD
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-
 import { Observable } from 'rxjs/Rx';
 
-=======
->>>>>>> 300d9a58b8ca90ef9ea021ec461eb1a12749455e
 import { Collection } from './../shared/collection/collection';
 
 import { ConfigService } from './../shared/config/config.service';
@@ -71,7 +66,7 @@ export class CollectionShareComponent implements OnInit {
     ngOnInit() {
         // make sure the user is logged out as soon as they are sent to this page
         this.orcidUtilService.logUserOut();
-        this.refreshData()();
+        this.refreshData();
 
     }
 }
