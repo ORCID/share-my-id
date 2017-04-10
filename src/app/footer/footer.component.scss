@@ -1,9 +1,11 @@
 @import '../../variables';
 
 footer {
+    //background-color: $orcidgraydk;
     background-color: $orcidgraydk;
     color: $white;
     padding: .5rem 0;
+    border-top: 1px solid #5b5c5d;
 
     img {
         float: left;
@@ -11,13 +13,23 @@ footer {
     }
 
     p {
-        color: $white;
+        color: $gray97;
         font: .8rem $font-stack;
         float: left;
         line-height: 2.2rem;
         margin: 0;
         padding: 0;
         vertical-align: bottom;
+    }
+
+    fa {
+        color: $gray97;
+        font-size: 1.4rem;
+        margin-left: 2rem; 
+
+        &:hover{
+            color: $orcidgreen;
+        }
     }
 }
 

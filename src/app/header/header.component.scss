@@ -1,18 +1,16 @@
 @import '../../variables';
 
 header {
-    background-color: $white;
-    border-bottom: 1px solid #eceeef;
+    background-color: $orcidgraydk;
+    border-bottom: 1px solid #5b5c5d;
 }
 
 nav {
-    margin: 2rem 0 1rem 0;
-    padding: 0;
-}
+    margin: 2rem 0;
+    padding: 0 0 .3rem 0;
 
-nav {
     a {
-        color: $orcidgraymd;
+        color: $orcidgraylt;
         font: normal 1rem $font-stack;
         text-transform: uppercase;
 

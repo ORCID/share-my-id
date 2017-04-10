@@ -1,42 +1,21 @@
 @import '../../variables';
 
-.jumbotron{
-    background-color: $orcidgraydk;
-    
-    h1 {
-        color: $white;
-        font: bold 3.6rem $font-stack;
-        margin: 0;
-    }
-
-    .btn-primary {
-        font: normal 1.4rem $font-stack;
-        margin-top: 2rem;
-        padding: .8em 2rem;
-    }
-
-    .lead {
-        color: $orcidgraylt;
-        font:  1.2rem $font-stack;
-    }
-
-    .share-id-icon{
-        margin-bottom: .2rem;
-        margin-left: -4rem;
-        width: 4rem;
-    }
-}
-
-h1, 
-h2 {
-    margin: 2rem 0;
+.card .btn-primary {  
+    margin: 1rem 0 2rem 0;
+    font: normal 1.4rem $font-stack;
+    padding: .8em 2rem;
     text-align: center;
-    width: 100%;
 }
 
 ol, 
 ul {
+    text-align: left;
+
     li {
         margin: 1rem 0;
     }
+}
+
+p {
+    text-align: left;
 }

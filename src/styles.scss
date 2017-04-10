@@ -6,7 +6,7 @@
 ****************************************************/
 * {
     white-space: normal;
-    word-break: break-all;
+    word-break: normal;
 }
 
 a {
@@ -39,7 +39,7 @@ a {
 
 body {
     font: normal 100% $font-stack;
-    color: $orcidgraydk;
+    background-color: $orcidgraydk;
 }
 
 button, 
@@ -97,4 +97,54 @@ p {
 .link-style {
     @extend a;
 
+}
+
+.card {
+    background-color: $white;
+    padding: 1rem;
+    border-radius: .5rem;
+    margin: 1rem 0;
+
+    h2 {
+        text-align: center;
+        font: bold 1.6rem $font-stack;
+        color: $orcidgraydk;
+        margin: 1rem 0;
+    }
+
+    p {
+        color: $white;
+        color: $orcidgraydk;
+        margin-bottom: .6rem;
+    }
+
+    .btn-primary {  
+        margin: 1rem 0 2rem 0;
+        font: normal 1.4rem $font-stack;
+        padding: .8em 2rem;
+    }
+  
+}
+
+.container{
+    text-align: left;
+
+    .lead {
+        font:  1.2rem $font-stack;
+        color: $orcidgraylt;
+        text-align: center;
+    }
+
+    .share-id-icon{
+        width: 4rem;
+        margin-bottom: .2rem;
+        margin-left: -4rem;
+    }
+
+    h1 {
+        font: bold 3.6rem $font-stack;
+        color: $white;
+        margin: 2rem 0 0 0;
+        text-align: center;
+    }
 }
