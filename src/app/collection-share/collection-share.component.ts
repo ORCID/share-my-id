@@ -42,7 +42,6 @@ export class CollectionShareComponent implements OnInit {
     private refreshData(): void {
         this.collectionService.getCollection(this.publicKey).subscribe( 
             collections => {
-                console.log("called");
                 this.collections = collections;
                 this.subscribeToData();
             }
@@ -50,7 +49,7 @@ export class CollectionShareComponent implements OnInit {
     }
 
     private subscribeToData(): void {
-        this.timerSubscription = Observable.timer( 1000, 30000 ).subscribe(() => this.refreshData());
+        this.timerSubscription = Observable.timer( 30000 ).subscribe(() => this.refreshData());
     }
 
     authenticate(): void {
