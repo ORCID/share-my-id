@@ -1,0 +1,58 @@
+@import '../../variables';
+
+.collection-info{
+    background-color: $gray97;
+    padding: 1rem;
+    border-radius: .5rem;
+    margin: 1rem 0;
+}
+
+.jumbotron{
+    background-color: $orcidgraydk;
+}
+
+.jumbotron{
+    padding: 2rem 0;
+
+    .share-id-icon{
+        width: 4rem;
+        margin-bottom: .2rem;
+        margin-left: -4rem;
+    }
+
+    h1 {
+        font: bold 3.6rem $font-stack;
+        color: $white;
+        margin: 0;
+    }
+
+    h2 {
+        font: bold 1.6rem $font-stack;
+        color: $white;
+        color: $orcidgraydk;
+        margin-bottom: 0;
+    }
+
+    p {
+        color: $white;
+        color: $orcidgraydk;
+        margin-bottom: .6rem;
+    }
+
+    .btn-primary {
+        margin: 1rem 0;
+        font: normal 1.4rem $font-stack;
+        padding: .8em 2rem;
+    }
+
+    .container {
+        width: 60%;
+    }
+
+    .lead {
+        font:  1.2rem $font-stack;
+        color: $orcidgraylt;
+    }
+
+    
+}

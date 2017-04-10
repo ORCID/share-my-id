@@ -1,19 +1,23 @@
+<section class="text-center jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1><img class="share-id-icon" src="../assets/img/share-id-icon.svg" alt="Share iD icon"> Share your ORCID iD</h1>
+        <!--<p class="lead">A simple way to collect authenticated ORCID iDs</p>-->
+        <p class="lead">You've been invited to add your ORCID iD to the collection:</p>
+        <div class="collection-info">
+            <div *ngIf="collections">
+                <h2>{{collections.form.title}}</h2>
+                <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
+                <p>{{collections.form.description}}</p>
+                <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
+                <p><i><small>After adding your iD, the public name and iD on your ORCID record will be displayed in the list below.</small></i></p>         
+            </div>
+        </div>
+        
+        <p class="lead"><i><small>Pretty cool, right? <a routerLink="/">Create your own iD collection now</a></small></i></p>
+        
+    </div>
+</section>
 <div class="container">
-    <section>
-        <div class="row">
-            <div class="col text-center">
-                <h1>Share My ORCID iD</h1>
-                <p>A simple way to collect authenticated ORCID iDs</p>
-                <p><i>Pretty cool, right? <a routerLink="/">Create your own iD collection now</a></i></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>
-                    <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
-                </p>
-            </div>
-        </div>
         <section 
             class="row" 
             *ngIf="collections" 
@@ -23,9 +27,6 @@
                     <div 
                         class="card-block text-nowrap"
                     >
-                        <h2>{{collections.form.title}}</h2>
-                        <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
-                        <p>{{collections.form.description}}</p>
 
                         <div class="table-responsive">
                             <table 
@@ -85,5 +86,4 @@
                 </p>
             </div>
         </div>
-    </section>
 </div>

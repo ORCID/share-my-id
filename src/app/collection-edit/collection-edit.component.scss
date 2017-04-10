@@ -27,11 +27,17 @@ legend {
     }
 
     button {
+        float: left;
         margin: 1rem 0 0 0;
         
         fa {
             color: $white;
         }
+    }
+
+    .text-success {
+        float: left;
+        margin: 1.5rem 0 0 1rem;
     }
 
 }

@@ -7,7 +7,8 @@
                 novalidate
             >
                 <fieldset>
-                    <legend class="font-weight-bold text-center">ID Collection Details</legend>
+                    <legend class="font-weight-bold text-center">iD Collection Details</legend>
+                    <p>This information is displayed on your collection page. Use these fields to let users know why you're collecting their iDs and what you plan to do with them. Sorry, plain text only! (no links or other HTML)</p>
 
                     <div class="form-group" >
                         <label class="form-control-label font-weight-bold" for="title">Title</label>
@@ -84,7 +85,7 @@
                         <p>Share this link with anyone whose iD you want to collect, or display this page on a laptop/tablet at your event:</p>
                         <p><a href="{{windowLocationOrigin}}/{{publicKey}}" target="_{{publicKey}}">{{windowLocationOrigin}}/{{publicKey}} <fa name="external-link-square"></fa></a></p>
                     </div>
-                    <button (click)="copyLinks()" class="btn btn-primary" ><fa  name="clipboard"></fa> Copy</button>
+                    <button (click)="copyLinks()" class="btn btn-primary" ><fa  name="clipboard"></fa> Copy</button><div *ngIf="showLinksCopied" class="text-success">Links copied!</div>
                 </div>
             </div>
         </div>
