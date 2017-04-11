@@ -40,6 +40,7 @@ a {
 body {
     font: normal 100% $font-stack;
     background-color: $orcidgraydk;
+    min-height: 100%;
 }
 
 button, 
@@ -56,8 +57,12 @@ legend {
     word-break: normal;
 }
 
+html{
+    height: 100%;
+}
+
 main#content{
-    padding-top: 0;
+    padding: 0 0 2rem 0;
     background-color: $orcidgraydk;
 }
 
@@ -67,7 +72,7 @@ p {
 }
 
 //Overwrite for bootstrap4 styles
-.btn-primary, .btn {
+.btn-primary {
     background-color: $button-bck-default;
     border: none;
     color: $button-font-color-default;
@@ -88,22 +93,15 @@ p {
     }
 }
 
-.container{
-    height: 100%;
-    min-height: 100%;
-    padding: 0 3rem;
-}
-
-.link-style {
-    @extend a;
-
-}
-
 .card {
     background-color: $white;
     padding: 1rem;
     border-radius: .5rem;
     margin: 1rem 0;
+
+    h1 {
+        color: $orcidgraydk;
+    }
 
     h2 {
         text-align: center;
@@ -118,7 +116,7 @@ p {
         margin-bottom: .6rem;
     }
 
-    .btn-primary {  
+    .lg-btn {  
         margin: 1rem 0 2rem 0;
         font: normal 1.4rem $font-stack;
         padding: .8em 2rem;
@@ -128,6 +126,9 @@ p {
 
 .container{
     text-align: left;
+    height: 100%;
+    min-height: 100%;
+    padding: 0 3rem;
 
     .lead {
         font:  1.2rem $font-stack;
@@ -147,4 +148,9 @@ p {
         margin: 2rem 0 0 0;
         text-align: center;
     }
+}
+
+.link-style {
+    @extend a;
+
 }

@@ -15,7 +15,7 @@
                             <h2>{{collections.form.title}}</h2>
                             <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank" rel="noopener noreferrer">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
                             <p>{{collections.form.description}}</p>
-                            <button (click)="authenticate()" class="btn btn-primary">Add my iD</button>
+                            <button (click)="authenticate()" class="btn btn-primary lg-btn">Add my iD</button>
                         </div> 
                         <div class="table-responsive">
                             <table 
@@ -46,7 +46,7 @@
                         class="row"
                     >
                         <div class="col">
-                            <button (click)="authenticate()" class="btn float-left">Add my iD</button>
+                            <button (click)="authenticate()" class="btn btn-primary float-left">Add my iD</button>
                             <p class="float-right text-right link-style"><small><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><fa  name="download"></fa> Download plain text</a></small></p>
                         </div>
                     </div>
