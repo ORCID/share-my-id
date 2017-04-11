@@ -1,0 +1,17 @@
+@import '../../variables';
+
+.card {
+    h2 {
+        margin-bottom: 0;
+    }
+
+    small{
+        font-style: italic;
+        line-height: .9rem;
+    }
+
+    table {
+        margin-top: 1rem;
+    }
+
+}

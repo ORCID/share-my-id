@@ -1,16 +1,24 @@
 @import '../../variables';
 
-legend {
-    color: $title-h1-font-color;
-    font: normal 2.5rem $font-stack;
+form p {
+    margin-bottom: 2rem;
 }
 
-.card {
+form p.form-control-label {
+    margin-bottom: 0;
+}
+
+legend {
+    color: $title-h1-font-color;
+    font: bold 2.5rem $font-stack;
+}
+
+.card .card {
+
     background-color: $gray97;
 
     h2 {
-        font: bold 1.5rem $font-stack;
-        color: $orcidgraydk;
+        text-align: left;
     }
 
     h3 {
@@ -27,11 +35,21 @@ legend {
     }
 
     button {
+        float: left;
         margin: 1rem 0 0 0;
         
         fa {
             color: $white;
         }
+    }
+
+    .card-block {
+        padding-top: .5rem;
+    }
+
+    .text-success {
+        float: left;
+        margin: 1.5rem 0 0 1rem;
     }
 
 }

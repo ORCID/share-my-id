@@ -1,20 +1,10 @@
 @import '../../variables';
 
 header {
-    background-color: $white;
-    border-bottom: 1px solid #eceeef;
-    color: $orcidgraymd;
-    margin-bottom: 1rem;
-}
+    margin: 1.5rem 0 1rem 0;
 
-nav {
-    margin: 2rem 0 1rem 0;
-    padding: 0;
-}
-
-nav {
     a {
-        color: $orcidgraymd;
+        color: $orcidgraylt;
         font: normal 1rem $font-stack;
         text-transform: uppercase;
 
@@ -22,9 +12,20 @@ nav {
             color: $orcidblue;
         }
     }
+    h1 {
+        display: inline-block;
+        &:hover{
+            color: $orcidgraylt;
+        }
+    }
 
     img {
         margin-bottom: .2rem;
+    }
+
+    .lead {
+        line-height: .5rem;
+        margin: 0;
     }
 
 }
