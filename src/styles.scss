@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'variables';
+@import "../node_modules/bootstrap/scss/bootstrap-grid.scss";
 
 /****************************************************
 //Global Styles
@@ -57,10 +58,6 @@ legend {
     word-break: normal;
 }
 
-html{
-    height: 100%;
-}
-
 main#content{
     padding: 0 0 2rem 0;
     background-color: $orcidgraydk;
@@ -105,7 +102,7 @@ p {
 
     h2 {
         text-align: center;
-        font: bold 1.6rem $font-stack;
+        font: bold 1.6em $font-stack;
         color: $orcidgraydk;
         margin: 1rem 0;
     }
@@ -121,7 +118,7 @@ p {
         font: normal 1.4rem $font-stack;
         padding: .8em 2rem;
     }
-  
+
 }
 
 .container{
@@ -148,9 +145,28 @@ p {
         margin: 2rem 0 0 0;
         text-align: center;
     }
+
 }
 
 .link-style {
     @extend a;
 
+}
+
+@include media-breakpoint-up(xs) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 16px;
+  }
 }

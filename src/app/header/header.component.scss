@@ -12,6 +12,7 @@ header {
             color: $orcidblue;
         }
     }
+
     h1 {
         display: inline-block;
         &:hover{
@@ -24,7 +25,6 @@ header {
     }
 
     .lead {
-        line-height: .5rem;
         margin: 0;
     }
 
