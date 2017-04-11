@@ -1,17 +1,11 @@
 <div class="container">
     <div class="row">
-        <div class="col">
-            <h1><img class="share-id-icon" src="../assets/img/share-id-icon.svg" alt="Share iD icon"> Share your ORCID iD</h1>
-            <!--<p class="lead">A simple way to collect authenticated ORCID iDs</p>-->
-            <p class="lead">You've been invited to add your ORCID iD to a collection</p>
-        </div>
-    </div>
-    <div class="row">
         <div class="col">    
             <div class="card">
                 <div class="card-block">
                     <div *ngIf="collections">
                         <div class="text-center">
+                            <p>You've been invited to add your ORCID iD to the collection:</p>
                             <h2>{{collections.form.title}}</h2>
                             <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank" rel="noopener noreferrer">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
                             <p>{{collections.form.description}}</p>
