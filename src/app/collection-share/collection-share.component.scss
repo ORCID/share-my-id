@@ -5,6 +5,10 @@
         margin-bottom: 0;
     }
 
+    .card {
+        background-color: $gray97;
+    }
+
     .lg-btn {
         margin-bottom: 1rem;
     }
@@ -17,6 +21,15 @@
 
     table {
         margin-top: 1rem;
+
+        th, td {
+            border-top: 1px solid #dadada;
+        }
+
+        .thead-default th {
+            background-color: $gray97;
+            border-bottom: 1px solid #dadada;
+        }
     }
 
 }
