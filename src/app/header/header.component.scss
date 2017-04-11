@@ -12,6 +12,12 @@ header {
             color: $orcidblue;
         }
     }
+    h1 {
+        display: inline-block;
+        &:hover{
+            color: $orcidgraylt;
+        }
+    }
 
     img {
         margin-bottom: .2rem;
@@ -19,6 +25,7 @@ header {
 
     .lead {
         line-height: .5rem;
+        margin: 0;
     }
 
 }
