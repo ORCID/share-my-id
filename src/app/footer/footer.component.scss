@@ -1,7 +1,7 @@
 @import '../../variables';
+@import "../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
 
 footer {
-    //background-color: $orcidgraydk;
     background-color: $orcidgraydk;
     color: $white;
     padding: .5rem 0;
@@ -16,7 +16,7 @@ footer {
         color: $gray97;
         font: .8rem $font-stack;
         float: left;
-        line-height: 2.2rem;
+        line-height: 32px;
         margin: 0;
         padding: 0;
         vertical-align: bottom;
@@ -31,5 +31,20 @@ footer {
             color: $orcidgreen;
         }
     }
+
+    .footer-left{
+        float: left;
+    }
+
+    .footer-right{
+        float: right;
+    }
+
+    @include media-breakpoint-down(sm) {
+        .footer-right {
+            clear: left;
+            float: left;
+    }
+}
 }
 
