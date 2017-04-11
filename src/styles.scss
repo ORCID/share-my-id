@@ -98,6 +98,10 @@ p {
 
     h1 {
         color: $orcidgraydk;
+        display: inline-block;
+        font: bold 3.6rem $font-stack;
+        margin: 1rem 0 0 0;
+        text-align: center;
     }
 
     h2 {
@@ -137,13 +141,6 @@ p {
         width: 4rem;
         margin-bottom: .2rem;
         margin-left: -4rem;
-    }
-
-    h1 {
-        font: bold 3.6rem $font-stack;
-        color: $white;
-        margin: 2rem 0 0 0;
-        text-align: center;
     }
 
 }

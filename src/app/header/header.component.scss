@@ -15,6 +15,11 @@ header {
 
     h1 {
         display: inline-block;
+        font: bold 3.6rem $font-stack;
+        color: $white;
+        margin: 2rem 0 0 0;
+        text-align: center;
+        
         &:hover{
             color: $orcidgraylt;
         }
