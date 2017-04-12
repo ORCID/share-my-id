@@ -193,7 +193,21 @@ app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
         from: 'No Reply <noreply@share-my-id.orcid.org>',
         to: data.email,
         subject: 'Share My iD ' + req.params.publicKey + ' links',
-        text: 'Testing some Mailgun awesomness!'
+        text: `Thanks for creating a ORCID iD collection.\n`
+        + `\n`
+        + `\n`
+        + `Administration Link\n`
+        + `Use this link to edit collection details: \n`
+        + `${config.HOST}/${req.params.publicKey}/edit/${req.params.privateKey}\n`
+        + `\n`
+        + `\n`
+        + `Share Link\n`
+        + `Share this link with anyone whose iD you want to collect, or display this page on a laptop/tablet at your event:`
+        + `${config.HOST}/${req.params.publicKey}`
+        + `\n`
+        + `\n`
+        + `Thanks,`
+        + `The Share My iD Team`
       };
       mailgunPriv.messages().send(mailData, function (error, body) {
         if (error != null) {
