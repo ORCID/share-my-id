@@ -14,7 +14,12 @@ module.exports = config = {
 	    roles: ["readWrite"]
 	});
   */
-  MONGO_CONNECTION_STRING: 'smid_user:devpassword@127.0.0.1:27017/smid'
+  MONGO_CONNECTION_STRING: 'smid_user:devpassword@127.0.0.1:27017/smid',
+  /* mailgun tkeys */
+  MAILGUN_PRIV_API_KEY: 'key-3ax6xnjp29jd6fds4gc373sgvjxteol0', // test key from mailgun docs
+  MAILGUN_PUB_API_KEY: 'pubkey-34mudp0r5-xfoewxwkxfo01-op6t6ed0', // our public key
+ 
+  MAILGUN_DOMAIN: 'samples.mailgun.org' // test domian from mailgun docs
 }
 
 // Environment variables overrides
