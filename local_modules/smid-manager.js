@@ -173,7 +173,7 @@ SmidManger.prototype.validateForm = function(form, callback) {
 
 
 SmidManger.prototype.updateForm = function(privateKey, form, callback) {
-  var smidManger = this
+  var smidManger = this;
   this.validateForm(form, function(err) {
     if (err) {
       callback(err)
@@ -210,11 +210,12 @@ SmidManger.prototype.validateEmail = function(email, callback) {
 };
 
 SmidManger.prototype.updateEmail = function(privateKey, email, callback) {
+  var smidManger = this;
   this.validateEmail(email, function (err) {
     if ( err != null) {
       callback(err, null);
     } else {
-      this._smidCol.findAndModify({
+      smidManger._smidCol.findAndModify({
           query: {
             private_key: privateKey
           },
