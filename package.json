@@ -37,6 +37,7 @@
     "font-awesome": "^4.7.0",
     "global-request-logger": "^0.1.1",
     "helmet": "^3.5.0",
+    "intl": "^1.2.5",
     "mongojs": "^2.4.0",
     "randomstring": "^1.1.5",
     "request": "^2.79.0",

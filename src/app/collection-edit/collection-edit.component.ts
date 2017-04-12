@@ -30,6 +30,7 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
     showErrorMessage: boolean;
     showLinksCopied: boolean;
     showSuccessMessage: boolean;
+    showWarningMessage: boolean;
     title: string;
     username: string;
 
@@ -43,6 +44,7 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
         this.showErrorMessage = false;
         this.showLinksCopied = false;
         this.showSuccessMessage = false;
+        this.showWarningMessage = false;
         this.title = '';
         this.windowLocationOrigin = window.location.protocol + '//'
             + window.location.hostname + (window.location.port ? ':' + location.port : '');
@@ -54,7 +56,7 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
         range.selectNode(collectionLinks);
         window.getSelection().addRange(range);
         document.execCommand('copy');
-        window.getSelection().removeAllRanges(); 
+        window.getSelection().removeAllRanges();
         this.showLinksCopied = true;
     }
 
