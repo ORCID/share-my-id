@@ -114,7 +114,6 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
             this.showEmailSuccessMessage = false;
         } else {
             var formString = JSON.stringify(form);
-            console.log("Email string: " + formString);
             this.collectionService.editEmail( formString, this.publicKey, this.privateKey ).subscribe(
                 (response) => {
                     this.response = response;
