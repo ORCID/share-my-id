@@ -165,7 +165,7 @@ SmidManger.prototype.smidExist = function(pubKey, privKey, callback) {
 SmidManger.prototype.validateForm = function(form, callback) {
   if (!ajv.validate(FormSchema, form)) {
     console.log(ajv.errors);
-    callback(Error("Invalid form " + form));
+    callback(ajv.errors);
   } else {
     callback(null)
   }
@@ -203,7 +203,7 @@ SmidManger.prototype.updateForm = function(privateKey, form, callback) {
 SmidManger.prototype.validateEmail = function(email, callback) {
   if (!ajv.validate(EmailSchema, email)) {
     console.log(ajv.errors);
-    callback(new Error("Invalid email " + email));
+    callback(ajv.errors);
   } else {
     callback(null);
   }

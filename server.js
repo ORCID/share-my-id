@@ -173,7 +173,7 @@ app.get(COLLECTION_DETAILS_DOWNLOAD, function(req, res) {
 app.put(COLLECTION_DETAILS_FORM, function(req, res) {
   var data = req.body;
   smidManger.updateForm(req.params.privateKey, data.form, function(err, doc) {
-    if (err) res.status(400).send(err)
+    if (err) res.status(400).json({'error':err})
     else {
       res.status(200).json(doc);
     }
@@ -184,7 +184,7 @@ app.put(COLLECTION_DETAILS_FORM, function(req, res) {
 app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
   var data = req.body;
   smidManger.updateEmail(req.params.privateKey, data.email, function(err, doc) {
-    if (err) res.status(400).send(err)
+    if (err) res.status(400).json({'error':err});
     else {
       res.status(200).json({'email': doc.owner.email});
     }
