@@ -4,14 +4,6 @@ var mongojs = require('mongojs'),
 
 var ajv = new Ajv();
 
-var EmailSchema = {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "SMID Eamil",
-  "description": "SMID Email",
-  "type": "string",
-  "format": "email"
-};
-
 var FormSchema = {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "SMID Form",
@@ -36,7 +28,6 @@ var OrcidRecordSchema = {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
     "form": FormSchema,
-    "email": EmailSchema
   },
   "title": "Orcid Record",
   "description": "Records Name and ORCID iD",
@@ -47,7 +38,6 @@ var OrcidRecordSchema = {
       "type": "object",
       "format": "date-time"
     },
-    "email": {"$ref": "#/definitions/email"},
     "fullOrcidId": {
       "description": "Full url ORCID iD",
       "type": "string"
@@ -66,7 +56,6 @@ var OrcidRecordSchema = {
       "type": "number"
     }
   },
-  // optional to be populated later ["email"]
   "required": ["orcid", "fullOrcidId", "name", "dateRecorded", "version"],
   "additionalProperties": false
 };
@@ -199,44 +188,6 @@ SmidManger.prototype.updateForm = function(privateKey, form, callback) {
     }
   })
 }
-
-SmidManger.prototype.validateEmail = function(email, callback) {
-  if (!ajv.validate(EmailSchema, email)) {
-    console.log(ajv.errors);
-    callback(ajv.errors);
-  } else {
-    callback(null);
-  }
-};
-
-SmidManger.prototype.updateEmail = function(privateKey, email, callback) {
-  var smidManger = this;
-  this.validateEmail(email, function (err) {
-    if ( err != null) {
-      callback(err, null);
-    } else {
-      smidManger._smidCol.findAndModify({
-          query: {
-            private_key: privateKey
-          },
-          update: {
-            $set: {
-              'details.owner.email': email
-            }
-          },
-          new: true // this means return the updated object
-        },
-        function(err, doc, lastErrorObject) {
-          if (err) callback(err, null);
-          else {
-            console.log("returned doc " + JSON.stringify(doc));
-            callback(null, doc.details);
-          }
-        });
-    }
-  });
-}
-
 
 SmidManger.prototype.validateOrcidRecord = function(orcidRecord) {
   if (!ajv.validate(OrcidRecordSchema, orcidRecord)) {
