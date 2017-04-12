@@ -7,15 +7,15 @@
                         <p><i>You've been invited to add your ORCID iD to the collection:</i></p>
                         <div class="card">
                             <div class="card-block">
-                        <h2>{{collections.form.title}}</h2>
-                        <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank" rel="noopener noreferrer">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
-                        <p>{{collections.form.description}}</p>
+                                <h2>{{collections.form.title}}</h2>
+                                <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank" rel="noopener noreferrer">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
+                                <p>{{collections.form.description}}</p>
 
-                        <button (click)="authenticate()" class="btn btn-primary lg-btn">Add my iD</button>
-                        </div>
+                                <button (click)="authenticate()" class="btn btn-primary lg-btn">Add my iD</button>
+                            </div>
                         </div>
                         
-                                <p><small><strong>Don't have an ORCID iD?</strong> Register for an iD and add it to this collection at the same time: Click 'Add my iD' above, then 'Register now' on the next screen.<br>Not so sure about this ORCID thing? <a href="//orcid.org/about" target="_blank" rel="noopener noreferrer">Learn more about ORCID</a></small></p>
+                        <p><small><strong>Don't have an ORCID iD?</strong> Register for an iD and add it to this collection at the same time: Click 'Add my iD' above, then 'Register now' on the next screen.<br>Not so sure about this ORCID thing? <a href="//orcid.org/about" target="_blank" rel="noopener noreferrer">Learn more about ORCID</a></small></p>
                             
                     </div> 
                     <div class="table-responsive">
@@ -42,16 +42,17 @@
                             </tbody>
                         </table>
                     </div> 
-                <div 
-                    *ngIf="collections" 
-                    class="row"
-                >
-                    <div class="col">
-                        <button (click)="authenticate()" class="btn btn-primary float-left">Add my iD</button>
-                        <p class="float-right text-right link-style"><small><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><fa  name="download"></fa> Download plain text</a></small></p>
+                    <div 
+                        *ngIf="collections" 
+                        class="row"
+                    >
+                        <div class="col">
+                            <button (click)="authenticate()" class="btn btn-primary float-left">Add my iD</button>
+                            <p class="float-right text-right link-style"><small><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><fa  name="download"></fa> Download plain text</a></small></p>
+                        </div>
                     </div>
-                </div>
-            </div>      
+                </div>      
+            </div>
         </div>
     </div>
 </div>

@@ -5,7 +5,16 @@ footer {
     background-color: $orcidgraydk;
     color: $white;
     padding: .5rem 0;
-    //order-top: 1px solid #5b5c5d;
+
+    fa {
+        color: $gray97;
+        font-size: 1.4rem;
+        margin-left: 2rem; 
+
+        &:hover{
+            color: $orcidgreen;
+        }
+    }
 
     img {
         float: left;
@@ -22,16 +31,6 @@ footer {
         vertical-align: bottom;
     }
 
-    fa {
-        color: $gray97;
-        font-size: 1.4rem;
-        margin-left: 2rem; 
-
-        &:hover{
-            color: $orcidgreen;
-        }
-    }
-
     .footer-left{
         float: left;
     }
@@ -44,7 +43,7 @@ footer {
         .footer-right {
             clear: left;
             float: left;
+        }
     }
-}
 }
 

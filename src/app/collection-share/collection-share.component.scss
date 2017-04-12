@@ -5,6 +5,25 @@
         margin-bottom: 0;
     }
 
+    small{
+        font-style: italic;
+        line-height: .9rem;
+    }
+
+    table {
+        margin-top: 1rem;
+
+        td, 
+        th {
+            border-top: 1px solid #dadada;
+        }
+
+        .thead-default th {
+            background-color: $gray97;
+            border-bottom: 1px solid #dadada;
+        }
+    }
+
     .card {
         background-color: $gray97;
     }
@@ -14,22 +33,5 @@
     }
 
 
-    small{
-        font-style: italic;
-        line-height: .9rem;
-    }
-
-    table {
-        margin-top: 1rem;
-
-        th, td {
-            border-top: 1px solid #dadada;
-        }
-
-        .thead-default th {
-            background-color: $gray97;
-            border-bottom: 1px solid #dadada;
-        }
-    }
 
 }

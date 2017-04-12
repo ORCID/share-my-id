@@ -2,10 +2,10 @@
 
 form p {
     margin-bottom: 2rem;
-}
-
-form p.form-control-label {
-    margin-bottom: 0;
+    
+    &.form-control-label {
+        margin-bottom: 0;
+    }
 }
 
 legend {
