@@ -47,7 +47,13 @@ legend {
         padding-top: .5rem;
     }
 
-    .text-success {
+    #collection-links{
+        a {
+            word-break: break-all;
+        }
+    }
+
+    div.text-success {
         float: left;
         margin: 1.5rem 0 0 1rem;
     }
