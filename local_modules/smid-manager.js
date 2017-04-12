@@ -4,37 +4,12 @@ var mongojs = require('mongojs'),
 
 var ajv = new Ajv();
 
-var OrcidRecordSchema = {
+var EmailSchema = {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Orcid Record",
-  "description": "Records Name and ORCID iD",
-  "type": "object",
-  "properties": {
-    "orcid": {
-      "description": "ORCID iD",
-      "type": "string"
-    },
-    "fullOrcidId": {
-      "description": "Full url ORCID iD",
-      "type": "string"
-    },
-    "name": {
-      "description": "ORCID users pulbic name",
-      "type": "string"
-    },
-    "dateRecorded": {
-      "description": "ORCID iD",
-      "type": "object",
-      "format": "date-time"
-    },
-    "version": {
-      "description": "version of type of this record, useful for later migrations",
-      "type": "number"
-    }
-
-  },
-  "required": ["orcid", "fullOrcidId", "name", "dateRecorded", "version"],
-  "additionalProperties": false
+  "title": "SMID Eamil",
+  "description": "SMID Email",
+  "type": "string",
+  "format": "email"
 };
 
 var FormSchema = {
@@ -57,6 +32,44 @@ var FormSchema = {
 };
 
 
+var OrcidRecordSchema = {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "form": FormSchema,
+    "email": EmailSchema
+  },
+  "title": "Orcid Record",
+  "description": "Records Name and ORCID iD",
+  "type": "object",
+  "properties": {
+    "dateRecorded": {
+      "description": "ORCID iD",
+      "type": "object",
+      "format": "date-time"
+    },
+    "email": {"$ref": "#/definitions/email"},
+    "fullOrcidId": {
+      "description": "Full url ORCID iD",
+      "type": "string"
+    },   
+    "form": {"$ref": "#/definitions/form"},
+    "name": {
+      "description": "ORCID users pulbic name",
+      "type": "string"
+    },
+    "orcid": {
+      "description": "ORCID iD",
+      "type": "string"
+    },
+    "version": {
+      "description": "version of type of this record, useful for later migrations",
+      "type": "number"
+    }
+  },
+  // optional to be populated later ["email"]
+  "required": ["orcid", "fullOrcidId", "name", "dateRecorded", "version"],
+  "additionalProperties": false
+};
 
 var SmidManger = function(connectionStr) {
   this._db = mongojs(connectionStr);
@@ -149,41 +162,87 @@ SmidManger.prototype.smidExist = function(pubKey, privKey, callback) {
   })
 };
 
+SmidManger.prototype.validateForm = function(form, callback) {
+  if (!ajv.validate(FormSchema, form)) {
+    console.log(ajv.errors);
+    callback(ajv.errors);
+  } else {
+    callback(null)
+  }
+};
+
+
 SmidManger.prototype.updateForm = function(privateKey, form, callback) {
-  this.validateForm(form);
-  this._smidCol.findAndModify({
-      query: {
-        private_key: privateKey
-      },
-      update: {
-        $set: {
-          'details.form': form
-        }
-      },
-      new: true // this means return the updated object
-    },
-    function(err, doc, lastErrorObject) {
-      if (err) callback(err, null);
-      else {
-        console.log("returned doc " + JSON.stringify(doc));
-        callback(null, doc.details.form);
-      }
-    });
+  var smidManger = this;
+  this.validateForm(form, function(err) {
+    if (err) {
+      callback(err)
+    } else {
+      smidManger._smidCol.findAndModify({
+          query: {
+            private_key: privateKey
+          },
+          update: {
+            $set: {
+              'details.form': form
+            }
+          },
+          new: true // this means return the updated object
+        },
+        function(err, doc, lastErrorObject) {
+          if (err) callback(err, null);
+          else {
+            console.log("returned doc " + JSON.stringify(doc));
+            callback(null, doc.details.form);
+          }
+        });
+    }
+  })
 }
+
+SmidManger.prototype.validateEmail = function(email, callback) {
+  if (!ajv.validate(EmailSchema, email)) {
+    console.log(ajv.errors);
+    callback(ajv.errors);
+  } else {
+    callback(null);
+  }
+};
+
+SmidManger.prototype.updateEmail = function(privateKey, email, callback) {
+  var smidManger = this;
+  this.validateEmail(email, function (err) {
+    if ( err != null) {
+      callback(err, null);
+    } else {
+      smidManger._smidCol.findAndModify({
+          query: {
+            private_key: privateKey
+          },
+          update: {
+            $set: {
+              'details.owner.email': email
+            }
+          },
+          new: true // this means return the updated object
+        },
+        function(err, doc, lastErrorObject) {
+          if (err) callback(err, null);
+          else {
+            console.log("returned doc " + JSON.stringify(doc));
+            callback(null, doc.details);
+          }
+        });
+    }
+  });
+}
+
 
 SmidManger.prototype.validateOrcidRecord = function(orcidRecord) {
   if (!ajv.validate(OrcidRecordSchema, orcidRecord)) {
     console.log(JSON.stringify(orcidRecord));
     console.log(ajv.errors);
     throw new Error("Invalid orcidRecord");
-  }
-};
-
-SmidManger.prototype.validateForm = function(form) {
-  if (!ajv.validate(FormSchema, form)) {
-    console.log(JSON.stringify(form));
-    console.log(ajv.errors);
-    throw new Error("Invalid form");
   }
 };
 

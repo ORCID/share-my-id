@@ -42,8 +42,8 @@ export class CollectionService {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
         return this.http.put(
-            '/' + publicKey + '/details/' + publicKey + '/edit/' + privateKey + '/details/form',
-            data,
+            '/' + publicKey + '/details/' + privateKey + '/details/form',
+            {form: data},
             options
         ).map(( res: Response ) => res.json()).catch(this.handleError);
     }

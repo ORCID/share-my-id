@@ -9,6 +9,7 @@ var
   OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
 
 var smidManger = new SmidManger(config.MONGO_CONNECTION_STRING);
+
 var ooau = new OcridOAuthUtil(
   config.CLIENT_ID,
   config.CLIENT_SECRET,
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(helmet());
+//app.use(helmet());
 app.set('json spaces', 2);
 app.set('json replacer', null);
 
@@ -46,7 +47,8 @@ var CONFIG = '/config';
 var CREATE_SMID_URI = '/create-smid-redirect';
 var COLLECTION_DETAILS = '/:publicKey/details';
 var COLLECTION_DETAILS_DOWNLOAD = '/:publicKey/details/download';
-var COLLECTION_DETAILS_FORM = '/:publicKey/details/:publicKey/edit/:privateKey/details/form';
+var COLLECTION_DETAILS_FORM = '/:publicKey/details/:privateKey/details/form';
+var COLLECTION_DETAILS_EMAIL = '/:publicKey/details/:privateKey/details/owner/email';
 var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
 var ADD_ID_REDIRECT = '/add-id-redirect';
 var ADD_ID_SUCCESS = '/:publicKey/orcid/:orcid';
@@ -169,11 +171,22 @@ app.get(COLLECTION_DETAILS_DOWNLOAD, function(req, res) {
 
 //Update collection details form fields
 app.put(COLLECTION_DETAILS_FORM, function(req, res) {
-  var form = req.body;
-  smidManger.updateForm(req.params.privateKey, form, function(err, doc) {
-    if (err) res.send(err)
+  var data = req.body;
+  smidManger.updateForm(req.params.privateKey, data.form, function(err, doc) {
+    if (err) res.status(400).json({'error':err})
     else {
       res.status(200).json(doc);
+    }
+  });
+});
+
+//Update collection details form fields
+app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
+  var data = req.body;
+  smidManger.updateEmail(req.params.privateKey, data.email, function(err, doc) {
+    if (err) res.status(400).json({'error':err});
+    else {
+      res.status(200).json({'email': doc.owner.email});
     }
   });
 });
