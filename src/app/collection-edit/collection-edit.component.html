@@ -89,10 +89,11 @@
                                         placeholder="Email" 
                                         type="email" 
                                         required
+                                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                                     >
                                     <p>
                                     <button 
-                                    [disabled]="!formRefEmail.valid"
+                    
                                     class="btn btn-primary mt-0" 
                                     type="submit" 
                                     role="button"
@@ -100,9 +101,9 @@
                                         Email links to me
                                     </button>
                                     </p>
-                                     <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage" class="text-danger"><strong>Uh oh!</strong> Email not sent - try again.</p>
-                                    <p (click)="showEmailSuccessMessage = !showEmailSuccessMessage" *ngIf="showEmailSuccessMessage" class="text-success clear-fix"><strong>Success!</strong> Links sent to {{email}}</p>
-                                    <!--<p (click)="showWarningMessage = !showWarningMessage" *ngIf="!formRef.valid && (formSubmitted || !formEmptyOnLoad)" class="text-warning"><strong>Please fill out the title and description.</strong></p>-->
+                                     <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage && formEmailSubmitted" class="text-danger"><strong>Uh oh!</strong> Email not sent. Check the address and try again.</p>
+                                    <p (click)="showEmailSuccessMessage = !showEmailSuccessMessage" *ngIf="showEmailSuccessMessage && formRefEmail.valid  && formEmailSubmitted" class="text-success"><strong>Success!</strong> Links sent to {{email}}</p>
+                                    <!--<p (click)="showEmailWarningMessage = !showEmailWarningMessage" *ngIf="!formRefEmail.valid" class="text-warning"><strong>Please enter a valid email address.</strong></p>-->
                                 </form>
                                 <div id="collection-links">
                                     <h3>Administration Link</h3>
