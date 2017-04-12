@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 
@@ -38,7 +39,8 @@ import { PageHomeComponent } from './page-home/page-home.component';
         BrowserModule,
         FormsModule,
         HttpModule,
-        JsonpModule
+        JsonpModule,
+        RouterModule
     ],
     providers: [
         CollectionService,

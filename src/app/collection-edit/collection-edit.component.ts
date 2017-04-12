@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';

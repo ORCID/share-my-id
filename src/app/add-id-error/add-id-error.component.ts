@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Routes, RouterModule } from '@angular/router';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
