@@ -5,10 +5,12 @@ var
   express = require('express'),
   fs = require('fs'),
   helmet = require('helmet'),
+  Mailgun = require('mailgun-js');
   SmidManger = require('./local_modules/smid-manager.js').SmidManger,
   OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
 
 var smidManger = new SmidManger(config.MONGO_CONNECTION_STRING);
+var mailgun = Mailgun({apiKey: config.MAILGUN_API_KEY, domain: config.MAILGUN_DOMAIN}); 
 
 var ooau = new OcridOAuthUtil(
   config.CLIENT_ID,
@@ -186,7 +188,22 @@ app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
   smidManger.updateEmail(req.params.privateKey, data.email, function(err, doc) {
     if (err) res.status(400).json({'error':err});
     else {
-      res.status(200).json({'email': doc.owner.email});
+      var mailData = {
+          from: 'No Reply <noreply@share-my-id.orcid.org>',
+          to: doc.owner.email,
+          subject: 'Share My iD ' + req.params.publicKey + ' links',
+          text: 'Testing some Mailgun awesomness!'
+
+      };
+      mailgun.messages().send(mailData, function (error, body) {
+        if (error != null) {
+          console.log("mailgun error:");
+          console.log(error);
+        } else {
+          console.log(body);
+        }
+        res.status(200).json({'email': doc.owner.email});
+      });
     }
   });
 });
