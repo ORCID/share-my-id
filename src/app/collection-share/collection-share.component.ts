@@ -17,7 +17,7 @@ import { OrcidUtilService } from './../shared/orcid-util/orcid-util.service';
     styleUrls: ['./collection-share.component.scss']
 })
 
-export class CollectionShareComponent implements OnInit {
+export class CollectionShareComponent implements OnInit, OnDestroy {
 
     collections: Collection[];
 
@@ -40,7 +40,7 @@ export class CollectionShareComponent implements OnInit {
     }
 
     private refreshData(): void {
-        this.collectionService.getCollection(this.publicKey).subscribe( 
+        this.collectionService.getCollection(this.publicKey).subscribe(
             collections => {
                 this.collections = collections;
                 this.subscribeToData();
@@ -56,7 +56,7 @@ export class CollectionShareComponent implements OnInit {
         this.orcidUtilService.addIdAuth(this.publicKey);
     }
 
-    public ngOnDestroy(): void {
+    ngOnDestroy() {
         if (this.timerSubscription) {
             this.timerSubscription.unsubscribe();
         }
