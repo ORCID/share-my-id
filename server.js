@@ -192,7 +192,7 @@ app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
       var mailData = {
         from: 'No Reply <noreply@share-my-id.orcid.org>',
         to: data.email,
-        subject: 'Share My iD ' + req.params.publicKey + ' links',
+        subject: 'Share My iD links',
         text: `Thanks for creating a ORCID iD collection.\n`
         + `\n`
         + `\n`
@@ -206,7 +206,7 @@ app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
         + `${config.HOST}/${req.params.publicKey}`
         + `\n`
         + `\n`
-        + `Thanks,`
+        + `Thanks,\n`
         + `The Share My iD Team`
       };
       mailgunPriv.messages().send(mailData, function (error, body) {
