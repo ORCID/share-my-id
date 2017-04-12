@@ -5,10 +5,13 @@ var
   express = require('express'),
   fs = require('fs'),
   helmet = require('helmet'),
+  Mailgun = require('mailgun-js');
   SmidManger = require('./local_modules/smid-manager.js').SmidManger,
   OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
 
 var smidManger = new SmidManger(config.MONGO_CONNECTION_STRING);
+var mailgunPriv = Mailgun({apiKey: config.MAILGUN_PRIV_API_KEY, domain: config.MAILGUN_DOMAIN}); 
+var mailgunPub = Mailgun({apiKey: config.MAILGUN_PUB_API_KEY, domain: config.MAILGUN_DOMAIN}); 
 
 var ooau = new OcridOAuthUtil(
   config.CLIENT_ID,
@@ -183,10 +186,46 @@ app.put(COLLECTION_DETAILS_FORM, function(req, res) {
 //Update collection details form fields
 app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
   var data = req.body;
-  smidManger.updateEmail(req.params.privateKey, data.email, function(err, doc) {
-    if (err) res.status(400).json({'error':err});
-    else {
-      res.status(200).json({'email': doc.owner.email});
+  console.log(data.email)
+  mailgunPub.validate(data.email, function (error, body) {
+    if(body && body.is_valid){
+      var mailData = {
+        from: 'No Reply <noreply@share-my-id.orcid.org>',
+        to: data.email,
+        subject: 'Share My iD ' + req.params.publicKey + ' links',
+        text: `Thanks for creating a ORCID iD collection.\n`
+        + `\n`
+        + `\n`
+        + `Administration Link\n`
+        + `Use this link to edit collection details: \n`
+        + `${config.HOST}/${req.params.publicKey}/edit/${req.params.privateKey}\n`
+        + `\n`
+        + `\n`
+        + `Share Link\n`
+        + `Share this link with anyone whose iD you want to collect, or display this page on a laptop/tablet at your event:`
+        + `${config.HOST}/${req.params.publicKey}`
+        + `\n`
+        + `\n`
+        + `Thanks,`
+        + `The Share My iD Team`
+      };
+      mailgunPriv.messages().send(mailData, function (error, body) {
+        if (error != null) {
+          console.log("mailgun error:");
+          console.log(error);
+          if (body != null && body.message != null && body.message.includes("Great job"))
+            res.status(200).json({'email': data.email}); // using test credentials
+          else
+            res.status(400).json({'error':error, 'body': body})
+        } else {
+          console.log("mailgun body:");
+          console.log(body);
+          res.status(200).json({'email': data.email});
+        }
+      });
+    // do something 
+    } else {
+      res.status(400).json({'error':error, 'body': body});
     }
   });
 });
