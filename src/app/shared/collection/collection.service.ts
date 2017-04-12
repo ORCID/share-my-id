@@ -48,6 +48,16 @@ export class CollectionService {
         ).map(( res: Response ) => res.json()).catch(this.handleError);
     }
 
+    editEmail( data: any, publicKey, privateKey ): Observable<Collection[]> {
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers });
+        return this.http.put(
+            '/' + publicKey + '/details/' + privateKey + '/details/owner/email',
+            data,
+            options
+        ).map(( res: Response ) => res.json()).catch(this.handleError);
+    }
+
     getCollection(publicKey): Observable<Collection[]> {
         return this.http.get( publicKey + '/details' ).map(( res: Response ) => res.json()).catch(this.handleError);
 

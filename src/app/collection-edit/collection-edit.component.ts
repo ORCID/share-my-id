@@ -22,11 +22,14 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
 
     collections: Collection[];
     description: string;
+    email: string;
     fullOrcidId: string;
     formEmptyOnLoad: boolean;
     formSubmitted: boolean;
     ngForm: any;
     orcid: string;
+    showEmailErrorMessage: boolean;
+    showEmailSuccessMessage: boolean;
     showErrorMessage: boolean;
     showLinksCopied: boolean;
     showSuccessMessage: boolean;
@@ -39,8 +42,11 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute
     ) {
         this.description = '';
+        this.email = '';
         this.formEmptyOnLoad = true;
         this.formSubmitted = false;
+        this.showEmailErrorMessage = false;
+        this.showEmailSuccessMessage = false;
         this.showErrorMessage = false;
         this.showLinksCopied = false;
         this.showSuccessMessage = false;
@@ -93,6 +99,26 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    submitEmail( form: any ): void {
+        var form_string = JSON.stringify(form);
+        console.log("Email string: " + form_string);
+        this.formSubmitted = true;
+        this.collectionService.editEmail( form_string, this.publicKey, this.privateKey ).subscribe(
+            (response) => {
+                this.response = response;
+                console.log(this.response);
+                this.showEmailErrorMessage = false;
+                this.showEmailSuccessMessage = true; // <- Update to change the status on the ajax call result
+            },
+            (err) => {
+                console.log(err);
+                this.showEmailErrorMessage = true;
+                this.showEmailSuccessMessage = false;
+            },
+            () => {}
+        );
     }
 
     submitForm( form: any ): void {

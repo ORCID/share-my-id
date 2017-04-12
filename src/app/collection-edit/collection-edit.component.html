@@ -74,6 +74,36 @@
                         <div class="card">
                             <div class="card-block">
                                 <h2>Collection Links <small>Hold onto these!</small></h2>
+                                <form class="form-inline"
+                                #formRefEmail="ngForm" 
+                                (ngSubmit)="submitEmail(formRefEmail.value)" 
+                                novalidate>
+                                    <label class="sr-only" for="email">Email</label>
+                                    <input 
+                                        [(ngModel)]="email"
+                                        #emailRef="ngModel" 
+                                        autocomplete="off"
+                                        class="form-control col-lg-5 col-md-7 mb-2 mb-sm-0 mr-sm-2 " 
+                                        id="email" 
+                                        name="email" 
+                                        placeholder="Email" 
+                                        type="email" 
+                                        required
+                                    >
+                                    <p>
+                                    <button 
+                                    [disabled]="!formRefEmail.valid"
+                                    class="btn btn-primary mt-0" 
+                                    type="submit" 
+                                    role="button"
+                                    >
+                                        Email links to me
+                                    </button>
+                                    </p>
+                                     <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage" class="text-danger"><strong>Uh oh!</strong> Email not sent - try again.</p>
+                                    <p (click)="showEmailSuccessMessage = !showEmailSuccessMessage" *ngIf="showEmailSuccessMessage" class="text-success clear-fix"><strong>Success!</strong> Links sent to {{email}}</p>
+                                    <!--<p (click)="showWarningMessage = !showWarningMessage" *ngIf="!formRef.valid && (formSubmitted || !formEmptyOnLoad)" class="text-warning"><strong>Please fill out the title and description.</strong></p>-->
+                                </form>
                                 <div id="collection-links">
                                     <h3>Administration Link</h3>
                                     <p>Use this link to edit collection details:</p>
