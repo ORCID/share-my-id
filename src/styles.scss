@@ -11,6 +11,7 @@
 }
 
 a {
+    font: normal 100% $font-stack;
     color: $link-font-color-default;
     cursor: pointer;
     text-decoration: none;
@@ -147,6 +148,8 @@ p {
 
 .link-style {
     @extend a;
+    background: none;
+    border: none;
 
 }
 
