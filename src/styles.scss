@@ -10,7 +10,7 @@
     word-break: normal;
 }
 
-a {
+a, a:not([href]):not([tabindex])  {
     font: normal 100% $font-stack;
     color: $link-font-color-default;
     cursor: pointer;
@@ -148,9 +148,6 @@ p {
 
 .link-style {
     @extend a;
-    background: none;
-    border: none;
-
 }
 
 @include media-breakpoint-up(xs) {
