@@ -51,7 +51,7 @@ var CREATE_SMID_URI = '/create-smid-redirect';
 var COLLECTION_DETAILS = '/:publicKey/details';
 var COLLECTION_DETAILS_DOWNLOAD = '/:publicKey/details/download';
 var COLLECTION_DETAILS_FORM = '/:publicKey/details/:privateKey/details/form';
-var COLLECTION_DETAILS_EMAIL = '/:publicKey/details/:privateKey/details/owner/email';
+var EMAIL_SMID = '/email-smid';
 var ADD_ID_AUTHORIZE = '/add-id-authorize/:publicKey';
 var ADD_ID_REDIRECT = '/add-id-redirect';
 var ADD_ID_SUCCESS = '/:publicKey/orcid/:orcid';
@@ -89,12 +89,6 @@ app.get(CONFIG, function(req, res) {
   });
 });
 
-//Create smid oauth sign into ORCID
-app.get(CREATE_SMID_AUTHORIZE, function(req, res) {
-  var create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI);
-  res.redirect(create_smid_authorization_uri);
-});
-
 app.get(CONFIG, function(req, res) {
   return res.status(200).json({
     'ORCID_URL': config.ORCID_URL
@@ -122,7 +116,7 @@ app.get(CREATE_SMID_URI, function(req, res) { // Redeem code URL
         orcidLogger.log(date, token.name, token.orcid, req.query.state);
         console.log("creating smid for " + token.orcid);
         var orcidRecord = smidManger.createOrcidRecord(token.orcid, ooau.fullOrcid(token.orcid), token.name);
-        smidManger.createSmid(orcidRecord, function(err, doc) {
+        smidManger.addOwnerOrcidRecord(orcidRecord, req.query.state, function(err, doc) {
           if (err) res.send(err)
           else {
             var collection = JSON.parse(JSON.stringify(doc, null, 2));
@@ -183,49 +177,51 @@ app.put(COLLECTION_DETAILS_FORM, function(req, res) {
   });
 });
 
-//Update collection details form fields
-app.put(COLLECTION_DETAILS_EMAIL, function(req, res) {
+// create and email smid
+app.post(EMAIL_SMID, function(req, res) {
   var data = req.body;
-  console.log(data.email)
   mailgunPub.validate(data.email, function (error, body) {
-    if(body && body.is_valid){
-      var mailData = {
-        from: 'No Reply <noreply@share-my-id.orcid.org>',
-        to: data.email,
-        subject: 'Share My iD links',
-        text: `Thanks for creating a ORCID iD collection.\n`
-        + `\n`
-        + `\n`
-        + `Administration Link\n`
-        + `Use this link to edit collection details: \n`
-        + `${config.HOST}/${req.params.publicKey}/edit/${req.params.privateKey}\n`
-        + `\n`
-        + `\n`
-        + `Share Link\n`
-        + `Share this link with anyone whose iD you want to collect, or display this page on a laptop/tablet at your event:`
-        + `${config.HOST}/${req.params.publicKey}`
-        + `\n`
-        + `\n`
-        + `Thanks,\n`
-        + `The Share My iD Team`
-      };
-      mailgunPriv.messages().send(mailData, function (error, body) {
-        if (error != null) {
-          console.log("mailgun error:");
-          console.log(error);
-          if (body != null && body.message != null && body.message.includes("Great job"))
-            res.status(200).json({'email': data.email}); // using test credentials
-          else
-            res.status(400).json({'error':error, 'body': body})
-        } else {
-          console.log("mailgun body:");
-          console.log(body);
-          res.status(200).json({'email': data.email});
-        }
+    if(body && body.is_valid) {
+      console.log("email is valid");
+      smidManger.createSmid(function(err, doc) {  
+        var mailData = {
+          from: 'No Reply <noreply@share-my-id.orcid.org>',
+          to: data.email,
+          subject: 'Share My iD links',
+          text: `Thanks for creating a ORCID iD collection.\n`
+          + `\n`
+          + `\n`
+          + `Administration Link\n`
+          + `Use this link to edit collection details: \n`
+          + `${config.HOST}/${doc.public_key}/edit/${doc.private_key}\n`
+          + `\n`
+          + `\n`
+          + `Share Link\n`
+          + `Share this link with anyone whose iD you want to collect, or display this page on a laptop/tablet at your event:`
+          + `${config.HOST}/${doc.public_key}`
+          + `\n`
+          + `\n`
+          + `Thanks,\n`
+          + `The Share My iD Team`
+        };
+        var create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI, doc.private_key);
+        mailgunPriv.messages().send(mailData, function (error, body) {
+          if (error != null) {
+            console.log("mailgun error:");
+            console.log(error);
+            if (body != null && body.message != null && body.message.includes("Great job"))
+              res.status(200).json({'email': data.email, 'redirect': create_smid_authorization_uri }); // using test credentials
+            else
+              res.status(400).json({'error':error, 'body': body});
+          } else {
+            console.log("mailgun body:");
+            console.log(body);
+            res.status(200).json({'email': data.email});
+          }
+        });
       });
-    // do something 
     } else {
-      res.status(400).json({'error':error, 'body': body});
+      res.status(400).json({'error':"Email failed to pass validation", 'body': body});
     }
   });
 });
