@@ -80,8 +80,7 @@ var SmidManger = function(connectionStr) {
  *  callback(err, [new smid object])
  */
 
-SmidManger.prototype.createSmid = function(orcidRecord, callback) {
-  this.validateOrcidRecord(orcidRecord);
+SmidManger.prototype.createSmid = function(callback) {
   var smidManger = this;
   var pubKey = randomstring.generate(8);
   var privKey = randomstring.generate()
@@ -102,7 +101,7 @@ SmidManger.prototype.createSmid = function(orcidRecord, callback) {
             description: undefined,
             title: undefined,
           },
-          owner: orcidRecord
+          owner: undefined
         },
         private_key: privKey, // used for allowing edits
         public_key: pubKey, // used for shareing
@@ -196,6 +195,25 @@ SmidManger.prototype.validateOrcidRecord = function(orcidRecord) {
     throw new Error("Invalid orcidRecord");
   }
 };
+
+SmidManger.prototype.addOwnerOrcidRecord = function(orcidRecord, privateKey, callback) {
+  this.validateOrcidRecord(orcidRecord);
+  this._smidCol.findAndModify({
+      query: {
+        private_key: privateKey
+      },
+      update: {
+        $set: {
+          'details.owner': orcidRecord
+        }
+      },
+      new: true // this means return the updated object
+    },
+    function(err, doc, lastErrorObject) {
+      if (err) callback(err, null);
+      else callback(null, doc);
+    });
+}
 
 SmidManger.prototype.addOrcidRecord = function(orcidRecord, publicKey, callback) {
   this.validateOrcidRecord(orcidRecord);
