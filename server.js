@@ -72,11 +72,10 @@ function dateToStr(date) {
 function smidToTxt(doc) {
   if (doc === undefined || doc == null) return null;
   var csv = `${rmTab(doc.form.title)}\n`;
-  csv += 'dateRecorded             \towner orcid        \towner fullOrcidId                            \towner name\n';
-  csv += `${dateToStr(doc.owner.dateRecorded)}\t${doc.owner.orcid}\t${doc.owner.fullOrcidId}\t${rmTab(doc.owner.name)}\n`;
-  csv += "\n";
-  csv += "Share my iD results\n";
-  csv += 'dateRecorded             \torcid              \tfullOrcidId                                   \tname\n';
+  csv += `Created by ${doc.owner.name} (${doc.owner.fullOrcidId})\n`;
+  csv += `\n`;
+  csv += `Collected iDs as of ${dateToStr(new Date())}\n`;
+  csv += `Date Collected            \tORCID              \tFull ORCID iD                               \tCollected Name\n`;
   doc.authenticated_orcids.forEach(function(row) {
     csv += `${dateToStr(row.dateRecorded)}\t${row.orcid}\t${row.fullOrcidId}\t${rmTab(row.name)}\n`;
   })
