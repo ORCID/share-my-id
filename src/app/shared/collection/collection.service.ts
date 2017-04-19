@@ -48,11 +48,11 @@ export class CollectionService {
         ).map(( res: Response ) => res.json()).catch(this.handleError);
     }
 
-    editEmail( data: any, publicKey, privateKey ): Observable<Collection[]> {
+    editEmail( data: any) {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
-        return this.http.put(
-            '/' + publicKey + '/details/' + privateKey + '/details/owner/email',
+        return this.http.post(
+            '/email-smid',
             data,
             options
         ).map(( res: Response ) => res.json()).catch(this.handleError);

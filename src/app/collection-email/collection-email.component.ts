@@ -17,7 +17,6 @@ export class CollectionEmailComponent implements OnInit {
     formEmailSubmitted: boolean;
     ngForm: any;
     showEmailErrorMessage: boolean;
-    showEmailSuccessMessage: boolean;
     showEmailWarningMessage: boolean;
  
     constructor(
@@ -26,7 +25,6 @@ export class CollectionEmailComponent implements OnInit {
         this.email = '';
         this.formEmailSubmitted = false
         this.showEmailErrorMessage = false;
-        this.showEmailSuccessMessage = false;
         this.showEmailWarningMessage = false;
     }
 
@@ -39,21 +37,19 @@ export class CollectionEmailComponent implements OnInit {
         if (re.test(form.email) == false) {
             console.log("invalid email");
             this.showEmailErrorMessage = true;
-            this.showEmailSuccessMessage = false;
         } else {
             var formString = JSON.stringify(form);
-            this.collectionService.editEmail( formString, this.publicKey, this.privateKey ).subscribe(
+            this.collectionService.editEmail(formString).subscribe(
                 (response) => {
                     this.response = response;
                     console.log(this.response);
+                    var response_parsed = JSON.parse(JSON.stringify(this.response, null, 2));
                     this.showEmailErrorMessage = false;
-                    this.showEmailSuccessMessage = true; // <- Update to change the status on the ajax call result
+                    window.location.replace(response_parsed.redirect + '&email=' + form.email);
                 },
                 (err) => {
                     console.log(err);
                     this.showEmailErrorMessage = true;
-                    this.showEmailSuccessMessage = false;
-            
                 },
                 () => {}
             );

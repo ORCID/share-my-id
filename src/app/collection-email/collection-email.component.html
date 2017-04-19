@@ -1,36 +1,41 @@
-<div class="row">
-    <div class="col">
+<div class="row justify-content-center">
+        <div class="col col-lg-7 text-center"> 
         <div class="card">
             <div class="card-block">
-                <h2>Email</h2>
-                <form class="form-inline"
+                <h2>Create a new iD collection</h2>
+                <p class="mb-0">To get started, we'll need your email address</p>
+                <p class="small mt-1 mb-3"><i>Used only to send collection editing instructions to you. We don't save or display this.</i></p>
+                <form 
+                class
                 #formRefEmail="ngForm" 
                 (ngSubmit)="submitEmail(formRefEmail.value)" 
                 novalidate>
-                    <label class="sr-only" for="email">Email</label>
-                    <input 
-                        [(ngModel)]="email"
-                        #emailRef="ngModel" 
-                        autocomplete="off"
-                        class="form-control col-lg-5 col-md-7 mb-2 mb-sm-0 mr-sm-2 " 
-                        id="email" 
-                        name="email" 
-                        placeholder="Email" 
-                        type="email" 
-                        required
-                    >
+                    <div class="form-group row justify-content-center">
+                      <label for="email" class="sr-only">Email</label>
+                      <div class="col-8">
+                        <input 
+                            [(ngModel)]="email"
+                            #emailRef="ngModel" 
+                            autocomplete="off"
+                            class="form-control text-center" 
+                            id="email" 
+                            name="email" 
+                            placeholder="name@example.com" 
+                            type="email" 
+                            required
+                        >
+                      </div>
+                    </div>
                     <button 
     
-                    class="btn btn-primary mt-0" 
+                    class="btn btn-primary" 
                     type="submit" 
                     role="button"
                     >
-                        <fa  name="envelope-o"></fa>
-                        Send links
+                        Next <fa  name="arrow-right"></fa>
                     </button>                                     
                 </form>
-                    <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage && formEmailSubmitted" class="text-danger"><strong>Uh oh, email not sent!</strong> Check the address and try again.</p>
-                    <p (click)="showEmailSuccessMessage = !showEmailSuccessMessage" *ngIf="showEmailSuccessMessage && formRefEmail.valid  && formEmailSubmitted" class="text-success"><strong>Success!</strong> Links sent to {{email}}</p>
+                    <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage && formEmailSubmitted" class="text-danger"><strong>Uh oh, we couldn't process that address.</strong> Check the address and try again.</p>
             </div>
         </div>
     </div>

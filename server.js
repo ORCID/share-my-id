@@ -212,6 +212,7 @@ app.post(EMAIL_SMID, function(req, res) {
             console.log(error);
             if (body != null && body.message != null && body.message.includes("Great job"))
               res.status(200).json({'email': data.email, 'redirect': create_smid_authorization_uri }); // using test credentials
+              
             else
               res.status(400).json({'error':error, 'body': body});
           } else {
