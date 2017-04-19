@@ -218,7 +218,7 @@ app.post(EMAIL_SMID, function(req, res) {
           } else {
             console.log("mailgun body:");
             console.log(body);
-            res.status(200).json({'email': data.email});
+            res.status(200).json({'email': data.email, 'redirect': create_smid_authorization_uri });
           }
         });
       });
