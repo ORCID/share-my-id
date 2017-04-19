@@ -275,6 +275,10 @@ app.get([COLLECTION_EDIT], function(req, res) { // Index page
   });
 });
 
+app.get([CREATE_SMID_EMAIL, '/'], function(req, res) { // Index page
+  res.status(200).sendFile(index_file);
+});
+
 app.get([COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR], function(req, res) { // Index page
   smidManger.detailsExist(req.params.publicKey, function(err, bool) {
     if (bool == true)
@@ -282,12 +286,4 @@ app.get([COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR], function(req, res) { /
     else
       res.sendFile(PAGE_404);
   });
-});
-
-app.get(CREATE_SMID_EMAIL, function(req, res) {
-  res.status(200).sendFile(index_file);
-});
-
-app.get([CREATE_SMID_EMAIL, '/'], function(req, res) { // Index page
-  res.status(200).sendFile(index_file);
 });
