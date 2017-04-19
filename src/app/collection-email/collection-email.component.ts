@@ -14,8 +14,10 @@ export class CollectionEmailComponent implements OnInit {
     private response: any;
 
     email: string;
+    emailSubmitSuccess: boolean;
     formEmailSubmitted: boolean;
     ngForm: any;
+    orcid_oauth_url: string;
     showEmailErrorMessage: boolean;
     showEmailWarningMessage: boolean;
  
@@ -23,7 +25,9 @@ export class CollectionEmailComponent implements OnInit {
         private collectionService: CollectionService
     ) {
         this.email = '';
+        this.emailSubmitSuccess = false
         this.formEmailSubmitted = false
+        this.orcid_oauth_url='';
         this.showEmailErrorMessage = false;
         this.showEmailWarningMessage = false;
     }
@@ -45,7 +49,9 @@ export class CollectionEmailComponent implements OnInit {
                     console.log(this.response);
                     var response_parsed = JSON.parse(JSON.stringify(this.response, null, 2));
                     this.showEmailErrorMessage = false;
-                    window.location.replace(response_parsed.redirect + '&email=' + form.email);
+                    //window.location.replace(response_parsed.redirect + '&email=' + response_parsed.email);
+                    this.orcid_oauth_url = response_parsed.redirect + '&email=' + response_parsed.email;
+                    this.emailSubmitSuccess = true;
                 },
                 (err) => {
                     console.log(err);

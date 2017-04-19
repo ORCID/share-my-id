@@ -13,6 +13,11 @@ legend {
     font: bold 2.5rem $font-stack;
 }
 
+small{
+        font-style: italic;
+        line-height: .8rem;
+    }
+
 .card .card {
 
     background-color: $gray97;

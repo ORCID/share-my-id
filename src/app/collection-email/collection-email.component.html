@@ -26,16 +26,31 @@
                         >
                       </div>
                     </div>
-                    <button 
-    
+                    <button *ngIf="!formEmailSubmitted || showEmailErrorMessage" 
                     class="btn btn-primary" 
                     type="submit" 
                     role="button"
                     >
-                        Next <fa  name="arrow-right"></fa>
+                        Submit
                     </button>                                     
                 </form>
-                    <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage && formEmailSubmitted" class="text-danger"><strong>Uh oh, we couldn't process that address.</strong> Check the address and try again.</p>
+                <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage && formEmailSubmitted" class="text-danger mt-2"><strong>Oops, something went wrong.</strong> Check the address and try again.</p>
+                <div 
+                *ngIf="emailSubmitSuccess"
+                class="row justify-content-center"
+                >
+                    <div class="card-block"> 
+                        <p>Thanks! To finish creating your collection, sign into ORCID.</p>
+                        
+                        <a href="{{orcid_oauth_url}}"><button 
+                        class="btn btn-primary" 
+                        role="button"
+                        >
+                            Sign into ORCID
+                        </button></a> 
+                        <p class="mt-3"><small><strong>Don't have an ORCID iD?</strong> Register for an iD and create your collection at the same time. Click 'Sign into ORCID' above, then 'Register now' on the next screen.</small></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
