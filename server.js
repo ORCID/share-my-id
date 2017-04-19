@@ -46,6 +46,7 @@ var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 //Endpoints
 var CONFIG = '/config';
 var CREATE_SMID_AUTHORIZE = '/create-smid-authorize';
+var CREATE_SMID_EMAIL = '/create-smid-email';
 var CONFIG = '/config';
 var CREATE_SMID_URI = '/create-smid-redirect';
 var COLLECTION_DETAILS = '/:publicKey/details';
@@ -283,6 +284,10 @@ app.get([COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR], function(req, res) { /
   });
 });
 
-app.get('/', function(req, res) { // Index page
+app.get(CREATE_SMID_EMAIL, function(req, res) {
+  res.status(200).sendFile(index_file);
+});
+
+app.get([CREATE_SMID_EMAIL, '/'], function(req, res) { // Index page
   res.status(200).sendFile(index_file);
 });

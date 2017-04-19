@@ -19,6 +19,7 @@ import { OrcidUtilService } from './shared/orcid-util/orcid-util.service';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { PageHomeComponent } from './page-home/page-home.component';
+import { CollectionEmailComponent } from './collection-email/collection-email.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { PageHomeComponent } from './page-home/page-home.component';
         CollectionShareComponent,
         FooterComponent,
         HeaderComponent,
-        PageHomeComponent
+        PageHomeComponent,
+        CollectionEmailComponent,
     ],
     imports: [
         Angular2FontAwesomeModule,

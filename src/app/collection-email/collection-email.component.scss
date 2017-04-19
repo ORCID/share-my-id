@@ -1,0 +1,61 @@
+@import '../../variables';
+
+form p {
+    margin-bottom: 2rem;
+    
+    &.form-control-label {
+        margin-bottom: 0;
+    }
+}
+
+legend {
+    color: $title-h1-font-color;
+    font: bold 2.5rem $font-stack;
+}
+
+.card .card {
+
+    background-color: $gray97;
+
+    h2 {
+        text-align: left;
+    }
+
+    h3 {
+        font: bold 1rem $font-stack;
+        margin: 1rem 0 0 0;
+    }
+
+    p {
+        margin: .1rem 0;
+    }
+
+    small{
+        font: italic 1rem $font-stack;
+    }
+
+    button {
+        float: left;
+        margin: 1rem 0 0 0;
+        
+        fa {
+            color: $white;
+        }
+    }
+
+    .card-block {
+        padding-top: .5rem;
+    }
+
+    #collection-links{
+        a {
+            word-break: break-all;
+        }
+    }
+
+    div.text-success {
+        float: left;
+        margin: 1.5rem 0 0 1rem;
+    }
+
+}
