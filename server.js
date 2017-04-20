@@ -46,6 +46,7 @@ var orcidLogger = new console.Console(orcidOutput, orcidErrorOutput);
 //Endpoints
 var CONFIG = '/config';
 var CREATE_SMID_AUTHORIZE = '/create-smid-authorize';
+var CREATE_SMID_EMAIL = '/create-smid-email';
 var CONFIG = '/config';
 var CREATE_SMID_URI = '/create-smid-redirect';
 var COLLECTION_DETAILS = '/:publicKey/details';
@@ -210,12 +211,13 @@ app.post(EMAIL_SMID, function(req, res) {
             console.log(error);
             if (body != null && body.message != null && body.message.includes("Great job"))
               res.status(200).json({'email': data.email, 'redirect': create_smid_authorization_uri }); // using test credentials
+              
             else
               res.status(400).json({'error':error, 'body': body});
           } else {
             console.log("mailgun body:");
             console.log(body);
-            res.status(200).json({'email': data.email});
+            res.status(200).json({'email': data.email, 'redirect': create_smid_authorization_uri });
           }
         });
       });
@@ -273,6 +275,10 @@ app.get([COLLECTION_EDIT], function(req, res) { // Index page
   });
 });
 
+app.get([CREATE_SMID_EMAIL, '/'], function(req, res) { // Index page
+  res.status(200).sendFile(index_file);
+});
+
 app.get([COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR], function(req, res) { // Index page
   smidManger.detailsExist(req.params.publicKey, function(err, bool) {
     if (bool == true)
@@ -280,8 +286,4 @@ app.get([COLLECTION_SHARE, ADD_ID_SUCCESS, ADD_ID_ERROR], function(req, res) { /
     else
       res.sendFile(PAGE_404);
   });
-});
-
-app.get('/', function(req, res) { // Index page
-  res.status(200).sendFile(index_file);
 });
