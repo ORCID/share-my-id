@@ -4,7 +4,7 @@
             <div class="card-block">
                 <h2>Create a new iD collection</h2>
                 <p class="mb-0">To get started, we'll need your email address</p>
-                <p class="small mt-1 mb-3"><i>Used only to send collection editing instructions to you. We don't save or display this.</i></p>
+                <p class="small mt-1 mb-3"><i>Used only to send collection info to you. We don't save or display this.</i></p>
                 <form 
                 class
                 #formRefEmail="ngForm" 
@@ -36,22 +36,6 @@
                 </form>
                 <p (click)="showEmailErrorMessage = !showEmailErrorMessage" *ngIf="showEmailErrorMessage && formEmailSubmitted" class="text-danger mt-2"><strong>Oops, something went wrong.</strong> Check the address and try again.</p>
                 <p class="mt-3"><small><strong>Don't have an ORCID iD?</strong> Register for an iD and create your collection at the same time. Click 'Sign into ORCID' above, then 'Register now' on the next screen.</small></p>
-                <div 
-                *ngIf="emailSubmitSuccess"
-                class="row justify-content-center"
-                >
-                    <div class="card-block"> 
-                        <p>Thanks! To finish creating your collection, sign into ORCID.</p>
-                        
-                        <a href="{{orcid_oauth_url}}"><button 
-                        class="btn btn-primary" 
-                        role="button"
-                        >
-                            Sign into ORCID
-                        </button></a> 
-                        <p class="mt-2"><small><strong>Don't have an ORCID iD?</strong> Register for an iD and create your collection at the same time. Click 'Sign into ORCID' above, then 'Register now' on the next screen.</small></p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
