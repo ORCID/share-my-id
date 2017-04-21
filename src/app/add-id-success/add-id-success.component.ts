@@ -18,7 +18,7 @@ export class AddIdSuccessComponent implements OnInit, OnDestroy {
     public publicKey: string;
     private response: any;
     private sub: any;
-    public userOrcidId: string;
+    public userFullOrcidId: string;
 
     collections: Collection[];
 
@@ -39,7 +39,7 @@ export class AddIdSuccessComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.publicKey = params['publicKey'];
-            this.userOrcidId = params['orcid'];
+            this.userFullOrcidId = params['orcid'];
             this.getCollections();
         });
     }

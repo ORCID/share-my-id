@@ -197,7 +197,7 @@ app.post(EMAIL_SMID, function(req, res) {
           + `\n`
           + `\n`
           + `Share Link\n`
-          + `Share this link with anyone whose iD you want to collect, and visit this link to view/download iDs you have collected:`
+          + `Share this link with anyone whose iD you want to collect, and visit this link to view/download iDs you have collected: \n`
           + `${config.HOST}/${doc.public_key}`
           + `\n`
           + `\n`
@@ -263,7 +263,7 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
           if (err) res.send(err)
           else {
             //res.redirect('/' + req.query.state);
-            res.redirect( /* make ADD_ID_SUCCESS url */ '/' + state + '/orcid/' + token.orcid);
+            res.redirect( /* make ADD_ID_SUCCESS url */ '/' + state + '/orcid/' + encodeURIComponent(config.ORCID_URL) + '%2F' + token.orcid);
           }
         });
       }
