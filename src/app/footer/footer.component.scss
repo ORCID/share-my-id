@@ -33,10 +33,20 @@ footer {
 
     .footer-left{
         float: left;
+        width: 50%;
     }
 
     .footer-right{
         float: right;
+    }
+
+    .list-inline-item {
+        color: $gray97;
+        font: .8rem $font-stack;
+        float: left;
+        line-height: 32px;
+        vertical-align: bottom;
+        margin-right: 1rem;
     }
 
     @include media-breakpoint-down(sm) {
