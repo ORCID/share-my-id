@@ -188,7 +188,7 @@ app.post(EMAIL_SMID, function(req, res) {
           from: 'No Reply <noreply@share-my-id.orcid.org>',
           to: data.email,
           subject: 'Share My iD links',
-          text: `Thanks for creating a ORCID iD collection.\n`
+          text: `Thanks for creating an ORCID iD collection.\n`
           + `\n`
           + `\n`
           + `Administration Link\n`
@@ -197,12 +197,15 @@ app.post(EMAIL_SMID, function(req, res) {
           + `\n`
           + `\n`
           + `Share Link\n`
-          + `Share this link with anyone whose iD you want to collect, or display this page on a laptop/tablet at your event:`
+          + `Share this link with anyone whose iD you want to collect, and visit this link to view/download iDs you have collected:`
           + `${config.HOST}/${doc.public_key}`
           + `\n`
           + `\n`
+          + `For more information, see our KnowledgeBase at ${config.SUPPORT_URL} and in case of problems, please contact our Community Team at support@orcid.org.`
+          + `\n`
+          + `\n`
           + `Thanks,\n`
-          + `The Share My iD Team`
+          + `The ORCID Team`
         };
         console.log("Email to: " + data.to);
         console.log("Email to: " + data.subject);

@@ -58,6 +58,11 @@ legend {
     word-break: normal;
 }
 
+.form-control::placeholder {
+    color: $gray78;
+}
+
+    
 main#content{
     padding: 0 0 2rem 0;
     background-color: $orcidgraydk;
