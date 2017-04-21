@@ -29,11 +29,12 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
     formSubmitted: boolean;
     ngForm: any;
     orcid: string;
+    showAdminLinkCopied: boolean;
     showEmailErrorMessage: boolean;
     showEmailSuccessMessage: boolean;
     showEmailWarningMessage: boolean;
     showErrorMessage: boolean;
-    showLinksCopied: boolean;
+    showShareLinkCopied: boolean;
     showSuccessMessage: boolean;
     showWarningMessage: boolean;
     title: string;
@@ -48,11 +49,12 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
         this.formEmailSubmitted = false
         this.formEmptyOnLoad = true;
         this.formSubmitted = false;
+        this.showAdminLinkCopied = false;
         this.showEmailErrorMessage = false;
         this.showEmailSuccessMessage = false;
         this.showEmailWarningMessage = false;
         this.showErrorMessage = false;
-        this.showLinksCopied = false;
+        this.showShareLinkCopied = false;
         this.showSuccessMessage = false;
         this.showWarningMessage = false;
         this.title = '';
@@ -60,14 +62,23 @@ export class CollectionEditComponent implements OnInit, OnDestroy {
             + window.location.hostname + (window.location.port ? ':' + location.port : '');
     }
 
-    copyLinks(): void {
-        const collectionLinks = document.querySelector('#collection-links');
+    copyLinks(linkId): void {
+        const collectionLinks = document.querySelector('#' + linkId);
         const range = document.createRange();
         range.selectNode(collectionLinks);
         window.getSelection().addRange(range);
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
-        this.showLinksCopied = true;
+        if(linkId == 'admin-link') {
+            this.showAdminLinkCopied = true;
+        } else {
+            this.showAdminLinkCopied = false;
+        }
+        if(linkId == 'share-link') {
+            this.showShareLinkCopied = true;
+        } else {
+            this.showShareLinkCopied = false;
+        }
     }
 
     getCollections(): void {

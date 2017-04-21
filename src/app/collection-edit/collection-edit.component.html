@@ -47,7 +47,7 @@
                             <p class="form-control-label font-weight-bold">
                                 Created by
                             </p>
-                            <p><span *ngIf="username">{{username}}, </span><a href="{{fullOrcidId}}" target="_blank">{{orcid}}</a></p>
+                            <p><span *ngIf="username">{{username}}, </span><a href="{{fullOrcidId}}" target="_blank" rel="noopener noreferrer"> <img src="../assets/img/id-icon.svg" width="16" alt="ORCID iD icon" class="id-icon">{{fullOrcidId}}</a></p>
                         </div>
                         <div class="form-group">
                             <p>
@@ -78,12 +78,13 @@
                                 <div id="collection-links" class="float-left">
                                     <h3 class="mt-0">Administration Link</h3>
                                     <p>Use this link to edit collection details:</p>
-                                    <p><a href="{{windowLocationOrigin}}/{{publicKey}}/edit/{{privateKey}}">{{windowLocationOrigin}}/{{publicKey}}/edit/{{privateKey}} </a></p>
+                                    <a id="admin-link" href="{{windowLocationOrigin}}/{{publicKey}}/edit/{{privateKey}}">{{windowLocationOrigin}}/{{publicKey}}/edit/{{privateKey}}</a><button (click)="copyLinks('admin-link')" class="btn btn-primary" ><fa  name="clipboard"></fa></button><span *ngIf="showAdminLinkCopied" class="text-success" aria-label="Copy admin link"> Link copied!</span>
                                     <h3>Share Link</h3>
                                     <p>Share this link with anyone whose iD you want to collect, and visit this link to view/download iDs you've collected:</p>
-                                    <p><a href="{{windowLocationOrigin}}/{{publicKey}}" target="_blank" rel="noopener noreferrer">{{windowLocationOrigin}}/{{publicKey}} <fa name="external-link-square"></fa></a></p>
+                                    <a id="share-link" href="{{windowLocationOrigin}}/{{publicKey}}" target="_blank" rel="noopener noreferrer">{{windowLocationOrigin}}/{{publicKey}}</a><button (click)="copyLinks('share-link')" class="btn btn-primary" aria-label="Copy share link"><fa  name="clipboard"></fa></button><span *ngIf="showShareLinkCopied" class="text-success"> Link copied!</span>
+                                    <h3>Download Collected iDs</h3>
+                                    <p><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><fa  name="download"></fa> Download text file</a></p>
                                 </div>
-                                <button (click)="copyLinks()" class="btn btn-primary" ><fa  name="clipboard"></fa> Copy links</button><div *ngIf="showLinksCopied" class="text-success">Links copied!</div>
                             </div>
                         </div>
                     </div>
