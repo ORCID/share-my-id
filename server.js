@@ -207,6 +207,9 @@ app.post(EMAIL_SMID, function(req, res) {
           + `Thanks,\n`
           + `The ORCID Team`
         };
+        console.log("Email to: " + data.to);
+        console.log("Email to: " + data.subject);
+        console.log("Email body: " + mailData.text);
         var create_smid_authorization_uri = ooau.getAuthUrl(config.HOST + CREATE_SMID_URI, doc.private_key);
         mailgunPriv.messages().send(mailData, function (error, body) {
           if (error != null) {
@@ -270,11 +273,18 @@ app.get(ADD_ID_REDIRECT, function(req, res) { // Redeem code URL
 });
 
 app.get([COLLECTION_EDIT], function(req, res) { // Index page
-  smidManger.smidExist(req.params.publicKey, req.params.privateKey, function(err, bool) {
-    if (bool == true)
-      res.status(200).sendFile(index_file);
-    else
+  smidManger.exist(req.params.publicKey, req.params.privateKey, function(err, boolA) {
+    if (boolA == true) {
+      smidManger.hasOwner(req.params.publicKey, req.params.privateKey, function(err, boolB) {
+        if (boolB == true) {
+          res.status(200).sendFile(index_file);
+        } else {
+          res.redirect(ooau.getAuthUrl(config.HOST + CREATE_SMID_URI, req.params.privateKey));
+        }
+      });
+    } else {
       res.sendFile(PAGE_404);
+    }
   });
 });
 
