@@ -26,7 +26,6 @@ a {
         text-decoration: none;
     }
 
-    &:focus,
     &:hover {
         color: $link-font-color-hover;
         text-decoration: none;
@@ -34,6 +33,7 @@ a {
 
     &:visited{
         text-decoration: none;
+        color: $link-font-color-default;
     }
 
 }
