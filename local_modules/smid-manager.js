@@ -140,10 +140,21 @@ SmidManger.prototype.detailsExist = function(pubKey, callback) {
   })
 };
 
-SmidManger.prototype.smidExist = function(pubKey, privKey, callback) {
+SmidManger.prototype.exist = function(pubKey, privKey, callback) {
   this._smidCol.count({
     public_key: pubKey,
-    private_key: privKey
+    private_key: privKey    
+  }, function(err, count) {
+    if (err) callback(err, null);
+    else callback(null, count == 0 ? false : true);
+  })
+};
+
+SmidManger.prototype.hasOwner = function(pubKey, privKey, callback) {
+  this._smidCol.count({
+    public_key: pubKey,
+    private_key: privKey,
+    "details.owner": {$ne: undefined}    
   }, function(err, count) {
     if (err) callback(err, null);
     else callback(null, count == 0 ? false : true);
@@ -168,7 +179,7 @@ SmidManger.prototype.updateForm = function(privateKey, form, callback) {
     } else {
       smidManger._smidCol.findAndModify({
           query: {
-            private_key: privateKey
+            private_key: privateKey,
           },
           update: {
             $set: {
