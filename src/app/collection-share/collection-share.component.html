@@ -8,7 +8,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h2>{{collections.form.title}}</h2>
-                                <p><i>Created by <a href="{{collections.owner.fullOrcidId}}" target="_blank" rel="noopener noreferrer">{{collections.owner.name}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
+                                <p><i>Created by <span *ngIf="collections.owner.name">{{collections.owner.name}}, </span><a href="{{collections.owner.fullOrcidId}}" target="_blank" rel="noopener noreferrer"> <img src="../assets/img/id-icon.svg" width="16" alt="ORCID iD icon" class="id-icon">{{collections.owner.fullOrcidId}}</a> on {{collections.created | date: 'yyyy-MM-dd'}}</i></p>
                                 <p>{{collections.form.description}}</p>
 
                                 <button (click)="authenticate()" class="btn btn-primary lg-btn">Add my iD</button>
@@ -37,7 +37,7 @@
                                 >
                                     <th scope="row">{{j+1}}</th>
                                     <td>{{authenticated_orcid.name}}</td>
-                                    <td><a href="{{authenticated_orcid.fullOrcidId}}" target="_blank">{{authenticated_orcid.orcid}}</a></td>
+                                    <td><a href="{{authenticated_orcid.fullOrcidId}}" target="_blank" rel="noopener noreferrer"> <img src="../assets/img/id-icon.svg" width="16" alt="ORCID iD icon" class="id-icon">{{authenticated_orcid.fullOrcidId}}</a></td>
                                 </tr>
                             </tbody>
                         </table>

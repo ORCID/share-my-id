@@ -155,6 +155,10 @@ p {
 
 }
 
+.id-icon {
+    margin: 0 .2rem .2rem 0;
+}
+
 @include media-breakpoint-up(xs) {
   html {
     font-size: 12px;

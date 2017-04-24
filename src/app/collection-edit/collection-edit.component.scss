@@ -35,7 +35,6 @@ legend {
     }
 
     button {
-        float: left;
         margin: 1rem 0 0 0;
         
         fa {
@@ -50,6 +49,11 @@ legend {
     #collection-links{
         a {
             word-break: break-all;
+        }
+        .btn-primary {
+            font-size: .8rem;
+            padding: .1rem .2rem;
+            margin: 0 0 .2rem .3rem;
         }
     }
 
