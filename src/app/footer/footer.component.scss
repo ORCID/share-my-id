@@ -4,7 +4,7 @@
 footer {
     background-color: $orcidgraydk;
     color: $white;
-    padding: .5rem 0;
+    padding: 0 0 .5rem 0;
 
     fa {
         color: $gray97;
@@ -31,12 +31,13 @@ footer {
         vertical-align: bottom;
     }
 
-    .footer-left{
+    .list-inline-item {
+        color: $gray97;
+        font: .8rem $font-stack;
         float: left;
-    }
-
-    .footer-right{
-        float: right;
+        line-height: 32px;
+        vertical-align: bottom;
+        margin-right: 1rem;
     }
 
     @include media-breakpoint-down(sm) {
