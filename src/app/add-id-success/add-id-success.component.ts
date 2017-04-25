@@ -21,7 +21,6 @@ export class AddIdSuccessComponent implements OnInit, OnDestroy {
     private sub: any;
     public orcidUrl: string;
     public userOrcidId: string;
-    public config: string;
 
     collections: Collection[];
 
@@ -43,9 +42,9 @@ export class AddIdSuccessComponent implements OnInit, OnDestroy {
     getConfig(): void {
         this.configService.getConfiguration().subscribe(
             response => {
-                    this.response = response;
-                    this.orcidUrl = this.response.ORCID_URL;
-                }
+                this.response = response;
+                this.orcidUrl = this.response.ORCID_URL;
+            }
         );
     }
 
@@ -54,8 +53,7 @@ export class AddIdSuccessComponent implements OnInit, OnDestroy {
             this.publicKey = params['publicKey'];
             this.userOrcidId = params['orcid'];
             this.getCollections();
-            this.getConfig();
-            
+            this.getConfig(); 
         });
     }
 
