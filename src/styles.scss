@@ -64,7 +64,7 @@ legend {
 
     
 main#content{
-    padding: 0 0 2rem 0;
+    padding: 0;
     background-color: $orcidgraydk;
 }
 
@@ -153,6 +153,10 @@ p {
 .link-style {
     @extend a;
 
+}
+
+.id-icon {
+    margin: 0 .2rem .2rem 0;
 }
 
 @include media-breakpoint-up(xs) {
