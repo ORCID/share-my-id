@@ -17,7 +17,6 @@ import { ConfigService } from './../shared/config/config.service';
 export class AddIdSuccessComponent implements OnInit, OnDestroy {
 
     public publicKey: string;
-    private response: any;
     private sub: any;
     public orcidUrl: string;
     public userOrcidId: string;
@@ -29,6 +28,10 @@ export class AddIdSuccessComponent implements OnInit, OnDestroy {
         private collectionService: CollectionService,
         private configService: ConfigService
     ) {
+        this.configService.getConfiguration().subscribe(
+            config => {
+                this.orcidUrl = config['ORCID_URL'];
+        });
     }
 
     getCollections(): void {
@@ -39,21 +42,11 @@ export class AddIdSuccessComponent implements OnInit, OnDestroy {
         );
     }
 
-    getConfig(): void {
-        this.configService.getConfiguration().subscribe(
-            response => {
-                this.response = response;
-                this.orcidUrl = this.response.ORCID_URL;
-            }
-        );
-    }
-
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.publicKey = params['publicKey'];
             this.userOrcidId = params['orcid'];
             this.getCollections();
-            this.getConfig(); 
         });
     }
 
