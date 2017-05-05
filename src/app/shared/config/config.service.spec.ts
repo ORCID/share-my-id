@@ -8,8 +8,8 @@ import { ConfigService } from './config.service';
 describe('ConfigService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [        
-      	HttpModule,
+      imports: [
+        HttpModule,
         JsonpModule
       ],
       providers: [

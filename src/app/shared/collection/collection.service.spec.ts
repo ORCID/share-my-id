@@ -7,8 +7,8 @@ import { CollectionService } from './collection.service';
 describe('CollectionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [        
-      	HttpModule,
+      imports: [
+        HttpModule,
         JsonpModule
       ],
       providers: [

@@ -9,8 +9,8 @@ import { ConfigService } from '../../shared/config/config.service';
 describe('OrcidUtilService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [        
-      	HttpModule,
+      imports: [
+        HttpModule,
         JsonpModule
       ],
       providers: [
