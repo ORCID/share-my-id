@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 
-import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
+import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +35,7 @@ import { CollectionEmailComponent } from './collection-email/collection-email.co
         CollectionEmailComponent,
     ],
     imports: [
-        Angular2FontAwesomeModule,
+        AngularFontAwesomeModule,
         AppRoutingModule,
         BrowserModule,
         FormsModule,
