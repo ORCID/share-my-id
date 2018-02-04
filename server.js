@@ -228,6 +228,7 @@ app.post(EMAIL_SMID, function(req, res) {
         });
       });
     } else {
+      console.log(error);
       res.status(400).json({'error':"Email failed to pass validation", 'body': body});
     }
   });
