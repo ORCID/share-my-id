@@ -7,6 +7,8 @@ MEAN app for creating collections of authenticated ORCID iDs
 - [NodeJS 6.9.0 or higher](https://nodejs.org/en/)
 - [NPM 3 or higher](https://www.npmjs.com/get-npm)
 - [Angular CLI 1.0 or higher](https://github.com/angular/angular-cli)
+- [Mailgun Private API Key](https://help.mailgun.com/hc/en-us/articles/203380100-Where-can-I-find-my-API-key-and-SMTP-credentials-)
+- [Mailgun Public Validation Key](https://help.mailgun.com/hc/en-us/articles/203380100-Where-can-I-find-my-API-key-and-SMTP-credentials-)
 
 ### 1. Clone project
 
@@ -27,7 +29,7 @@ MEAN app for creating collections of authenticated ORCID iDs
 
 Paths vary depending on your OS and installation method - see [MongoDB Manual](https://docs.mongodb.com/manual) for more info and alternate startup instructions.
 
-### 5. Create database and user (first time only)
+### 6. Create database and user (first time only)
 
      use smid;
         db.createUser({
@@ -36,11 +38,11 @@ Paths vary depending on your OS and installation method - see [MongoDB Manual](h
               roles: ["readWrite"]
         });
 
-### 4. Start app
+### 7. Start app
 
 ```npm start```
 
-### 5. Open localhost [http://localhost:8080/](http://localhost:8080/)
+### 8. Open localhost [http://localhost:8080/](http://localhost:8080/)
 
 ## Build and reload changes automatically during development
 
