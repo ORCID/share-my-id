@@ -23,26 +23,61 @@ var FormSchema = {
   "additionalProperties": false
 };
 
+var IdentifierSchema = {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Identifier",
+  "description": "External Identifier Reference",
+  "type": "object",
+  "properties": {
+    "dateRecorded": {
+      "description": "Date identifier was recorded in this record",
+      "type": "object",
+      "format": "date-time"
+    },
+    "description": {
+      "description": "description",
+      "type": "string"
+    },
+    "type": {
+      "description": "type of identifier",
+      "type": "string"
+    },
+    "url": {
+      "description": "only full url identifiers",
+      "type": "string"
+    }
+  },
+  "required": ["title"],
+  "additionalProperties": false
+};
 
 var OrcidRecordSchema = {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
     "form": FormSchema,
+    "identifier": IdentifierSchema
   },
   "title": "Orcid Record",
   "description": "Records Name and ORCID iD",
   "type": "object",
   "properties": {
     "dateRecorded": {
-      "description": "ORCID iD",
+      "description": "Date ORCID iD was recorded in this record",
       "type": "object",
       "format": "date-time"
     },
+    "form": {"$ref": "#/definitions/form"},
     "fullOrcidId": {
       "description": "Full url ORCID iD",
       "type": "string"
-    },   
-    "form": {"$ref": "#/definitions/form"},
+    },
+    "identifiers": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "identifiers that represent this collection of ORCID iDs ",
+      "items":
+        {"$ref": "#/definitions/identifier"}
+    },
     "name": {
       "description": "ORCID users pulbic name",
       "type": "string"
@@ -116,6 +151,7 @@ SmidManger.prototype.createOrcidRecord = function(orcidId, fullOrcidId, name) {
   return {
     'orcid': orcidId,
     'fullOrcidId': fullOrcidId,
+    'identifiers': new Array(),
     'name': name,
     'dateRecorded': new Date(),
     'version': 1
@@ -208,6 +244,7 @@ SmidManger.prototype.validateOrcidRecord = function(orcidRecord) {
 };
 
 SmidManger.prototype.addOwnerOrcidRecord = function(orcidRecord, privateKey, callback) {
+  console.log(JSON.stringify(orcidRecord, null, 4))
   this.validateOrcidRecord(orcidRecord);
   this._smidCol.findAndModify({
       query: {
