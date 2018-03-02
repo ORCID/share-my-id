@@ -5,7 +5,6 @@ var mongojs = require('mongojs'),
 var ajv = new Ajv();
 
 var FormSchema = {
-  "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "SMID Form",
   "description": "SMID Form",
   "type": "object",
@@ -25,7 +24,6 @@ var FormSchema = {
 
 
 var OrcidRecordSchema = {
-  "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
     "form": FormSchema,
   },
