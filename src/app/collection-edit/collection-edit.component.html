@@ -83,7 +83,9 @@
                                     <p>Share this link with anyone whose iD you want to collect, and visit this link to view/download iDs you've collected:</p>
                                     <a id="share-link" href="{{windowLocationOrigin}}/{{publicKey}}" target="_blank" rel="noopener noreferrer">{{windowLocationOrigin}}/{{publicKey}}</a><button (click)="copyLink('share-link')" class="btn btn-primary" aria-label="Copy share link"><fa  name="clipboard"></fa></button><span *ngIf="showShareLinkCopied" class="text-success"> Link copied!</span>
                                     <h3>Download Collected iDs</h3>
-                                    <p><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><fa  name="download"></fa> Download text file</a></p>
+                                    <p><a href="{{windowLocationOrigin}}/{{publicKey}}/details/download"><fa  name="download"></fa> Download text file</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<a id="admin-link" href="{{windowLocationOrigin}}/{{publicKey}}/create-raid/{{privateKey}}" target="raid" title="raid easter egg">&nbsp;&nbsp;</a>
+                                    </p>                                   
                                 </div>
                             </div>
                         </div>
