@@ -8,7 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AddIdErrorComponent } from '../add-id-error/add-id-error.component';
 
-import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
 
 import { AppComponent } from '../app.component';
 import { AppRoutingModule } from '../app-routing.module';
@@ -43,7 +43,7 @@ describe('CollectionEmailComponent', () => {
         CollectionEmailComponent,
       ],
       imports: [
-        AngularFontAwesomeModule,
+        Angular2FontawesomeModule,
         RouterTestingModule.withRoutes([]),
         BrowserModule,
         FormsModule,
