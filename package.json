@@ -19,15 +19,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^2.4.0",
-    "@angular/compiler": "^2.4.0",
-    "@angular/core": "^2.4.0",
-    "@angular/forms": "^2.4.0",
-    "@angular/http": "^2.4.0",
-    "@angular/platform-browser": "^2.4.0",
-    "@angular/platform-browser-dynamic": "^2.4.0",
-    "@angular/router": "^3.4.0",
-    "angular-font-awesome": "^2.0.2",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/http": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "angular-font-awesome": "^3.1.2",
+    "angular2-fontawesome": "^5.2.1",
     "ava": "^0.18.2",
     "body-parser": "^1.16.1",
     "bootstrap": "^4.0.0-alpha.6",
@@ -46,8 +47,8 @@
     "zone.js": "^0.7.6"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0",
-    "@angular/compiler-cli": "^2.4.0",
+    "@angular/cli": "^1.7.2",
+    "@angular/compiler-cli": "^5.2.7",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
@@ -63,7 +64,7 @@
     "phantomjs-prebuilt": "^2.1.14",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
-    "tslint": "~4.4.2",
-    "typescript": "~2.0.0"
+    "tslint": "~5.7.0",
+    "typescript": "~2.4.2"
   }
 }
