@@ -51,10 +51,6 @@ var IdentifierSchema = {
 };
 
 var OrcidRecordSchema = {
-  "definitions": {
-    "form": FormSchema,
-    "identifier": IdentifierSchema
-  },
   "title": "Orcid Record",
   "description": "Records Name and ORCID iD",
   "type": "object",
@@ -64,17 +60,9 @@ var OrcidRecordSchema = {
       "type": "object",
       "format": "date-time"
     },
-    "form": {"$ref": "#/definitions/form"},
     "fullOrcidId": {
       "description": "Full url ORCID iD",
       "type": "string"
-    },
-    "identifiers": {
-      "type": "array",
-      "uniqueItems": true,
-      "description": "identifiers that represent this collection of ORCID iDs ",
-      "items":
-        {"$ref": "#/definitions/identifier"}
     },
     "name": {
       "description": "ORCID users pulbic name",
@@ -92,6 +80,21 @@ var OrcidRecordSchema = {
   "required": ["orcid", "fullOrcidId", "name", "dateRecorded", "version"],
   "additionalProperties": false
 };
+
+var SmidSchema = {
+  "definitions": {
+    "form": FormSchema,
+    "identifier": IdentifierSchema
+  },
+  "title": "SMID Record",
+  "description": "SMID",
+  "type": "object",
+  "properties": {
+     //TODO finish this
+  },
+ };
+
+var SMID_VERSION = 2;
 
 var SmidManger = function(connectionStr) {
   this._db = mongojs(connectionStr);
@@ -136,9 +139,10 @@ SmidManger.prototype.createSmid = function(callback) {
           },
           owner: undefined
         },
+        'identifiers': new Array(),
         private_key: privKey, // used for allowing edits
         public_key: pubKey, // used for shareing
-        'version': 1
+        'version': SMID_VERSION
       }
       smidManger._smidCol.save(newSmid, callback);
     }
@@ -149,7 +153,6 @@ SmidManger.prototype.createOrcidRecord = function(orcidId, fullOrcidId, name) {
   return {
     'orcid': orcidId,
     'fullOrcidId': fullOrcidId,
-    'identifiers': new Array(),
     'name': name,
     'dateRecorded': new Date(),
     'version': 1

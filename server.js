@@ -192,10 +192,13 @@ app.get(CREATE_RAID, function(req, res) {
         console.log(smidDoc);
         var post_data = {
           'contentPath' : `${config.HOST}/${req.params.publicKey}`,
-          'description': smidDoc.form.description,
           'startDate': dateFormat(new Date(), 'yyyy-mm-dd hh:mm:ss'),
           'meta' : {  
-            'purpose': smidDoc
+            'name': smidDoc.form.title,
+            'description': smidDoc.form.description,
+            'smidPublicKey': req.params.publicKey 
+            //'smid_owner': smidDoc.owner,
+            //'authenticated_orcids': smidDoc.authenticated_orcids,
         }
         };
         console.log("post_data-----------------------------");
@@ -214,8 +217,15 @@ app.get(CREATE_RAID, function(req, res) {
               console.log(err)
               res.status(400).json(err);
             } else
-              // to resolve 
-              // curl -H'Authorization: Bearer XXXXXXX' -H'Content-Type: application/json' https://api.raid.org.au/v1/handle/10378.1/1592477
+              // to resolve details 
+              // curl -H'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJPUkNpRCIsImlzcyI6Imh0dHBzOi8vd3d3LnJhaWQub3JnLmF1IiwiZW52aXJvbm1lbnQiOiJkZW1vIiwicm9sZSI6InNlcnZpY2UiLCJleHAiOjE1ODA4NjA4MDAsImlhdCI6MTUxNzgzNzg1OCwiYXVkIjoiaHR0cHM6Ly9hcGkucmFpZC5vcmcuYXUifQ.fj4y0-Jsnh_-HRCy6q6uIgsYMRF6FEYO1wCKOBfFPdQ' \ 
+              //      -H'Content-Type: application/json' https://api.raid.org.au/v1/RAiD/10378.1%2F1592687
+              //
+              // to resolve public info (note ?demo is not needed for production) 
+              //      curl  -H'Content-Type: application/json' https://api.raid.org.au/v1/handle/10378.1%2F1592689?demo=true
+              //
+              // to resolve redirect (note ?demo is not needed for production) 
+              //      curl  -H'Content-Type: application/json' https://api.raid.org.au/v1/handle/10378.1%2F1592689/redirect?demo=true              
               res.status(201).json(body);
         });
       });
