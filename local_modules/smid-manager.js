@@ -264,6 +264,35 @@ SmidManger.prototype.addOwnerOrcidRecord = function(orcidRecord, privateKey, cal
     });
 }
 
+SmidManger.prototype.addIdentifier = function(identifier, publicKey, callback) {
+  this.validateIdentifier(Identifier);
+  this._smidCol.findAndModify({
+      query: {
+        public_key: publicKey
+      },
+      update: {
+        $push: {
+          'details.identifiers': identifier
+        }
+      },
+      new: true // this means return the updated object
+    },
+    function(err, doc, lastErrorObject) {
+      if (err) callback(err, null);
+      else callback(null, doc.details.identifier);
+    });
+}
+
+SmidManger.prototype.getDetailsIdentifier = function(pubKey, type, callback) {
+  this._smidCol.findOne({
+    public_key: pubKey, 
+    'identifiers.type': type,  
+  }, function(err, doc) {
+    if (err) callback(err, null);
+    else callback(null, doc != null ? doc.identifiers.type : null);
+  })
+};
+
 SmidManger.prototype.addOrcidRecord = function(orcidRecord, publicKey, callback) {
   this.validateOrcidRecord(orcidRecord);
   this._smidCol.findAndModify({
