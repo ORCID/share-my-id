@@ -2,12 +2,18 @@ var
   // load config from file
   bodyParser = require('body-parser'),
   config = require('./local_modules/config'),
+  dateFormat = require('dateformat'),
   express = require('express'),
   fs = require('fs'),
   helmet = require('helmet'),
-  Mailgun = require('mailgun-js');
+  querystring = require('querystring'),
+  request = require('request'),
+  Mailgun = require('mailgun-js'),
   SmidManger = require('./local_modules/smid-manager.js').SmidManger,
+  request = require('request'),
   OcridOAuthUtil = require('./local_modules/orcid-oauth-util.js').OcridOAuthUtil;
+
+require('request-debug')(request);
 
 var smidManger = new SmidManger(config.MONGO_CONNECTION_STRING);
 var mailgunPriv = Mailgun({apiKey: config.MAILGUN_PRIV_API_KEY, domain: config.MAILGUN_DOMAIN}); 
@@ -48,6 +54,7 @@ var CONFIG = '/config';
 var CREATE_SMID_AUTHORIZE = '/create-smid-authorize';
 var CREATE_SMID_EMAIL = '/create-smid-email';
 var CONFIG = '/config';
+var CREATE_RAID = '/:publicKey/create-raid/:privateKey'
 var CREATE_SMID_URI = '/create-smid-redirect';
 var COLLECTION_DETAILS = '/:publicKey/details';
 var COLLECTION_DETAILS_DOWNLOAD = '/:publicKey/details/download';
@@ -177,6 +184,66 @@ app.put(COLLECTION_DETAILS_FORM, function(req, res) {
   });
 });
 
+// create and raid 
+app.get(CREATE_RAID, function(req, res) {
+  smidManger.exist(req.params.publicKey, req.params.privateKey, function(err, boolA) {
+    if (boolA == true) {
+      smidManger.getDetails(req.params.publicKey, function(err, smidDoc) {
+        console.log(smidDoc);
+        if (smidDoc.identifiers == undefined 
+          || smidDoc.identifiers.raid == undefined) {
+          // create a new one
+          var post_data = {
+            'contentPath' : `${config.HOST}/${req.params.publicKey}`,
+            'startDate': dateFormat(new Date(), 'yyyy-mm-dd hh:mm:ss'),
+            'meta' : {  
+              'name': smidDoc.form.title,
+              'description': smidDoc.form.description,
+              'smidPublicKey': req.params.publicKey 
+              //'smid_owner': smidDoc.owner,
+              //'authenticated_orcids': smidDoc.authenticated_orcids,
+            }
+          };
+          console.log("post_data-----------------------------");
+          console.log(JSON.stringify(post_data))
+          console.log("post_data-----------------------------");
+          request({
+            headers: {
+              'Authorization': 'Bearer ' + config.RAID_TOKEN,
+              'Content-Type': 'application/json'
+            },
+            uri: config.RAID_BASE_URL,
+            body: JSON.stringify(post_data),
+            method: 'POST'
+            }, function (err, resonse, body) {
+              if (err) {
+                console.log(err)
+                res.status(400).json(err);
+              } else
+                // to resolve details 
+                // curl -H'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJPUkNpRCIsImlzcyI6Imh0dHBzOi8vd3d3LnJhaWQub3JnLmF1IiwiZW52aXJvbm1lbnQiOiJkZW1vIiwicm9sZSI6InNlcnZpY2UiLCJleHAiOjE1ODA4NjA4MDAsImlhdCI6MTUxNzgzNzg1OCwiYXVkIjoiaHR0cHM6Ly9hcGkucmFpZC5vcmcuYXUifQ.fj4y0-Jsnh_-HRCy6q6uIgsYMRF6FEYO1wCKOBfFPdQ' \ 
+                //      -H'Content-Type: application/json' https://api.raid.org.au/v1/RAiD/10378.1%2F1592687
+                //
+                // to resolve public info (note ?demo is not needed for production) 
+                //      curl  -H'Content-Type: application/json' https://api.raid.org.au/v1/handle/10378.1%2F1592689?demo=true
+                //
+                // to resolve redirect (note ?demo is not needed for production) 
+                //      curl  -H'Content-Type: application/json' https://api.raid.org.au/v1/handle/10378.1%2F1592689/redirect?demo=true              
+                res.status(201).json(body);
+          });
+        } else {
+           // idenitifer already exist, update it
+           res.status(200).json(smidDoc.identifiers.raid);
+             
+        }
+      });
+    } else {
+      res.sendFile(PAGE_404);
+    }
+  });
+});
+
+
 // create and email smid
 app.post(EMAIL_SMID, function(req, res) {
   var data = req.body;
@@ -217,7 +284,6 @@ app.post(EMAIL_SMID, function(req, res) {
             console.log(error);
             if (body != null && body.message != null && body.message.includes("Great job"))
               res.status(200).json({'email': data.email, 'redirect': create_smid_authorization_uri }); // using test credentials
-              
             else
               res.status(400).json({'error':error, 'body': body});
           } else {

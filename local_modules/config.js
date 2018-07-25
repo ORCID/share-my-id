@@ -20,7 +20,10 @@ module.exports = config = {
   MAILGUN_PRIV_API_KEY: 'key-3ax6xnjp29jd6fds4gc373sgvjxteol0', // test key from mailgun docs
   MAILGUN_PUB_API_KEY: 'pubkey-34mudp0r5-xfoewxwkxfo01-op6t6ed0', // our public key
  
-  MAILGUN_DOMAIN: 'samples.mailgun.org' // test domian from mailgun docs
+  MAILGUN_DOMAIN: 'samples.mailgun.org', // test domian from mailgun docs
+  RAID_BASE_URL: 'https://api.raid.org.au/v1/RAiD',
+  RAID_TOKEN: '<<RAID JWT TOKEN>>',
+
 }
 
 // Environment variables overrides
