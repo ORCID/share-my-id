@@ -67,7 +67,7 @@ When registering include the redirect_uri 'https://localhost'
 
 #### 2. Override default config by exporting environment variables
 
-Example in linux bash:
+Example in bash:
 
         export CLIENT_ID='APP-3BI8IQ5O8DREEAVF'
         export CLIENT_SECRET='35d8f715-9121-440c-ad34-b66cb8c4e884'
@@ -76,3 +76,11 @@ Example in linux bash:
         export HOST='http://localhost:8080'
 
 [other systems](https://www.schrodinger.com/kb/1842)
+
+## Configure Mailgun API credentials and mail domain
+
+Example in bash:
+
+        export MAILGUN_PRIV_API_KEY='************************-********-********-'
+        export MAILGUN_PUB_API_KEY='pubkey-************************'
+        export MAILGUN_DOMAIN='********.mailgun.org'
