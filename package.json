@@ -30,7 +30,7 @@
     "angular-font-awesome": "^3.1.2",
     "angular2-fontawesome": "^5.2.1",
     "body-parser": "^1.18.3",
-    "bootstrap": "^4.2.1",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.6.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
